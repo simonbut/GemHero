@@ -100,7 +100,6 @@ public class AchievementManager : MonoBehaviour
             Database.globalData.completed_achievement_id.Add(achievement_id);
             //AchievementManager.Instance.GetAchievement(achievement_id).isGet = true;
 
-            Database.ESLog("CompleteAchievement", new string[] { achievement_id.ToString() });
             Database.SaveGlobalSave();
 
             //foreach (Card _c in CardManager.Instance.GetAllSuitableCard())

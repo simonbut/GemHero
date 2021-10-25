@@ -258,15 +258,6 @@ public class Database : MonoBehaviour
 
         InitDataFromSave(saveId);
 
-        if (!GlobalCommunicateManager.isTutorial)
-        {
-            ESLog("GameStart");
-        }
-        else
-        {
-            ESLog("TutorialStage");
-        }
-
         //if (!isBattleTutorial)
         //{
         //    globalData.lastLoadData = _saveId;
@@ -763,76 +754,6 @@ public class Database : MonoBehaviour
             SaveGlobalSave();
         }
     }
-
-
-    //public static void GameClear()
-    //{
-    //    ESLog("GameClear");
-    //    userDataJson.isGameClear = true;
-    //    globalData.isGameClear = true;
-    //    Save();
-    //    globalData.lastLoadData = -1;
-    //    SaveGlobalSave();
-    //}
-
-    public static void DemoClear()
-    {
-        ESLog("DemoClear");
-        //Database.CompleteAchievement(AchievementName.通關);
-        userDataJson.isGameClear = true;
-        Save();
-        globalData.lastLoadData = -1;
-        SaveGlobalSave();
-    }
-
-
-    public static void ESLog(string _type, string[] _stringArray = null)
-    {
-        Dictionary<string, object> _param = new Dictionary<string, object>();
-        switch (_type)
-        {
-            case "DemoClear":
-            case "GameOver":
-            case "GameStart":
-            case "StageClear":
-            case "ChooseHope":
-            case "ChoosePatch":
-            case "ResearchActionCard":
-            case "BeforeFight":
-            case "AfterFight":
-            default:
-                _param = ElasticsearchManager.AppendInGameInfo(_param);
-                ElasticsearchManager.ESLog(_type, _param);
-                break;
-            case "CompleteAchievement":
-                //game start , game over, stage clear, choose hope, choose patch, research, build facility, fusion, tutorial
-                _param.Add("AchievementName", _stringArray[0]);
-                _param = ElasticsearchManager.AppendInGameInfo(_param);
-                ElasticsearchManager.ESLog(_type, _param);
-                break;
-            case "BuildFacility":
-                _param.Add("FacilityName", _stringArray[0]);
-                _param = ElasticsearchManager.AppendInGameInfo(_param);
-                ElasticsearchManager.ESLog(_type, _param);
-                break;
-            case "TutorialComplete":
-                _param.Add("TutorialName", _stringArray[0]);
-                _param = ElasticsearchManager.AppendInGameInfo(_param);
-                ElasticsearchManager.ESLog(_type, _param);
-                break;
-            case "Fusion":
-                _param.Add("ComponentName", _stringArray[0]);
-                _param = ElasticsearchManager.AppendInGameInfo(_param);
-                ElasticsearchManager.ESLog(_type, _param);
-                break;
-                //case "GameStart":
-                //    _param = ElasticsearchManager.AppendInGameInfo(_param);
-                //    ElasticsearchManager.ESLog(_type, _param);
-                //    break;
-        }
-    }
-
-
 
 
     public static bool hasGameoverSave()
