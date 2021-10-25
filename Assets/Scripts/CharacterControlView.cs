@@ -1,13 +1,26 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class CharacterControlView : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    InputMaster controls;
+    void Awake()
     {
-        
+        print("test");
+        controls = new InputMaster();
+        //controls.Map1.Move.started += ctx => OnMovement(ctx.ReadValue<Vector2>());
+        //controls.Map1.Move.performed += ctx => OnMovement(ctx.ReadValue<Vector2>());
+    }
+    public void OnEnable()
+    {
+        controls.Enable();
+    }
+
+    public void OnDisable()
+    {
+        controls.Disable();
     }
 
     // Update is called once per frame
@@ -24,8 +37,14 @@ public class CharacterControlView : MonoBehaviour
     Vector3 input;
     void CheckInput()
     {
-        input.x = Input.GetAxisRaw("Horizontal");
-        input.y = Input.GetAxisRaw("Vertical");
+        OnMovement(controls.Map1.Move.ReadValue<Vector2>());
+    }
+    public void OnMovement(Vector2 _input)
+    {
+        print(_input.x);
+        input = _input;
+        //input.x = Input.GetAxisRaw("Horizontal");
+        //input.y = Input.GetAxisRaw("Vertical");
     }
 
     void CharacterMove()
