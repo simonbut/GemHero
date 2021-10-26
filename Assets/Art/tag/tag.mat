@@ -65,14 +65,30 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - Boolean_06236a76736d4a1f861ce0c5b67ec7e3: 1
-    - Boolean_0e0dba44088945458fe4e72904a5b544: 1
-    - Boolean_32c9d204547348ed985133ffcd00c470: 1
-    - Boolean_71f62e67ee5143b6a52e82ba3907e4b0: 1
-    - Boolean_745a6d79cf204aceac81e5857e746ee4: 1
-    - Boolean_8ca95669d0234bc1a59d2c24e3398e68: 1
-    - Boolean_b82fadc329c440d79b8b57bb3cd48da7: 1
-    - Boolean_d750181d824b4d11a84e5f8ff945daba: 1
+    - Boolean_06236a76736d4a1f861ce0c5b67ec7e3: 0
+    - Boolean_0e0dba44088945458fe4e72904a5b544: 0
+    - Boolean_32c9d204547348ed985133ffcd00c470: 0
+    - Boolean_71f62e67ee5143b6a52e82ba3907e4b0: 0
+    - Boolean_73cf7fae9103487196afe4e47d13ea91: 0
+    - Boolean_745a6d79cf204aceac81e5857e746ee4: 0
+    - Boolean_8934fb6445fa4d2fbffa0f48a57259f8: 0
+    - Boolean_8ca95669d0234bc1a59d2c24e3398e68: 0
+    - Boolean_a91800ca97914395a0ec5a98dd7d0fd0: 0
+    - Boolean_b82fadc329c440d79b8b57bb3cd48da7: 0
+    - Boolean_d750181d824b4d11a84e5f8ff945daba: 0
+    - Boolean_e2610b6bb9f64c688734f3eefc3fc09d: 0
+    - Down: 0
+    - Left: 0
+    - LeftDown: 0
+    - LeftDownReverse: 0
+    - LeftUp: 0
+    - LeftUpReverse: 0
+    - Right: 0
+    - RightDown: 0
+    - RightDownReverse: 0
+    - RightUp: 0
+    - RightUpReverse: 0
+    - Up: 0
     - Vector1_350fc063a23349ec8afe65812e8244d2: 0
     - _EnableExternalAlpha: 0
     m_Colors:
