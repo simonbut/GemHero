@@ -35,21 +35,21 @@ public class ListMenuView : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (JoyStickManager.Instance.IsJoyStickEnable())
-        {
-            for (int i = 0; i < buttonList.Count; i++)
-            {
-                buttonList[i].GetComponent<Image>().color = Color.white;
-                if (GlobalCommunicateManager.selectingId == i)
-                {
-                    buttonList[i].GetComponent<Image>().sprite = highlightedSprite;
-                }
-                else
-                {
-                    buttonList[i].GetComponent<Image>().sprite = normalSprite;
-                }
-            }
-        }
+        //if (JoyStickManager.Instance.IsJoyStickEnable())
+        //{
+        //    for (int i = 0; i < buttonList.Count; i++)
+        //    {
+        //        buttonList[i].GetComponent<Image>().color = Color.white;
+        //        if (GlobalCommunicateManager.selectingId == i)
+        //        {
+        //            buttonList[i].GetComponent<Image>().sprite = highlightedSprite;
+        //        }
+        //        else
+        //        {
+        //            buttonList[i].GetComponent<Image>().sprite = normalSprite;
+        //        }
+        //    }
+        //}
 
         for (int i = 0; i < buttonList.Count; i++)
         {
@@ -79,40 +79,40 @@ public class ListMenuView : MonoBehaviour
             }
         }
 
-        if (JoyStickManager.Instance.IsJoyStickEnable() && UIManager.Instance.IsCurrentUI(controlableUI))
-        {
-            if (JoyStickManager.Instance.IsInputDown("Circle"))
-            {
-                if (buttonList.Count > GlobalCommunicateManager.selectingId)
-                {
-                    OnButtonClicked(GlobalCommunicateManager.selectingId);
-                    //buttonList[GlobalCommunicateManager.selectingId].GetComponent<Button>().onClick.Invoke();
-                }
-            }
+        //if (JoyStickManager.Instance.IsJoyStickEnable() && UIManager.Instance.IsCurrentUI(controlableUI))
+        //{
+        //    if (JoyStickManager.Instance.IsInputDown("Circle"))
+        //    {
+        //        if (buttonList.Count > GlobalCommunicateManager.selectingId)
+        //        {
+        //            OnButtonClicked(GlobalCommunicateManager.selectingId);
+        //            //buttonList[GlobalCommunicateManager.selectingId].GetComponent<Button>().onClick.Invoke();
+        //        }
+        //    }
 
-            if (JoyStickManager.Instance.IsInputDown("Down"))
-            {
-                if (GlobalCommunicateManager.selectingId + 1 < buttonCount)
-                {
-                    GlobalCommunicateManager.selectingId++;
-                }
-                else
-                {
-                    GlobalCommunicateManager.selectingId = 0;
-                }
-            }
-            if (JoyStickManager.Instance.IsInputDown("Up"))
-            {
-                if (GlobalCommunicateManager.selectingId - 1 >= 0)
-                {
-                    GlobalCommunicateManager.selectingId--;
-                }
-                else
-                {
-                    GlobalCommunicateManager.selectingId = buttonCount - 1;
-                }
-            }
-        }
+        //    if (JoyStickManager.Instance.IsInputDown("Down"))
+        //    {
+        //        if (GlobalCommunicateManager.selectingId + 1 < buttonCount)
+        //        {
+        //            GlobalCommunicateManager.selectingId++;
+        //        }
+        //        else
+        //        {
+        //            GlobalCommunicateManager.selectingId = 0;
+        //        }
+        //    }
+        //    if (JoyStickManager.Instance.IsInputDown("Up"))
+        //    {
+        //        if (GlobalCommunicateManager.selectingId - 1 >= 0)
+        //        {
+        //            GlobalCommunicateManager.selectingId--;
+        //        }
+        //        else
+        //        {
+        //            GlobalCommunicateManager.selectingId = buttonCount - 1;
+        //        }
+        //    }
+        //}
     }
 
     public void SetUp(List<string> _titleList, ControlableUI _controlableUI, List<Callback> _callbackList)
@@ -133,10 +133,10 @@ public class ListMenuView : MonoBehaviour
         buttonCount = _titleList.Count;
         GlobalCommunicateManager.selectingId = 0;
         GlobalCommunicateManager.selectingScrollViewId = 0;
-        if (JoyStickManager.Instance.IsJoyStickEnable())
-        {
-            OnButtonSelecing(0);
-        }
+        //if (JoyStickManager.Instance.IsJoyStickEnable())
+        //{
+        //    OnButtonSelecing(0);
+        //}
     }
 
     public void OnButtonClicked(int index)

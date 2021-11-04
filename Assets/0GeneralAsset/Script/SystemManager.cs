@@ -102,7 +102,7 @@ public class SystemManager : MonoBehaviour
             }
         }
 
-        if (EventSystem.current.IsPointerOverGameObject() && JoyStickManager.Instance.IsInputDown("Circle"))
+        if (EventSystem.current.IsPointerOverGameObject())
         {
             //PointerEventData pointerEventData = extendedStandaloneInputModule.GetPointerEventData();
             //print("over something" + test.hovered.Count);

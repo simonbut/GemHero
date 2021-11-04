@@ -54,16 +54,16 @@ public class SettingUI : ControlableUI
 
         hintGameObject.SetActive(false);
 
-        if (JoyStickManager.Instance.IsJoyStickEnable())
-        {
-            toTitleButtonImage.enabled = false;
-            //ControlMeaningUI.Instance?.Show(Database.GetInputIcon(KeyBoardInput.joystick_cross) + " " + Database.GetLocalizedText("Confirm") + "     " + Database.GetInputIcon(KeyBoardInput.joystick_circle) + " " + Database.GetLocalizedText("Back"));
-        }
-        else
-        {
-            toTitleButtonImage.enabled = true;
-            //ControlMeaningUI.Instance?.Show(Database.GetInputIcon(KeyBoardInput.Input_Left_Click) + " " + Database.GetLocalizedText("Confirm") + "     " + Database.GetInputIcon(KeyBoardInput.Input_Right_Click) + " " + Database.GetLocalizedText("Back"));
-        }
+        //if (JoyStickManager.Instance.IsJoyStickEnable())
+        //{
+        //    toTitleButtonImage.enabled = false;
+        //    //ControlMeaningUI.Instance?.Show(Database.GetInputIcon(KeyBoardInput.joystick_cross) + " " + Database.GetLocalizedText("Confirm") + "     " + Database.GetInputIcon(KeyBoardInput.joystick_circle) + " " + Database.GetLocalizedText("Back"));
+        //}
+        //else
+        //{
+        //    toTitleButtonImage.enabled = true;
+        //    //ControlMeaningUI.Instance?.Show(Database.GetInputIcon(KeyBoardInput.Input_Left_Click) + " " + Database.GetLocalizedText("Confirm") + "     " + Database.GetInputIcon(KeyBoardInput.Input_Right_Click) + " " + Database.GetLocalizedText("Back"));
+        //}
 
         base.OnShow();
     }
@@ -199,164 +199,146 @@ public class SettingUI : ControlableUI
             return;
         }
 
-        if (JoyStickManager.Instance.IsInputDown("Cross") || Input.GetButtonDown("Escape"))
-        {
-            OnBackPressed();
-        }
+        //if (JoyStickManager.Instance.IsInputDown("Cross") || Input.GetButtonDown("Escape"))
+        //{
+        //    OnBackPressed();
+        //}
 
 
         selectingSlot.gameObject.SetActive(false);
-        if (JoyStickManager.Instance.IsJoyStickEnable())
-        {
-            selectingSlot.gameObject.SetActive(true);
-            selectingSlot.transform.position = titleList[GlobalCommunicateManager.selectingId].transform.position;
+        //if (JoyStickManager.Instance.IsJoyStickEnable())
+        //{
+        //    selectingSlot.gameObject.SetActive(true);
+        //    selectingSlot.transform.position = titleList[GlobalCommunicateManager.selectingId].transform.position;
 
 
-            if (JoyStickManager.Instance.IsInputDown("Down"))
-            {
-                if (GlobalCommunicateManager.selectingId + 1 < titleCount)
-                {
-                    GlobalCommunicateManager.selectingId++;
-                }
-                else
-                {
-                    GlobalCommunicateManager.selectingId = 0;
-                }
-            }
-            if (JoyStickManager.Instance.IsInputDown("Up"))
-            {
-                if (GlobalCommunicateManager.selectingId - 1 >= 0)
-                {
-                    GlobalCommunicateManager.selectingId--;
-                }
-                else
-                {
-                    GlobalCommunicateManager.selectingId = titleCount - 1;
-                }
-            }
+        //    if (JoyStickManager.Instance.IsInputDown("Down"))
+        //    {
+        //        if (GlobalCommunicateManager.selectingId + 1 < titleCount)
+        //        {
+        //            GlobalCommunicateManager.selectingId++;
+        //        }
+        //        else
+        //        {
+        //            GlobalCommunicateManager.selectingId = 0;
+        //        }
+        //    }
+        //    if (JoyStickManager.Instance.IsInputDown("Up"))
+        //    {
+        //        if (GlobalCommunicateManager.selectingId - 1 >= 0)
+        //        {
+        //            GlobalCommunicateManager.selectingId--;
+        //        }
+        //        else
+        //        {
+        //            GlobalCommunicateManager.selectingId = titleCount - 1;
+        //        }
+        //    }
 
-            switch (GlobalCommunicateManager.selectingId)
-            {
-                case 0://bgm
-                    if (JoyStickManager.Instance.IsInputDown("Left"))
-                    {
-                        if (bgmSlider.value > 0)
-                        {
-                            bgmSlider.value--;
-                            OnSettingChange();
-                        }
-                    }
-                    if (JoyStickManager.Instance.IsInputDown("Right"))
-                    {
-                        if (bgmSlider.value < bgmSlider.maxValue)
-                        {
-                            bgmSlider.value++;
-                            OnSettingChange();
-                        }
-                    }
-                    break;
-                case 1://sfx
-                    if (JoyStickManager.Instance.IsInputDown("Left"))
-                    {
-                        if (vfxSlider.value > 0)
-                        {
-                            vfxSlider.value--;
-                            OnSettingChange();
-                        }
-                    }
-                    if (JoyStickManager.Instance.IsInputDown("Right"))
-                    {
-                        if (vfxSlider.value < vfxSlider.maxValue)
-                        {
-                            vfxSlider.value++;
-                            OnSettingChange();
-                        }
-                    }
-                    break;
-                case 2://language
-                    if (JoyStickManager.Instance.IsInputDown("Circle"))
-                    {
-                        LanguageDropDownClicked();
-                    }
-                    //if (JoyStickManager.Instance.IsInputDown("Left"))
-                    //{
-                    //    if (languageDropDown.value > 0)
-                    //    {
-                    //        languageDropDown.value--;
-                    //        OnSettingChange();
-                    //    }
-                    //}
-                    //if (JoyStickManager.Instance.IsInputDown("Right"))
-                    //{
-                    //    if (languageDropDown.value < languageDropDown.options.Count - 1)
-                    //    {
-                    //        languageDropDown.value++;
-                    //        OnSettingChange();
-                    //    }
-                    //}
-                    break;
-                case 3://full screen
-                    if (JoyStickManager.Instance.IsInputDown("Circle"))
-                    {
-                        fullScreenToggle.isOn = !fullScreenToggle.isOn;
-                        OnSettingChange();
-                    }
-                    break;
-                case 4://resolution
-                    if (JoyStickManager.Instance.IsInputDown("Circle"))
-                    {
-                        ResolutionDropDownClicked();
-                    }
-                    //if (JoyStickManager.Instance.IsInputDown("Left"))
-                    //{
-                    //    if (resolutionDropDown.value > 0)
-                    //    {
-                    //        resolutionDropDown.value--;
-                    //        OnSettingChange();
-                    //    }
-                    //}
-                    //if (JoyStickManager.Instance.IsInputDown("Right"))
-                    //{
-                    //    if (resolutionDropDown.value < resolutionDropDown.options.Count - 1)
-                    //    {
-                    //        resolutionDropDown.value++;
-                    //        OnSettingChange();
-                    //    }
-                    //}
-                    break;
-                case 5://simple mode
-                    if (JoyStickManager.Instance.IsInputDown("Circle"))
-                    {
-                        isSimpleModeToggle.isOn = !isSimpleModeToggle.isOn;
-                        OnSettingChange();
-                    }
-                    break;
-                case 6://to main screen
-                    if (JoyStickManager.Instance.IsInputDown("Circle"))
-                    {
-                        OnTitleButtonPressed();
-                    }
-                    break;
-                    //case 6://game speed
-                    //    if (JoyStickManager.Instance.IsInputDown("Left"))
-                    //    {
-                    //        if (gameSpeedSlider.value > 0)
-                    //        {
-                    //            gameSpeedSlider.value--;
-                    //            OnSettingChange();
-                    //        }
-                    //    }
-                    //    if (JoyStickManager.Instance.IsInputDown("Right"))
-                    //    {
-                    //        if (gameSpeedSlider.value < gameSpeedSlider.maxValue)
-                    //        {
-                    //            gameSpeedSlider.value++;
-                    //            OnSettingChange();
-                    //        }
-                    //    }
-                    //    break;
-            }
-        }
+        //    switch (GlobalCommunicateManager.selectingId)
+        //    {
+        //        case 0://bgm
+        //            if (JoyStickManager.Instance.IsInputDown("Left"))
+        //            {
+        //                if (bgmSlider.value > 0)
+        //                {
+        //                    bgmSlider.value--;
+        //                    OnSettingChange();
+        //                }
+        //            }
+        //            if (JoyStickManager.Instance.IsInputDown("Right"))
+        //            {
+        //                if (bgmSlider.value < bgmSlider.maxValue)
+        //                {
+        //                    bgmSlider.value++;
+        //                    OnSettingChange();
+        //                }
+        //            }
+        //            break;
+        //        case 1://sfx
+        //            if (JoyStickManager.Instance.IsInputDown("Left"))
+        //            {
+        //                if (vfxSlider.value > 0)
+        //                {
+        //                    vfxSlider.value--;
+        //                    OnSettingChange();
+        //                }
+        //            }
+        //            if (JoyStickManager.Instance.IsInputDown("Right"))
+        //            {
+        //                if (vfxSlider.value < vfxSlider.maxValue)
+        //                {
+        //                    vfxSlider.value++;
+        //                    OnSettingChange();
+        //                }
+        //            }
+        //            break;
+        //        case 2://language
+        //            if (JoyStickManager.Instance.IsInputDown("Circle"))
+        //            {
+        //                LanguageDropDownClicked();
+        //            }
+        //            //if (JoyStickManager.Instance.IsInputDown("Left"))
+        //            //{
+        //            //    if (languageDropDown.value > 0)
+        //            //    {
+        //            //        languageDropDown.value--;
+        //            //        OnSettingChange();
+        //            //    }
+        //            //}
+        //            //if (JoyStickManager.Instance.IsInputDown("Right"))
+        //            //{
+        //            //    if (languageDropDown.value < languageDropDown.options.Count - 1)
+        //            //    {
+        //            //        languageDropDown.value++;
+        //            //        OnSettingChange();
+        //            //    }
+        //            //}
+        //            break;
+        //        case 3://full screen
+        //            if (JoyStickManager.Instance.IsInputDown("Circle"))
+        //            {
+        //                fullScreenToggle.isOn = !fullScreenToggle.isOn;
+        //                OnSettingChange();
+        //            }
+        //            break;
+        //        case 4://resolution
+        //            if (JoyStickManager.Instance.IsInputDown("Circle"))
+        //            {
+        //                ResolutionDropDownClicked();
+        //            }
+        //            //if (JoyStickManager.Instance.IsInputDown("Left"))
+        //            //{
+        //            //    if (resolutionDropDown.value > 0)
+        //            //    {
+        //            //        resolutionDropDown.value--;
+        //            //        OnSettingChange();
+        //            //    }
+        //            //}
+        //            //if (JoyStickManager.Instance.IsInputDown("Right"))
+        //            //{
+        //            //    if (resolutionDropDown.value < resolutionDropDown.options.Count - 1)
+        //            //    {
+        //            //        resolutionDropDown.value++;
+        //            //        OnSettingChange();
+        //            //    }
+        //            //}
+        //            break;
+        //        case 5://simple mode
+        //            if (JoyStickManager.Instance.IsInputDown("Circle"))
+        //            {
+        //                isSimpleModeToggle.isOn = !isSimpleModeToggle.isOn;
+        //                OnSettingChange();
+        //            }
+        //            break;
+        //        case 6://to main screen
+        //            if (JoyStickManager.Instance.IsInputDown("Circle"))
+        //            {
+        //                OnTitleButtonPressed();
+        //            }
+        //            break;
+        //    }
+        //}
 
         //    if (hint)
         //    {

@@ -12,8 +12,6 @@ public class ListItem : MonoBehaviour
     public ListItemCallback selectingCallBack;
     public ListItemCallback disSelectingCallBack;
     public TextMeshProUGUI displayName;
-    //public Text text2;
-    public TextMeshProUGUI text2;
     public int id;
     int selectingId = 0;
 
@@ -58,7 +56,7 @@ public class ListItem : MonoBehaviour
         }
     }
 
-    public void SetListItem(string _name,int _id,int _selectingId, ListItemCallback _clickCallBack, ListItemCallback _selectingCallBack, ListItemCallback _disSelectingCallBack, string _text2 = "",int levelcolor = 0)
+    public void SetListItem(string _name,int _id,int _selectingId, ListItemCallback _clickCallBack, ListItemCallback _selectingCallBack, ListItemCallback _disSelectingCallBack)
     {
         //_g.AddComponent<ListItem>();
         displayName.text = _name;
@@ -66,26 +64,9 @@ public class ListItem : MonoBehaviour
         selectingId = _selectingId;
         clickCallBack = _clickCallBack;
         selectingCallBack = _selectingCallBack;
-        text2.SetText(_text2);
         disSelectingCallBack = _disSelectingCallBack;
 
         transform.localScale = new Vector2(transform.localScale.x / 160f * Screen.width, transform.localScale.y / 90f * Screen.height);
-
-        //switch (levelcolor)
-        //{
-        //    case 1:
-        //        bg.color = new Color(0f, 1f, 0f, 1f);
-        //        break;
-        //    case 2:
-        //        bg.color = new Color(0f, 0f, 1f, 1f);
-        //        break;
-        //    case 3:
-        //        bg.color = new Color(1f, 0f, 1f, 1f);
-        //        break;
-        //    case 4:
-        //        bg.color = new Color(1f, 1f, 0f, 1f);
-        //        break;
-        //}
     }
 
     public void Clicked()
@@ -122,7 +103,6 @@ public class ListItem : MonoBehaviour
     {
         bg.color = new Color(0.5f, 0.5f, 0.5f, 1f);
         displayName.color = new Color(0.5f, 0.5f, 0.5f, 1f);
-        text2.color = new Color(0.5f, 0.5f, 0.5f, 1f);
         isAllowInteract = false;
     }
 }

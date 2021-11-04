@@ -44,137 +44,137 @@ public class GridScrollView : MonoBehaviour
             //print("Mouse ScrollWheel" + Input.GetAxis("Mouse ScrollWheel"));
             scrollRect.verticalNormalizedPosition = Mathf.Clamp(scrollRect.verticalNormalizedPosition + Input.GetAxis("Mouse ScrollWheel"), 0, 1);
 
-            if (JoyStickManager.Instance.IsJoyStickEnable())
-            {
-                for (int i = 0; i < listItemList.Count; i++)
-                {
-                    listItemList[i].GetComponent<Image>().sprite = normalSprite;
-                }
-                if (scrollViewId == GlobalCommunicateManager.selectingScrollViewId)
-                {
-                    listItemList[GlobalCommunicateManager.selectingId].GetComponent<Image>().sprite = highlightedSprite;
-                }
-            }
+            //    if (JoyStickManager.Instance.IsJoyStickEnable())
+            //    {
+            //        for (int i = 0; i < listItemList.Count; i++)
+            //        {
+            //            listItemList[i].GetComponent<Image>().sprite = normalSprite;
+            //        }
+            //        if (scrollViewId == GlobalCommunicateManager.selectingScrollViewId)
+            //        {
+            //            listItemList[GlobalCommunicateManager.selectingId].GetComponent<Image>().sprite = highlightedSprite;
+            //        }
+            //    }
 
-            if (scrollViewId == GlobalCommunicateManager.selectingScrollViewId && JoyStickManager.Instance.IsJoyStickEnable() && UIManager.Instance.IsCurrentUI(controlableUI))
-            {
-                if (preGlobalScrollViewId != scrollViewId)
-                {
-                    GlobalCommunicateManager.selectingId = 0;
-                    if (listItemList[GlobalCommunicateManager.selectingId].GetComponent<GridItem>() != null)
-                    {
-                        listItemList[GlobalCommunicateManager.selectingId].GetComponent<GridItem>().Selecting();
-                    }
-                }
-                else
-                {
-                    if (JoyStickManager.Instance.IsInputDown("Circle"))
-                    {
-                        if (listItemList[GlobalCommunicateManager.selectingId].GetComponent<GridItem>() != null)
-                        {
-                            listItemList[GlobalCommunicateManager.selectingId].GetComponent<GridItem>().Clicked();
-                        }
-                    }
+            //    if (scrollViewId == GlobalCommunicateManager.selectingScrollViewId && JoyStickManager.Instance.IsJoyStickEnable() && UIManager.Instance.IsCurrentUI(controlableUI))
+            //    {
+            //        if (preGlobalScrollViewId != scrollViewId)
+            //        {
+            //            GlobalCommunicateManager.selectingId = 0;
+            //            if (listItemList[GlobalCommunicateManager.selectingId].GetComponent<GridItem>() != null)
+            //            {
+            //                listItemList[GlobalCommunicateManager.selectingId].GetComponent<GridItem>().Selecting();
+            //            }
+            //        }
+            //        else
+            //        {
+            //            if (JoyStickManager.Instance.IsInputDown("Circle"))
+            //            {
+            //                if (listItemList[GlobalCommunicateManager.selectingId].GetComponent<GridItem>() != null)
+            //                {
+            //                    listItemList[GlobalCommunicateManager.selectingId].GetComponent<GridItem>().Clicked();
+            //                }
+            //            }
 
-                    if (JoyStickManager.Instance.IsInputDown("Right"))
-                    {
-                        if (GlobalCommunicateManager.selectingId + 1 < listItemList.Count)
-                        {
-                            GlobalCommunicateManager.selectingId++;
-                        }
-                        else
-                        {
-                            GlobalCommunicateManager.selectingId = 0;
-                        }
-                        if (listItemList[GlobalCommunicateManager.selectingId].GetComponent<GridItem>() != null)
-                        {
-                            listItemList[GlobalCommunicateManager.selectingId].GetComponent<GridItem>().Selecting();
-                        }
-                    }
-                    if (JoyStickManager.Instance.IsInputDown("Left"))
-                    {
-                        if (GlobalCommunicateManager.selectingId - 1 >= 0)
-                        {
-                            GlobalCommunicateManager.selectingId--;
-                        }
-                        else
-                        {
-                            GlobalCommunicateManager.selectingId = listItemList.Count - 1;
-                        }
-                        if (listItemList[GlobalCommunicateManager.selectingId].GetComponent<GridItem>() != null)
-                        {
-                            listItemList[GlobalCommunicateManager.selectingId].GetComponent<GridItem>().Selecting();
-                        }
-                    }
-                    if (JoyStickManager.Instance.IsInputDown("Up"))
-                    {
-                        if (GlobalCommunicateManager.selectingId - gridCountInLine >= 0)
-                        {
-                            GlobalCommunicateManager.selectingId -= gridCountInLine;
-                            if (listItemList[GlobalCommunicateManager.selectingId].GetComponent<GridItem>() != null)
-                            {
-                                listItemList[GlobalCommunicateManager.selectingId].GetComponent<GridItem>().Selecting();
-                            }
-                        }
-                        else
-                        {
-                            if (isMultipleScrollView)
-                            {
-                                GlobalCommunicateManager.selectingId = 0;
-                                GlobalCommunicateManager.selectingScrollViewId--;
-                                if (GlobalCommunicateManager.selectingScrollViewId < 0)
-                                {
-                                    GlobalCommunicateManager.selectingScrollViewId = scrollViewCount - 1;
-                                }
-                            }
-                            else
-                            {
-                                GlobalCommunicateManager.selectingId = listItemList.Count - 1;
-                                if (listItemList[GlobalCommunicateManager.selectingId].GetComponent<GridItem>() != null)
-                                {
-                                    listItemList[GlobalCommunicateManager.selectingId].GetComponent<GridItem>().Selecting();
-                                }
-                            }
-                        }
-                    }
-                    if (JoyStickManager.Instance.IsInputDown("Down"))
-                    {
-                        if (GlobalCommunicateManager.selectingId + gridCountInLine < listItemList.Count)
-                        {
-                            GlobalCommunicateManager.selectingId += gridCountInLine;
-                            if (listItemList[GlobalCommunicateManager.selectingId].GetComponent<GridItem>() != null)
-                            {
-                                listItemList[GlobalCommunicateManager.selectingId].GetComponent<GridItem>().Selecting();
-                            }
-                        }
-                        else
-                        {
-                            if (isMultipleScrollView)
-                            {
-                                GlobalCommunicateManager.selectingId = 0;
-                                GlobalCommunicateManager.selectingScrollViewId++;
-                                if (GlobalCommunicateManager.selectingScrollViewId > scrollViewCount - 1)
-                                {
-                                    GlobalCommunicateManager.selectingScrollViewId = 0;
-                                }
-                            }
-                            else
-                            {
-                                GlobalCommunicateManager.selectingId = 0;
-                                if (listItemList[GlobalCommunicateManager.selectingId].GetComponent<GridItem>() != null)
-                                {
-                                    listItemList[GlobalCommunicateManager.selectingId].GetComponent<GridItem>().Selecting();
-                                }
-                            }
-                        }
-                    }
-                }
+            //            if (JoyStickManager.Instance.IsInputDown("Right"))
+            //            {
+            //                if (GlobalCommunicateManager.selectingId + 1 < listItemList.Count)
+            //                {
+            //                    GlobalCommunicateManager.selectingId++;
+            //                }
+            //                else
+            //                {
+            //                    GlobalCommunicateManager.selectingId = 0;
+            //                }
+            //                if (listItemList[GlobalCommunicateManager.selectingId].GetComponent<GridItem>() != null)
+            //                {
+            //                    listItemList[GlobalCommunicateManager.selectingId].GetComponent<GridItem>().Selecting();
+            //                }
+            //            }
+            //            if (JoyStickManager.Instance.IsInputDown("Left"))
+            //            {
+            //                if (GlobalCommunicateManager.selectingId - 1 >= 0)
+            //                {
+            //                    GlobalCommunicateManager.selectingId--;
+            //                }
+            //                else
+            //                {
+            //                    GlobalCommunicateManager.selectingId = listItemList.Count - 1;
+            //                }
+            //                if (listItemList[GlobalCommunicateManager.selectingId].GetComponent<GridItem>() != null)
+            //                {
+            //                    listItemList[GlobalCommunicateManager.selectingId].GetComponent<GridItem>().Selecting();
+            //                }
+            //            }
+            //            if (JoyStickManager.Instance.IsInputDown("Up"))
+            //            {
+            //                if (GlobalCommunicateManager.selectingId - gridCountInLine >= 0)
+            //                {
+            //                    GlobalCommunicateManager.selectingId -= gridCountInLine;
+            //                    if (listItemList[GlobalCommunicateManager.selectingId].GetComponent<GridItem>() != null)
+            //                    {
+            //                        listItemList[GlobalCommunicateManager.selectingId].GetComponent<GridItem>().Selecting();
+            //                    }
+            //                }
+            //                else
+            //                {
+            //                    if (isMultipleScrollView)
+            //                    {
+            //                        GlobalCommunicateManager.selectingId = 0;
+            //                        GlobalCommunicateManager.selectingScrollViewId--;
+            //                        if (GlobalCommunicateManager.selectingScrollViewId < 0)
+            //                        {
+            //                            GlobalCommunicateManager.selectingScrollViewId = scrollViewCount - 1;
+            //                        }
+            //                    }
+            //                    else
+            //                    {
+            //                        GlobalCommunicateManager.selectingId = listItemList.Count - 1;
+            //                        if (listItemList[GlobalCommunicateManager.selectingId].GetComponent<GridItem>() != null)
+            //                        {
+            //                            listItemList[GlobalCommunicateManager.selectingId].GetComponent<GridItem>().Selecting();
+            //                        }
+            //                    }
+            //                }
+            //            }
+            //            if (JoyStickManager.Instance.IsInputDown("Down"))
+            //            {
+            //                if (GlobalCommunicateManager.selectingId + gridCountInLine < listItemList.Count)
+            //                {
+            //                    GlobalCommunicateManager.selectingId += gridCountInLine;
+            //                    if (listItemList[GlobalCommunicateManager.selectingId].GetComponent<GridItem>() != null)
+            //                    {
+            //                        listItemList[GlobalCommunicateManager.selectingId].GetComponent<GridItem>().Selecting();
+            //                    }
+            //                }
+            //                else
+            //                {
+            //                    if (isMultipleScrollView)
+            //                    {
+            //                        GlobalCommunicateManager.selectingId = 0;
+            //                        GlobalCommunicateManager.selectingScrollViewId++;
+            //                        if (GlobalCommunicateManager.selectingScrollViewId > scrollViewCount - 1)
+            //                        {
+            //                            GlobalCommunicateManager.selectingScrollViewId = 0;
+            //                        }
+            //                    }
+            //                    else
+            //                    {
+            //                        GlobalCommunicateManager.selectingId = 0;
+            //                        if (listItemList[GlobalCommunicateManager.selectingId].GetComponent<GridItem>() != null)
+            //                        {
+            //                            listItemList[GlobalCommunicateManager.selectingId].GetComponent<GridItem>().Selecting();
+            //                        }
+            //                    }
+            //                }
+            //            }
+            //        }
 
 
-                scrollbar.value = (scrollbar.value * 3f + 1f - Mathf.CeilToInt((GlobalCommunicateManager.selectingId + 1) * 1f / gridCountInLine - 1f) * 1f / (Mathf.CeilToInt((listItemList.Count) * 1f / gridCountInLine - 1f))) / 4f;
+            //        scrollbar.value = (scrollbar.value * 3f + 1f - Mathf.CeilToInt((GlobalCommunicateManager.selectingId + 1) * 1f / gridCountInLine - 1f) * 1f / (Mathf.CeilToInt((listItemList.Count) * 1f / gridCountInLine - 1f))) / 4f;
 
-                //scrollbar.value = 1f - Mathf.CeilToInt((GlobalCommunicateManager.selectingId + 1) * 1f / gridCountInLine - 1f) * 1f / (Mathf.CeilToInt((listItemList.Count) * 1f / gridCountInLine - 1f));
-            }
+            //        //scrollbar.value = 1f - Mathf.CeilToInt((GlobalCommunicateManager.selectingId + 1) * 1f / gridCountInLine - 1f) * 1f / (Mathf.CeilToInt((listItemList.Count) * 1f / gridCountInLine - 1f));
+            //    }
         }
         preGlobalScrollViewId = GlobalCommunicateManager.selectingScrollViewId;
     }
@@ -215,13 +215,13 @@ public class GridScrollView : MonoBehaviour
         listItemInstance.GetComponent<GridItem>().SetGridItem(graphPath, _id, listItemList.Count, Click, Selecting, DisSelecting, graphPath2, _text, isEnabled, Drag, graphPath3);
         listItemList.Add(listItemInstance);
 
-        if (JoyStickManager.Instance.IsJoyStickEnable() && listItemList.Count == 1 && scrollViewId == GlobalCommunicateManager.selectingScrollViewId)
-        {
-            if (listItemList[0].GetComponent<GridItem>() != null)
-            {
-                listItemList[0].GetComponent<GridItem>().Selecting();
-            }
-        }
+        //if (JoyStickManager.Instance.IsJoyStickEnable() && listItemList.Count == 1 && scrollViewId == GlobalCommunicateManager.selectingScrollViewId)
+        //{
+        //    if (listItemList[0].GetComponent<GridItem>() != null)
+        //    {
+        //        listItemList[0].GetComponent<GridItem>().Selecting();
+        //    }
+        //}
 
         //if (scrollViewContent.transform.childCount == 1)
         //{
@@ -232,28 +232,6 @@ public class GridScrollView : MonoBehaviour
         //}
         return listItemInstance;
     }
-
-    //public GameObject GenerateStyleBox(int[] styleBoxArray, int _id)
-    //{
-    //    //List<Facility> _fl = FacilityManager.Instance.GetFacilityList();
-    //    //foreach (FacilityComponent _c in componentList)
-    //    //{
-    //    GameObject listItemInstance = Instantiate(gridStyleBoxItem);
-    //    listItemInstance.transform.SetParent(scrollViewContent.transform);
-    //    listItemInstance.transform.localScale = Vector3.one;
-    //    listItemInstance.GetComponent<GridItemStyleBox>().SetGridItem(styleBoxArray, _id, listItemList.Count, Click, Selecting, DisSelecting);
-    //    listItemList.Add(listItemInstance);
-
-    //    //ListItemInstance.transform.Find("Name").GetComponent<Text>()
-    //    //}
-
-    //    //if (scrollViewContent.transform.childCount == 1)
-    //    //{
-    //    //    listItemInstance.GetComponent<Button>().Select();
-    //    //}
-
-    //    return listItemInstance;
-    //}
 
     void Click(int id, GridItem gi)
     {

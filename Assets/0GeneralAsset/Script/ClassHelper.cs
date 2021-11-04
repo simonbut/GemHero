@@ -57,13 +57,13 @@ namespace ClassHelper
                     result = en;
                     break;
             }
-            if (JoyStickManager.Instance.IsJoyStickEnable())
-            {
-                result = result.Replace("「W」, 「A」, 「S」, and 「D」", "「D-Pad」");
-                result = result.Replace("「W」、「A」、「S」、「D」", "「D-Pad」");
-                result = result.Replace("「Q」 and 「E」", "「L1」 and 「R1」");
-                result = result.Replace("「Q」、「E」", "「L1」、「R1」");
-            }
+            //if (JoyStickManager.Instance.IsJoyStickEnable())
+            //{
+            //    result = result.Replace("「W」, 「A」, 「S」, and 「D」", "「D-Pad」");
+            //    result = result.Replace("「W」、「A」、「S」、「D」", "「D-Pad」");
+            //    result = result.Replace("「Q」 and 「E」", "「L1」 and 「R1」");
+            //    result = result.Replace("「Q」、「E」", "「L1」、「R1」");
+            //}
             if (result.Contains("「") && result.Contains("」"))
             {
                 result = result.Replace("「", "<b> ");

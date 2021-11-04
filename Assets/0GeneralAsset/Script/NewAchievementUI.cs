@@ -19,13 +19,13 @@ public class NewAchievementUI : ControlableUI
     void Update()
     {
 
-        if (JoyStickManager.Instance.IsJoyStickEnable() && UIManager.Instance.IsCurrentUI(this))
-        {
-            if (JoyStickManager.Instance.IsInputDown("Cross"))
-            {
-                OnBackPressed();
-            }
-        }
+        //if (JoyStickManager.Instance.IsJoyStickEnable() && UIManager.Instance.IsCurrentUI(this))
+        //{
+        //    if (JoyStickManager.Instance.IsInputDown("Cross"))
+        //    {
+        //        OnBackPressed();
+        //    }
+        //}
     }
 
     int cardId;

@@ -97,79 +97,79 @@ public class GeneralPanelFilter : ControlableUI
             background.color = new Color(0, 0, 0, 0.01f);
         }
 
-        if (JoyStickManager.Instance.IsInputDown("Cross") || Input.GetButtonDown("Escape"))
-        {
-            OnBackPressed();
-        }
+        //if (JoyStickManager.Instance.IsInputDown("Cross") || Input.GetButtonDown("Escape"))
+        //{
+        //    OnBackPressed();
+        //}
 
-        if (JoyStickManager.Instance.IsJoyStickEnable())
-        {
-            selectingSlot.gameObject.SetActive(true);
-            selectingSlot.transform.position = titleList[GlobalCommunicateManager.selectingScrollViewId].transform.position;
+        //if (JoyStickManager.Instance.IsJoyStickEnable())
+        //{
+        //    selectingSlot.gameObject.SetActive(true);
+        //    selectingSlot.transform.position = titleList[GlobalCommunicateManager.selectingScrollViewId].transform.position;
 
-            if (JoyStickManager.Instance.IsInputDown("Down"))
-            {
-                if (GlobalCommunicateManager.selectingScrollViewId + 1 < titleList.Count)
-                {
-                    GlobalCommunicateManager.selectingScrollViewId++;
-                }
-                else
-                {
-                    GlobalCommunicateManager.selectingScrollViewId = 0;
-                }
-            }
-            if (JoyStickManager.Instance.IsInputDown("Up"))
-            {
-                if (GlobalCommunicateManager.selectingScrollViewId - 1 >= 0)
-                {
-                    GlobalCommunicateManager.selectingScrollViewId--;
-                }
-                else
-                {
-                    GlobalCommunicateManager.selectingScrollViewId = titleList.Count - 1;
-                }
-            }
+        //    if (JoyStickManager.Instance.IsInputDown("Down"))
+        //    {
+        //        if (GlobalCommunicateManager.selectingScrollViewId + 1 < titleList.Count)
+        //        {
+        //            GlobalCommunicateManager.selectingScrollViewId++;
+        //        }
+        //        else
+        //        {
+        //            GlobalCommunicateManager.selectingScrollViewId = 0;
+        //        }
+        //    }
+        //    if (JoyStickManager.Instance.IsInputDown("Up"))
+        //    {
+        //        if (GlobalCommunicateManager.selectingScrollViewId - 1 >= 0)
+        //        {
+        //            GlobalCommunicateManager.selectingScrollViewId--;
+        //        }
+        //        else
+        //        {
+        //            GlobalCommunicateManager.selectingScrollViewId = titleList.Count - 1;
+        //        }
+        //    }
 
-            switch (GlobalCommunicateManager.selectingScrollViewId)
-            {
-                case 0://Sorting
-                    if (JoyStickManager.Instance.IsInputDown("Circle"))
-                    {
-                        SortingDropDownClicked();
-                    }
-                    break;
-                case 1://Name
-                    if (JoyStickManager.Instance.IsInputDown("Circle"))
-                    {
-                        FilterDropDown1Clicked();
-                    }
-                    break;
-                case 2://Property
-                    if (JoyStickManager.Instance.IsInputDown("Circle"))
-                    {
-                        FilterDropDown2Clicked();
-                    }
-                    break;
-                //case 3://Type
-                //    if (JoyStickManager.Instance.IsInputDown("Circle"))
-                //    {
-                //        FilterDropDown3Clicked();
-                //    }
-                //    break;
-                case 4://Reset
-                    if (JoyStickManager.Instance.IsInputDown("Circle"))
-                    {
-                        ResetButtonClicked();
-                    }
-                    break;
-                case 5://Confirm
-                    if (JoyStickManager.Instance.IsInputDown("Circle"))
-                    {
-                        ConfirmButtonClicked();
-                    }
-                    break;
-            }
-        }
+        //    switch (GlobalCommunicateManager.selectingScrollViewId)
+        //    {
+        //        //case 0://Sorting
+        //        //    if (JoyStickManager.Instance.IsInputDown("Circle"))
+        //        //    {
+        //        //        SortingDropDownClicked();
+        //        //    }
+        //        //    break;
+        //        //case 1://Name
+        //        //    if (JoyStickManager.Instance.IsInputDown("Circle"))
+        //        //    {
+        //        //        FilterDropDown1Clicked();
+        //        //    }
+        //        //    break;
+        //        //case 2://Property
+        //        //    if (JoyStickManager.Instance.IsInputDown("Circle"))
+        //        //    {
+        //        //        FilterDropDown2Clicked();
+        //        //    }
+        //        //    break;
+        //        //case 3://Type
+        //        //    if (JoyStickManager.Instance.IsInputDown("Circle"))
+        //        //    {
+        //        //        FilterDropDown3Clicked();
+        //        //    }
+        //        //    break;
+        //        //case 4://Reset
+        //        //    if (JoyStickManager.Instance.IsInputDown("Circle"))
+        //        //    {
+        //        //        ResetButtonClicked();
+        //        //    }
+        //        //    break;
+        //        //case 5://Confirm
+        //        //    if (JoyStickManager.Instance.IsInputDown("Circle"))
+        //        //    {
+        //        //        ConfirmButtonClicked();
+        //        //    }
+        //        //    break;
+        //    }
+        //}
 
     }
 

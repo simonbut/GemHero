@@ -39,78 +39,78 @@ public class StartPanelMain : ControlableUI
                 }
             }
 
-            if (JoyStickManager.Instance.IsJoyStickEnable())
-            {
-                tutorialButton.transform.Find("Text").GetComponent<TextMeshProUGUI>().text = Database.GetInputIcon(KeyBoardInput.joystick_square) + " " + Database.GetLocalizedText("Tutorial");
-                if (JoyStickManager.Instance.IsInputDown("Square"))
-                {
-                    StartView.Instance.TutorialClicked();
-                }
+            //if (JoyStickManager.Instance.IsJoyStickEnable())
+            //{
+            //    tutorialButton.transform.Find("Text").GetComponent<TextMeshProUGUI>().text = Database.GetInputIcon(KeyBoardInput.joystick_square) + " " + Database.GetLocalizedText("Tutorial");
+            //    if (JoyStickManager.Instance.IsInputDown("Square"))
+            //    {
+            //        StartView.Instance.TutorialClicked();
+            //    }
 
-                if (JoyStickManager.Instance.IsInputDown("Triangle"))
-                {
-                    UIManager.Instance.AddSettingUI();
-                }
+            //    if (JoyStickManager.Instance.IsInputDown("Triangle"))
+            //    {
+            //        UIManager.Instance.AddSettingUI();
+            //    }
 
-                if (JoyStickManager.Instance.IsInputDown("Escape"))
-                {
-                    UIManager.Instance.AddSettingUI();
-                }
+            //    if (JoyStickManager.Instance.IsInputDown("Escape"))
+            //    {
+            //        UIManager.Instance.AddSettingUI();
+            //    }
 
-                if (JoyStickManager.Instance.IsInputDown("Circle"))
-                {
-                    if (buttonList.Count > GlobalCommunicateManager.selectingId)
-                    {
-                        //OnButtonClicked(GlobalCommunicateManager.selectingId);
-                        buttonList[GlobalCommunicateManager.selectingId].GetComponent<Button>().onClick.Invoke();
-                    }
-                }
+            //    if (JoyStickManager.Instance.IsInputDown("Circle"))
+            //    {
+            //        if (buttonList.Count > GlobalCommunicateManager.selectingId)
+            //        {
+            //            //OnButtonClicked(GlobalCommunicateManager.selectingId);
+            //            buttonList[GlobalCommunicateManager.selectingId].GetComponent<Button>().onClick.Invoke();
+            //        }
+            //    }
 
-                if (JoyStickManager.Instance.IsInputDown("Down"))
-                {
-                    if (GlobalCommunicateManager.selectingId + 1 < buttonList.Count)
-                    {
-                        GlobalCommunicateManager.selectingId++;
-                    }
-                    else
-                    {
-                        GlobalCommunicateManager.selectingId = 0;
-                    }
-                    while (!buttonList[GlobalCommunicateManager.selectingId].gameObject.activeInHierarchy)
-                    {
-                        if (GlobalCommunicateManager.selectingId + 1 < buttonList.Count)
-                        {
-                            GlobalCommunicateManager.selectingId++;
-                        }
-                        else
-                        {
-                            GlobalCommunicateManager.selectingId = 0;
-                        }
-                    }
-                }
-                if (JoyStickManager.Instance.IsInputDown("Up"))
-                {
-                    if (GlobalCommunicateManager.selectingId - 1 >= 0)
-                    {
-                        GlobalCommunicateManager.selectingId--;
-                    }
-                    else
-                    {
-                        GlobalCommunicateManager.selectingId = buttonList.Count - 1;
-                    }
-                    while (!buttonList[GlobalCommunicateManager.selectingId].gameObject.activeInHierarchy)
-                    {
-                        if (GlobalCommunicateManager.selectingId - 1 >= 0)
-                        {
-                            GlobalCommunicateManager.selectingId--;
-                        }
-                        else
-                        {
-                            GlobalCommunicateManager.selectingId = buttonList.Count - 1;
-                        }
-                    }
-                }
-            }
+            //    if (JoyStickManager.Instance.IsInputDown("Down"))
+            //    {
+            //        if (GlobalCommunicateManager.selectingId + 1 < buttonList.Count)
+            //        {
+            //            GlobalCommunicateManager.selectingId++;
+            //        }
+            //        else
+            //        {
+            //            GlobalCommunicateManager.selectingId = 0;
+            //        }
+            //        while (!buttonList[GlobalCommunicateManager.selectingId].gameObject.activeInHierarchy)
+            //        {
+            //            if (GlobalCommunicateManager.selectingId + 1 < buttonList.Count)
+            //            {
+            //                GlobalCommunicateManager.selectingId++;
+            //            }
+            //            else
+            //            {
+            //                GlobalCommunicateManager.selectingId = 0;
+            //            }
+            //        }
+            //    }
+            //    if (JoyStickManager.Instance.IsInputDown("Up"))
+            //    {
+            //        if (GlobalCommunicateManager.selectingId - 1 >= 0)
+            //        {
+            //            GlobalCommunicateManager.selectingId--;
+            //        }
+            //        else
+            //        {
+            //            GlobalCommunicateManager.selectingId = buttonList.Count - 1;
+            //        }
+            //        while (!buttonList[GlobalCommunicateManager.selectingId].gameObject.activeInHierarchy)
+            //        {
+            //            if (GlobalCommunicateManager.selectingId - 1 >= 0)
+            //            {
+            //                GlobalCommunicateManager.selectingId--;
+            //            }
+            //            else
+            //            {
+            //                GlobalCommunicateManager.selectingId = buttonList.Count - 1;
+            //            }
+            //        }
+            //    }
+            //}
         }
     }
 
@@ -118,14 +118,14 @@ public class StartPanelMain : ControlableUI
     {
 
         GlobalCommunicateManager.selectingId = 1;
-        if (JoyStickManager.Instance.IsJoyStickEnable())
-        {
-            ControlMeaningUI.Instance?.Show(Database.GetInputIcon(KeyBoardInput.joystick_triangle) + " " + Database.GetLocalizedText("Setting") + "     " + Database.GetInputIcon(KeyBoardInput.joystick_cross) + " " + Database.GetLocalizedText("Confirm"));
-        }
-        else
-        {
-            ControlMeaningUI.Instance?.Show(Database.GetInputIcon(KeyBoardInput.Input_Left_Click) + " " + Database.GetLocalizedText("Confirm"));
-        }
+        //if (JoyStickManager.Instance.IsJoyStickEnable())
+        //{
+        //    ControlMeaningUI.Instance?.Show(Database.GetInputIcon(KeyBoardInput.joystick_triangle) + " " + Database.GetLocalizedText("Setting") + "     " + Database.GetInputIcon(KeyBoardInput.joystick_cross) + " " + Database.GetLocalizedText("Confirm"));
+        //}
+        //else
+        //{
+        //    ControlMeaningUI.Instance?.Show(Database.GetInputIcon(KeyBoardInput.Input_Left_Click) + " " + Database.GetLocalizedText("Confirm"));
+        //}
 
 
 

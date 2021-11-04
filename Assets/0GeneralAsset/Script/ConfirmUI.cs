@@ -27,16 +27,8 @@ public class ConfirmUI : ControlableUI
         text.text = Database.GetLocalizedText(_text);
         yesCallBack = _yesCallBack;
         noCallBack = _noCallBack;
-        if (JoyStickManager.Instance.IsJoyStickEnable())
-        {
-            yesText.text = Database.GetInputIcon(KeyBoardInput.joystick_cross) + " " + Database.GetLocalizedText("Yes");
-            noText.text = Database.GetInputIcon(KeyBoardInput.joystick_circle) + " " + Database.GetLocalizedText("No");
-        }
-        else
-        {
-            yesText.text = Database.GetLocalizedText("Yes");
-            noText.text = Database.GetLocalizedText("No");
-        }
+        yesText.text = Database.GetLocalizedText("Yes");
+        noText.text = Database.GetLocalizedText("No");
 
         AddUI();
     }
@@ -44,24 +36,24 @@ public class ConfirmUI : ControlableUI
     // Update is called once per frame
     void Update()
     {
-        if (JoyStickManager.Instance.IsInputDown("Cross"))
-        {
-            if (UIManager.Instance.IsCurrentUI(this))
-            {
-                No();
-            }
-        }
+        //if (JoyStickManager.Instance.IsInputDown("Cross"))
+        //{
+        //    if (UIManager.Instance.IsCurrentUI(this))
+        //    {
+        //        No();
+        //    }
+        //}
 
-        if (JoyStickManager.Instance.IsJoyStickEnable())
-        {
-            if (JoyStickManager.Instance.IsInputDown("Circle"))
-            {
-                if (UIManager.Instance.IsCurrentUI(this))
-                {
-                    Yes();
-                }
-            }
-        }
+        //if (JoyStickManager.Instance.IsJoyStickEnable())
+        //{
+        //    if (JoyStickManager.Instance.IsInputDown("Circle"))
+        //    {
+        //        if (UIManager.Instance.IsCurrentUI(this))
+        //        {
+        //            Yes();
+        //        }
+        //    }
+        //}
     }
 
 

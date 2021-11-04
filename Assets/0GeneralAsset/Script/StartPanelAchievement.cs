@@ -24,13 +24,13 @@ public class StartPanelAchievement : ControlableUI
     // Update is called once per frame
     void Update()
     {
-        if (JoyStickManager.Instance.IsInputDown("Cross") || Input.GetButtonDown("Escape"))
-        {
-            if (UIManager.Instance.IsCurrentUI(this))
-            {
-                OnBackPressed();
-            }
-        }
+        //if (JoyStickManager.Instance.IsInputDown("Cross") || Input.GetButtonDown("Escape"))
+        //{
+        //    if (UIManager.Instance.IsCurrentUI(this))
+        //    {
+        //        OnBackPressed();
+        //    }
+        //}
     }
 
     public override void OnRemoveUI()
