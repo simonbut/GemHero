@@ -5,6 +5,8 @@ using UnityEngine.InputSystem;
 
 public class CharacterControlView : MonoBehaviour
 {
+    public float lengthLimit = 10;
+
     InputMaster controls;
     void Awake()
     {
@@ -41,15 +43,18 @@ public class CharacterControlView : MonoBehaviour
     }
     public void OnMovement(Vector2 _input)
     {
-        print(_input.x);
         input = _input;
-        //input.x = Input.GetAxisRaw("Horizontal");
-        //input.y = Input.GetAxisRaw("Vertical");
     }
 
     void CharacterMove()
     {
-        player.GetComponent<Rigidbody2D>().MovePosition(player.transform.position + input * Time.deltaTime * speed);
+        Vector3 _prePos = new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z);
+        Vector3 _offset = input * Time.deltaTime * speed;
+        player.GetComponent<Rigidbody2D>().MovePosition(player.transform.position + _offset);
+        if (Rope.instance.GetRopeLength(_offset) > lengthLimit)
+        {
+            player.GetComponent<Rigidbody2D>().MovePosition(player.transform.position);
+        }
     }
 
     void CharacterAnimation()

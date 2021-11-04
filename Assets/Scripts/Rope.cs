@@ -10,8 +10,13 @@ public class Rope : MonoBehaviour
 
     public List<Vector3> ropePositions = new List<Vector3>();
 
+    public TextMesh lengthText;
+
+    public static Rope instance;
     private void Awake()
     {
+        instance = this;
+
         AddPosToRope(player.transform.position);
     }
 
@@ -25,6 +30,21 @@ public class Rope : MonoBehaviour
         {
             DetectCollisionExits();
         }
+
+        lengthText.transform.position = player.transform.position;
+        lengthText.text = GetRopeLength(Vector3.zero).ToString("0.0");
+    }
+
+    public float GetRopeLength(Vector3 _offset)
+    {
+        float result = 0f;
+        for (int i = 0; i < ropePositions.Count - 1; i++)
+        {
+            result += (ropePositions[i + 1] - ropePositions[i]).magnitude;
+        }
+        result += (player.transform.position + _offset - ropePositions[ropePositions.Count - 1]).magnitude;
+
+        return result;
     }
 
     private void DetectCollisionEnter()
@@ -45,10 +65,6 @@ public class Rope : MonoBehaviour
         Vector2 _v2 = rope.GetPosition(ropePositions.Count - 2);
         Vector3 _projectionPoint = GetProjectionPoint(_v, player.transform.position, _v2);
         RaycastHit2D hit = Physics2D.Linecast(_projectionPoint, _v, collMask);
-        //if(_projectionPoint != player.transform.position)
-        //{
-        //    print("_projectionPoint is not zero");
-        //}
         if (_projectionPoint != player.transform.position && (!hit || hit.point == _v))
         {
             ropePositions.RemoveAt(ropePositions.Count - 1);
@@ -74,11 +90,7 @@ public class Rope : MonoBehaviour
     //https://forum.unity.com/threads/perpendicular-2d-vector.347451/
     Vector3 GetProjectionPoint(Vector3 A, Vector3 B, Vector3 C)
     {
-        //print("length1" + (A - B).magnitude);
-        //print("length2" + (C - B).magnitude);
-        //Vector3 heading = target - transform.position;
         Vector3 force = Vector3.Project(A - B, C - B);
-        //print(B + force);
         Debug.DrawLine(B + force, A, Color.white);
         return B + force;
     }
