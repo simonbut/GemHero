@@ -773,6 +773,8 @@ MonoBehaviour:
   gridPrefab: {fileID: 1347800137340822855, guid: bf07b13b3d29d494d9d6245a8ef57cbd,
     type: 3}
   choosingTag: {fileID: 0}
+  gridSize: 0.5
+  canvasSize: 1
 --- !u!4 &1481114630
 Transform:
   m_ObjectHideFlags: 0

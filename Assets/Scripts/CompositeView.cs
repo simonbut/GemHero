@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using ClassHelper;
 
 public class CompositeView : MonoBehaviour
 {
@@ -9,13 +10,17 @@ public class CompositeView : MonoBehaviour
     public GameObject choosingTagCanvas;
     public GameObject gridPrefab;
     public ChoosingTag choosingTag;
+    public float gridSize = 1f;
+    public float canvasSize = 1f;
+
+    public List<Tag> existingTagList = new List<Tag>();
 
     // Start is called before the first frame update
     void Start()
     {
         //GenerateTagGrid(new List<Vector2Int> { Vector2Int.zero,Vector2Int.up,Vector2Int.down,Vector2Int.left,Vector2Int.right,new Vector2Int(1,1) });
-        GenerateTagGrid(new List<Vector2Int> { new Vector2Int(-1, -1)});
-        GenerateTagGrid(new List<Vector2Int> { new Vector2Int(1, -1), new Vector2Int(1, -2) });
+        GenerateTagGrid(new List<Vector2Int> { new Vector2Int(0, 0) }, new Vector2Int(-1, -1));
+        GenerateTagGrid(new List<Vector2Int> { new Vector2Int(0, 0), new Vector2Int(0, -1) }, new Vector2Int(1, -1));
 
         GenerateChoosingTag(new List<Vector2Int> { Vector2Int.zero, Vector2Int.up, Vector2Int.down, Vector2Int.left, Vector2Int.right, new Vector2Int(1, 1) });
 
@@ -24,12 +29,61 @@ public class CompositeView : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        gridCanvas.transform.localScale = Vector3.one * canvasSize;
+
+        DetermineChoosingTagPosition();
+
+
+        if (CheckIfCollide(choosingTag.GetComponent<ChoosingTag>().tagContent, existingTagList))
+        {
+            choosingTag.SetColor(Color.red);
+        }
+        else
+        {
+            choosingTag.SetColor(Color.white);
+        }
     }
 
-    void GenerateChoosingTag(List<Vector2Int> _gridContent)
+    bool CheckIfCollide(Tag tag, List<Tag> tagList)
     {
-        GameObject _gameObjectInstance = GenerateTagGrid(_gridContent);
+        foreach (Vector2Int _v in tag.grids)
+        {
+            foreach (Tag _t in tagList)
+            {
+                foreach (Vector2Int _v2 in _t.grids)
+                {
+                    if (_v2 + _t.offset == _v + tag.offset)
+                    {
+                        print("x = " + (_v2 + _t.offset).x + ",y = " + (_v2 + _t.offset).y);
+                        return true;
+                    }
+                }
+            }
+        }
+
+        return false;
+    }
+
+    void DetermineChoosingTagPosition()
+    {
+        if (choosingTag == null)
+        {
+            return;
+        }
+
+        Vector2Int gridOffset = CalculateGridOffset(Input.mousePosition);
+        choosingTag.GetComponent<ChoosingTag>().tagContent.offset = gridOffset;
+        choosingTag.transform.localPosition = new Vector3(gridOffset.x, gridOffset.y, 0) * 100f * gridSize;
+    }
+
+    Vector2Int CalculateGridOffset(Vector2 _mousePosition)
+    {
+        return new Vector2Int(Mathf.FloorToInt((_mousePosition.x - Screen.width / 2f) / 50f + 0.5f), Mathf.FloorToInt((_mousePosition.y - Screen.height / 2f) / 50f + 0.5f));
+    }
+
+    void GenerateChoosingTag(List<Vector2Int> _gridContents)
+    {
+        GameObject _gameObjectInstance = GenerateTagGrid(_gridContents, new Vector2Int() , false);
         _gameObjectInstance.AddComponent<ChoosingTag>();
         if (choosingTag != null)
         {
@@ -37,10 +91,12 @@ public class CompositeView : MonoBehaviour
         }
         choosingTag = _gameObjectInstance.GetComponent<ChoosingTag>();
         choosingTag.transform.SetParent(choosingTagCanvas.transform);
+        choosingTag.GetComponent<ChoosingTag>().SetUp(_gridContents, new Vector2Int());
+        choosingTag.GetComponent<ChoosingTag>().SetTagColor(Color.grey);
     }
 
 
-    GameObject GenerateTagGrid(List<Vector2Int> _gridContent)
+    GameObject GenerateTagGrid(List<Vector2Int> _gridContents, Vector2Int _tagOffset, bool isExisting = true)
     {
         GameObject _gameObjectInstance = new GameObject();
         _gameObjectInstance.name = "tag";
@@ -49,7 +105,7 @@ public class CompositeView : MonoBehaviour
 
         //get content size
         int size = 0;
-        foreach (Vector2 _v in _gridContent)
+        foreach (Vector2 _v in _gridContents)
         {
             int compare = Mathf.FloorToInt(Mathf.Max(Mathf.Abs(_v.x), Mathf.Abs(_v.y)));
             if (compare > size)
@@ -63,11 +119,12 @@ public class CompositeView : MonoBehaviour
         {
             for (int j = -size; j < size + 1; j++)
             {
-                if (_gridContent.Contains(new Vector2Int(i,j)))
+                if (_gridContents.Contains(new Vector2Int(i,j)))
                 {
                     GameObject _gridInstance = Instantiate(gridPrefab);
                     _gridInstance.transform.SetParent(_gameObjectInstance.transform);
-                    _gridInstance.transform.localPosition = new Vector2(i * 100f, j * 100f);
+                    _gridInstance.transform.localPosition = new Vector2((i + _tagOffset.x) * 100f, (j + _tagOffset.y) * 100f) * gridSize;
+                    _gridInstance.transform.localScale *= gridSize;
 
                     Material mat = Instantiate(_gridInstance.GetComponent<Image>().material);
                     //Material mat = new Material(Shader.Find("Shader Graphs/tag"));
@@ -75,51 +132,51 @@ public class CompositeView : MonoBehaviour
                     //mat.color = new Color(Random.Range(0.0f, 1.0f), Random.Range(0.0f, 1.0f), Random.Range(0.0f, 1.0f));
 
                     //generate edge and vertice
-                    if (!_gridContent.Contains(new Vector2Int(i - 1, j)))
+                    if (!_gridContents.Contains(new Vector2Int(i - 1, j)))
                     {
                         mat.SetFloat("Left", 1);
-                        if (!_gridContent.Contains(new Vector2Int(i, j - 1)))
+                        if (!_gridContents.Contains(new Vector2Int(i, j - 1)))
                         {
                             mat.SetFloat("LeftDownReverse", 1);
                         }
-                        if (!_gridContent.Contains(new Vector2Int(i, j + 1)))
+                        if (!_gridContents.Contains(new Vector2Int(i, j + 1)))
                         {
                             mat.SetFloat("LeftUpReverse", 1);
                         }
                     }
-                    if (!_gridContent.Contains(new Vector2Int(i, j - 1)))
+                    if (!_gridContents.Contains(new Vector2Int(i, j - 1)))
                     {
                         mat.SetFloat("Down", 1);
                     }
-                    if (!_gridContent.Contains(new Vector2Int(i - 1, j - 1)))
+                    if (!_gridContents.Contains(new Vector2Int(i - 1, j - 1)))
                     {
                         mat.SetFloat("LeftDown", 1);
                     }
-                    if (!_gridContent.Contains(new Vector2Int(i + 1, j - 1)))
+                    if (!_gridContents.Contains(new Vector2Int(i + 1, j - 1)))
                     {
                         mat.SetFloat("RightDown", 1);
                     }
-                    if (!_gridContent.Contains(new Vector2Int(i + 1, j)))
+                    if (!_gridContents.Contains(new Vector2Int(i + 1, j)))
                     {
                         mat.SetFloat("Right", 1);
-                        if (!_gridContent.Contains(new Vector2Int(i, j - 1)))
+                        if (!_gridContents.Contains(new Vector2Int(i, j - 1)))
                         {
                             mat.SetFloat("RightDownReverse", 1);
                         }
-                        if (!_gridContent.Contains(new Vector2Int(i, j + 1)))
+                        if (!_gridContents.Contains(new Vector2Int(i, j + 1)))
                         {
                             mat.SetFloat("RightUpReverse", 1);
                         }
                     }
-                    if (!_gridContent.Contains(new Vector2Int(i, j + 1)))
+                    if (!_gridContents.Contains(new Vector2Int(i, j + 1)))
                     {
                         mat.SetFloat("Up", 1);
                     }
-                    if (!_gridContent.Contains(new Vector2Int(i + 1, j + 1)))
+                    if (!_gridContents.Contains(new Vector2Int(i + 1, j + 1)))
                     {
                         mat.SetFloat("RightUp", 1);
                     }
-                    if (!_gridContent.Contains(new Vector2Int(i - 1, j + 1)))
+                    if (!_gridContents.Contains(new Vector2Int(i - 1, j + 1)))
                     {
                         mat.SetFloat("LeftUp", 1);
                     }
@@ -128,6 +185,16 @@ public class CompositeView : MonoBehaviour
                 }
             }
         }
+
+        if (isExisting)
+        {
+            existingTagList.Add(Tag.CreateTag(_gridContents, _tagOffset));
+        }
+
+        //foreach (Vector2Int _v in _gridContents)
+        //{
+        //    print("x = " + (_v.x + _tagOffset.x) + ",y = " + (_v.y + _tagOffset.y));
+        //}
 
         return _gameObjectInstance;
     }

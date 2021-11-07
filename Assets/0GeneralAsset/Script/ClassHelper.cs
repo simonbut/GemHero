@@ -204,4 +204,20 @@ namespace ClassHelper
 
     public delegate void ListItemCallback(int _id, ListItem gi);
     public delegate void GridItemCallback(int _id, GridItem gi);
+
+    public class Tag
+    {
+        public List<Vector2Int> grids;
+        public Vector2Int offset = new Vector2Int();
+
+        static public Tag CreateTag(List<Vector2Int> _grids, Vector2Int _offset)
+        {
+            Tag result = new Tag();
+            result.grids = new List<Vector2Int>(_grids);
+            result.offset = _offset;
+
+
+            return result;
+        }
+    }
 }
