@@ -38,12 +38,15 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: Default
-    uniqueID: 0
+  - name: BG
+    uniqueID: 1879019195
     locked: 0
   - name: Lv2
     uniqueID: 2821518055
     locked: 0
   - name: Character
     uniqueID: 577312713
+    locked: 0
+  - name: Default
+    uniqueID: 0
     locked: 0

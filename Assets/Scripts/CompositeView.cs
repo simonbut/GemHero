@@ -5,16 +5,19 @@ using UnityEngine.UI;
 
 public class CompositeView : MonoBehaviour
 {
-    public GameObject canvas;
+    public GameObject gridCanvas;
+    public GameObject choosingTagCanvas;
     public GameObject gridPrefab;
+    public ChoosingTag choosingTag;
 
     // Start is called before the first frame update
     void Start()
     {
-        GenerateTagGrid(new List<Vector2Int> { Vector2Int.zero,Vector2Int.up,Vector2Int.down,Vector2Int.left,Vector2Int.right,new Vector2Int(1,1) });
+        //GenerateTagGrid(new List<Vector2Int> { Vector2Int.zero,Vector2Int.up,Vector2Int.down,Vector2Int.left,Vector2Int.right,new Vector2Int(1,1) });
         GenerateTagGrid(new List<Vector2Int> { new Vector2Int(-1, -1)});
         GenerateTagGrid(new List<Vector2Int> { new Vector2Int(1, -1), new Vector2Int(1, -2) });
 
+        GenerateChoosingTag(new List<Vector2Int> { Vector2Int.zero, Vector2Int.up, Vector2Int.down, Vector2Int.left, Vector2Int.right, new Vector2Int(1, 1) });
 
     }
 
@@ -24,13 +27,24 @@ public class CompositeView : MonoBehaviour
         
     }
 
+    void GenerateChoosingTag(List<Vector2Int> _gridContent)
+    {
+        GameObject _gameObjectInstance = GenerateTagGrid(_gridContent);
+        _gameObjectInstance.AddComponent<ChoosingTag>();
+        if (choosingTag != null)
+        {
+            Destroy(choosingTag.gameObject);
+        }
+        choosingTag = _gameObjectInstance.GetComponent<ChoosingTag>();
+        choosingTag.transform.SetParent(choosingTagCanvas.transform);
+    }
 
 
-    void GenerateTagGrid(List<Vector2Int> _gridContent)
+    GameObject GenerateTagGrid(List<Vector2Int> _gridContent)
     {
         GameObject _gameObjectInstance = new GameObject();
         _gameObjectInstance.name = "tag";
-        _gameObjectInstance.transform.SetParent(canvas.transform);
+        _gameObjectInstance.transform.SetParent(gridCanvas.transform);
         _gameObjectInstance.transform.localPosition = new Vector2(0, 0);
 
         //get content size
@@ -115,5 +129,6 @@ public class CompositeView : MonoBehaviour
             }
         }
 
+        return _gameObjectInstance;
     }
 }

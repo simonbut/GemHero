@@ -55,7 +55,6 @@ public class Database : MonoBehaviour
         //
 
 
-        MemoryManager.Instance.LoadMemoryData();
         AchievementManager.Instance.LoadAchievementData();
         ParameterManager.Instance.LoadParameterData();
         //LoadStatusData();
@@ -70,7 +69,6 @@ public class Database : MonoBehaviour
     // Use this for initialization
     public static void Init()
     {
-        MemoryManager.Instance.LoadMemoryData();
 
         LoadGlobalSave();
 
@@ -718,10 +716,6 @@ public class Database : MonoBehaviour
 
     public static void SaveGlobalSave()
     {
-        foreach (string _id in globalData.read_oice)
-        {
-            MemoryManager.Instance.GetMemoryByUuid(_id).isGet = true;
-        }
 
         //System.IO.File.WriteAllText(UnityEngine.Application.persistentDataPath + "/globalSaveDataJson.sav", JsonUtility.ToJson(globalData));
 

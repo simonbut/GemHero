@@ -24,7 +24,6 @@ public class UIManager : MonoBehaviour
 
     //ControlableUI controlingUI;
     public List<ControlableUI> ControlableUIList = new List<ControlableUI>();
-    //public InputTextUI inputTextUI;
     public ConfirmUI confirmUI;
     public ConfirmUI confirmSmallUI;
     public InformationUI informationUI;
@@ -32,14 +31,10 @@ public class UIManager : MonoBehaviour
     public SettingUI settingUI;
     public ControlableUIGeneral emptyUI;
 
-    //public List<int> newCardStack = new List<int>();
     public NewAchievementUI newAchievementUI;
-    public CreditUI creditUI;
 
     [SerializeField] GameObject staticCanvas;
     [SerializeField] DropdownUI dropdownUIPrefab;
-
-    //public ItemChoosingIndicator itemChoosingIndicator;
 
     // Start is called before the first frame update
     void Start()
@@ -245,11 +240,6 @@ public class UIManager : MonoBehaviour
     public void StopAnimation()
     {
         ControlableUIList[ControlableUIList.Count - 1].StopAnimation();
-    }
-
-    public void AddCreditUI()
-    {
-        creditUI.AddUI();
     }
 
     public DropdownUI GenerateDropdownUI(DropdownUI _dropdownUI, string _title,List<string> optionList, Button _triggerButton ,Vector2 _pos,int initialValue = 0)

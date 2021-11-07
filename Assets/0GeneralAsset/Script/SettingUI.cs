@@ -167,21 +167,6 @@ public class SettingUI : ControlableUI
     //    }
     //}
 
-    //IEnumerator PlaySFX()
-    //{
-    //    yield return null;
-    //    AudioManager.instance.PlaySFX(AudioManager.instance.uI_Signle_Click);//
-    //}
-
-    public void OnCreditButtonPressed()
-    {
-        //RemoveUI();
-        //SaveSetting();
-        //Database.ApplySetting();
-        //SceneManager.LoadScene("CreditScene");
-        UIManager.Instance.AddCreditUI();
-    }
-
     public void OnTitleButtonPressed()
     {
         OnRemoveUI();
