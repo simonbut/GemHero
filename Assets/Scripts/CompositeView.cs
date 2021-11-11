@@ -9,6 +9,7 @@ public class CompositeView : MonoBehaviour
     public GameObject gridCanvas;
     public GameObject choosingTagCanvas;
     public GameObject gridPrefab;
+    public GameObject tagNamePrefab;
     public ChoosingTag choosingTag;
     public float gridSize = 1f;
     public float canvasSize = 1f;
@@ -19,10 +20,10 @@ public class CompositeView : MonoBehaviour
     void Start()
     {
         //GenerateTagGrid(new List<Vector2Int> { Vector2Int.zero,Vector2Int.up,Vector2Int.down,Vector2Int.left,Vector2Int.right,new Vector2Int(1,1) });
-        GenerateTagGrid(new List<Vector2Int> { new Vector2Int(0, 0) }, new Vector2Int(-1, -1));
-        GenerateTagGrid(new List<Vector2Int> { new Vector2Int(0, 0), new Vector2Int(0, -1) }, new Vector2Int(1, -1));
+        GenerateTagGrid(new List<Vector2Int> { new Vector2Int(0, 0) }, new Vector2Int(-1, -1), "Text 1");
+        GenerateTagGrid(new List<Vector2Int> { new Vector2Int(0, 0), new Vector2Int(0, -1) }, new Vector2Int(1, -1), "Text 2");
 
-        GenerateChoosingTag(new List<Vector2Int> { Vector2Int.zero, Vector2Int.up, Vector2Int.down, Vector2Int.left, Vector2Int.right, new Vector2Int(1, 1) });
+        GenerateChoosingTag(new List<Vector2Int> { Vector2Int.zero, Vector2Int.up, Vector2Int.down, Vector2Int.left, Vector2Int.right, new Vector2Int(1, 1) }, "Text 3");
 
     }
 
@@ -78,12 +79,12 @@ public class CompositeView : MonoBehaviour
 
     Vector2Int CalculateGridOffset(Vector2 _mousePosition)
     {
-        return new Vector2Int(Mathf.FloorToInt((_mousePosition.x - Screen.width / 2f) / 50f + 0.5f), Mathf.FloorToInt((_mousePosition.y - Screen.height / 2f) / 50f + 0.5f));
+        return new Vector2Int(Mathf.FloorToInt((_mousePosition.x - Screen.width / 2f) / (100f * gridSize) + 0.5f), Mathf.FloorToInt((_mousePosition.y - Screen.height / 2f) / (100f * gridSize) + 0.5f));
     }
 
-    void GenerateChoosingTag(List<Vector2Int> _gridContents)
+    void GenerateChoosingTag(List<Vector2Int> _gridContents, string _tagName = "")
     {
-        GameObject _gameObjectInstance = GenerateTagGrid(_gridContents, new Vector2Int() , false);
+        GameObject _gameObjectInstance = GenerateTagGrid(_gridContents, new Vector2Int(), _tagName, false);
         _gameObjectInstance.AddComponent<ChoosingTag>();
         if (choosingTag != null)
         {
@@ -96,10 +97,10 @@ public class CompositeView : MonoBehaviour
     }
 
 
-    GameObject GenerateTagGrid(List<Vector2Int> _gridContents, Vector2Int _tagOffset, bool isExisting = true)
+    GameObject GenerateTagGrid(List<Vector2Int> _gridContents, Vector2Int _tagOffset, string _tagName = "", bool isExisting = true)
     {
         GameObject _gameObjectInstance = new GameObject();
-        _gameObjectInstance.name = "tag";
+        _gameObjectInstance.name = _tagName;
         _gameObjectInstance.transform.SetParent(gridCanvas.transform);
         _gameObjectInstance.transform.localPosition = new Vector2(0, 0);
 
@@ -119,7 +120,7 @@ public class CompositeView : MonoBehaviour
         {
             for (int j = -size; j < size + 1; j++)
             {
-                if (_gridContents.Contains(new Vector2Int(i,j)))
+                if (_gridContents.Contains(new Vector2Int(i, j)))
                 {
                     GameObject _gridInstance = Instantiate(gridPrefab);
                     _gridInstance.transform.SetParent(_gameObjectInstance.transform);
@@ -185,6 +186,41 @@ public class CompositeView : MonoBehaviour
                 }
             }
         }
+
+        //generate name
+        GameObject _tagNameInstance = Instantiate(tagNamePrefab);
+        _tagNameInstance.name = _tagName;
+        _tagNameInstance.GetComponent<Text>().text = _tagName;
+        _tagNameInstance.transform.SetParent(_gameObjectInstance.transform);
+        _tagNameInstance.transform.localPosition = new Vector2(0, 0);
+        _tagNameInstance.GetComponent<RectTransform>().sizeDelta = new Vector2(100, 100);
+        if (_gridContents.Contains(new Vector2Int(-1, 0)))
+        {
+            _tagNameInstance.GetComponent<RectTransform>().sizeDelta += new Vector2(100, 0);
+            _tagNameInstance.transform.localPosition += new Vector3(-50, 0, 0);
+        }
+        if (_gridContents.Contains(new Vector2Int(1, 0)))
+        {
+            _tagNameInstance.GetComponent<RectTransform>().sizeDelta += new Vector2(100, 0);
+            _tagNameInstance.transform.localPosition += new Vector3(50, 0, 0);
+        }
+        if (!_gridContents.Contains(new Vector2Int(1, 0)) && !_gridContents.Contains(new Vector2Int(-1, 0)))
+        {
+            if (_gridContents.Contains(new Vector2Int(0, -1)))
+            {
+                _tagNameInstance.GetComponent<RectTransform>().sizeDelta += new Vector2(0, 100);
+                _tagNameInstance.transform.localPosition = new Vector2(0, -50);
+            }
+            if (_gridContents.Contains(new Vector2Int(0, 1)))
+            {
+                _tagNameInstance.GetComponent<RectTransform>().sizeDelta += new Vector2(0, 100);
+                _tagNameInstance.transform.localPosition = new Vector2(0, 50);
+            }
+        }
+        _tagNameInstance.transform.localPosition = new Vector2(_tagNameInstance.transform.localPosition.x + _tagOffset.x * 100f, _tagNameInstance.transform.localPosition.y + _tagOffset.y * 100f);
+        _tagNameInstance.GetComponent<RectTransform>().sizeDelta *= gridSize;
+        _tagNameInstance.transform.localPosition *= gridSize;
+        _tagNameInstance.transform.localScale *= gridSize;
 
         if (isExisting)
         {

@@ -772,8 +772,10 @@ MonoBehaviour:
   choosingTagCanvas: {fileID: 1282281775}
   gridPrefab: {fileID: 1347800137340822855, guid: bf07b13b3d29d494d9d6245a8ef57cbd,
     type: 3}
+  tagNamePrefab: {fileID: 1303678637279915554, guid: edd531af50f4e1343acd4ddadaebc91b,
+    type: 3}
   choosingTag: {fileID: 0}
-  gridSize: 0.5
+  gridSize: 1
   canvasSize: 1
 --- !u!4 &1481114630
 Transform:
