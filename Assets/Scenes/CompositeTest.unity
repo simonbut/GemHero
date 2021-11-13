@@ -797,6 +797,7 @@ MonoBehaviour:
   choosingTag: {fileID: 0}
   gridSize: 1
   canvasSize: 1
+  gridMapBoundary: 2
 --- !u!4 &1481114630
 Transform:
   m_ObjectHideFlags: 0
@@ -1548,9 +1549,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isMute: 0
-  bgmVolume: 0
   bgmVolumeFadeinTimer: 0
-  sfxVolume: 0
   BGM: {fileID: 4122820444644385583}
   SFX: {fileID: 5405608633660985547}
   Voice: {fileID: 2897523103606315882}

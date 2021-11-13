@@ -13,6 +13,7 @@ public class CompositeView : MonoBehaviour
     public ChoosingTag choosingTag;
     public float gridSize = 1f;
     public float canvasSize = 1f;
+    public int gridMapBoundary = 3;
 
     public List<Tag> existingTagList = new List<Tag>();
 
@@ -79,7 +80,31 @@ public class CompositeView : MonoBehaviour
 
     Vector2Int CalculateGridOffset(Vector2 _mousePosition)
     {
-        return new Vector2Int(Mathf.FloorToInt((_mousePosition.x - Screen.width / 2f) / (100f * gridSize) + 0.5f), Mathf.FloorToInt((_mousePosition.y - Screen.height / 2f) / (100f * gridSize) + 0.5f));
+        int resultX = Mathf.FloorToInt((_mousePosition.x - Screen.width / 2f) / (100f * gridSize) + 0.5f);
+        int resultY = Mathf.FloorToInt((_mousePosition.y - Screen.height / 2f) / (100f * gridSize) + 0.5f);
+
+        //calculate boundary
+        if (choosingTag != null)
+        {
+            if (resultX + choosingTag.GetComponent<ChoosingTag>().tagContent.tagData.GetMaxX() > gridMapBoundary)
+            {
+                resultX = gridMapBoundary - choosingTag.GetComponent<ChoosingTag>().tagContent.tagData.GetMaxX();
+            }
+            if (resultY + choosingTag.GetComponent<ChoosingTag>().tagContent.tagData.GetMaxY() > gridMapBoundary)
+            {
+                resultY = gridMapBoundary - choosingTag.GetComponent<ChoosingTag>().tagContent.tagData.GetMaxY();
+            }
+            if (resultX + choosingTag.GetComponent<ChoosingTag>().tagContent.tagData.GetMinX() < -gridMapBoundary)
+            {
+                resultX = -gridMapBoundary - choosingTag.GetComponent<ChoosingTag>().tagContent.tagData.GetMinX();
+            }
+            if (resultY + choosingTag.GetComponent<ChoosingTag>().tagContent.tagData.GetMinY() < -gridMapBoundary)
+            {
+                resultY = -gridMapBoundary - choosingTag.GetComponent<ChoosingTag>().tagContent.tagData.GetMinY();
+            }
+        }
+
+        return new Vector2Int(resultX, resultY);
     }
 
     void GenerateChoosingTag(int _tagId)

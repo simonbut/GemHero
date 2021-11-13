@@ -240,5 +240,57 @@ namespace ClassHelper
         public LocalizedString name;
         public LocalizedString description;
         public List<Vector2Int> grids;
+
+        public int GetMaxX()
+        {
+            int result = 0;
+            foreach (Vector2Int _g in grids)
+            {
+                if (_g.x > result)
+                {
+                    result = _g.x;
+                }
+            }
+            return result;
+        }
+
+        public int GetMinX()
+        {
+            int result = 0;
+            foreach (Vector2Int _g in grids)
+            {
+                if (_g.x < result)
+                {
+                    result = _g.x;
+                }
+            }
+            return result;
+        }
+
+        public int GetMaxY()
+        {
+            int result = 0;
+            foreach (Vector2Int _g in grids)
+            {
+                if (_g.y > result)
+                {
+                    result = _g.y;
+                }
+            }
+            return result;
+        }
+
+        public int GetMinY()
+        {
+            int result = 0;
+            foreach (Vector2Int _g in grids)
+            {
+                if (_g.y < result)
+                {
+                    result = _g.y;
+                }
+            }
+            return result;
+        }
     }
 }
