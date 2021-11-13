@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using ClassHelper;
-using TMPro;
 
 public class GridScrollView : MonoBehaviour
 {
@@ -14,7 +13,7 @@ public class GridScrollView : MonoBehaviour
     public GameObject scrollViewContent;
     public GameObject gridItem;
     //public GameObject gridStyleBoxItem;
-    public TextMeshProUGUI title;
+    public Text title;
 
     public GridItemCallback clickCallback;
     public GridItemCallback selectingCallback;

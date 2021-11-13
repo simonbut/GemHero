@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 using UnityEngine.EventSystems;
 using ClassHelper;
 
@@ -11,7 +10,7 @@ public class ListItem : MonoBehaviour
     public ListItemCallback clickCallBack;
     public ListItemCallback selectingCallBack;
     public ListItemCallback disSelectingCallBack;
-    public TextMeshProUGUI displayName;
+    public Text displayName;
     public int id;
     int selectingId = 0;
 

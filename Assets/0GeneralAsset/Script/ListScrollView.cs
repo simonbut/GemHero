@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using ClassHelper;
-using TMPro;
 
 public class ListScrollView : MonoBehaviour
 {
@@ -11,7 +10,7 @@ public class ListScrollView : MonoBehaviour
     public ScrollRect scrollRect;
     public GameObject scrollViewContent;
     public GameObject listItem;
-    public TextMeshProUGUI title;
+    public Text title;
     
     public ListItemCallback clickCallback;
     public ListItemCallback selectingCallback;

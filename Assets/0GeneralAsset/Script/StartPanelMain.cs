@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using ClassHelper;
 using UnityEngine.UI;
-using TMPro;
 
 public class StartPanelMain : ControlableUI
 {

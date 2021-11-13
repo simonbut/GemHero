@@ -1,14 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using ClassHelper;
-using TMPro;
 
 public class NewAchievementUI : ControlableUI
 {
     public AchievementDataUI achievementDataUI;
     //public CardDataUI cardDataUI;
-    public TextMeshProUGUI confirmText;
+    public Text confirmText;
     // Start is called before the first frame update
     void Start()
     {

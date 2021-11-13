@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
-using TMPro;
 
 public class DescriptionMessage : MonoBehaviour
 {
@@ -61,11 +60,11 @@ public class DescriptionMessage : MonoBehaviour
                 transform.SetAsLastSibling();
                 Text m_myTextBox = textObj.GetComponent<Text>();
                 m_myTextBox.rectTransform.sizeDelta = new Vector3(kWidth, 20);
-                TextMeshProUGUI m_myTextUGUIBox = textUGUIObj.GetComponent<TextMeshProUGUI>();
-                m_myTextUGUIBox.rectTransform.sizeDelta = new Vector3(kWidth, 20);
+                //TextMeshProUGUI m_myTextUGUIBox = textUGUIObj.GetComponent<TextMeshProUGUI>();
+                //m_myTextUGUIBox.rectTransform.sizeDelta = new Vector3(kWidth, 20);
                 string newText = Database.descriptionMessage;
                 textObj.GetComponent<Text>().text = newText;
-                textUGUIObj.GetComponent<TextMeshProUGUI>().text = newText;
+                //textUGUIObj.GetComponent<TextMeshProUGUI>().text = newText;
                 TextGenerator textGen = new TextGenerator();
                 TextGenerationSettings generationSettings = m_myTextBox.GetGenerationSettings(m_myTextBox.rectTransform.rect.size);
                 float width = textGen.GetPreferredWidth(newText, generationSettings) / 10f;
@@ -78,13 +77,13 @@ public class DescriptionMessage : MonoBehaviour
                 if (width < kWidth)
                 {
                     m_myTextBox.rectTransform.sizeDelta = new Vector3(width, height);
-                    m_myTextUGUIBox.rectTransform.sizeDelta = new Vector3(width, height);
+                    //m_myTextUGUIBox.rectTransform.sizeDelta = new Vector3(width, height);
                     panel.GetComponent<RectTransform>().sizeDelta = new Vector3(width + 2, height + 2);
                 }
                 else
                 {
                     m_myTextBox.rectTransform.sizeDelta = new Vector3(kWidth, height);
-                    m_myTextUGUIBox.rectTransform.sizeDelta = new Vector3(kWidth, height);
+                    //m_myTextUGUIBox.rectTransform.sizeDelta = new Vector3(kWidth, height);
                     panel.GetComponent<RectTransform>().sizeDelta = new Vector3(kWidth + 2, height + 2);
                 }
                 //m_myTextBox.rectTransform.sizeDelta = new Vector3(width, height);

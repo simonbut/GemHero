@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using ClassHelper;
-using TMPro;
 
 public class SystemManager : MonoBehaviour
 {
@@ -38,9 +37,9 @@ public class SystemManager : MonoBehaviour
     public Font simpFont;
     public Font enFont;
 
-    public TMP_FontAsset tradFontPro;
-    public TMP_FontAsset simpFontPro;
-    public TMP_FontAsset enFontPro;
+    //public TMP_FontAsset tradFontPro;
+    //public TMP_FontAsset simpFontPro;
+    //public TMP_FontAsset enFontPro;
 
     public Vector2 screenMousePos;
 

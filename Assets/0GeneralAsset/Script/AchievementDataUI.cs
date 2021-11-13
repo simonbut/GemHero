@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using ClassHelper;
-using TMPro;
 
 public class AchievementDataUI : DataUI
 {

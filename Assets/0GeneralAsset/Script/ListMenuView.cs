@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
 public class ListMenuView : MonoBehaviour
 {
@@ -127,7 +126,7 @@ public class ListMenuView : MonoBehaviour
         for (int i = 0; i < _titleList.Count; i++)
         {
             buttonList[i].gameObject.SetActive(true);
-            buttonList[i].gameObject.transform.Find("Text").GetComponent<TextMeshProUGUI>().text = Database.GetLocalizedText(_titleList[i]);
+            buttonList[i].gameObject.transform.Find("Text").GetComponent<Text>().text = Database.GetLocalizedText(_titleList[i]);
         }
 
         buttonCount = _titleList.Count;

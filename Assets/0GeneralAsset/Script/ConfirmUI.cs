@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using ClassHelper;
@@ -18,8 +17,8 @@ public class ConfirmUI : ControlableUI
     SimpleCallBack noCallBack;
     public Text text;
 
-    public TextMeshProUGUI yesText;
-    public TextMeshProUGUI noText;
+    public Text yesText;
+    public Text noText;
 
     public void AddUI(string _text, SimpleCallBack _yesCallBack, SimpleCallBack _noCallBack = null)
     {
