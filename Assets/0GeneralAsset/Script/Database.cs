@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -53,6 +53,7 @@ public class Database : MonoBehaviour
         //Manager
         //AchievementManager.Instance.LoadAchievementData();
         //ParameterManager.Instance.LoadParameterData();
+        TagManager.Instance.LoadTagData();
         //
 
 

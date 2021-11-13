@@ -20,9 +20,9 @@ public class ChoosingTag : MonoBehaviour
         
     }
 
-    public void SetUp(List<Vector2Int> _gridContents,Vector2Int _offset)
+    public void SetUp(int _tagId,Vector2Int _offset)
     {
-        tagContent = Tag.CreateTag(_gridContents, _offset);
+        tagContent = Tag.CreateTag(_tagId, _offset);
     }
 
     public void SetTagColor(Color _c)
