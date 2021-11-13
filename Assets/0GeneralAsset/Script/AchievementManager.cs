@@ -45,8 +45,8 @@ public class AchievementManager : MonoBehaviour
                 Achievement _b = new Achievement();
                 string[] _c = _a[i].Split('\t');
                 int.TryParse(_c[0], out _b.achievement_id);
-                _b.name = new GlobalString(_c[1], _c[4], _c[6], "");
-                _b.description = new GlobalString(_c[2], _c[5], _c[7], "");
+                _b.name = new LocalizedString(_c[1], _c[4], _c[6], "");
+                _b.description = new LocalizedString(_c[2], _c[5], _c[7], "");
                 //int.TryParse(_c[3], out _b.rewardOrder);
 
                 bool.TryParse(_c[3], out _b.isValid);

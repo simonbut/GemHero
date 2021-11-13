@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -51,12 +51,11 @@ public class Database : MonoBehaviour
     public static void InitDatabaseData()
     {
         //Manager
-        //StatusManager.Instance.LoadStatusData();
+        //AchievementManager.Instance.LoadAchievementData();
+        //ParameterManager.Instance.LoadParameterData();
         //
 
 
-        AchievementManager.Instance.LoadAchievementData();
-        ParameterManager.Instance.LoadParameterData();
         //LoadStatusData();
         LoadLocalizationData();
 
@@ -473,7 +472,7 @@ public class Database : MonoBehaviour
 
     static void LoadLocalizationData()
     {
-        localizationTable = new Dictionary<string, GlobalString>();
+        localizationTable = new Dictionary<string, LocalizedString>();
 
         //TextAsset localizationData = Resources.Load("database/Localization - localization") as TextAsset;
         string localizationData = ReadLocalization();
@@ -487,7 +486,7 @@ public class Database : MonoBehaviour
                 //if (!localizationSubTable.ContainsKey(_c[1]) && _c.Length > (int)globalData.language)
                 if (!localizationTable.ContainsKey(_c[1]))
                 {
-                    localizationTable.Add(_c[1], new GlobalString(_c[2], _c[3], _c[4], ""));
+                    localizationTable.Add(_c[1], new LocalizedString(_c[2], _c[3], _c[4], ""));
                 }
             }
         }
@@ -522,13 +521,13 @@ public class Database : MonoBehaviour
     #endregion
 
     #region Localization
-    static Dictionary<string, GlobalString> localizationTable = new Dictionary<string, GlobalString>();
+    static Dictionary<string, LocalizedString> localizationTable = new Dictionary<string, LocalizedString>();
     //static Dictionary<string, string> localizationTable = new Dictionary<string, string>();
     public static string GetLocalizedText(string _key)
     {
         //Dictionary<string, string> localizationSubTable = null;
         //localizationTable.TryGetValue((int)Database.globalData.language, out localizationSubTable);
-        GlobalString globalString = null;
+        LocalizedString globalString = null;
         string result = "";
         localizationTable.TryGetValue(_key, out globalString);
         if (globalString == null)
@@ -556,9 +555,9 @@ public class Database : MonoBehaviour
     public static void ApplySetting()
     {
         //bgm
-        AudioManager.instance.bgmVolume = globalData.bgm;
+        //AudioManager.instance.bgmVolume = globalData.bgm;
         //vfx
-        AudioManager.instance.sfxVolume = globalData.sfx;
+        //AudioManager.instance.sfxVolume = globalData.sfx;
         //globalData.language //TODO
         //screen resolution,full screen
         if (globalData.isFullScreen)

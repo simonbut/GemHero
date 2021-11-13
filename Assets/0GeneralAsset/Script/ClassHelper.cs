@@ -15,14 +15,14 @@ namespace ClassHelper
         de,
     }
 
-    public class GlobalString
+    public class LocalizedString
     {
         public string zh = "";
         public string en = "";
         public string cn = "";
         public string jp = "";
 
-        public GlobalString(string _zh, string _en, string _cn, string _jp)
+        public LocalizedString(string _zh, string _en, string _cn, string _jp)
         {
             zh = _zh;
             en = _en;
@@ -82,8 +82,8 @@ namespace ClassHelper
 
         //get from database
         public int achievement_id;
-        public GlobalString name;
-        public GlobalString description;
+        public LocalizedString name;
+        public LocalizedString description;
         public int rewardOrder;
         public bool isValid;
 
@@ -207,17 +207,38 @@ namespace ClassHelper
 
     public class Tag
     {
-        public List<Vector2Int> grids;
+        public int uid;
+        public TagData tagData;
+        //public List<Vector2Int> grids;
         public Vector2Int offset = new Vector2Int();
 
-        static public Tag CreateTag(List<Vector2Int> _grids, Vector2Int _offset)
+        static public Tag CreateTag(int _tagid, Vector2Int _offset)
         {
             Tag result = new Tag();
-            result.grids = new List<Vector2Int>(_grids);
+            result.tagData = TagManager.Instance.GetTag(_tagid);
             result.offset = _offset;
 
 
             return result;
         }
+
+        static public Tag CreateTag(TagData _tagData, Vector2Int _offset)
+        {
+            Tag result = new Tag();
+            result.tagData = _tagData;
+            result.offset = _offset;
+
+            return result;
+        }
+    }
+
+    public class TagData
+    {
+        public int id;
+        public int groupId;
+        public int subId;
+        public LocalizedString name;
+        public LocalizedString description;
+        public List<Vector2Int> grids;
     }
 }

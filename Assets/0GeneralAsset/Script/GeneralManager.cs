@@ -11,4 +11,12 @@ public class GeneralManager : MonoBehaviour
             gameObject.SetActive(false);
         }
     }
+
+    private void Start()
+    {
+        if (!Database.isInit)
+        {
+            Database.Init();
+        }
+    }
 }

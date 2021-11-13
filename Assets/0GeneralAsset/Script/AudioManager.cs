@@ -24,9 +24,9 @@ public class AudioManager : MonoBehaviour
             bgmVolumeFadeinTimer = 1;
         }
         //Camera.main.GetComponent<AkAudioListener>().
-        BGM.volume = 0.05f * bgmVolume * bgmVolumeFadeinTimer;
-        SFX.volume = 0.08f * sfxVolume;
-        Voice.volume = 0.08f * sfxVolume;
+        BGM.volume = 0.05f * Database.globalData.bgm * bgmVolumeFadeinTimer;
+        SFX.volume = 0.08f * Database.globalData.sfx;
+        Voice.volume = 0.08f * Database.globalData.sfx;
         if (isMute)
         {
             BGM.volume = 0;
@@ -35,9 +35,9 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public int bgmVolume;
+    //public int bgmVolume;
     public float bgmVolumeFadeinTimer;
-    public int sfxVolume;
+    //public int sfxVolume;
 
     public static AudioManager instance;
     [SerializeField] AudioSource BGM;
