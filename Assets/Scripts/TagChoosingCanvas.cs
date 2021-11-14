@@ -25,22 +25,22 @@ public class TagChoosingCanvas : ControlableUI
 
     public void Refresh()
     {
-        listScrollView.Setup("DeckList", this, ClickData, SelectingData, DisSelectingData);
+        listScrollView.Setup("Tag List", this, ClickData, SelectingData, DisSelectingData);
 
         GenerateList();
     }
 
     void GenerateList()
     {
-        GameObject gridItemInstance = listScrollView.GenerateItem("test tag" , 1);
+        foreach (TagData _t in TagManager.Instance.GetTagDataFullList())
+        {
+            GameObject gridItemInstance = listScrollView.GenerateItem(_t.name.GetString(), _t.id);
+        }
     }
 
     void ClickData(int id, ListItem gi)
     {
-        if (id == 1)
-        {
-
-        }
+        CompositeView.Instance.GenerateChoosingTag(id);
     }
 
     void SelectingData(int id, ListItem gi)

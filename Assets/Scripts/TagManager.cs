@@ -27,7 +27,7 @@ public class TagManager : MonoBehaviour
 
     [HideInInspector]
     public List<TagData> tagdata = new List<TagData>();
-    public List<TagData> GetAchievementFullList()
+    public List<TagData> GetTagDataFullList()
     {
         return tagdata;
     }

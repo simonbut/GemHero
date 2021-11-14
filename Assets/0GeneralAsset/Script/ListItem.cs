@@ -65,7 +65,7 @@ public class ListItem : MonoBehaviour
         selectingCallBack = _selectingCallBack;
         disSelectingCallBack = _disSelectingCallBack;
 
-        transform.localScale = new Vector2(transform.localScale.x / 160f * Screen.width, transform.localScale.y / 90f * Screen.height);
+        transform.localScale = new Vector2(transform.localScale.x / 1600f * Screen.width, transform.localScale.y / 900f * Screen.height);
     }
 
     public void Clicked()

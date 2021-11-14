@@ -6,6 +6,26 @@ using ClassHelper;
 
 public class CompositeView : MonoBehaviour
 {
+    #region instance
+    private static CompositeView m_instance;
+
+    public static CompositeView Instance
+    {
+        get
+        {
+            return m_instance;
+        }
+    }
+
+    void Awake()
+    {
+        if (CompositeView.Instance == null)
+        {
+            m_instance = this;
+        }
+    }
+    #endregion
+
     public GameObject gridCanvas;
     public GameObject choosingTagCanvas;
     public GameObject gridPrefab;
@@ -18,6 +38,8 @@ public class CompositeView : MonoBehaviour
 
     public List<Tag> existingTagList = new List<Tag>();
 
+    public TagChoosingCanvas tagChoosingCanvas;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,7 +47,9 @@ public class CompositeView : MonoBehaviour
         GenerateTagGrid(4, new Vector2Int(-1, -1));
         GenerateTagGrid(3, new Vector2Int(1, -1));
 
-        GenerateChoosingTag(1);
+        tagChoosingCanvas.AddUI();
+
+        //GenerateChoosingTag(1);
 
     }
 
@@ -144,7 +168,7 @@ public class CompositeView : MonoBehaviour
         return new Vector2Int(resultX, resultY);
     }
 
-    void GenerateChoosingTag(int _tagId)
+    public void GenerateChoosingTag(int _tagId)
     {
         GameObject _gameObjectInstance = GenerateTagGrid(_tagId, new Vector2Int(), false);
         _gameObjectInstance.AddComponent<ChoosingTag>();
