@@ -14,6 +14,7 @@ public class CompositeView : MonoBehaviour
     public float gridSize = 1f;
     public float canvasSize = 1f;
     public int gridMapBoundary = 3;
+    bool isPutChoosingTagValid = true;
 
     public List<Tag> existingTagList = new List<Tag>();
 
@@ -33,16 +34,52 @@ public class CompositeView : MonoBehaviour
     {
         gridCanvas.transform.localScale = Vector3.one * canvasSize;
 
-        DetermineChoosingTagPosition();
+        if (choosingTag != null)
+        {
+            DetermineChoosingTagPosition();
 
+            DetermineIsPutChoosingTagValid();
 
+            DetermineChoosingTagColor();
+
+            if (Input.GetMouseButtonDown(0))
+            {
+                PutChoosingTag();
+            }
+        }
+
+    }
+
+    void PutChoosingTag()
+    {
+        if (isPutChoosingTagValid)
+        {
+            GenerateTagGrid(choosingTag.GetComponent<ChoosingTag>().tagContent.tagData.id, choosingTag.GetComponent<ChoosingTag>().tagContent.offset);
+            if (choosingTag != null)
+            {
+                Destroy(choosingTag.gameObject);
+            }
+        }
+    }
+
+    void DetermineIsPutChoosingTagValid()
+    {
+        isPutChoosingTagValid = true;
         if (CheckIfCollide(choosingTag.GetComponent<ChoosingTag>().tagContent, existingTagList))
         {
-            choosingTag.SetColor(Color.red);
+            isPutChoosingTagValid = false;
+        }
+    }
+
+    void DetermineChoosingTagColor()
+    {
+        if (isPutChoosingTagValid)
+        {
+            choosingTag.SetColor(Color.white);
         }
         else
         {
-            choosingTag.SetColor(Color.white);
+            choosingTag.SetColor(Color.red);
         }
     }
 
