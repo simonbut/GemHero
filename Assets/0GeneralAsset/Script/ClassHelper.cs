@@ -293,4 +293,28 @@ namespace ClassHelper
             return result;
         }
     }
+
+    public enum Force
+    {
+        player = 0,
+        enemy
+    }
+
+    public class CharacterAttribute
+    {
+        float hpTotalPt = 500f;
+
+        public static CharacterAttribute SetUpCharacterAttribute(float _hpTotalPt)
+        {
+            CharacterAttribute result = new CharacterAttribute();
+            result.hpTotalPt = _hpTotalPt;
+
+            return result;
+        }
+
+        public float GetHpTotal()
+        {
+            return hpTotalPt;
+        }
+    }
 }
