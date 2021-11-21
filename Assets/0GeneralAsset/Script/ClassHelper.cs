@@ -306,10 +306,12 @@ namespace ClassHelper
         float atkPt = 100f;
         float atsPt = 1000f;
 
-        public static CharacterAttribute SetUpCharacterAttribute(float _hpTotalPt)
+        public static CharacterAttribute SetUpCharacterAttribute(float _hpTotalPt, float _atkPt, float _atsPt)
         {
             CharacterAttribute result = new CharacterAttribute();
             result.hpTotalPt = _hpTotalPt;
+            result.atkPt = _atkPt;
+            result.atsPt = _atsPt;
 
             return result;
         }

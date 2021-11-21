@@ -10,8 +10,13 @@ public class TurnBaseBattleCharacter : MonoBehaviour
     [SerializeField] Image actionbar;
     [SerializeField] Image appearence;
 
+    [SerializeField] Sprite basicSprite;
+    [SerializeField] Sprite attackSprite;
+    [SerializeField] GameObject gunFireAnimation;
+
     public float hpPt;
     public float actionRefillPt;
+
 
     public CharacterAttribute characterAttribute;
     public Force force;//0 = player, 1 = enemy
@@ -42,6 +47,39 @@ public class TurnBaseBattleCharacter : MonoBehaviour
     {
         SetHpBar();
         SetActionBar();
+
+        if (attackAnimationTimer >= 1f)
+        {
+            attackAnimation = false;
+        }
+        if (hurtAnimationTimer >= 1f)
+        {
+            hurtAnimation = false;
+        }
+
+        appearence.transform.localPosition = Vector2.zero;
+        appearence.GetComponent<Image>().sprite = basicSprite;
+        if (attackAnimation)
+        {
+            attackAnimationTimer += Time.deltaTime * 2f;
+            appearence.GetComponent<Image>().sprite = attackSprite;
+        }
+        else
+        {
+            //step back
+            if (hurtAnimation)
+            {
+                appearence.transform.localPosition = new Vector2(-Mathf.Sin(hurtAnimationTimer * Mathf.PI), 0) * 3f;
+            }
+        }
+
+        //hurt color change
+        if (hurtAnimation)
+        {
+            hurtAnimationTimer += Time.deltaTime * 2f;
+            float pTemp = Mathf.Sin(hurtAnimationTimer * Mathf.PI);
+            appearence.GetComponent<Image>().color = Color.Lerp(Color.white, Color.red, pTemp);
+        }
     }
 
     void SetHpBar()
@@ -81,5 +119,23 @@ public class TurnBaseBattleCharacter : MonoBehaviour
     public void DestroyCharacter()
     {
         Destroy(gameObject);
+    }
+
+    bool attackAnimation = false;
+    float attackAnimationTimer = 0f;
+    public void RunAttackAnimation()
+    {
+        attackAnimation = true;
+        attackAnimationTimer = 0f;
+
+        gunFireAnimation.SetActive(true);
+    }
+
+    bool hurtAnimation = false;
+    float hurtAnimationTimer = 0f;
+    public void RunHurtAnimation()
+    {
+        hurtAnimation = true;
+        hurtAnimationTimer = 0f;
     }
 }

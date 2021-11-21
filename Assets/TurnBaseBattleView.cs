@@ -16,10 +16,10 @@ public class TurnBaseBattleView : MonoBehaviour
     void Start()
     {
         //test
-        AddCharacter(new CharacterAttribute(), Force.player);
-        AddCharacter(new CharacterAttribute(), Force.enemy);
-        AddCharacter(new CharacterAttribute(), Force.enemy);
-        AddCharacter(new CharacterAttribute(), Force.enemy);
+        AddCharacter(CharacterAttribute.SetUpCharacterAttribute(500f,100f,1000f), Force.player);
+        AddCharacter(CharacterAttribute.SetUpCharacterAttribute(100f, 20f, 1500f), Force.enemy);
+        AddCharacter(CharacterAttribute.SetUpCharacterAttribute(100f, 20f, 1500f), Force.enemy);
+        AddCharacter(CharacterAttribute.SetUpCharacterAttribute(100f, 20f, 1500f), Force.enemy);
     }
 
     void AddCharacter(CharacterAttribute _characterAttribute, Force _force)
@@ -58,18 +58,13 @@ public class TurnBaseBattleView : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Set Attack Target
-        //foreach (TurnBaseBattleCharacter _tbbc in characterList)
-        //{
-        //    if (_tbbc.target == null)
-        //    {
-        //        SetTarget(_tbbc);
-        //    }
-        //}
-
         //Check Attack
         foreach (TurnBaseBattleCharacter _tbbc in characterList)
         {
+            if (_tbbc == null)
+            {
+                continue;
+            }
             _tbbc.AtbCharge();
             if (_tbbc.actionRefillPt >= 1f)
             {
@@ -85,13 +80,19 @@ public class TurnBaseBattleView : MonoBehaviour
         {
             List<TurnBaseBattleCharacter> _cl = GetCharacterList(Force.enemy);
             int ran = Random.Range(0,_cl.Count);
-            from.target = _cl[ran];
+            if (_cl.Count > 0)
+            {
+                from.target = _cl[ran];
+            }
         }
         else
         {
             List<TurnBaseBattleCharacter> _cl = GetCharacterList(Force.player);
             int ran = Random.Range(0, _cl.Count);
-            from.target = _cl[ran];
+            if (_cl.Count > 0)
+            {
+                from.target = _cl[ran];
+            }
         }
     }
 
@@ -100,6 +101,10 @@ public class TurnBaseBattleView : MonoBehaviour
         List<TurnBaseBattleCharacter> result = new List<TurnBaseBattleCharacter>();
         foreach (TurnBaseBattleCharacter _tbbc in characterList)
         {
+            if (_tbbc == null)
+            {
+                continue;
+            }
             if (_tbbc.force == _force)
             {
                 result.Add(_tbbc);
@@ -123,6 +128,8 @@ public class TurnBaseBattleView : MonoBehaviour
 
     void PerformAttack(TurnBaseBattleCharacter from, TurnBaseBattleCharacter to)
     {
+        from.RunAttackAnimation();
+        to.RunHurtAnimation();
         to.GetDamage(from.characterAttribute.GetAtk());
     }
 }

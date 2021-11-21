@@ -418,8 +418,8 @@ MonoBehaviour:
   - {x: 0.83870256, y: 2.1535249, z: 0}
   - {x: -1.0809467, y: 2.2587366, z: 0}
   m_ShapePathHash: -1214772857
-  m_Mesh: {fileID: 1509763960}
-  m_InstanceId: 20842
+  m_Mesh: {fileID: 1432167009}
+  m_InstanceId: 19194
 --- !u!95 &22300411
 Animator:
   serializedVersion: 3
@@ -2414,7 +2414,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!43 &1509763960
+--- !u!43 &1432167009
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5527,6 +5527,8 @@ MonoBehaviour:
   canvas: {fileID: 1384792133}
   characterObjectPrefab: {fileID: 4248314346278732632, guid: 8af276eb983fbc14c8d34e90ca3e8242,
     type: 3}
+  characterList: []
+  enemyCount: 0
 --- !u!4 &1813878805
 Transform:
   m_ObjectHideFlags: 0
