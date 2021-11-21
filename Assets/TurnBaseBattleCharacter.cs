@@ -14,7 +14,8 @@ public class TurnBaseBattleCharacter : MonoBehaviour
     public float actionRefillPt;
 
     public CharacterAttribute characterAttribute;
-    Force force;//0 = player, 1 = enemy
+    public Force force;//0 = player, 1 = enemy
+    public TurnBaseBattleCharacter target;
 
     public void InitCharacter(CharacterAttribute _characterAttribute, Force _force)
     {
@@ -51,5 +52,34 @@ public class TurnBaseBattleCharacter : MonoBehaviour
     void SetActionBar()
     {
         actionbar.fillAmount = actionRefillPt;
+    }
+
+    public void AtbCharge()
+    {
+        AtbCharge(characterAttribute.GetAts() / 1000f * Time.deltaTime);
+    }
+
+    public void AtbCharge(float chargeAmount)
+    {
+        actionRefillPt += chargeAmount;
+    }
+
+    public void ResetAtb()
+    {
+        actionRefillPt = 0;
+    }
+
+    public void GetDamage(float _amount)
+    {
+        hpPt -= _amount;
+        if (hpPt <= 0)
+        {
+            DestroyCharacter();
+        }
+    }
+
+    public void DestroyCharacter()
+    {
+        Destroy(gameObject);
     }
 }

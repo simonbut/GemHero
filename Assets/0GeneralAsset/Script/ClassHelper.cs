@@ -303,6 +303,8 @@ namespace ClassHelper
     public class CharacterAttribute
     {
         float hpTotalPt = 500f;
+        float atkPt = 100f;
+        float atsPt = 1000f;
 
         public static CharacterAttribute SetUpCharacterAttribute(float _hpTotalPt)
         {
@@ -315,6 +317,16 @@ namespace ClassHelper
         public float GetHpTotal()
         {
             return hpTotalPt;
+        }
+
+        public float GetAtk()
+        {
+            return atkPt;
+        }
+
+        public float GetAts()
+        {
+            return atsPt;
         }
     }
 }
