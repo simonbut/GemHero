@@ -26,8 +26,9 @@ public class CompositeView : MonoBehaviour
     }
     #endregion
 
-    public GameObject gridCanvas;
-    public GameObject choosingTagCanvas;
+    public GameObject compositeCanvas;
+    public GameObject gridParent;
+    public GameObject choosingTagParent;
     public GameObject gridPrefab;
     public GameObject tagNamePrefab;
     public ChoosingTag choosingTag;
@@ -40,23 +41,20 @@ public class CompositeView : MonoBehaviour
 
     public TagChoosingCanvas tagChoosingCanvas;
 
-    // Start is called before the first frame update
-    void Start()
+    public void StartComposite()
     {
-        //GenerateTagGrid(new List<Vector2Int> { Vector2Int.zero,Vector2Int.up,Vector2Int.down,Vector2Int.left,Vector2Int.right,new Vector2Int(1,1) });
+        compositeCanvas.SetActive(true);
+
+        //test
         GenerateTagGrid(4, new Vector2Int(-1, -1));
         GenerateTagGrid(3, new Vector2Int(1, -1));
-
         tagChoosingCanvas.AddUI();
-
-        //GenerateChoosingTag(1);
-
     }
 
     // Update is called once per frame
     void Update()
     {
-        gridCanvas.transform.localScale = Vector3.one * canvasSize;
+        gridParent.transform.localScale = Vector3.one * canvasSize;
 
         if (choosingTag != null)
         {
@@ -177,7 +175,7 @@ public class CompositeView : MonoBehaviour
             Destroy(choosingTag.gameObject);
         }
         choosingTag = _gameObjectInstance.GetComponent<ChoosingTag>();
-        choosingTag.transform.SetParent(choosingTagCanvas.transform);
+        choosingTag.transform.SetParent(choosingTagParent.transform);
         choosingTag.GetComponent<ChoosingTag>().SetUp(_tagId, new Vector2Int());
         choosingTag.GetComponent<ChoosingTag>().SetTagColor(Color.grey);
     }
@@ -190,7 +188,7 @@ public class CompositeView : MonoBehaviour
 
         GameObject _gameObjectInstance = new GameObject();
         _gameObjectInstance.name = _t.name.GetString();
-        _gameObjectInstance.transform.SetParent(gridCanvas.transform);
+        _gameObjectInstance.transform.SetParent(gridParent.transform);
         _gameObjectInstance.transform.localPosition = new Vector2(0, 0);
 
         //get content size

@@ -6,15 +6,36 @@ using ClassHelper;
 
 public class TurnBaseBattleView : MonoBehaviour
 {
+    #region instance
+    private static TurnBaseBattleView m_instance;
+
+    public static TurnBaseBattleView Instance
+    {
+        get
+        {
+            return m_instance;
+        }
+    }
+
+    void Awake()
+    {
+        if (TurnBaseBattleView.Instance == null)
+        {
+            m_instance = this;
+        }
+    }
+    #endregion
+
     public GameObject canvas;
     public GameObject characterObjectPrefab;
 
     public List<TurnBaseBattleCharacter> characterList;
     public int enemyCount = 0;
 
-    // Start is called before the first frame update
-    void Start()
+    public void StartBattle()
     {
+        canvas.SetActive(true);
+
         //test
         AddCharacter(CharacterAttribute.SetUpCharacterAttribute(500f,100f,1000f), Force.player);
         AddCharacter(CharacterAttribute.SetUpCharacterAttribute(100f, 20f, 1500f), Force.enemy);
