@@ -164,7 +164,7 @@ GameObject:
   - component: {fileID: 4248314346278732583}
   - component: {fileID: 4248314346278732580}
   m_Layer: 5
-  m_Name: Character
+  m_Name: TurnBaseCharacter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

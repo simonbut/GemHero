@@ -26,6 +26,8 @@ public class MainGameView : MonoBehaviour
     }
     #endregion
 
+    public List<ResourcePoint> resourcePointList = new List<ResourcePoint>();
+
     // Start is called before the first frame update
     void Start()
     {
@@ -36,6 +38,18 @@ public class MainGameView : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        InteractiveDialog.transform.position = MathManager.WorldPosToCanvasPos(CharacterControlView.Instance.player.transform.position + Vector3.up * 1f);
+    }
+
+    public GameObject InteractiveDialog;
+    public void ShowInteractiveDialog(string _text)
+    {
+        InteractiveDialog.SetActive(true);
+        InteractiveDialog.transform.Find("Text").GetComponent<Text>().text = _text;
+    }
+
+    public void HideInteractiveDialog()
+    {
+        InteractiveDialog.SetActive(false);
     }
 }

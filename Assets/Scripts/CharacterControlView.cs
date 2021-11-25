@@ -88,6 +88,17 @@ public class CharacterControlView : MonoBehaviour
             player.GetComponent<Rigidbody2D>().MovePosition(player.transform.position);
         }
 
+        Vector3 tempScale = player.transform.localScale;
+        if (_offset.x > 0)
+        {
+            tempScale.x = -Mathf.Abs(tempScale.x);
+        }
+        if (_offset.x < 0)
+        {
+            tempScale.x = Mathf.Abs(tempScale.x);
+        }
+        player.transform.localScale = tempScale;
+
         UpdateCameraPosition(_offset);
     }
 
