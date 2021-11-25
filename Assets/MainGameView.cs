@@ -29,7 +29,8 @@ public class MainGameView : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        CompositeView.Instance.StartComposite();
+        //test
+        //CompositeView.Instance.StartComposite();
     }
 
     // Update is called once per frame

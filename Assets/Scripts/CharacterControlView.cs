@@ -5,16 +5,32 @@ using UnityEngine.InputSystem;
 
 public class CharacterControlView : MonoBehaviour
 {
-    public float lengthLimit = 10;
+    #region instance
+    private static CharacterControlView m_instance;
 
-    InputMaster controls;
+    public static CharacterControlView Instance
+    {
+        get
+        {
+            return m_instance;
+        }
+    }
+
     void Awake()
     {
-        print("test");
-        controls = new InputMaster();
-        //controls.Map1.Move.started += ctx => OnMovement(ctx.ReadValue<Vector2>());
-        //controls.Map1.Move.performed += ctx => OnMovement(ctx.ReadValue<Vector2>());
+        if (CharacterControlView.Instance == null)
+        {
+            m_instance = this;
+            controls = new InputMaster();
+        }
     }
+    #endregion
+
+    public float lengthLimit = 10;
+    public GameObject cameraParent;
+
+    InputMaster controls;
+
     public void OnEnable()
     {
         controls.Enable();
@@ -31,6 +47,22 @@ public class CharacterControlView : MonoBehaviour
         CheckInput();
         CharacterMove();
         CharacterAnimation();
+
+    }
+
+    void UpdateCameraPosition(Vector3 _offset)
+    {
+        Vector3 _newVector = player.transform.position + _offset - cameraParent.transform.position;
+        Vector3 result = cameraParent.transform.position;
+        if (Mathf.Abs(_newVector.y) > 2)
+        {
+            result.y += _offset.y;
+        }
+        if (Mathf.Abs(_newVector.x) > 1)
+        {
+            result.x += _offset.x;
+        }
+        cameraParent.transform.position = result;
     }
 
     public Animator playerMovement;
@@ -55,6 +87,8 @@ public class CharacterControlView : MonoBehaviour
         {
             player.GetComponent<Rigidbody2D>().MovePosition(player.transform.position);
         }
+
+        UpdateCameraPosition(_offset);
     }
 
     void CharacterAnimation()
