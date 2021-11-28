@@ -54,6 +54,12 @@ public class Database : MonoBehaviour
         //AchievementManager.Instance.LoadAchievementData();
         //ParameterManager.Instance.LoadParameterData();
         TagManager.Instance.LoadTagData();
+        AssetManager.Instance.LoadAssetData();
+        AssetManager.Instance.LoadAssetTypeData();
+        AssetManager.Instance.LoadCompoundData();
+        AssetManager.Instance.LoadRecipeData();
+        EnemyManager.Instance.LoadEnemyData();
+        ResourcePointManager.Instance.LoadResourcePointData();
         //
 
 

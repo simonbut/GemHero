@@ -234,12 +234,15 @@ namespace ClassHelper
 
     public class TagData
     {
+        //id	groupId	subId	name	description	grids	compound_type_list	score
         public int id;
         public int groupId;
         public int subId;
         public LocalizedString name;
         public LocalizedString description;
         public List<Vector2Int> grids;
+        public List<CompoundType> compoundTypeList = new List<CompoundType>();
+        public int score;
 
         public int GetMaxX()
         {
@@ -336,5 +339,91 @@ namespace ClassHelper
     {
         Collect = 0,
         Talk = 1
+    }
+
+    public enum CompoundType
+    {
+        weapon = 0,
+        accessory,
+        consumable,
+        compound
+    }
+
+    public enum StatType
+    {
+        atk = 0,
+        ats,
+        hp,
+        def
+    }
+
+    public class ResourceAsset
+    {
+        int assetId;//id, name, graph, firePt, waterPt, earthPt
+    }
+
+    public class ResourcePointData
+    {
+        //id	resource_point_id	asset_id	must_have_tag_list	tag_pool	score_min	score_max
+        public int id;
+        public int resourcePointId;
+        public int assetId;
+        public List<int> mustHaveTagList = new List<int>();
+        public List<int> tagPool = new List<int>();
+        public int scoreMin;
+        public int scoreMax;
+    }
+
+    public class AssetData
+    {
+        //id	name	asset_type_list	fire_point	water_point	earth_point
+        public int id;
+        public LocalizedString name;
+        public List<int> assetTypeList = new List<int>();
+        public int firePoint;
+        public int waterPoint;
+        public int earthPoint;
+    }
+
+    public class AssetTypeData
+    {
+        //id	name
+        public int id;
+        public LocalizedString name;
+    }
+
+    public class CompoundData
+    {
+        //id	name	compound_type	asset_type_list	basic_stat_types	basic_stats
+        public int id;
+        public LocalizedString name;
+        public CompoundType compoundType;
+        public List<int> assetTypeList;
+        public List<StatType> basicStatTypeList;
+        public List<int> basicStatList;
+    }
+
+    public class RecipeData
+    {
+        //id	shape	assets_type_id	target_tool_id
+        public int id;
+        public List<Vector2Int> shape;
+        public List<int> assetTypeList;
+        public int targetCompoundId;
+    }
+
+    public class EnemyData
+    {
+        //id	name	hp	atk ats
+        public int id;
+        public LocalizedString name;
+        public int hp;
+        public int atk;
+        public int ats;
+
+        public CharacterAttribute ConvertToCharacterAttribute()
+        {
+            return CharacterAttribute.SetUpCharacterAttribute(hp,atk,ats);
+        }
     }
 }

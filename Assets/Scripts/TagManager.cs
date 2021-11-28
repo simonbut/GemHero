@@ -35,7 +35,6 @@ public class TagManager : MonoBehaviour
     public void LoadTagData()
     {
         tagdata = new List<TagData>();
-        //TextAsset data = Resources.Load("database/Database - " + globalData.language.ToString() + " - achievement") as TextAsset;
         string data = Database.ReadDatabaseWithoutLanguage("Tag");
         if (data.Length > 0)
         {
@@ -64,6 +63,18 @@ public class TagManager : MonoBehaviour
 
                 }
 
+                _b.compoundTypeList = new List<CompoundType>();
+                string[] _c6 = _c[6].Split(';');
+                for (int j = 0; j < _c6.Length; j++)
+                {
+                    CompoundType _c6b;
+                    CompoundType.TryParse(_c6[j], out _c6b);
+
+                    _b.compoundTypeList.Add(_c6b);
+                }
+
+                int.TryParse(_c[7], out _b.score);
+
                 tagdata.Add(_b);
             }
         }
@@ -86,5 +97,8 @@ public class TagManager : MonoBehaviour
         }
         return new TagData();
     }
+
+
+
 
 }
