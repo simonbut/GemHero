@@ -331,4 +331,10 @@ namespace ClassHelper
             return atsPt;
         }
     }
+
+    public enum ReactType
+    {
+        Collect = 0,
+        Talk = 1
+    }
 }

@@ -26,6 +26,7 @@ public class CharacterControlView : MonoBehaviour
     }
     #endregion
 
+
     public float lengthLimit = 10;
     public GameObject cameraParent;
 

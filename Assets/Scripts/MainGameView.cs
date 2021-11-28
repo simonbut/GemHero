@@ -26,6 +26,7 @@ public class MainGameView : MonoBehaviour
     }
     #endregion
 
+    public ResourcePoint reactingObject;
     public List<ResourcePoint> resourcePointList = new List<ResourcePoint>();
 
     // Start is called before the first frame update
@@ -39,6 +40,27 @@ public class MainGameView : MonoBehaviour
     void Update()
     {
         InteractiveDialog.transform.position = MathManager.WorldPosToCanvasPos(CharacterControlView.Instance.player.transform.position + Vector3.up * 1f);
+
+        foreach (ResourcePoint _rp in resourcePointList)
+        {
+            if (_rp == null)
+            {
+                continue;
+            }
+            if (reactingObject == _rp)
+            {
+                _rp.GetComponent<SpriteRenderer>().material.SetFloat("IsReactable", 1);
+                ShowInteractiveDialog(_rp.reactText);
+            }
+            else
+            {
+                _rp.GetComponent<SpriteRenderer>().material.SetFloat("IsReactable", 0);
+            }
+        }
+        if (reactingObject == null)
+        {
+            HideInteractiveDialog();
+        }
     }
 
     public GameObject InteractiveDialog;
