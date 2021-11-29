@@ -26,6 +26,7 @@ public class AssetManager : MonoBehaviour
     #endregion
 
 
+
     [HideInInspector]
     public List<AssetData> assetdata = new List<AssetData>();
     public List<AssetData> GetAssetDataFullList()
@@ -70,6 +71,19 @@ public class AssetManager : MonoBehaviour
             Debug.Log("data is null");
         }
     }
+
+    public AssetData GetAssetData(int assetId)
+    {
+        foreach (AssetData _a in assetdata)
+        {
+            if (_a.id == assetId)
+            {
+                return _a;
+            }
+        }
+        return new AssetData();
+    }
+
 
 
     [HideInInspector]
@@ -128,6 +142,7 @@ public class AssetManager : MonoBehaviour
     }
 
 
+
     [HideInInspector]
     public List<AssetTypeData> assetTypedata = new List<AssetTypeData>();
     public List<AssetTypeData> GetAssetTypeDataFullList()
@@ -157,6 +172,18 @@ public class AssetManager : MonoBehaviour
         {
             Debug.Log("data is null");
         }
+    }
+
+    public AssetTypeData GetAssetTypeData(int assetTypeId)
+    {
+        foreach (AssetTypeData _at in assetTypedata)
+        {
+            if (_at.id == assetTypeId)
+            {
+                return _at;
+            }
+        }
+        return new AssetTypeData();
     }
 
 
@@ -222,5 +249,17 @@ public class AssetManager : MonoBehaviour
         {
             Debug.Log("data is null");
         }
+    }
+
+    public int CalculateQuality(List<int> _tagList,int _qualityAffect)
+    {
+        int result = 0;
+        foreach (int _t in _tagList)
+        {
+            result += Mathf.FloorToInt(TagManager.Instance.GetTag(_t).score / 10f);
+        }
+        result = Mathf.FloorToInt(result * (1 + _qualityAffect / 100f));
+
+        return result;
     }
 }

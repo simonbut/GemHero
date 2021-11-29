@@ -357,6 +357,17 @@ namespace ClassHelper
         def
     }
 
+    public enum Rank
+    {
+        F = 0,
+        E,
+        D,
+        C,
+        B,
+        A,
+        S
+    }
+
     public class ResourceAsset
     {
         int assetId;//id, name, graph, firePt, waterPt, earthPt
@@ -370,6 +381,7 @@ namespace ClassHelper
         public int assetId;
         public List<int> mustHaveTagList = new List<int>();
         public List<int> tagPool = new List<int>();
+        public List<int> rareTagPool = new List<int>();
         public int scoreMin;
         public int scoreMax;
     }
@@ -383,6 +395,109 @@ namespace ClassHelper
         public int firePoint;
         public int waterPoint;
         public int earthPoint;
+
+        public List<AssetTypeData> GetAssetTypeList()
+        {
+            List<AssetTypeData> result = new List<AssetTypeData>();
+            foreach (int _at in assetTypeList)
+            {
+                result.Add(AssetManager.Instance.GetAssetTypeData(_at));
+            }
+            return result;
+        }
+
+        public bool IsAssetType(int assetTypeId)
+        {
+            foreach (int _at in assetTypeList)
+            {
+                if (_at == assetTypeId)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+    }
+
+    public class Asset
+    {
+        public int assetId;
+        public int qualityAffect;
+        public List<int> tagList;
+
+        public int GetQuality()
+        {
+            return AssetManager.Instance.CalculateQuality(tagList, qualityAffect);
+        }
+
+        public AssetData GetAssetData()
+        {
+            return AssetManager.Instance.GetAssetData(assetId);
+        }
+
+        public int GetScore()
+        {
+            int result = 0;
+            foreach (int _t in tagList)
+            {
+                result += Mathf.FloorToInt(TagManager.Instance.GetTag(_t).score / 10f);
+            }
+            result += qualityAffect;
+
+            return result;
+        }
+
+        public Rank GetRank()
+        {
+            int score = GetScore();
+            if (score < 30)
+            {
+                return Rank.F;
+            }
+            else
+            {
+                if (score < 40)
+                {
+                    return Rank.E;
+                }
+                else
+                {
+
+                    if (score < 50)
+                    {
+                        return Rank.D;
+                    }
+                    else
+                    {
+
+                        if (score < 60)
+                        {
+                            return Rank.C;
+                        }
+                        else
+                        {
+
+                            if (score < 70)
+                            {
+                                return Rank.B;
+                            }
+                            else
+                            {
+
+                                if (score < 80)
+                                {
+                                    return Rank.A;
+                                }
+                                else
+                                {
+                                    return Rank.S;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 
     public class AssetTypeData

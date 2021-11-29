@@ -68,8 +68,18 @@ public class ResourcePointManager : MonoBehaviour
                     _b.tagPool.Add(_c4b);
                 }
 
-                int.TryParse(_c[5], out _b.scoreMin);
-                int.TryParse(_c[6], out _b.scoreMax);
+                _b.rareTagPool = new List<int>();
+                string[] _c5 = _c[5].Split(';');
+                for (int j = 0; j < _c5.Length; j++)
+                {
+                    int _c5b;
+                    int.TryParse(_c5[j], out _c5b);
+
+                    _b.rareTagPool.Add(_c5b);
+                }
+
+                int.TryParse(_c[6], out _b.scoreMin);
+                int.TryParse(_c[7], out _b.scoreMax);
 
                 resourcePointdata.Add(_b);
             }
@@ -80,4 +90,96 @@ public class ResourcePointManager : MonoBehaviour
         }
     }
 
+    public Asset DrawAsset(int _assetId, List<int> _mustHaveTagList, List<int> _tagPool, List<int> _rareTagList, int _scoreMin, int _scoreMax)
+    {
+        //random draw at most 2 tags and quality, then check score TODO
+        int tag1 = 0;
+        int tag2 = 0;
+        int qualityAffect = 0;
+
+        bool passScoreCheck = false;
+        int tryCount = 0;
+
+        while (!passScoreCheck && tryCount < 100)
+        {
+            int score = 0;
+            tryCount++;
+            List<int> _tp = new List<int>(_tagPool);
+            List<int> _rtp = new List<int>(_rareTagList);
+            List<int> _mht = new List<int>(_rareTagList);
+
+            if (_mht.Count > 0)
+            {
+                int _index = Random.Range(0, _rtp.Count);
+                tag1 = _mht[_index];
+                score += TagManager.Instance.GetTag(_mht[_index]).score;
+                _mht.RemoveAt(_index);
+            }
+            if (_mht.Count > 0)
+            {
+                int _index = Random.Range(0, _rtp.Count);
+                tag2 = _mht[_index];
+                score += TagManager.Instance.GetTag(_mht[_index]).score;
+                _mht.RemoveAt(_index);
+            }
+
+            if (tag1 == 0 && _rtp.Count > 0)
+            {
+                if (Random.Range(0, 1000) < 200)
+                {
+                    int _index = Random.Range(0, _rtp.Count);
+                    tag1 = _rtp[_index];
+                    score += TagManager.Instance.GetTag(_rtp[_index]).score;
+                    _rtp.RemoveAt(_index);
+                }
+            }
+            if (tag1 == 0 && _tp.Count > 0)
+            {
+                if (Random.Range(0, 1000) < 700)
+                {
+                    int _index = Random.Range(0, _tp.Count);
+                    tag1 = _tp[_index];
+                    score += TagManager.Instance.GetTag(_rtp[_index]).score;
+                    _tp.RemoveAt(_index);
+                }
+            }
+
+            if (tag2 == 0 && _rtp.Count > 0)
+            {
+                if (Random.Range(0, 1000) < 200)
+                {
+                    int _index = Random.Range(0, _rtp.Count);
+                    tag2 = _rtp[_index];
+                    score += TagManager.Instance.GetTag(_rtp[_index]).score;
+                    _rtp.RemoveAt(_index);
+                }
+            }
+            if (tag2 == 0 && _tp.Count > 0)
+            {
+                if (Random.Range(0, 1000) < 700)
+                {
+                    int _index = Random.Range(0, _tp.Count);
+                    tag2 = _tp[_index];
+                    score += TagManager.Instance.GetTag(_rtp[_index]).score;
+                    _tp.RemoveAt(_index);
+                }
+            }
+
+            qualityAffect = Random.Range(-10, 10);
+            score += qualityAffect * 10;
+
+            if (score >= _scoreMin && score <= _scoreMax)
+            {
+                passScoreCheck = true;
+            }
+        }
+
+        List<int> tagList = new List<int> { tag1, tag2 };
+        Asset result = new Asset();
+        result.assetId = _assetId;
+        result.qualityAffect = qualityAffect;
+        result.tagList = tagList;
+
+        return result;
+    }
 }
