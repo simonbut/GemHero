@@ -36,6 +36,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject staticCanvas;
     [SerializeField] DropdownUI dropdownUIPrefab;
 
+    public AssetDataUI assetDataUI;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -266,16 +268,9 @@ public class UIManager : MonoBehaviour
         return dropdownUI.GetComponent<DropdownUI>();
     }
 
-    //[SerializeField] TankDeckDataUI tankDeckDataUI;
-    //public void ShowTankDeckDataUI(int tankDeckId)
-    //{
-    //    tankDeckDataUI.Show(tankDeckId);
-    //}
-
     public void HideAllDataUI()
     {
-        //ingredientDataUI.Show(0);
-        //itemChoosingIndicator.Hide();
+        assetDataUI.Hide();
     }
 
     //public void ShowItemChoosingIndicator(Vector3 _v)

@@ -1,4 +1,4 @@
-// GENERATED AUTOMATICALLY FROM 'Assets/InputMaster.inputactions'
+// GENERATED AUTOMATICALLY FROM 'Assets/Input/InputMaster.inputactions'
 
 using System;
 using System.Collections;
@@ -23,6 +23,14 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""type"": ""Value"",
                     ""id"": ""06edc7d7-e643-426b-bfa2-945014ce35ae"",
                     ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""React"",
+                    ""type"": ""Button"",
+                    ""id"": ""74b98fb5-dcb8-4356-af60-7ae8eacc5051"",
+                    ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
                 }
@@ -82,6 +90,17 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ac70d55b-a115-479e-be62-cac91161edd7"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardAndMouse"",
+                    ""action"": ""React"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -97,6 +116,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
         // Map1
         m_Map1 = asset.FindActionMap("Map1", throwIfNotFound: true);
         m_Map1_Move = m_Map1.FindAction("Move", throwIfNotFound: true);
+        m_Map1_React = m_Map1.FindAction("React", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -147,11 +167,13 @@ public class @InputMaster : IInputActionCollection, IDisposable
     private readonly InputActionMap m_Map1;
     private IMap1Actions m_Map1ActionsCallbackInterface;
     private readonly InputAction m_Map1_Move;
+    private readonly InputAction m_Map1_React;
     public struct Map1Actions
     {
         private @InputMaster m_Wrapper;
         public Map1Actions(@InputMaster wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Map1_Move;
+        public InputAction @React => m_Wrapper.m_Map1_React;
         public InputActionMap Get() { return m_Wrapper.m_Map1; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -164,6 +186,9 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @Move.started -= m_Wrapper.m_Map1ActionsCallbackInterface.OnMove;
                 @Move.performed -= m_Wrapper.m_Map1ActionsCallbackInterface.OnMove;
                 @Move.canceled -= m_Wrapper.m_Map1ActionsCallbackInterface.OnMove;
+                @React.started -= m_Wrapper.m_Map1ActionsCallbackInterface.OnReact;
+                @React.performed -= m_Wrapper.m_Map1ActionsCallbackInterface.OnReact;
+                @React.canceled -= m_Wrapper.m_Map1ActionsCallbackInterface.OnReact;
             }
             m_Wrapper.m_Map1ActionsCallbackInterface = instance;
             if (instance != null)
@@ -171,6 +196,9 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @Move.started += instance.OnMove;
                 @Move.performed += instance.OnMove;
                 @Move.canceled += instance.OnMove;
+                @React.started += instance.OnReact;
+                @React.performed += instance.OnReact;
+                @React.canceled += instance.OnReact;
             }
         }
     }
@@ -187,5 +215,6 @@ public class @InputMaster : IInputActionCollection, IDisposable
     public interface IMap1Actions
     {
         void OnMove(InputAction.CallbackContext context);
+        void OnReact(InputAction.CallbackContext context);
     }
 }

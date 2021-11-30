@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using ClassHelper;
@@ -260,6 +260,18 @@ public class AssetManager : MonoBehaviour
         }
         result = Mathf.FloorToInt(result * (1 + _qualityAffect / 100f));
 
+        return result;
+    }
+
+    public string AssetTypeListToString(List<AssetTypeData> assetTypeDataList)
+    {
+        string result = "";
+        foreach (AssetTypeData _atd in assetTypeDataList)
+        {
+            result += _atd.name.GetString();
+            result += "、";
+        }
+        result = result.Substring(0, result.Length - 1);
         return result;
     }
 }

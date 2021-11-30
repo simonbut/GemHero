@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using ClassHelper;
 
 public class CharacterControlView : MonoBehaviour
 {
@@ -73,10 +74,20 @@ public class CharacterControlView : MonoBehaviour
     void CheckInput()
     {
         OnMovement(controls.Map1.Move.ReadValue<Vector2>());
+        OnReact(controls.Map1.React.triggered);
     }
+
     public void OnMovement(Vector2 _input)
     {
         input = _input;
+    }
+
+    public void OnReact(bool isTrue)
+    {
+        if (isTrue)
+        {
+            MainGameView.Instance.CharacterReact();
+        }
     }
 
     void CharacterMove()

@@ -90,6 +90,24 @@ public class ResourcePointManager : MonoBehaviour
         }
     }
 
+    public ResourcePointData GetResourcePointData(int _resourcePointId)
+    {
+        foreach (ResourcePointData _rt in resourcePointdata)
+        {
+            if (_rt.id == _resourcePointId)
+            {
+                return _rt;
+            }
+        }
+        return new ResourcePointData();
+    }
+
+    public Asset DrawAsset(int _resourcePointId)
+    {
+        ResourcePointData _rp = GetResourcePointData(_resourcePointId);
+        return DrawAsset(_rp.assetId, _rp.mustHaveTagList, _rp.tagPool, _rp.rareTagPool, _rp.scoreMin, _rp.scoreMin);
+    }
+
     public Asset DrawAsset(int _assetId, List<int> _mustHaveTagList, List<int> _tagPool, List<int> _rareTagList, int _scoreMin, int _scoreMax)
     {
         //random draw at most 2 tags and quality, then check score TODO

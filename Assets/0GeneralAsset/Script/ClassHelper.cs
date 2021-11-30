@@ -368,11 +368,6 @@ namespace ClassHelper
         S
     }
 
-    public class ResourceAsset
-    {
-        int assetId;//id, name, graph, firePt, waterPt, earthPt
-    }
-
     public class ResourcePointData
     {
         //id	resource_point_id	asset_id	must_have_tag_list	tag_pool	score_min	score_max
@@ -406,6 +401,7 @@ namespace ClassHelper
             return result;
         }
 
+
         public bool IsAssetType(int assetTypeId)
         {
             foreach (int _at in assetTypeList)
@@ -433,6 +429,21 @@ namespace ClassHelper
         public AssetData GetAssetData()
         {
             return AssetManager.Instance.GetAssetData(assetId);
+        }
+
+        public int GetFirePoint()
+        {
+            return GetAssetData().firePoint;
+        }
+
+        public int GetWaterPoint()
+        {
+            return GetAssetData().waterPoint;
+        }
+
+        public int GetEarthPoint()
+        {
+            return GetAssetData().earthPoint;
         }
 
         public int GetScore()

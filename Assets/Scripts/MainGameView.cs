@@ -74,4 +74,17 @@ public class MainGameView : MonoBehaviour
     {
         InteractiveDialog.SetActive(false);
     }
+
+    public void CharacterReact()
+    {
+        switch (reactingObject.reactType)
+        {
+            case ReactType.Collect:
+                UIManager.Instance.assetDataUI.Show(ResourcePointManager.Instance.DrawAsset(reactingObject.resourcePointId));
+                break;
+            case ReactType.Talk:
+
+                break;
+        }
+    }
 }
