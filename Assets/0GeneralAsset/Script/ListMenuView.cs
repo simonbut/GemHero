@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using ClassHelper;
 
 public class ListMenuView : MonoBehaviour
 {
@@ -16,7 +17,7 @@ public class ListMenuView : MonoBehaviour
     //public Button button3;
     //public Button button4;
 
-    public delegate void Callback();
+    //public delegate void Callback();
     List<Callback> onButtonClickedCallbackList = new List<Callback>();
     //public Callback onButton2ClickedCallback;
     //public Callback onButton3ClickedCallback;
@@ -54,11 +55,11 @@ public class ListMenuView : MonoBehaviour
         {
             if (!buttonList[i].interactable)
             {
-                buttonList[i].GetComponent<Image>().color = Color.gray;
+                buttonList[i].GetComponent<Button>().targetGraphic.color = Color.gray;
             }
             else
             {
-                buttonList[i].GetComponent<Image>().color = Color.white;
+                buttonList[i].GetComponent<Button>().targetGraphic.color = Color.white;
             }
 
 

@@ -29,9 +29,13 @@ public class MainGameView : MonoBehaviour
     public ResourcePoint reactingObject;
     public List<ResourcePoint> resourcePointList = new List<ResourcePoint>();
 
+    public InGameMainMenuUI inGameMainMenuUI;
+
     // Start is called before the first frame update
     void Start()
     {
+        //inGameMainMenuUI.AddUI();
+
         //test
         //CompositeView.Instance.StartComposite();
     }
@@ -86,5 +90,10 @@ public class MainGameView : MonoBehaviour
 
                 break;
         }
+    }
+
+    public void OpenRecipeMenu()
+    {
+        print("OpenRecipeMenu");
     }
 }

@@ -202,6 +202,7 @@ namespace ClassHelper
     //
 
 
+    public delegate void Callback();
     public delegate void ListItemCallback(int _id, ListItem gi);
     public delegate void GridItemCallback(int _id, GridItem gi);
 
