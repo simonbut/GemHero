@@ -6,17 +6,6 @@ using UnityEngine.UI;
 
 public class AssetDataUI : DataUI
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     [SerializeField] GameObject tagListParent;
     [SerializeField] List<GameObject> tagList;
@@ -28,17 +17,44 @@ public class AssetDataUI : DataUI
     [SerializeField] GameObject firePoint;
     [SerializeField] GameObject waterPoint;
     [SerializeField] GameObject earthPoint;
+    [SerializeField] GameObject attr1;
+    [SerializeField] GameObject attr2;
     public void Show(Asset _ra)
     {
         //graphic TODO
 
-        assetName.transform.Find("Text").GetComponent<Text>().text = _ra.GetAssetData().name.GetString();
-        assetType.transform.Find("Text").GetComponent<Text>().text = "Types: " + AssetManager.Instance.AssetTypeListToString(_ra.GetAssetData().GetAssetTypeList());
+        AssetData _ad = _ra.GetAssetData();
+
+        assetName.transform.Find("Text").GetComponent<Text>().text = _ad.name.GetString();
+        assetType.transform.Find("Text").GetComponent<Text>().text = "Types: " + AssetManager.Instance.AssetTypeListToString(_ad.GetAssetTypeList());
         quality.transform.Find("Text").GetComponent<Text>().text = "Quality: " + _ra.GetQuality().ToString("0");
         rank.transform.Find("Text").GetComponent<Text>().text = _ra.GetRank().ToString();
         firePoint.transform.Find("Text").GetComponent<Text>().text = "Fire: " + _ra.GetFirePoint().ToString();
         waterPoint.transform.Find("Text").GetComponent<Text>().text = "Water: " + _ra.GetWaterPoint().ToString();
         earthPoint.transform.Find("Text").GetComponent<Text>().text = "Earth: " + _ra.GetEarthPoint().ToString();
+
+        switch (_ad.compoundType)
+        {
+            case CompoundType.asset:
+            case CompoundType.compound:
+            case CompoundType.consumable:
+                attr1.SetActive(false);
+                attr2.SetActive(false);
+                break;
+            case CompoundType.weapon:
+            case CompoundType.accessory:
+                if (_ad.basicStatTypeList.Count > 0)
+                {
+                    attr1.SetActive(true);
+                    attr1.transform.Find("Text").GetComponent<Text>().text = _ad.basicStatTypeList[0].ToString() + ": " + _ra.GetAttr1().ToString("0");
+                }
+                if (_ad.basicStatTypeList.Count > 1)
+                {
+                    attr2.SetActive(true);
+                    attr1.transform.Find("Text").GetComponent<Text>().text = _ad.basicStatTypeList[1].ToString() + ": " + _ra.GetAttr2().ToString("0");
+                }
+                break;
+        }
 
         if (_ra.tagList.Count == 0)
         {

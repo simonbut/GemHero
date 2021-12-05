@@ -56,7 +56,6 @@ public class Database : MonoBehaviour
         TagManager.Instance.LoadTagData();
         AssetManager.Instance.LoadAssetData();
         AssetManager.Instance.LoadAssetTypeData();
-        AssetManager.Instance.LoadCompoundData();
         AssetManager.Instance.LoadRecipeData();
         EnemyManager.Instance.LoadEnemyData();
         ResourcePointManager.Instance.LoadResourcePointData();

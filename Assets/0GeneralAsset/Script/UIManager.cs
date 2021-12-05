@@ -37,6 +37,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] DropdownUI dropdownUIPrefab;
 
     public AssetDataUI assetDataUI;
+    public RecipeDataUI recipeDataUI;
+    public CompositionDataUI compositionDataUI;
 
     // Start is called before the first frame update
     void Start()

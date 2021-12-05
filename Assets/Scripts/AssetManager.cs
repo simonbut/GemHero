@@ -63,6 +63,28 @@ public class AssetManager : MonoBehaviour
                 int.TryParse(_c[4], out _b.waterPoint);
                 int.TryParse(_c[5], out _b.earthPoint);
 
+                CompoundType.TryParse(_c[6], out _b.compoundType);
+
+                _b.basicStatTypeList = new List<StatType>();
+                string[] _c7 = _c[7].Split(';');
+                for (int j = 0; j < _c7.Length; j++)
+                {
+                    StatType _c7b;
+                    StatType.TryParse(_c7[j], out _c7b);
+
+                    _b.basicStatTypeList.Add(_c7b);
+                }
+
+                _b.basicStatList = new List<int>();
+                string[] _c8 = _c[8].Split(';');
+                for (int j = 0; j < _c8.Length; j++)
+                {
+                    int _c8b;
+                    int.TryParse(_c8[j], out _c8b);
+
+                    _b.basicStatList.Add(_c8b);
+                }
+
                 assetdata.Add(_b);
             }
         }
@@ -141,6 +163,18 @@ public class AssetManager : MonoBehaviour
         }
     }
 
+    public RecipeData GetRecipeData(int recipeId)
+    {
+        foreach (RecipeData _a in recipedata)
+        {
+            if (_a.id == recipeId)
+            {
+                return _a;
+            }
+        }
+        return new RecipeData();
+    }
+
 
 
     [HideInInspector]
@@ -184,71 +218,6 @@ public class AssetManager : MonoBehaviour
             }
         }
         return new AssetTypeData();
-    }
-
-
-
-    [HideInInspector]
-    public List<CompoundData> compounddata = new List<CompoundData>();
-    public List<CompoundData> GetCompoundDataFullList()
-    {
-        return compounddata;
-    }
-
-
-    public void LoadCompoundData()
-    {
-        compounddata = new List<CompoundData>();
-        string data = Database.ReadDatabaseWithoutLanguage("Compound");
-        if (data.Length > 0)
-        {
-            string[] _a = data.Split('\n');
-            for (int i = 1; i < _a.Length; i++)
-            {
-                CompoundData _b = new CompoundData();
-                string[] _c = _a[i].Split('\t');
-                int.TryParse(_c[0], out _b.id);
-                _b.name = new LocalizedString(_c[1], _c[1], _c[1], "");
-                CompoundType.TryParse(_c[2], out _b.compoundType);
-
-
-                _b.assetTypeList = new List<int>();
-                string[] _c3 = _c[3].Split(';');
-                for (int j = 0; j < _c3.Length; j++)
-                {
-                    int _c3b;
-                    int.TryParse(_c3[j], out _c3b);
-
-                    _b.assetTypeList.Add(_c3b);
-                }
-
-                _b.basicStatTypeList = new List<StatType>();
-                string[] _c4 = _c[4].Split(';');
-                for (int j = 0; j < _c4.Length; j++)
-                {
-                    StatType _c4b;
-                    StatType.TryParse(_c4[j], out _c4b);
-
-                    _b.basicStatTypeList.Add(_c4b);
-                }
-
-                _b.basicStatList = new List<int>();
-                string[] _c5 = _c[5].Split(';');
-                for (int j = 0; j < _c5.Length; j++)
-                {
-                    int _c5b;
-                    int.TryParse(_c5[j], out _c5b);
-
-                    _b.basicStatList.Add(_c5b);
-                }
-
-                compounddata.Add(_b);
-            }
-        }
-        else
-        {
-            Debug.Log("data is null");
-        }
     }
 
     public int CalculateQuality(List<int> _tagList,int _qualityAffect)

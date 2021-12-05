@@ -2305,7 +2305,7 @@ GameObject:
   m_Component:
   - component: {fileID: 231714635}
   m_Layer: 5
-  m_Name: TagChoosingMenuCanvas
+  m_Name: Menu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4343,6 +4343,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 470260071}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &470260073 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5495609709480372089, guid: 0ef72adb39ee8fe41b1a192be8ae47b0,
+    type: 3}
+  m_PrefabInstance: {fileID: 470260071}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 695a55474b3e50d4994ded2345d122af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &480246346
 GameObject:
   m_ObjectHideFlags: 0
@@ -7269,7 +7281,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1032638583
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7631,6 +7643,8 @@ MonoBehaviour:
   firePoint: {fileID: 955947921}
   waterPoint: {fileID: 1426914587}
   earthPoint: {fileID: 401818190}
+  attr1: {fileID: 0}
+  attr2: {fileID: 0}
 --- !u!1 &1081409449
 GameObject:
   m_ObjectHideFlags: 0
@@ -8647,6 +8661,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1236175189}
+  - component: {fileID: 1236175190}
   m_Layer: 5
   m_Name: RecipeDataUI
   m_TagString: Untagged
@@ -8674,6 +8689,25 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1236175190
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1236175188}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 793e41baeebf1ff4bb35b4770567e116, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hiding: 0
+  recipeAssetList:
+  - {fileID: 1691956014}
+  - {fileID: 490372579}
+  - {fileID: 407041849}
+  - {fileID: 551035714}
+  - {fileID: 1210791744}
 --- !u!1 &1244482914
 GameObject:
   m_ObjectHideFlags: 0
@@ -9486,6 +9520,7 @@ MonoBehaviour:
   reactingObject: {fileID: 0}
   resourcePointList: []
   inGameMainMenuUI: {fileID: 1685666555}
+  recipeMenuCanvas: {fileID: 1371876655}
   InteractiveDialog: {fileID: 930657395}
 --- !u!4 &1350708361
 Transform:
@@ -9606,9 +9641,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1371876653}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 539eb33a298cf0e4cb1204e5067414ad, type: 3}
+  m_Script: {fileID: 11500000, guid: fd15df7464c5465409991021e52afce8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fadeInType: 0
+  isHideLastUI: 1
+  listScrollView: {fileID: 470260073}
 --- !u!1 &1374780068
 GameObject:
   m_ObjectHideFlags: 0
@@ -9773,6 +9811,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1418643245}
+  - component: {fileID: 1418643246}
   m_Layer: 5
   m_Name: CompositionDataUI
   m_TagString: Untagged
@@ -9801,6 +9840,28 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1418643246
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1418643244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f95b0d099b5b1a74a9f16e152e1c4e8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hiding: 0
+  graphic: {fileID: 1317627835}
+  assetName: {fileID: 1227342840}
+  assetType: {fileID: 500808903}
+  shape: {fileID: 1772284131}
+  firePoint: {fileID: 772261324}
+  waterPoint: {fileID: 1785755970}
+  earthPoint: {fileID: 583639238}
+  attr1: {fileID: 320278586}
+  attr2: {fileID: 15132370}
 --- !u!1 &1421273443
 GameObject:
   m_ObjectHideFlags: 0
@@ -15053,6 +15114,8 @@ MonoBehaviour:
   staticCanvas: {fileID: 299870112}
   dropdownUIPrefab: {fileID: 0}
   assetDataUI: {fileID: 1074650402}
+  recipeDataUI: {fileID: 1236175190}
+  compositionDataUI: {fileID: 1418643246}
 --- !u!1 &1935608763
 GameObject:
   m_ObjectHideFlags: 0

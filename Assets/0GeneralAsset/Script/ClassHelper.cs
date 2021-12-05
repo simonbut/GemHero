@@ -347,7 +347,8 @@ namespace ClassHelper
         weapon = 0,
         accessory,
         consumable,
-        compound
+        compound,
+        asset
     }
 
     public enum StatType
@@ -392,6 +393,10 @@ namespace ClassHelper
         public int waterPoint;
         public int earthPoint;
 
+        public CompoundType compoundType;
+        public List<StatType> basicStatTypeList;
+        public List<int> basicStatList;
+
         public List<AssetTypeData> GetAssetTypeList()
         {
             List<AssetTypeData> result = new List<AssetTypeData>();
@@ -430,6 +435,30 @@ namespace ClassHelper
         public AssetData GetAssetData()
         {
             return AssetManager.Instance.GetAssetData(assetId);
+        }
+
+        public float GetAttr1()
+        {
+            if (GetAssetData().basicStatTypeList.Count < 1)
+            {
+                return 0;
+            }
+            else
+            {
+                return GetAssetData().basicStatList[0];
+            }
+        }
+
+        public float GetAttr2()
+        {
+            if (GetAssetData().basicStatTypeList.Count < 2)
+            {
+                return 0;
+            }
+            else
+            {
+                return GetAssetData().basicStatList[1];
+            }
         }
 
         public int GetFirePoint()
@@ -517,17 +546,6 @@ namespace ClassHelper
         //id	name
         public int id;
         public LocalizedString name;
-    }
-
-    public class CompoundData
-    {
-        //id	name	compound_type	asset_type_list	basic_stat_types	basic_stats
-        public int id;
-        public LocalizedString name;
-        public CompoundType compoundType;
-        public List<int> assetTypeList;
-        public List<StatType> basicStatTypeList;
-        public List<int> basicStatList;
     }
 
     public class RecipeData
