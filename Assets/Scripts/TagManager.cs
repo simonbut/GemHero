@@ -75,6 +75,10 @@ public class TagManager : MonoBehaviour
 
                 int.TryParse(_c[7], out _b.score);
 
+                bool.TryParse(_c[8], out _b.isBadTag);
+                TagType.TryParse(_c[9], out _b.tagType);
+                int.TryParse(_c[10], out _b.RequireAchievementsCount);
+
                 tagdata.Add(_b);
             }
         }

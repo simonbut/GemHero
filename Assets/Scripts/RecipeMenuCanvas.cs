@@ -47,7 +47,7 @@ public class RecipeMenuCanvas : ControlableUI
     void SelectingData(int id, ListItem gi)
     {
         RecipeData recipeData = AssetManager.Instance.GetRecipeData(id);
-        UIManager.Instance.compositionDataUI.Show(recipeData.targetCompoundId);
+        UIManager.Instance.compositionDataUI.Show(id);
         UIManager.Instance.recipeDataUI.Show(id);
     }
 

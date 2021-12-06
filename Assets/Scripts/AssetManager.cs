@@ -143,16 +143,48 @@ public class AssetManager : MonoBehaviour
                 }
 
                 _b.assetTypeList = new List<int>();
-                string[] _c6 = _c[2].Split(';');
+                string[] _c2 = _c[2].Split(';');
+                for (int j = 0; j < _c2.Length; j++)
+                {
+                    int _c2b;
+                    int.TryParse(_c2[j], out _c2b);
+
+                    _b.assetTypeList.Add(_c2b);
+                }
+
+                int.TryParse(_c[3], out _b.targetCompoundId);
+
+                _b.targetScore = new List<int>();
+                string[] _c4 = _c[4].Split(';');
+                for (int j = 0; j < _c4.Length; j++)
+                {
+                    int _c4b;
+                    int.TryParse(_c4[j], out _c4b);
+
+                    _b.targetScore.Add(_c4b);
+                }
+
+                _b.targetTag = new List<int>();
+                string[] _c5 = _c[5].Split(';');
+                for (int j = 0; j < _c5.Length; j++)
+                {
+                    int _c5b;
+                    int.TryParse(_c5[j], out _c5b);
+
+                    _b.targetTag.Add(_c5b);
+                }
+
+                _b.capacity = new List<int>();
+                string[] _c6 = _c[6].Split(';');
                 for (int j = 0; j < _c6.Length; j++)
                 {
                     int _c6b;
                     int.TryParse(_c6[j], out _c6b);
 
-                    _b.assetTypeList.Add(_c6b);
+                    _b.capacity.Add(_c6b);
                 }
 
-                int.TryParse(_c[3], out _b.targetCompoundId);
+                int.TryParse(_c[7], out _b.RequireAchievementsCount);
 
                 recipedata.Add(_b);
             }

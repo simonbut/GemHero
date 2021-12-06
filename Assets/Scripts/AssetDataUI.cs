@@ -14,9 +14,9 @@ public class AssetDataUI : DataUI
     [SerializeField] GameObject assetType;
     [SerializeField] GameObject quality;
     [SerializeField] GameObject rank;
-    [SerializeField] GameObject firePoint;
-    [SerializeField] GameObject waterPoint;
-    [SerializeField] GameObject earthPoint;
+    [SerializeField] GameObject realityPoint;
+    [SerializeField] GameObject dreamPoint;
+    [SerializeField] GameObject idealPoint;
     [SerializeField] GameObject attr1;
     [SerializeField] GameObject attr2;
     public void Show(Asset _ra)
@@ -29,9 +29,9 @@ public class AssetDataUI : DataUI
         assetType.transform.Find("Text").GetComponent<Text>().text = "Types: " + AssetManager.Instance.AssetTypeListToString(_ad.GetAssetTypeList());
         quality.transform.Find("Text").GetComponent<Text>().text = "Quality: " + _ra.GetQuality().ToString("0");
         rank.transform.Find("Text").GetComponent<Text>().text = _ra.GetRank().ToString();
-        firePoint.transform.Find("Text").GetComponent<Text>().text = "Fire: " + _ra.GetRealityPoint().ToString();
-        waterPoint.transform.Find("Text").GetComponent<Text>().text = "Water: " + _ra.GetDreamPoint().ToString();
-        earthPoint.transform.Find("Text").GetComponent<Text>().text = "Earth: " + _ra.GetIdealPoint().ToString();
+        realityPoint.transform.Find("Text").GetComponent<Text>().text = "Reality: " + _ra.GetRealityPoint().ToString();
+        dreamPoint.transform.Find("Text").GetComponent<Text>().text = "Dream: " + _ra.GetDreamPoint().ToString();
+        idealPoint.transform.Find("Text").GetComponent<Text>().text = "Ideal: " + _ra.GetIdealPoint().ToString();
 
         switch (_ad.compoundType)
         {

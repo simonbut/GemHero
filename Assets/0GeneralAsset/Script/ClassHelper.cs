@@ -244,6 +244,9 @@ namespace ClassHelper
         public List<Vector2Int> grids;
         public List<CompoundType> compoundTypeList = new List<CompoundType>();
         public int score;
+        public bool isBadTag;
+        public TagType tagType;
+        public int RequireAchievementsCount = 0;
 
         public int GetMaxX()
         {
@@ -368,6 +371,14 @@ namespace ClassHelper
         B,
         A,
         S
+    }
+
+    public enum TagType
+    {
+        AssetTag = 0,
+        CharacterTag,
+        GemTag,
+        FixedTag
     }
 
     public class ResourcePointData
@@ -555,6 +566,10 @@ namespace ClassHelper
         public List<Vector2Int> shape;
         public List<int> assetTypeList;
         public int targetCompoundId;
+        public List<int> targetScore;
+        public List<int> targetTag;
+        public List<int> capacity;
+        public int RequireAchievementsCount;
     }
 
     public class EnemyData
