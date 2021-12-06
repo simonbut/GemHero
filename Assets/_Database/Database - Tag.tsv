@@ -1,5 +1,5 @@
 id	groupId	subId	name	description	grids	compound_type_list	score
-1	1	1	Tag1	Tag1	0,0;0,-1;-1,-1	consumable	100
-2	2	1	Tag2	Tag2	0,0;0,1;-1,1	consumable	100
-3	3	1	Tag3	Tag3	0,0;0,-1	consumable	100
-4	4	1	Tag4	Tag4	0,0	consumable	100
+1	1	1	Tag1	Tag1	0;-1,0	consumable	100
+2	2	1	Tag2	Tag2	-1,0;0	consumable	100
+3	3	1	Tag3	Tag3	0;0	consumable	100
+4	4	1	Tag4	Tag4	0	consumable	100

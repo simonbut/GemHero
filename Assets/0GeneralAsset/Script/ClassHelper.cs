@@ -389,9 +389,9 @@ namespace ClassHelper
         public int id;
         public LocalizedString name;
         public List<int> assetTypeList = new List<int>();
-        public int firePoint;
-        public int waterPoint;
-        public int earthPoint;
+        public int realityPoint;
+        public int dreamPoint;
+        public int idealPoint;
 
         public CompoundType compoundType;
         public List<StatType> basicStatTypeList;
@@ -461,19 +461,19 @@ namespace ClassHelper
             }
         }
 
-        public int GetFirePoint()
+        public int GetRealityPoint()
         {
-            return GetAssetData().firePoint;
+            return GetAssetData().realityPoint;
         }
 
-        public int GetWaterPoint()
+        public int GetDreamPoint()
         {
-            return GetAssetData().waterPoint;
+            return GetAssetData().dreamPoint;
         }
 
-        public int GetEarthPoint()
+        public int GetIdealPoint()
         {
-            return GetAssetData().earthPoint;
+            return GetAssetData().idealPoint;
         }
 
         public int GetScore()

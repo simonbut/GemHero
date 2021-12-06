@@ -53,14 +53,14 @@ public class TagManager : MonoBehaviour
                 string[] _c5 = _c[5].Split(';');
                 for (int j = 0; j < _c5.Length; j++)
                 {
-                    int x5 = 0;
-                    int y5 = 0;
                     string[] _c5b = _c5[j].Split(',');
-                    int.TryParse(_c5b[0], out x5);
-                    int.TryParse(_c5b[1], out y5);
+                    for (int k = 0; k < _c5b.Length; k++)
+                    {
+                        int x5 = 0;
+                        int.TryParse(_c5b[k], out x5);
 
-                    _b.grids.Add(new Vector2Int(x5, y5));
-
+                        _b.grids.Add(new Vector2Int(x5, Mathf.FloorToInt(_c5.Length / 2) - j));
+                    }
                 }
 
                 _b.compoundTypeList = new List<CompoundType>();

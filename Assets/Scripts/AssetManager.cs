@@ -59,9 +59,9 @@ public class AssetManager : MonoBehaviour
                     _b.assetTypeList.Add(_c6b);
                 }
 
-                int.TryParse(_c[3], out _b.firePoint);
-                int.TryParse(_c[4], out _b.waterPoint);
-                int.TryParse(_c[5], out _b.earthPoint);
+                int.TryParse(_c[3], out _b.realityPoint);
+                int.TryParse(_c[4], out _b.dreamPoint);
+                int.TryParse(_c[5], out _b.idealPoint);
 
                 CompoundType.TryParse(_c[6], out _b.compoundType);
 
@@ -129,17 +129,17 @@ public class AssetManager : MonoBehaviour
                 int.TryParse(_c[0], out _b.id);
 
                 _b.shape = new List<Vector2Int>();
-                string[] _c5 = _c[1].Split(';');
-                for (int j = 0; j < _c5.Length; j++)
+                string[] _c1 = _c[1].Split(';');
+                for (int j = 0; j < _c1.Length; j++)
                 {
-                    int x5 = 0;
-                    int y5 = 0;
-                    string[] _c5b = _c5[j].Split(',');
-                    int.TryParse(_c5b[0], out x5);
-                    int.TryParse(_c5b[1], out y5);
+                    string[] _c1b = _c1[j].Split(',');
+                    for (int k = 0; k < _c1b.Length; k++)
+                    {
+                        int x1 = 0;
+                        int.TryParse(_c1b[k], out x1);
 
-                    _b.shape.Add(new Vector2Int(x5, y5));
-
+                        _b.shape.Add(new Vector2Int(x1, Mathf.FloorToInt(_c1.Length / 2) - j));
+                    }
                 }
 
                 _b.assetTypeList = new List<int>();

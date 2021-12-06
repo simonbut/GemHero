@@ -29,9 +29,9 @@ public class AssetDataUI : DataUI
         assetType.transform.Find("Text").GetComponent<Text>().text = "Types: " + AssetManager.Instance.AssetTypeListToString(_ad.GetAssetTypeList());
         quality.transform.Find("Text").GetComponent<Text>().text = "Quality: " + _ra.GetQuality().ToString("0");
         rank.transform.Find("Text").GetComponent<Text>().text = _ra.GetRank().ToString();
-        firePoint.transform.Find("Text").GetComponent<Text>().text = "Fire: " + _ra.GetFirePoint().ToString();
-        waterPoint.transform.Find("Text").GetComponent<Text>().text = "Water: " + _ra.GetWaterPoint().ToString();
-        earthPoint.transform.Find("Text").GetComponent<Text>().text = "Earth: " + _ra.GetEarthPoint().ToString();
+        firePoint.transform.Find("Text").GetComponent<Text>().text = "Fire: " + _ra.GetRealityPoint().ToString();
+        waterPoint.transform.Find("Text").GetComponent<Text>().text = "Water: " + _ra.GetDreamPoint().ToString();
+        earthPoint.transform.Find("Text").GetComponent<Text>().text = "Earth: " + _ra.GetIdealPoint().ToString();
 
         switch (_ad.compoundType)
         {
