@@ -31,13 +31,17 @@ public class MainGameView : MonoBehaviour
 
     public InGameMainMenuUI inGameMainMenuUI;
     public RecipeMenuCanvas recipeMenuCanvas;
+    public CompositeMenuCanvas compositeMenuCanvas;
 
     // Start is called before the first frame update
     void Start()
     {
 
         //test
-        UIManager.Instance.compositionDataUI.Show(1, true);
+        //ResourcePointManager.Instance.DrawAsset(1);
+        //ResourcePointManager.Instance.DrawAsset(1);
+        compositeMenuCanvas.AddUI();
+        //UIManager.Instance.compositionDataUI.Show(1, true);
         //inGameMainMenuUI.AddUI();
         //CompositeView.Instance.StartComposite();
     }

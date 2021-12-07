@@ -434,6 +434,7 @@ namespace ClassHelper
 
     public class Asset
     {
+        public int assetUid;
         public int assetId;
         public int qualityAffect;
         public List<int> tagList;

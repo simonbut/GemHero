@@ -275,4 +275,31 @@ public class AssetManager : MonoBehaviour
         result = result.Substring(0, result.Length - 1);
         return result;
     }
+
+
+
+    public Asset GetAssetByUid(int uid)
+    {
+        foreach (Asset _a in Database.userDataJson.assetList)
+        {
+            if(_a.assetUid == uid)
+            {
+                return _a;
+            }
+        }
+        return null;
+    }
+
+    public List<Asset> GetAssetListByType(int type)
+    {
+        List<Asset> result = new List<Asset>();
+        foreach (Asset _a in Database.userDataJson.assetList)
+        {
+            if (_a.GetAssetData().IsAssetType(type))
+            {
+                result.Add(_a);
+            }
+        }
+        return result;
+    }
 }

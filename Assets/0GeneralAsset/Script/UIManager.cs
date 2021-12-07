@@ -39,7 +39,8 @@ public class UIManager : MonoBehaviour
     public AssetDataUI assetDataUI;
     public RecipeDataUI recipeDataUI;
     public CompositionDataUI compositionDataUI;
-
+    public AssetInCompositionDataUI assetInCompositionDataUI;
+    
     // Start is called before the first frame update
     void Start()
     {

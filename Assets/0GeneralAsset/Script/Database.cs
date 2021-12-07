@@ -100,7 +100,6 @@ public class Database : MonoBehaviour
 
     public class UserData
     {
-
         public int chapter = 1;
 
         public float currentStageDifficulty = 1;
@@ -124,9 +123,17 @@ public class Database : MonoBehaviour
         //back door
         public bool isBackDoor = false;
 
-
+        public int lastAssetUid = 1;
+        public List<Asset> assetList = new List<Asset>();
     }
 
+    public static void AddAsset(Asset _a)
+    {
+        _a.assetUid = userDataJson.lastAssetUid;
+        userDataJson.assetList.Add(_a);
+        userDataJson.lastAssetUid++;
+        Save();
+    }
 
 
 

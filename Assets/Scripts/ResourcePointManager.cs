@@ -102,13 +102,13 @@ public class ResourcePointManager : MonoBehaviour
         return new ResourcePointData();
     }
 
-    public Asset DrawAsset(int _resourcePointId)
+    public Asset DrawAsset(int _resourcePointId,bool _isAddToDatabase = true)
     {
         ResourcePointData _rp = GetResourcePointData(_resourcePointId);
-        return DrawAsset(_rp.assetId, _rp.mustHaveTagList, _rp.tagPool, _rp.rareTagPool, _rp.scoreMin, _rp.scoreMin);
+        return DrawAsset(_rp.assetId, _rp.mustHaveTagList, _rp.tagPool, _rp.rareTagPool, _rp.scoreMin, _rp.scoreMin, _isAddToDatabase);
     }
 
-    public Asset DrawAsset(int _assetId, List<int> _mustHaveTagList, List<int> _tagPool, List<int> _rareTagList, int _scoreMin, int _scoreMax)
+    public Asset DrawAsset(int _assetId, List<int> _mustHaveTagList, List<int> _tagPool, List<int> _rareTagList, int _scoreMin, int _scoreMax, bool _isAddToDatabase = true)
     {
         //random draw at most 2 tags and quality, then check score TODO
         int tag1 = 0;
@@ -197,6 +197,11 @@ public class ResourcePointManager : MonoBehaviour
         result.assetId = _assetId;
         result.qualityAffect = qualityAffect;
         result.tagList = tagList;
+
+        if (_isAddToDatabase)
+        {
+            Database.AddAsset(result);
+        }
 
         return result;
     }
