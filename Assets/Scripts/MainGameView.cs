@@ -37,13 +37,6 @@ public class MainGameView : MonoBehaviour
     void Start()
     {
 
-        //test
-        //ResourcePointManager.Instance.DrawAsset(1);
-        //ResourcePointManager.Instance.DrawAsset(1);
-        compositeMenuCanvas.AddUI();
-        //UIManager.Instance.compositionDataUI.Show(1, true);
-        //inGameMainMenuUI.AddUI();
-        //CompositeView.Instance.StartComposite();
     }
 
     // Update is called once per frame
