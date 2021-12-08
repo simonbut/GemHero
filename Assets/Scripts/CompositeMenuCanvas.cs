@@ -84,6 +84,9 @@ public class CompositeMenuCanvas : ControlableUI
     public int session = 0;
     public void AddUI(int _recipeId)
     {
+        UIManager.Instance.compositionDataUI.Show(_recipeId, true);
+        UIManager.Instance.recipeDataUI.Hide();
+
         recipe = AssetManager.Instance.GetRecipeData(_recipeId);
         assetSelectList = new int[recipe.assetTypeList.Count];
         DefineSessions();

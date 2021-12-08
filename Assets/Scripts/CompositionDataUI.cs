@@ -27,6 +27,8 @@ public class CompositionDataUI : DataUI
     [SerializeField] Sprite emptySlotSprite;
     [SerializeField] Sprite fillSlotSprite;
 
+    bool showCompositePart = false;
+
     public void Show(int _recipeId, bool _showCompositePart = false)
     {
         RecipeData _rd = AssetManager.Instance.GetRecipeData(_recipeId);
@@ -119,11 +121,70 @@ public class CompositionDataUI : DataUI
             }
         }
 
+        showCompositePart = _showCompositePart;
+
         OnShow();
+    }
+
+    public void Update()
+    {
+        if (showCompositePart && MainGameView.Instance != null)
+        {
+            int realityPt = 0;
+            int dreamPt = 0;
+            int idealPt = 0;
+            if (MainGameView.Instance.compositeMenuCanvas.assetSelectList != null)
+            {
+                foreach (int _uid in MainGameView.Instance.compositeMenuCanvas.assetSelectList)
+                {
+                    if (_uid > 0)
+                    {
+                        Asset _a = AssetManager.Instance.GetAssetByUid(_uid);
+                        realityPt += _a.GetRealityPoint();
+                        dreamPt += _a.GetDreamPoint();
+                        idealPt += _a.GetIdealPoint();
+                    }
+                }
+            }
+            for (int i = 0; i < realitySlots.Count; i++)
+            {
+                if (i < realityPt)
+                {
+                    realitySlots[i].GetComponent<Image>().sprite = fillSlotSprite;
+                }
+                else
+                {
+                    realitySlots[i].GetComponent<Image>().sprite = emptySlotSprite;
+                }
+            }
+            for (int i = 0; i < dreamSlots.Count; i++)
+            {
+                if (i < dreamPt)
+                {
+                    dreamSlots[i].GetComponent<Image>().sprite = fillSlotSprite;
+                }
+                else
+                {
+                    dreamSlots[i].GetComponent<Image>().sprite = emptySlotSprite;
+                }
+            }
+            for (int i = 0; i < idealSlots.Count; i++)
+            {
+                if (i < idealPt)
+                {
+                    idealSlots[i].GetComponent<Image>().sprite = fillSlotSprite;
+                }
+                else
+                {
+                    idealSlots[i].GetComponent<Image>().sprite = emptySlotSprite;
+                }
+            }
+        }
     }
 
     public void Hide()
     {
+        showCompositePart = false;
         OnHide();
     }
 }

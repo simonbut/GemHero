@@ -42,6 +42,7 @@ public class RecipeMenuCanvas : ControlableUI
     void ClickData(int id, ListItem gi)
     {
         //CompositeView.Instance.StartAssetChoosing(id);
+        MainGameView.Instance.compositeMenuCanvas.AddUI(id);
     }
 
     void SelectingData(int id, ListItem gi)
