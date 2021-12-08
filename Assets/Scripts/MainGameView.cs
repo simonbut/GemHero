@@ -32,6 +32,9 @@ public class MainGameView : MonoBehaviour
     public InGameMainMenuUI inGameMainMenuUI;
     public RecipeMenuCanvas recipeMenuCanvas;
     public CompositeMenuCanvas compositeMenuCanvas;
+    public CompositeTagChoosingCanvas tagChoosingCanvas;
+
+    public TagBaseCanvas tagBaseCanvas;
 
     // Start is called before the first frame update
     void Start()

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using ClassHelper;
 
-public class TagChoosingCanvas : ControlableUI
+public class CompositeTagChoosingCanvas : ControlableUI
 {
     public ListScrollView listScrollView;
 
@@ -40,7 +40,7 @@ public class TagChoosingCanvas : ControlableUI
 
     void ClickData(int id, ListItem gi)
     {
-        CompositeView.Instance.GenerateChoosingTag(id);
+        //CompositeView.Instance.GenerateChoosingTag(id);
     }
 
     void SelectingData(int id, ListItem gi)
