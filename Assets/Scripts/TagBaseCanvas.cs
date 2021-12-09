@@ -41,7 +41,7 @@ public class TagBaseCanvas : MonoBehaviour
     public List<Tag> existingTagList = new List<Tag>();
     List<Vector2Int> gridBaseShape;
 
-    public void Show(List<Vector2Int> _gridBaseShape, List<int> tagList,List<Vector2Int> tagPos)
+    public void Show(List<Vector2Int> _gridBaseShape, List<Tag> tagList)
     {
         ResetTagBase();
 
@@ -51,7 +51,7 @@ public class TagBaseCanvas : MonoBehaviour
 
         for (int i = 0; i < tagList.Count; i++)
         {
-            GenerateTagGrid(tagList[i], tagPos[i]);
+            GenerateTagGrid(tagList[i]);
         }
     }
 
@@ -96,7 +96,7 @@ public class TagBaseCanvas : MonoBehaviour
     {
         if (isPutChoosingTagValid)
         {
-            GenerateTagGrid(choosingTag.GetComponent<ChoosingTag>().tagContent.tagData.id, choosingTag.GetComponent<ChoosingTag>().tagContent.offset);
+            GenerateTagGrid(choosingTag.GetComponent<ChoosingTag>().tagContent);
             if (choosingTag != null)
             {
                 Destroy(choosingTag.gameObject);
@@ -109,10 +109,12 @@ public class TagBaseCanvas : MonoBehaviour
         isPutChoosingTagValid = true;
         if (CheckIfCollide(choosingTag.GetComponent<ChoosingTag>().tagContent, existingTagList))
         {
+            print("CheckIfCollide failed");
             isPutChoosingTagValid = false;
         }
         if (!CheckIfInside(choosingTag.GetComponent<ChoosingTag>().tagContent, gridBaseShape))
         {
+            print("CheckIfInside failed");
             isPutChoosingTagValid = false;
         }
     }
@@ -131,7 +133,7 @@ public class TagBaseCanvas : MonoBehaviour
 
     bool CheckIfInside(Tag tag, List<Vector2Int> tagBase)
     {
-        foreach (Vector2Int _v in tag.tagData.grids)
+        foreach (Vector2Int _v in tag.GetGrids())
         {
             if (!tagBase.Contains(_v))
             {
@@ -144,15 +146,15 @@ public class TagBaseCanvas : MonoBehaviour
 
     bool CheckIfCollide(Tag tag, List<Tag> tagList)
     {
-        foreach (Vector2Int _v in tag.tagData.grids)
+        foreach (Vector2Int _v in tag.GetGrids())
         {
             foreach (Tag _t in tagList)
             {
-                foreach (Vector2Int _v2 in _t.tagData.grids)
+                foreach (Vector2Int _v2 in _t.GetGrids())
                 {
-                    if (_v2 + _t.offset == _v + tag.offset)
+                    if (_v2 == _v)
                     {
-                        print("x = " + (_v2 + _t.offset).x + ",y = " + (_v2 + _t.offset).y);
+                        print("x = " + (_v2).x + ",y = " + (_v2).y);
                         return true;
                     }
                 }
@@ -176,8 +178,8 @@ public class TagBaseCanvas : MonoBehaviour
 
     Vector2Int CalculateGridOffset(Vector2 _mousePosition)
     {
-        int resultX = Mathf.FloorToInt((_mousePosition.x - Screen.width / 2f) / (100f * gridSize) + 0.5f);
-        int resultY = Mathf.FloorToInt((_mousePosition.y - Screen.height / 2f) / (100f * gridSize) + 0.5f);
+        int resultX = Mathf.FloorToInt((_mousePosition.x - gridBaseParent.transform.position.x) / (100f * gridSize) + 0.5f);
+        int resultY = Mathf.FloorToInt((_mousePosition.y - gridBaseParent.transform.position.y) / (100f * gridSize) + 0.5f);
 
         //calculate boundary
         if (choosingTag != null)
@@ -203,9 +205,9 @@ public class TagBaseCanvas : MonoBehaviour
         return new Vector2Int(resultX, resultY);
     }
 
-    public void GenerateChoosingTag(int _tagId)
+    public void GenerateChoosingTag(Tag _tag)
     {
-        GameObject _gameObjectInstance = GenerateTagGrid(_tagId, new Vector2Int(), false);
+        GameObject _gameObjectInstance = GenerateTagGrid(_tag, false);
         _gameObjectInstance.AddComponent<ChoosingTag>();
         if (choosingTag != null)
         {
@@ -213,7 +215,8 @@ public class TagBaseCanvas : MonoBehaviour
         }
         choosingTag = _gameObjectInstance.GetComponent<ChoosingTag>();
         choosingTag.transform.SetParent(choosingTagParent.transform);
-        choosingTag.GetComponent<ChoosingTag>().SetUp(_tagId, new Vector2Int());
+
+        choosingTag.GetComponent<ChoosingTag>().SetUp(_tag);
         choosingTag.GetComponent<ChoosingTag>().SetTagColor(Color.grey);
     }
 
@@ -310,13 +313,14 @@ public class TagBaseCanvas : MonoBehaviour
     }
 
 
-    GameObject GenerateTagGrid(int _tagId, Vector2Int _tagOffset, bool isExisting = true)
+    GameObject GenerateTagGrid(Tag _tag, bool isExisting = true)
     {
-        TagData _t = TagManager.Instance.GetTag(_tagId);
-        List<Vector2Int> _gridContents = _t.grids;
+        TagData _td = _tag.tagData;
+        Vector2Int _tagOffset = _tag.offset;
+        List<Vector2Int> _gridContents = _tag.GetGrids();
 
         GameObject _gameObjectInstance = new GameObject();
-        _gameObjectInstance.name = _t.name.GetString();
+        _gameObjectInstance.name = _td.name.GetString();
         _gameObjectInstance.transform.SetParent(gridParent.transform);
         _gameObjectInstance.transform.localPosition = new Vector2(0, 0);
 
@@ -340,7 +344,7 @@ public class TagBaseCanvas : MonoBehaviour
                 {
                     GameObject _gridInstance = Instantiate(gridPrefab);
                     _gridInstance.transform.SetParent(_gameObjectInstance.transform);
-                    _gridInstance.transform.localPosition = new Vector2((i + _tagOffset.x) * 100f, (j + _tagOffset.y) * 100f) * gridSize;
+                    _gridInstance.transform.localPosition = new Vector2((i) * 100f, (j) * 100f) * gridSize;
                     _gridInstance.transform.localScale *= gridSize;
 
                     Material mat = Instantiate(_gridInstance.GetComponent<Image>().material);
@@ -405,29 +409,29 @@ public class TagBaseCanvas : MonoBehaviour
 
         //generate name
         GameObject _tagNameInstance = Instantiate(tagNamePrefab);
-        _tagNameInstance.name = _t.name.GetString();
-        _tagNameInstance.GetComponent<Text>().text = _t.name.GetString();
+        _tagNameInstance.name = _td.name.GetString();
+        _tagNameInstance.GetComponent<Text>().text = _td.name.GetString();
         _tagNameInstance.transform.SetParent(_gameObjectInstance.transform);
-        _tagNameInstance.transform.localPosition = new Vector2(0, 0);
+        _tagNameInstance.transform.localPosition = new Vector2(0,0);
         _tagNameInstance.GetComponent<RectTransform>().sizeDelta = new Vector2(100, 100);
-        if (_gridContents.Contains(new Vector2Int(-1, 0)))
+        if (_gridContents.Contains(new Vector2Int(-1 + _tagOffset.x, 0)))
         {
             _tagNameInstance.GetComponent<RectTransform>().sizeDelta += new Vector2(100, 0);
             _tagNameInstance.transform.localPosition += new Vector3(-50, 0, 0);
         }
-        if (_gridContents.Contains(new Vector2Int(1, 0)))
+        if (_gridContents.Contains(new Vector2Int(1 + _tagOffset.x, 0)))
         {
             _tagNameInstance.GetComponent<RectTransform>().sizeDelta += new Vector2(100, 0);
             _tagNameInstance.transform.localPosition += new Vector3(50, 0, 0);
         }
-        if (!_gridContents.Contains(new Vector2Int(1, 0)) && !_gridContents.Contains(new Vector2Int(-1, 0)))
+        if (!_gridContents.Contains(new Vector2Int(1 + _tagOffset.x, 0)) && !_gridContents.Contains(new Vector2Int(-1 + _tagOffset.x, 0)))
         {
-            if (_gridContents.Contains(new Vector2Int(0, -1)))
+            if (_gridContents.Contains(new Vector2Int(0, -1 + _tagOffset.y)))
             {
                 _tagNameInstance.GetComponent<RectTransform>().sizeDelta += new Vector2(0, 100);
                 _tagNameInstance.transform.localPosition = new Vector2(0, -50);
             }
-            if (_gridContents.Contains(new Vector2Int(0, 1)))
+            if (_gridContents.Contains(new Vector2Int(0, 1 + _tagOffset.y)))
             {
                 _tagNameInstance.GetComponent<RectTransform>().sizeDelta += new Vector2(0, 100);
                 _tagNameInstance.transform.localPosition = new Vector2(0, 50);
@@ -440,7 +444,7 @@ public class TagBaseCanvas : MonoBehaviour
 
         if (isExisting)
         {
-            existingTagList.Add(Tag.CreateTag(_tagId, _tagOffset));
+            existingTagList.Add(_tag);
         }
 
         //foreach (Vector2Int _v in _gridContents)

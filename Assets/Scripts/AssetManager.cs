@@ -174,14 +174,28 @@ public class AssetManager : MonoBehaviour
                     _b.targetTag.Add(_c5b);
                 }
 
-                _b.capacity = new List<int>();
+                _b.targetPos = new List<Vector2Int>();
                 string[] _c6 = _c[6].Split(';');
                 for (int j = 0; j < _c6.Length; j++)
                 {
-                    int _c6b;
-                    int.TryParse(_c6[j], out _c6b);
+                    int x6 = 0;
+                    int y6 = 0;
+                    string[] _c6b = _c6[j].Split(',');
+                    int.TryParse(_c6b[0], out x6);
+                    int.TryParse(_c6b[1], out y6);
 
-                    _b.capacity.Add(_c6b);
+                    _b.targetPos.Add(new Vector2Int(x6, y6));
+
+                }
+
+                _b.capacity = new List<int>();
+                string[] _c7 = _c[7].Split(';');
+                for (int j = 0; j < _c7.Length; j++)
+                {
+                    int _c7b;
+                    int.TryParse(_c7[j], out _c7b);
+
+                    _b.capacity.Add(_c7b);
                 }
 
                 int.TryParse(_c[7], out _b.RequireAchievementsCount);
@@ -298,6 +312,35 @@ public class AssetManager : MonoBehaviour
             if (_a.GetAssetData().IsAssetType(type))
             {
                 result.Add(_a);
+            }
+        }
+        return result;
+    }
+
+    public List<Tag> CreateTagList(List<int> tagIdList,List<Vector2Int> tagOffsetList)
+    {
+        List<Tag> result = new List<Tag>();
+        for (int i = 0; i < tagIdList.Count; i++)
+        {
+            if (tagIdList[i] > 0)
+            {
+                result.Add(Tag.CreateTag(tagIdList[i], tagOffsetList[i], new List<int>()));
+            }
+        }
+        return result;
+    }
+
+    public List<Tag> CreateTagListByAssets(int[] assetUidList)
+    {
+        List<Tag> result = new List<Tag>();
+        for (int i = 0; i < assetUidList.Length; i++)
+        {
+            Asset _a = GetAssetByUid(assetUidList[i]);
+            foreach (int _tid in _a.tagList)
+            {
+                List<int> affectList = new List<int>();
+                //TODO tag Affect List
+                result.Add(Tag.CreateTag(_tid, Vector2Int.zero, affectList));
             }
         }
         return result;

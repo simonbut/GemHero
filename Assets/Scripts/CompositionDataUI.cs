@@ -130,22 +130,9 @@ public class CompositionDataUI : DataUI
     {
         if (showCompositePart && MainGameView.Instance != null)
         {
-            int realityPt = 0;
-            int dreamPt = 0;
-            int idealPt = 0;
-            if (MainGameView.Instance.compositeMenuCanvas.assetSelectList != null)
-            {
-                foreach (int _uid in MainGameView.Instance.compositeMenuCanvas.assetSelectList)
-                {
-                    if (_uid > 0)
-                    {
-                        Asset _a = AssetManager.Instance.GetAssetByUid(_uid);
-                        realityPt += _a.GetRealityPoint();
-                        dreamPt += _a.GetDreamPoint();
-                        idealPt += _a.GetIdealPoint();
-                    }
-                }
-            }
+            int realityPt = MainGameView.Instance.compositeMenuCanvas.GetPoints()[0];
+            int dreamPt = MainGameView.Instance.compositeMenuCanvas.GetPoints()[1];
+            int idealPt = MainGameView.Instance.compositeMenuCanvas.GetPoints()[2];
             for (int i = 0; i < realitySlots.Count; i++)
             {
                 if (i < realityPt)

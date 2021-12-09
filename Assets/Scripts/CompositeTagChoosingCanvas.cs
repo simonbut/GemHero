@@ -32,15 +32,18 @@ public class CompositeTagChoosingCanvas : ControlableUI
 
     void GenerateList()
     {
-        foreach (TagData _t in TagManager.Instance.GetTagDataFullList())
+        for (int i = 0; i < tagList.Count; i++)
         {
-            GameObject gridItemInstance = listScrollView.GenerateItem(_t.name.GetString(), _t.id);
+            GameObject gridItemInstance = listScrollView.GenerateItem(tagList[i].tagData.name.GetString(), i);
         }
+        //TODO "complete" button
     }
 
     void ClickData(int id, ListItem gi)
     {
-        //CompositeView.Instance.GenerateChoosingTag(id);
+        tagList[id].offset = Vector2Int.zero;
+        //TODO remove existing tag (check if FixedTag)
+        TagBaseCanvas.Instance.GenerateChoosingTag(tagList[id]);
     }
 
     void SelectingData(int id, ListItem gi)
@@ -51,6 +54,17 @@ public class CompositeTagChoosingCanvas : ControlableUI
     void DisSelectingData(int id, ListItem gi)
     {
 
+    }
+
+    List<Tag> tagList;
+    //assetSelectList, TargetTagListWithEnoughPoints()
+    public void AddUI(List<Tag> _tagList,List<Tag> _staticTagList)
+    {
+        tagList = new List<Tag>();
+        tagList.AddRange(_tagList);
+        tagList.AddRange(_staticTagList);
+
+        base.AddUI();
     }
 
     // Update is called once per frame

@@ -129,6 +129,10 @@ public class CompositeMenuCanvas : ControlableUI
         if (isAllChossen)
         {
             print("NextStep");
+            UIManager.Instance.assetInCompositionDataUI.Hide();
+            UIManager.Instance.compositionDataUI.Hide();
+            MainGameView.Instance.tagBaseCanvas.Show(recipe.shape, AssetManager.Instance.CreateTagList(TargetTagListWithEnoughPoints(), recipe.targetPos));
+            MainGameView.Instance.tagChoosingCanvas.AddUI(AssetManager.Instance.CreateTagListByAssets(assetSelectList), AssetManager.Instance.CreateTagList(TargetTagListWithEnoughPoints(), recipe.targetPos));
             return;
         }
         else
@@ -142,5 +146,46 @@ public class CompositeMenuCanvas : ControlableUI
         print("select session " + _session);
         session = _session;
         Refresh();
+    }
+
+    public List<int> TargetTagListWithEnoughPoints()
+    {
+        List<int> result = new List<int> ();
+        for (int i = 0; i < 3; i++)
+        {
+            if (IsTargetReach(i))
+            {
+                result.Add(recipe.targetTag[i]);
+            }
+            else
+            {
+                result.Add(0);
+            }
+        }
+        return result;
+    }
+
+    public bool IsTargetReach(int index)
+    {
+        return (recipe.targetScore[index] <= GetPoints()[index]);
+    }
+
+    public int[] GetPoints()
+    {
+        int[] result = new int[3];
+        if (MainGameView.Instance.compositeMenuCanvas.assetSelectList != null)
+        {
+            foreach (int _uid in MainGameView.Instance.compositeMenuCanvas.assetSelectList)
+            {
+                if (_uid > 0)
+                {
+                    Asset _a = AssetManager.Instance.GetAssetByUid(_uid);
+                    result[0] += _a.GetRealityPoint();
+                    result[1] += _a.GetDreamPoint();
+                    result[2] += _a.GetIdealPoint();
+                }
+            }
+        }
+        return result;
     }
 }

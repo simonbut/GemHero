@@ -208,26 +208,39 @@ namespace ClassHelper
 
     public class Tag
     {
-        public int uid;
+        //public int uid;
         public TagData tagData;
-        //public List<Vector2Int> grids;
+        public List<int> affectList = new List<int>();
         public Vector2Int offset = new Vector2Int();
 
-        static public Tag CreateTag(int _tagid, Vector2Int _offset)
+        public List<Vector2Int> GetGrids()
+        {
+            List<Vector2Int> result = new List<Vector2Int>();
+            foreach (Vector2Int _v in tagData.grids)
+            {
+                Vector2Int _resultV = _v + offset;
+                //TODO affectList
+                result.Add(_resultV);
+            }
+            return result;
+        }
+
+        static public Tag CreateTag(int _tagid, Vector2Int _offset, List<int> _affectList)
         {
             Tag result = new Tag();
             result.tagData = TagManager.Instance.GetTag(_tagid);
             result.offset = _offset;
-
+            result.affectList = _affectList;
 
             return result;
         }
 
-        static public Tag CreateTag(TagData _tagData, Vector2Int _offset)
+        static public Tag CreateTag(TagData _tagData, Vector2Int _offset, List<int> _affectList)
         {
             Tag result = new Tag();
             result.tagData = _tagData;
             result.offset = _offset;
+            result.affectList = _affectList;
 
             return result;
         }
@@ -569,6 +582,7 @@ namespace ClassHelper
         public int targetCompoundId;
         public List<int> targetScore;
         public List<int> targetTag;
+        public List<Vector2Int> targetPos;
         public List<int> capacity;
         public int RequireAchievementsCount;
     }
