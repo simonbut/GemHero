@@ -33,7 +33,8 @@ public class MainGameView : MonoBehaviour
     public RecipeMenuCanvas recipeMenuCanvas;
     public CompositeMenuCanvas compositeMenuCanvas;
     public CompositeTagChoosingCanvas tagChoosingCanvas;
-
+    public AssetConfirmCanvas assetConfirmCanvas;
+    
     public TagBaseCanvas tagBaseCanvas;
 
     // Start is called before the first frame update
@@ -45,7 +46,7 @@ public class MainGameView : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        InteractiveDialog.transform.position = MathManager.WorldPosToCanvasPos(CharacterControlView.Instance.player.transform.position + Vector3.up * 1f);
+        InteractiveDialog.transform.position = MathManager.WorldPosToCanvasPos(ControlView.Instance.player.transform.position + Vector3.up * 1f);
 
         foreach (ResourcePoint _rp in resourcePointList)
         {
@@ -83,10 +84,15 @@ public class MainGameView : MonoBehaviour
 
     public void CharacterReact()
     {
+        if (UIManager.Instance.IsNoUI())
+        {
+            return;
+        }
         switch (reactingObject.reactType)
         {
             case ReactType.Collect:
-                UIManager.Instance.assetDataUI.Show(ResourcePointManager.Instance.DrawAsset(reactingObject.resourcePointId));
+                MainGameView.Instance.assetConfirmCanvas.AddUI(ResourcePointManager.Instance.DrawAsset(reactingObject.resourcePointId));
+                //UIManager.Instance.assetDataUI.Show(ResourcePointManager.Instance.DrawAsset(reactingObject.resourcePointId));
                 break;
             case ReactType.Talk:
 
@@ -97,5 +103,16 @@ public class MainGameView : MonoBehaviour
     public void OpenRecipeMenu()
     {
         recipeMenuCanvas.AddUI();
+    }
+
+    public void LeaveComposition()
+    {
+        UIManager.Instance.RemoveUI(compositeMenuCanvas);
+        UIManager.Instance.RemoveUI(tagChoosingCanvas);
+        compositeMenuCanvas.gameObject.SetActive(false);
+        tagChoosingCanvas.gameObject.SetActive(false);
+
+        UIManager.Instance.HideAllDataUI();
+        tagBaseCanvas.Hide();
     }
 }

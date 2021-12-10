@@ -35,10 +35,10 @@ public class InGameMainMenuUI : ControlableUI
             return;
         }
 
-        //if (JoyStickManager.Instance.IsInputDown("Cross") || Input.GetButtonDown("Escape"))
-        //{
-        //    OnBackPressed();
-        //}
+        if (ControlView.Instance.controls.Map1.Cancel.triggered)
+        {
+            OnBackPressed();
+        }
     }
 
     void OnCompositeButtonClick()

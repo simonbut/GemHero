@@ -4074,6 +4074,51 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &260697783
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 260697784}
+  - component: {fileID: 260697785}
+  m_Layer: 0
+  m_Name: AssetConfirmCanvas
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &260697784
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 260697783}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -371.3669, y: -60.067047, z: -32.539223}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 332331676}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &260697785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 260697783}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 605a38b87a52ab342b4ec58509b441ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadeInType: 0
+  isHideLastUI: 1
 --- !u!1 &261473463
 GameObject:
   m_ObjectHideFlags: 0
@@ -5170,6 +5215,7 @@ RectTransform:
   - {fileID: 786260846}
   - {fileID: 410897103}
   - {fileID: 1384792134}
+  - {fileID: 260697784}
   - {fileID: 818314725}
   - {fileID: 1341179089}
   - {fileID: 1659079076}
@@ -5344,7 +5390,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 536, y: 0}
+  m_AnchoredPosition: {x: 0, y: 36.894196}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &342493466
@@ -6449,7 +6495,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 536, y: -48.894196}
+  m_AnchoredPosition: {x: 0, y: -12}
   m_SizeDelta: {x: 500, y: 766.4207}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &427310601
@@ -10451,7 +10497,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 332331676}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -13361,6 +13407,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hiding: 0
+  background: {fileID: 427310599}
+  contents: {fileID: 338787137}
   tagListParent: {fileID: 72782907}
   tagList:
   - {fileID: 1408759493}
@@ -16301,7 +16349,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 332331676}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -16512,6 +16560,7 @@ MonoBehaviour:
   recipeMenuCanvas: {fileID: 1371876655}
   compositeMenuCanvas: {fileID: 786260847}
   tagChoosingCanvas: {fileID: 410897104}
+  assetConfirmCanvas: {fileID: 260697785}
   tagBaseCanvas: {fileID: 1523867905}
   InteractiveDialog: {fileID: 930657395}
 --- !u!4 &1350708361
@@ -17928,7 +17977,7 @@ RectTransform:
   - {fileID: 8070345}
   - {fileID: 1088531738}
   m_Father: {fileID: 332331676}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -17958,6 +18007,7 @@ MonoBehaviour:
   gridSize: 1
   canvasSize: 1
   gridMapBoundary: 3
+  existingTagGameObjectList: []
 --- !u!1 &1524773413
 GameObject:
   m_ObjectHideFlags: 0
@@ -18307,7 +18357,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 332331676}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -21997,7 +22047,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 332331676}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -22126,7 +22176,7 @@ GameObject:
   - component: {fileID: 1685212516}
   - component: {fileID: 1685212515}
   m_Layer: 0
-  m_Name: CharacterControlView
+  m_Name: ControlView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

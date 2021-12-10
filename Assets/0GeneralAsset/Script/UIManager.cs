@@ -40,7 +40,14 @@ public class UIManager : MonoBehaviour
     public RecipeDataUI recipeDataUI;
     public CompositionDataUI compositionDataUI;
     public AssetInCompositionDataUI assetInCompositionDataUI;
-    
+    public void HideAllDataUI()
+    {
+        assetDataUI.Hide();
+        recipeDataUI.Hide();
+        compositionDataUI.Hide();
+        assetInCompositionDataUI.Hide();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -113,9 +120,14 @@ public class UIManager : MonoBehaviour
         ControlableUIList.Remove(UIToRemove);
     }
 
+    public bool IsNoUI()
+    {
+        return (ControlableUIList.Count <= 0);
+    }
+
     public bool IsCurrentUI(ControlableUI UIToCheck)
     {
-        if (ControlableUIList.Count<=0)
+        if (IsNoUI())
         {
             return false;
         }
@@ -269,11 +281,6 @@ public class UIManager : MonoBehaviour
         dropdownUI.SetActive(false);
 
         return dropdownUI.GetComponent<DropdownUI>();
-    }
-
-    public void HideAllDataUI()
-    {
-        assetDataUI.Hide();
     }
 
     //public void ShowItemChoosingIndicator(Vector3 _v)

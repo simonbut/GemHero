@@ -66,9 +66,11 @@ public class RecipeMenuCanvas : ControlableUI
             return;
         }
 
-        //if (JoyStickManager.Instance.IsInputDown("Cross") || Input.GetButtonDown("Escape"))
-        //{
-        //    OnBackPressed();
-        //}
+        if (ControlView.Instance.controls.Map1.Cancel.triggered)
+        {
+            UIManager.Instance.compositionDataUI.Hide();
+            UIManager.Instance.recipeDataUI.Hide();
+            OnBackPressed();
+        }
     }
 }

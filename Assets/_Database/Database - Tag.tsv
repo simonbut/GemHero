@@ -1,8 +1,8 @@
 id	groupId	subId	name	description	grids	compound_type_list	score	isBadTag	tagType	RequireAchievementsCount
-1	1	1	Tag1	Tag1	0;-1,0	consumable	100	FALSE	AssetTag	
-2	2	1	Tag2	Tag2	-1,0;0	consumable	100	FALSE	AssetTag	
-3	3	1	Tag3	Tag3	0;0	consumable	100	FALSE	AssetTag	
-4	4	1	Tag4	Tag4	0	consumable	100	FALSE	AssetTag	
-5	5	1	Tag5	Tag5	0	consumable	100	FALSE	CharacterTag	
-6	6	1	Tag6	Tag6	0	consumable	100	FALSE	GemTag	0
-7	7	1	Tag7	Tag7	0	consumable	100	FALSE	FixedTag	
+1	1	1	Tag1	Tag1	0;-1,0	consumable	10	FALSE	AssetTag	
+2	2	1	Tag2	Tag2	-1,0;0	consumable	10	FALSE	AssetTag	
+3	3	1	Tag3	Tag3	0;0	consumable	10	FALSE	AssetTag	
+4	4	1	Tag4	Tag4	0	consumable	10	FALSE	AssetTag	
+5	5	1	Tag5	Tag5	0	consumable	10	FALSE	CharacterTag	
+6	6	1	Tag6	Tag6	0	consumable	10	FALSE	GemTag	0
+7	7	1	Tag7	Tag7	0	consumable	10	FALSE	FixedTag	

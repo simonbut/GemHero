@@ -38,8 +38,35 @@ public class TagBaseCanvas : MonoBehaviour
     public int gridMapBoundary = 3;
     bool isPutChoosingTagValid = true;
 
-    public List<Tag> existingTagList = new List<Tag>();
+    public List<TagGameObject> existingTagGameObjectList = new List<TagGameObject>();
     List<Vector2Int> gridBaseShape;
+
+    public List<Tag> GetExistingTagList()
+    {
+        List<Tag> result = new List<Tag>();
+        foreach (TagGameObject _tg in existingTagGameObjectList)
+        {
+            result.Add(_tg.tagContent);
+        }
+        return result;
+    }
+
+    public List<int> GetExistingTagIdList()
+    {
+        List<int> result = new List<int>();
+        foreach (TagGameObject _tg in existingTagGameObjectList)
+        {
+            result.Add(_tg.tagContent.tagData.id);
+        }
+        return result;
+    }
+    
+    public void Hide()
+    {
+        ResetTagBase();
+
+        gameObject.SetActive(false);
+    }
 
     public void Show(List<Vector2Int> _gridBaseShape, List<Tag> tagList)
     {
@@ -97,6 +124,7 @@ public class TagBaseCanvas : MonoBehaviour
         if (isPutChoosingTagValid)
         {
             GenerateTagGrid(choosingTag.GetComponent<ChoosingTag>().tagContent);
+            //TODO Set up tag type visual
             if (choosingTag != null)
             {
                 Destroy(choosingTag.gameObject);
@@ -107,7 +135,7 @@ public class TagBaseCanvas : MonoBehaviour
     void DetermineIsPutChoosingTagValid()
     {
         isPutChoosingTagValid = true;
-        if (CheckIfCollide(choosingTag.GetComponent<ChoosingTag>().tagContent, existingTagList))
+        if (CheckIfCollide(choosingTag.GetComponent<ChoosingTag>().tagContent, GetExistingTagList()))
         {
             print("CheckIfCollide failed");
             isPutChoosingTagValid = false;
@@ -207,6 +235,16 @@ public class TagBaseCanvas : MonoBehaviour
 
     public void GenerateChoosingTag(Tag _tag)
     {
+        for (int i = 0; i < existingTagGameObjectList.Count; i++)
+        {
+            if (existingTagGameObjectList[i].tagContent.localIndex == _tag.localIndex)
+            {
+                Destroy(existingTagGameObjectList[i].gameObject);
+                existingTagGameObjectList.RemoveAt(i);
+                break;
+            }
+        }
+
         GameObject _gameObjectInstance = GenerateTagGrid(_tag, false);
         _gameObjectInstance.AddComponent<ChoosingTag>();
         if (choosingTag != null)
@@ -323,6 +361,8 @@ public class TagBaseCanvas : MonoBehaviour
         _gameObjectInstance.name = _td.name.GetString();
         _gameObjectInstance.transform.SetParent(gridParent.transform);
         _gameObjectInstance.transform.localPosition = new Vector2(0, 0);
+        _gameObjectInstance.AddComponent<TagGameObject>();
+        _gameObjectInstance.GetComponent<TagGameObject>().tagContent = _tag;
 
         //get content size
         int size = 0;
@@ -444,7 +484,7 @@ public class TagBaseCanvas : MonoBehaviour
 
         if (isExisting)
         {
-            existingTagList.Add(_tag);
+            existingTagGameObjectList.Add(_gameObjectInstance.GetComponent<TagGameObject>());
         }
 
         //foreach (Vector2Int _v in _gridContents)

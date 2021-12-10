@@ -36,11 +36,17 @@ public class CompositeTagChoosingCanvas : ControlableUI
         {
             GameObject gridItemInstance = listScrollView.GenerateItem(tagList[i].tagData.name.GetString(), i);
         }
-        //TODO "complete" button
+        GameObject gridItemInstance2 = listScrollView.GenerateItem("Complete", -1);
     }
 
     void ClickData(int id, ListItem gi)
     {
+        if (id == -1)
+        {
+            CompleteComposite();
+            return;
+        }
+
         tagList[id].offset = Vector2Int.zero;
         //TODO remove existing tag (check if FixedTag)
         TagBaseCanvas.Instance.GenerateChoosingTag(tagList[id]);
@@ -48,21 +54,39 @@ public class CompositeTagChoosingCanvas : ControlableUI
 
     void SelectingData(int id, ListItem gi)
     {
-
+        if (id == -1)
+        {
+            return;
+        }
     }
 
     void DisSelectingData(int id, ListItem gi)
     {
-
+        if (id == -1)
+        {
+            return;
+        }
     }
 
     List<Tag> tagList;
+    RecipeData recipe;
+    int compoundQuality;
     //assetSelectList, TargetTagListWithEnoughPoints()
-    public void AddUI(List<Tag> _tagList,List<Tag> _staticTagList)
+    public void AddUI(int _compoundQuality, RecipeData _recipe, List<Tag> _tagList,List<Tag> _staticTagList)
     {
+        recipe = _recipe;
+        compoundQuality = _compoundQuality;
+
         tagList = new List<Tag>();
         tagList.AddRange(_tagList);
         tagList.AddRange(_staticTagList);
+
+        for (int i = 0; i < tagList.Count; i++)
+        {
+            tagList[i].localIndex = i;
+        }
+
+        MainGameView.Instance.tagBaseCanvas.Show(_recipe.shape, _staticTagList);
 
         base.AddUI();
     }
@@ -75,9 +99,23 @@ public class CompositeTagChoosingCanvas : ControlableUI
             return;
         }
 
-        //if (JoyStickManager.Instance.IsInputDown("Cross") || Input.GetButtonDown("Escape"))
-        //{
-        //    OnBackPressed();
-        //}
+        if (ControlView.Instance.controls.Map1.Cancel.triggered)
+        {
+            MainGameView.Instance.tagBaseCanvas.Hide();
+            OnBackPressed();
+        }
+    }
+
+    void CompleteComposite()
+    {
+        Asset compositeAsset = new Asset();
+        compositeAsset.assetId = recipe.targetCompoundId;
+        compositeAsset.tagList = MainGameView.Instance.tagBaseCanvas.GetExistingTagIdList();
+        compositeAsset.qualityAffect = compositeAsset.CalculateQualityAffectByQuality(compoundQuality);
+        Database.AddAsset(compositeAsset);
+
+        MainGameView.Instance.LeaveComposition();
+
+        MainGameView.Instance.assetConfirmCanvas.AddUI(compositeAsset);
     }
 }

@@ -4,12 +4,12 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using ClassHelper;
 
-public class CharacterControlView : MonoBehaviour
+public class ControlView : MonoBehaviour
 {
     #region instance
-    private static CharacterControlView m_instance;
+    private static ControlView m_instance;
 
-    public static CharacterControlView Instance
+    public static ControlView Instance
     {
         get
         {
@@ -19,7 +19,7 @@ public class CharacterControlView : MonoBehaviour
 
     void Awake()
     {
-        if (CharacterControlView.Instance == null)
+        if (ControlView.Instance == null)
         {
             m_instance = this;
             controls = new InputMaster();
@@ -31,7 +31,7 @@ public class CharacterControlView : MonoBehaviour
     public float lengthLimit = 10;
     public GameObject cameraParent;
 
-    InputMaster controls;
+    public InputMaster controls;
 
     public void OnEnable()
     {

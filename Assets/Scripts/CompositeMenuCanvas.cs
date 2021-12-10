@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using ClassHelper;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 public class CompositeMenuCanvas : ControlableUI
 {
@@ -72,10 +73,12 @@ public class CompositeMenuCanvas : ControlableUI
             return;
         }
 
-        //if (JoyStickManager.Instance.IsInputDown("Cross") || Input.GetButtonDown("Escape"))
-        //{
-        //    OnBackPressed();
-        //}
+        if (ControlView.Instance.controls.Map1.Cancel.triggered)
+        {
+            UIManager.Instance.assetInCompositionDataUI.Hide();
+            UIManager.Instance.compositionDataUI.Hide();
+            OnBackPressed();
+        }
     }
 
     public List<GameObject> sessions;
@@ -131,14 +134,27 @@ public class CompositeMenuCanvas : ControlableUI
             print("NextStep");
             UIManager.Instance.assetInCompositionDataUI.Hide();
             UIManager.Instance.compositionDataUI.Hide();
-            MainGameView.Instance.tagBaseCanvas.Show(recipe.shape, AssetManager.Instance.CreateTagList(TargetTagListWithEnoughPoints(), recipe.targetPos));
-            MainGameView.Instance.tagChoosingCanvas.AddUI(AssetManager.Instance.CreateTagListByAssets(assetSelectList), AssetManager.Instance.CreateTagList(TargetTagListWithEnoughPoints(), recipe.targetPos));
+            //MainGameView.Instance.tagBaseCanvas.Show(recipe.shape, AssetManager.Instance.CreateTagList(TargetTagListWithEnoughPoints(), recipe.targetPos));
+            MainGameView.Instance.tagChoosingCanvas.AddUI(GetQuality(),recipe, AssetManager.Instance.CreateTagListByAssets(assetSelectList), AssetManager.Instance.CreateTagList(TargetTagListWithEnoughPoints(), recipe.targetPos));
             return;
         }
         else
         {
             SelectSession(nextSession);
         }
+    }
+
+    public int GetQuality()
+    {
+        int result = 0;
+        foreach (int _uid in assetSelectList)
+        {
+            if (_uid != 0)
+            {
+                result += AssetManager.Instance.GetAssetByUid(_uid).GetQuality();
+            }
+        }
+        return result;
     }
 
     public void SelectSession(int _session)

@@ -33,6 +33,14 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Cancel"",
+                    ""type"": ""Button"",
+                    ""id"": ""c14a8b79-bf5f-4208-93b3-009f11db8abb"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -101,6 +109,28 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""action"": ""React"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ed7fc75e-2e25-4926-9cb0-87079faa7576"",
+                    ""path"": ""<Keyboard>/backspace"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardAndMouse"",
+                    ""action"": ""Cancel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6f669bef-9a88-4133-9709-232b0ff68f0f"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardAndMouse"",
+                    ""action"": ""Cancel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -117,6 +147,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
         m_Map1 = asset.FindActionMap("Map1", throwIfNotFound: true);
         m_Map1_Move = m_Map1.FindAction("Move", throwIfNotFound: true);
         m_Map1_React = m_Map1.FindAction("React", throwIfNotFound: true);
+        m_Map1_Cancel = m_Map1.FindAction("Cancel", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -168,12 +199,14 @@ public class @InputMaster : IInputActionCollection, IDisposable
     private IMap1Actions m_Map1ActionsCallbackInterface;
     private readonly InputAction m_Map1_Move;
     private readonly InputAction m_Map1_React;
+    private readonly InputAction m_Map1_Cancel;
     public struct Map1Actions
     {
         private @InputMaster m_Wrapper;
         public Map1Actions(@InputMaster wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Map1_Move;
         public InputAction @React => m_Wrapper.m_Map1_React;
+        public InputAction @Cancel => m_Wrapper.m_Map1_Cancel;
         public InputActionMap Get() { return m_Wrapper.m_Map1; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -189,6 +222,9 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @React.started -= m_Wrapper.m_Map1ActionsCallbackInterface.OnReact;
                 @React.performed -= m_Wrapper.m_Map1ActionsCallbackInterface.OnReact;
                 @React.canceled -= m_Wrapper.m_Map1ActionsCallbackInterface.OnReact;
+                @Cancel.started -= m_Wrapper.m_Map1ActionsCallbackInterface.OnCancel;
+                @Cancel.performed -= m_Wrapper.m_Map1ActionsCallbackInterface.OnCancel;
+                @Cancel.canceled -= m_Wrapper.m_Map1ActionsCallbackInterface.OnCancel;
             }
             m_Wrapper.m_Map1ActionsCallbackInterface = instance;
             if (instance != null)
@@ -199,6 +235,9 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @React.started += instance.OnReact;
                 @React.performed += instance.OnReact;
                 @React.canceled += instance.OnReact;
+                @Cancel.started += instance.OnCancel;
+                @Cancel.performed += instance.OnCancel;
+                @Cancel.canceled += instance.OnCancel;
             }
         }
     }
@@ -216,5 +255,6 @@ public class @InputMaster : IInputActionCollection, IDisposable
     {
         void OnMove(InputAction.CallbackContext context);
         void OnReact(InputAction.CallbackContext context);
+        void OnCancel(InputAction.CallbackContext context);
     }
 }

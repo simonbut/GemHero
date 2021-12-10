@@ -183,8 +183,8 @@ public class ResourcePointManager : MonoBehaviour
                 }
             }
 
-            qualityAffect = Random.Range(-10, 10);
-            score += qualityAffect * 10;
+            qualityAffect = Random.Range(-20, 30);
+            score += qualityAffect;
 
             if (score >= _scoreMin && score <= _scoreMax)
             {

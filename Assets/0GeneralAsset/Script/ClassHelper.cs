@@ -208,7 +208,7 @@ namespace ClassHelper
 
     public class Tag
     {
-        //public int uid;
+        public int localIndex;
         public TagData tagData;
         public List<int> affectList = new List<int>();
         public Vector2Int offset = new Vector2Int();
@@ -506,11 +506,21 @@ namespace ClassHelper
             int result = 0;
             foreach (int _t in tagList)
             {
-                result += Mathf.FloorToInt(TagManager.Instance.GetTag(_t).score / 10f);
+                result += Mathf.FloorToInt(TagManager.Instance.GetTag(_t).score);
             }
-            result += qualityAffect;
+            //result += qualityAffect;
 
             return result;
+        }
+
+        public int CalculateQualityAffectByQuality(int quality)
+        {
+            int originalQuality = 0;
+            foreach (int _t in tagList)
+            {
+                originalQuality += Mathf.FloorToInt(TagManager.Instance.GetTag(_t).score);
+            }
+            return (quality - originalQuality);
         }
 
         public Rank GetRank()

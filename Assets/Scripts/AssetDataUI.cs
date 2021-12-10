@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class AssetDataUI : DataUI
 {
+    [SerializeField] GameObject background;
+    [SerializeField] GameObject contents;
 
     [SerializeField] GameObject tagListParent;
     [SerializeField] List<GameObject> tagList;
@@ -19,8 +21,11 @@ public class AssetDataUI : DataUI
     [SerializeField] GameObject idealPoint;
     [SerializeField] GameObject attr1;
     [SerializeField] GameObject attr2;
-    public void Show(Asset _ra)
+    public void Show(Asset _ra,float x = 800)
     {
+        background.transform.position = new Vector2(x, background.transform.position.y);
+        contents.transform.position = new Vector2(x, contents.transform.position.y);
+
         //graphic TODO
 
         AssetData _ad = _ra.GetAssetData();
