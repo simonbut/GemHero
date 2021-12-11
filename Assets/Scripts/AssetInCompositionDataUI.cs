@@ -25,11 +25,45 @@ public class AssetInCompositionDataUI : DataUI
 
         assetName.transform.Find("Text").GetComponent<Text>().text = _ad.name.GetString();
         //assetType.transform.Find("Text").GetComponent<Text>().text = "Types: " + AssetManager.Instance.AssetTypeListToString(_ad.GetAssetTypeList());
-        quality.transform.Find("Text").GetComponent<Text>().text = "Quality: " + _ra.GetQuality().ToString("0");
+        //quality.transform.Find("Text").GetComponent<Text>().text = "Quality: " + _ra.GetQuality().ToString("0");
+        quality.transform.Find("Text2").GetComponent<Text>().text = _ra.GetQuality().ToString("0");
+        quality.transform.Find("Fill").GetComponent<Image>().fillAmount = _ra.GetQuality() * 1f / 100f;
         rank.transform.Find("Text").GetComponent<Text>().text = _ra.GetRank().ToString();
-        realityPoint.transform.Find("Text").GetComponent<Text>().text = "Reality: " + _ra.GetRealityPoint().ToString();
-        dreamPoint.transform.Find("Text").GetComponent<Text>().text = "Dream: " + _ra.GetDreamPoint().ToString();
-        idealPoint.transform.Find("Text").GetComponent<Text>().text = "Ideal: " + _ra.GetIdealPoint().ToString();
+
+        for (int i = 0; i < 5; i++)
+        {
+            if (i < _ra.GetRealityPoint())
+            {
+                realityPoint.transform.Find("PtGrid" + i).Find("Fill").GetComponent<Image>().fillAmount = 1f;
+            }
+            else
+            {
+                realityPoint.transform.Find("PtGrid" + i).Find("Fill").GetComponent<Image>().fillAmount = 0f;
+            }
+        }
+        for (int i = 0; i < 5; i++)
+        {
+            if (i < _ra.GetDreamPoint())
+            {
+                dreamPoint.transform.Find("PtGrid" + i).Find("Fill").GetComponent<Image>().fillAmount = 1f;
+            }
+            else
+            {
+                dreamPoint.transform.Find("PtGrid" + i).Find("Fill").GetComponent<Image>().fillAmount = 0f;
+            }
+        }
+        for (int i = 0; i < 5; i++)
+        {
+            if (i < _ra.GetIdealPoint())
+            {
+                idealPoint.transform.Find("PtGrid" + i).Find("Fill").GetComponent<Image>().fillAmount = 1f;
+            }
+            else
+            {
+                idealPoint.transform.Find("PtGrid" + i).Find("Fill").GetComponent<Image>().fillAmount = 0f;
+            }
+        }
+
 
         realityPoint.SetActive(_ra.GetRealityPoint() > 0);
         dreamPoint.SetActive(_ra.GetDreamPoint() > 0);
@@ -41,12 +75,13 @@ public class AssetInCompositionDataUI : DataUI
         else
         {
             tagListParent.SetActive(true);
+            List<Tag> _tl = AssetManager.Instance.CreateTagListByAssets(new int[1] { _ra.assetUid });
             for (int i = 0; i < tagList.Count; i++)
             {
-                if (i < _ra.tagList.Count)
+                if (i < _tl.Count)
                 {
-                    tagList[i].transform.Find("Text").GetComponent<Text>().text = TagManager.Instance.GetTag(_ra.tagList[i]).name.GetString();
-                    //TODO show shape
+                    tagList[i].transform.Find("Text").GetComponent<Text>().text = _tl[i].tagData.name.GetString();
+                    ShapeGenerator.GenerateShape(tagList[i].transform.Find("Grid").gameObject, null, new List<Tag> { _tl[i] }, 0.15f);
                 }
                 else
                 {

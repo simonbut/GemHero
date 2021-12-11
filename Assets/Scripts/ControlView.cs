@@ -54,6 +54,10 @@ public class ControlView : MonoBehaviour
 
     void UpdateCameraPosition(Vector3 _offset)
     {
+        if (!UIManager.Instance.IsNoUI())
+        {
+            return;
+        }
         Vector3 _newVector = player.transform.position + _offset - cameraParent.transform.position;
         Vector3 result = cameraParent.transform.position;
         if (Mathf.Abs(_newVector.y) > 2)
@@ -75,6 +79,19 @@ public class ControlView : MonoBehaviour
     {
         OnMovement(controls.Map1.Move.ReadValue<Vector2>());
         OnReact(controls.Map1.React.triggered);
+        OnOpenMenu(controls.Map1.AssetKey.triggered);
+    }
+
+    public void OnOpenMenu(bool isTrue)
+    {
+        if (!UIManager.Instance.IsNoUI())
+        {
+            return;
+        }
+        if (isTrue)
+        {
+            MainGameView.Instance.inGameMainMenuUI.AddUI();
+        }
     }
 
     public void OnMovement(Vector2 _input)
@@ -92,6 +109,10 @@ public class ControlView : MonoBehaviour
 
     void CharacterMove()
     {
+        if (!UIManager.Instance.IsNoUI())
+        {
+            return;
+        }
         Vector3 _prePos = new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z);
         Vector3 _offset = input * Time.deltaTime * speed;
         player.GetComponent<Rigidbody2D>().MovePosition(player.transform.position + _offset);
@@ -116,6 +137,10 @@ public class ControlView : MonoBehaviour
 
     void CharacterAnimation()
     {
+        if (!UIManager.Instance.IsNoUI())
+        {
+            return;
+        }
         playerMovement.SetFloat("MoveX", input.x);
         playerMovement.SetFloat("MoveY", input.y);
         playerMovement.SetBool("Moving", (new Vector2(input.x, input.y).magnitude > 0f));

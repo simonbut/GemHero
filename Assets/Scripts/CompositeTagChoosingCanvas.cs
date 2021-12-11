@@ -18,7 +18,6 @@ public class CompositeTagChoosingCanvas : ControlableUI
     public override void OnShow()
     {
         Refresh();
-        //MainMenuView.Instance.tankModelShowCase.ShowTankModelByTankDeckId(Database.userDataJson.selectingDeckId);
 
         base.OnShow();
     }

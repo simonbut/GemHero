@@ -41,6 +41,14 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""AssetKey"",
+                    ""type"": ""Button"",
+                    ""id"": ""663b6af9-8ed5-4ae1-835c-8a0f825c9d6d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -131,6 +139,28 @@ public class @InputMaster : IInputActionCollection, IDisposable
                     ""action"": ""Cancel"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4c321ad0-6b3b-4595-b7a8-302bf312cfbf"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardAndMouse"",
+                    ""action"": ""Cancel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""50647aa5-f336-4178-9d4c-a4d6e7c5f069"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""KeyboardAndMouse"",
+                    ""action"": ""AssetKey"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -148,6 +178,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
         m_Map1_Move = m_Map1.FindAction("Move", throwIfNotFound: true);
         m_Map1_React = m_Map1.FindAction("React", throwIfNotFound: true);
         m_Map1_Cancel = m_Map1.FindAction("Cancel", throwIfNotFound: true);
+        m_Map1_AssetKey = m_Map1.FindAction("AssetKey", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -200,6 +231,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
     private readonly InputAction m_Map1_Move;
     private readonly InputAction m_Map1_React;
     private readonly InputAction m_Map1_Cancel;
+    private readonly InputAction m_Map1_AssetKey;
     public struct Map1Actions
     {
         private @InputMaster m_Wrapper;
@@ -207,6 +239,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
         public InputAction @Move => m_Wrapper.m_Map1_Move;
         public InputAction @React => m_Wrapper.m_Map1_React;
         public InputAction @Cancel => m_Wrapper.m_Map1_Cancel;
+        public InputAction @AssetKey => m_Wrapper.m_Map1_AssetKey;
         public InputActionMap Get() { return m_Wrapper.m_Map1; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -225,6 +258,9 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @Cancel.started -= m_Wrapper.m_Map1ActionsCallbackInterface.OnCancel;
                 @Cancel.performed -= m_Wrapper.m_Map1ActionsCallbackInterface.OnCancel;
                 @Cancel.canceled -= m_Wrapper.m_Map1ActionsCallbackInterface.OnCancel;
+                @AssetKey.started -= m_Wrapper.m_Map1ActionsCallbackInterface.OnAssetKey;
+                @AssetKey.performed -= m_Wrapper.m_Map1ActionsCallbackInterface.OnAssetKey;
+                @AssetKey.canceled -= m_Wrapper.m_Map1ActionsCallbackInterface.OnAssetKey;
             }
             m_Wrapper.m_Map1ActionsCallbackInterface = instance;
             if (instance != null)
@@ -238,6 +274,9 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 @Cancel.started += instance.OnCancel;
                 @Cancel.performed += instance.OnCancel;
                 @Cancel.canceled += instance.OnCancel;
+                @AssetKey.started += instance.OnAssetKey;
+                @AssetKey.performed += instance.OnAssetKey;
+                @AssetKey.canceled += instance.OnAssetKey;
             }
         }
     }
@@ -256,5 +295,6 @@ public class @InputMaster : IInputActionCollection, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnReact(InputAction.CallbackContext context);
         void OnCancel(InputAction.CallbackContext context);
+        void OnAssetKey(InputAction.CallbackContext context);
     }
 }

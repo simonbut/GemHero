@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using ClassHelper;
 
-public class TagBaseCanvas : MonoBehaviour
+public class TagBaseCanvas : ShapeGenerator
 {
     #region instance
     private static TagBaseCanvas m_instance;
@@ -26,20 +26,11 @@ public class TagBaseCanvas : MonoBehaviour
     }
     #endregion
 
-    //public GameObject compositeCanvas;
-    public GameObject gridBaseParent;
-    public GameObject gridParent;
     public GameObject choosingTagParent;
-    public GameObject gridPrefab;
-    public GameObject tagNamePrefab;
     public ChoosingTag choosingTag;
-    public float gridSize = 1f;
     public float canvasSize = 1f;
     public int gridMapBoundary = 3;
     bool isPutChoosingTagValid = true;
-
-    public List<TagGameObject> existingTagGameObjectList = new List<TagGameObject>();
-    List<Vector2Int> gridBaseShape;
 
     public List<Tag> GetExistingTagList()
     {
@@ -64,38 +55,12 @@ public class TagBaseCanvas : MonoBehaviour
     public void Hide()
     {
         ResetTagBase();
-
-        gameObject.SetActive(false);
-    }
-
-    public void Show(List<Vector2Int> _gridBaseShape, List<Tag> tagList)
-    {
-        ResetTagBase();
-
-        gameObject.SetActive(true);
-
-        DefineTagBase(_gridBaseShape);
-
-        for (int i = 0; i < tagList.Count; i++)
-        {
-            GenerateTagGrid(tagList[i]);
-        }
-    }
-
-    void ResetTagBase()
-    {
-        foreach (Transform _c in gridBaseParent.transform)
-        {
-            Destroy(_c.gameObject);
-        }
-        foreach (Transform _c in gridParent.transform)
-        {
-            Destroy(_c.gameObject);
-        }
         if (choosingTag != null)
         {
             Destroy(choosingTag.gameObject);
         }
+
+        gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -258,240 +223,5 @@ public class TagBaseCanvas : MonoBehaviour
         choosingTag.GetComponent<ChoosingTag>().SetTagColor(Color.grey);
     }
 
-    void DefineTagBase(List<Vector2Int> _baseShape)
-    {
-        gridBaseShape = _baseShape;
 
-        //get content size
-        int size = 0;
-        foreach (Vector2 _v in gridBaseShape)
-        {
-            int compare = Mathf.FloorToInt(Mathf.Max(Mathf.Abs(_v.x), Mathf.Abs(_v.y)));
-            if (compare > size)
-            {
-                size = compare;
-            }
-        }
-
-        GameObject _gameObjectInstance = new GameObject();
-        _gameObjectInstance.transform.SetParent(gridBaseParent.transform);
-        _gameObjectInstance.transform.localPosition = new Vector2(0, 0);
-
-        //generate content
-        for (int i = -size; i < size + 1; i++)
-        {
-            for (int j = -size; j < size + 1; j++)
-            {
-                if (gridBaseShape.Contains(new Vector2Int(i, j)))
-                {
-                    GameObject _gridInstance = Instantiate(gridPrefab);
-                    _gridInstance.transform.SetParent(_gameObjectInstance.transform);
-                    _gridInstance.transform.localPosition = new Vector2((i) * 100f, (j) * 100f) * gridSize;
-                    _gridInstance.transform.localScale *= gridSize;
-
-                    Material mat = Instantiate(_gridInstance.GetComponent<Image>().material);
-                    //Material mat = new Material(Shader.Find("Shader Graphs/tag"));
-                    //mat.name = Random.Range(0, 10000).ToString();
-                    //mat.color = new Color(Random.Range(0.0f, 1.0f), Random.Range(0.0f, 1.0f), Random.Range(0.0f, 1.0f));
-
-                    //generate edge and vertice
-                    if (!gridBaseShape.Contains(new Vector2Int(i - 1, j)))
-                    {
-                        mat.SetFloat("Left", 1);
-                        if (!gridBaseShape.Contains(new Vector2Int(i, j - 1)))
-                        {
-                            mat.SetFloat("LeftDownReverse", 1);
-                        }
-                        if (!gridBaseShape.Contains(new Vector2Int(i, j + 1)))
-                        {
-                            mat.SetFloat("LeftUpReverse", 1);
-                        }
-                    }
-                    if (!gridBaseShape.Contains(new Vector2Int(i, j - 1)))
-                    {
-                        mat.SetFloat("Down", 1);
-                    }
-                    if (!gridBaseShape.Contains(new Vector2Int(i - 1, j - 1)))
-                    {
-                        mat.SetFloat("LeftDown", 1);
-                    }
-                    if (!gridBaseShape.Contains(new Vector2Int(i + 1, j - 1)))
-                    {
-                        mat.SetFloat("RightDown", 1);
-                    }
-                    if (!gridBaseShape.Contains(new Vector2Int(i + 1, j)))
-                    {
-                        mat.SetFloat("Right", 1);
-                        if (!gridBaseShape.Contains(new Vector2Int(i, j - 1)))
-                        {
-                            mat.SetFloat("RightDownReverse", 1);
-                        }
-                        if (!gridBaseShape.Contains(new Vector2Int(i, j + 1)))
-                        {
-                            mat.SetFloat("RightUpReverse", 1);
-                        }
-                    }
-                    if (!gridBaseShape.Contains(new Vector2Int(i, j + 1)))
-                    {
-                        mat.SetFloat("Up", 1);
-                    }
-                    if (!gridBaseShape.Contains(new Vector2Int(i + 1, j + 1)))
-                    {
-                        mat.SetFloat("RightUp", 1);
-                    }
-                    if (!gridBaseShape.Contains(new Vector2Int(i - 1, j + 1)))
-                    {
-                        mat.SetFloat("LeftUp", 1);
-                    }
-
-                    _gridInstance.GetComponent<Image>().material = mat;
-                }
-            }
-        }
-    }
-
-
-    GameObject GenerateTagGrid(Tag _tag, bool isExisting = true)
-    {
-        TagData _td = _tag.tagData;
-        Vector2Int _tagOffset = _tag.offset;
-        List<Vector2Int> _gridContents = _tag.GetGrids();
-
-        GameObject _gameObjectInstance = new GameObject();
-        _gameObjectInstance.name = _td.name.GetString();
-        _gameObjectInstance.transform.SetParent(gridParent.transform);
-        _gameObjectInstance.transform.localPosition = new Vector2(0, 0);
-        _gameObjectInstance.AddComponent<TagGameObject>();
-        _gameObjectInstance.GetComponent<TagGameObject>().tagContent = _tag;
-
-        //get content size
-        int size = 0;
-        foreach (Vector2 _v in _gridContents)
-        {
-            int compare = Mathf.FloorToInt(Mathf.Max(Mathf.Abs(_v.x), Mathf.Abs(_v.y)));
-            if (compare > size)
-            {
-                size = compare;
-            }
-        }
-
-        //generate content
-        for (int i = -size; i < size + 1; i++)
-        {
-            for (int j = -size; j < size + 1; j++)
-            {
-                if (_gridContents.Contains(new Vector2Int(i, j)))
-                {
-                    GameObject _gridInstance = Instantiate(gridPrefab);
-                    _gridInstance.transform.SetParent(_gameObjectInstance.transform);
-                    _gridInstance.transform.localPosition = new Vector2((i) * 100f, (j) * 100f) * gridSize;
-                    _gridInstance.transform.localScale *= gridSize;
-
-                    Material mat = Instantiate(_gridInstance.GetComponent<Image>().material);
-                    //Material mat = new Material(Shader.Find("Shader Graphs/tag"));
-                    //mat.name = Random.Range(0, 10000).ToString();
-                    //mat.color = new Color(Random.Range(0.0f, 1.0f), Random.Range(0.0f, 1.0f), Random.Range(0.0f, 1.0f));
-
-                    //generate edge and vertice
-                    if (!_gridContents.Contains(new Vector2Int(i - 1, j)))
-                    {
-                        mat.SetFloat("Left", 1);
-                        if (!_gridContents.Contains(new Vector2Int(i, j - 1)))
-                        {
-                            mat.SetFloat("LeftDownReverse", 1);
-                        }
-                        if (!_gridContents.Contains(new Vector2Int(i, j + 1)))
-                        {
-                            mat.SetFloat("LeftUpReverse", 1);
-                        }
-                    }
-                    if (!_gridContents.Contains(new Vector2Int(i, j - 1)))
-                    {
-                        mat.SetFloat("Down", 1);
-                    }
-                    if (!_gridContents.Contains(new Vector2Int(i - 1, j - 1)))
-                    {
-                        mat.SetFloat("LeftDown", 1);
-                    }
-                    if (!_gridContents.Contains(new Vector2Int(i + 1, j - 1)))
-                    {
-                        mat.SetFloat("RightDown", 1);
-                    }
-                    if (!_gridContents.Contains(new Vector2Int(i + 1, j)))
-                    {
-                        mat.SetFloat("Right", 1);
-                        if (!_gridContents.Contains(new Vector2Int(i, j - 1)))
-                        {
-                            mat.SetFloat("RightDownReverse", 1);
-                        }
-                        if (!_gridContents.Contains(new Vector2Int(i, j + 1)))
-                        {
-                            mat.SetFloat("RightUpReverse", 1);
-                        }
-                    }
-                    if (!_gridContents.Contains(new Vector2Int(i, j + 1)))
-                    {
-                        mat.SetFloat("Up", 1);
-                    }
-                    if (!_gridContents.Contains(new Vector2Int(i + 1, j + 1)))
-                    {
-                        mat.SetFloat("RightUp", 1);
-                    }
-                    if (!_gridContents.Contains(new Vector2Int(i - 1, j + 1)))
-                    {
-                        mat.SetFloat("LeftUp", 1);
-                    }
-
-                    _gridInstance.GetComponent<Image>().material = mat;
-                }
-            }
-        }
-
-        //generate name
-        GameObject _tagNameInstance = Instantiate(tagNamePrefab);
-        _tagNameInstance.name = _td.name.GetString();
-        _tagNameInstance.GetComponent<Text>().text = _td.name.GetString();
-        _tagNameInstance.transform.SetParent(_gameObjectInstance.transform);
-        _tagNameInstance.transform.localPosition = new Vector2(0,0);
-        _tagNameInstance.GetComponent<RectTransform>().sizeDelta = new Vector2(100, 100);
-        if (_gridContents.Contains(new Vector2Int(-1 + _tagOffset.x, 0)))
-        {
-            _tagNameInstance.GetComponent<RectTransform>().sizeDelta += new Vector2(100, 0);
-            _tagNameInstance.transform.localPosition += new Vector3(-50, 0, 0);
-        }
-        if (_gridContents.Contains(new Vector2Int(1 + _tagOffset.x, 0)))
-        {
-            _tagNameInstance.GetComponent<RectTransform>().sizeDelta += new Vector2(100, 0);
-            _tagNameInstance.transform.localPosition += new Vector3(50, 0, 0);
-        }
-        if (!_gridContents.Contains(new Vector2Int(1 + _tagOffset.x, 0)) && !_gridContents.Contains(new Vector2Int(-1 + _tagOffset.x, 0)))
-        {
-            if (_gridContents.Contains(new Vector2Int(0, -1 + _tagOffset.y)))
-            {
-                _tagNameInstance.GetComponent<RectTransform>().sizeDelta += new Vector2(0, 100);
-                _tagNameInstance.transform.localPosition = new Vector2(0, -50);
-            }
-            if (_gridContents.Contains(new Vector2Int(0, 1 + _tagOffset.y)))
-            {
-                _tagNameInstance.GetComponent<RectTransform>().sizeDelta += new Vector2(0, 100);
-                _tagNameInstance.transform.localPosition = new Vector2(0, 50);
-            }
-        }
-        _tagNameInstance.transform.localPosition = new Vector2(_tagNameInstance.transform.localPosition.x + _tagOffset.x * 100f, _tagNameInstance.transform.localPosition.y + _tagOffset.y * 100f);
-        _tagNameInstance.GetComponent<RectTransform>().sizeDelta *= gridSize;
-        _tagNameInstance.transform.localPosition *= gridSize;
-        _tagNameInstance.transform.localScale *= gridSize;
-
-        if (isExisting)
-        {
-            existingTagGameObjectList.Add(_gameObjectInstance.GetComponent<TagGameObject>());
-        }
-
-        //foreach (Vector2Int _v in _gridContents)
-        //{
-        //    print("x = " + (_v.x + _tagOffset.x) + ",y = " + (_v.y + _tagOffset.y));
-        //}
-
-        return _gameObjectInstance;
-    }
 }

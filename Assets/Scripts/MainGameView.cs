@@ -26,6 +26,9 @@ public class MainGameView : MonoBehaviour
     }
     #endregion
 
+    public GameObject gridPrefab;
+    public GameObject tagBasePrefab;
+
     public ResourcePoint reactingObject;
     public List<ResourcePoint> resourcePointList = new List<ResourcePoint>();
 
@@ -84,7 +87,7 @@ public class MainGameView : MonoBehaviour
 
     public void CharacterReact()
     {
-        if (UIManager.Instance.IsNoUI())
+        if (!UIManager.Instance.IsNoUI())
         {
             return;
         }

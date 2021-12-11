@@ -10,6 +10,7 @@ public class CompositionDataUI : DataUI
     [SerializeField] GameObject assetName;
     [SerializeField] GameObject assetType;
     [SerializeField] GameObject shape;
+    [SerializeField] GameObject quality;
     [SerializeField] GameObject realityPoint;
     [SerializeField] GameObject dreamPoint;
     [SerializeField] GameObject idealPoint;
@@ -38,15 +39,47 @@ public class CompositionDataUI : DataUI
         print(_ad.id);
 
         //graphic TODO
-        //shape TODO
+
+        ShapeGenerator.GenerateShape(shape, _rd.shape, null, 0.2f);
 
         assetName.transform.Find("Text").GetComponent<Text>().text = _ad.name.GetString();
         assetType.transform.Find("Text").GetComponent<Text>().text = "Types: " + AssetManager.Instance.AssetTypeListToString(_ad.GetAssetTypeList());
 
+        for (int i = 0; i < 5; i++)
+        {
+            if (i < _ad.realityPoint)
+            {
+                realityPoint.transform.Find("PtGrid" + i).Find("Fill").GetComponent<Image>().fillAmount = 1f;
+            }
+            else
+            {
+                realityPoint.transform.Find("PtGrid" + i).Find("Fill").GetComponent<Image>().fillAmount = 0f;
+            }
+        }
 
-        realityPoint.transform.Find("Text").GetComponent<Text>().text = "Reality: " + _ad.realityPoint.ToString();
-        dreamPoint.transform.Find("Text").GetComponent<Text>().text = "Dream: " + _ad.dreamPoint.ToString();
-        idealPoint.transform.Find("Text").GetComponent<Text>().text = "Ideal: " + _ad.idealPoint.ToString();
+        for (int i = 0; i < 5; i++)
+        {
+            if (i < _ad.dreamPoint)
+            {
+                dreamPoint.transform.Find("PtGrid" + i).Find("Fill").GetComponent<Image>().fillAmount = 1f;
+            }
+            else
+            {
+                dreamPoint.transform.Find("PtGrid" + i).Find("Fill").GetComponent<Image>().fillAmount = 0f;
+            }
+        }
+
+        for (int i = 0; i < 5; i++)
+        {
+            if (i < _ad.idealPoint)
+            {
+                idealPoint.transform.Find("PtGrid" + i).Find("Fill").GetComponent<Image>().fillAmount = 1f;
+            }
+            else
+            {
+                idealPoint.transform.Find("PtGrid" + i).Find("Fill").GetComponent<Image>().fillAmount = 0f;
+            }
+        }
 
         switch (_ad.compoundType)
         {
@@ -66,7 +99,7 @@ public class CompositionDataUI : DataUI
                 if (_ad.basicStatTypeList.Count > 1)
                 {
                     attr2.SetActive(true);
-                    attr1.transform.Find("Text").GetComponent<Text>().text = _ad.basicStatTypeList[1].ToString() + ": " + _ad.basicStatList[1].ToString("0");
+                    attr2.transform.Find("Text").GetComponent<Text>().text = _ad.basicStatTypeList[1].ToString() + ": " + _ad.basicStatList[1].ToString("0");
                 }
                 break;
         }
@@ -121,6 +154,8 @@ public class CompositionDataUI : DataUI
             }
         }
 
+        quality.SetActive(_showCompositePart);
+
         showCompositePart = _showCompositePart;
 
         OnShow();
@@ -128,8 +163,16 @@ public class CompositionDataUI : DataUI
 
     public void Update()
     {
+        foreach (Transform _c in shape.transform)
+        {
+            _c.transform.localScale = Vector3.one;
+        }
+
         if (showCompositePart && MainGameView.Instance != null)
         {
+            quality.transform.Find("Text2").GetComponent<Text>().text = MainGameView.Instance.compositeMenuCanvas.GetQuality().ToString("0");
+            quality.transform.Find("Fill").GetComponent<Image>().fillAmount = MainGameView.Instance.compositeMenuCanvas.GetQuality() * 1f / 100f;
+
             int realityPt = MainGameView.Instance.compositeMenuCanvas.GetPoints()[0];
             int dreamPt = MainGameView.Instance.compositeMenuCanvas.GetPoints()[1];
             int idealPt = MainGameView.Instance.compositeMenuCanvas.GetPoints()[2];

@@ -35,7 +35,7 @@ public class InGameMainMenuUI : ControlableUI
             return;
         }
 
-        if (ControlView.Instance.controls.Map1.Cancel.triggered)
+        if (ControlView.Instance.controls.Map1.Cancel.triggered || ControlView.Instance.controls.Map1.AssetKey.triggered)
         {
             OnBackPressed();
         }
