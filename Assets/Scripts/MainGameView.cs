@@ -91,6 +91,10 @@ public class MainGameView : MonoBehaviour
         {
             return;
         }
+        if (reactingObject == null)
+        {
+            return;
+        }
         switch (reactingObject.reactType)
         {
             case ReactType.Collect:

@@ -55,7 +55,10 @@ public class ResourcePointManager : MonoBehaviour
                     int _c3b;
                     int.TryParse(_c3[j], out _c3b);
 
-                    _b.mustHaveTagList.Add(_c3b);
+                    if (_c3b > 0)
+                    {
+                        _b.mustHaveTagList.Add(_c3b);
+                    }
                 }
 
                 _b.tagPool = new List<int>();
@@ -65,7 +68,10 @@ public class ResourcePointManager : MonoBehaviour
                     int _c4b;
                     int.TryParse(_c4[j], out _c4b);
 
-                    _b.tagPool.Add(_c4b);
+                    if (_c4b > 0)
+                    {
+                        _b.tagPool.Add(_c4b);
+                    }
                 }
 
                 _b.rareTagPool = new List<int>();
@@ -75,7 +81,10 @@ public class ResourcePointManager : MonoBehaviour
                     int _c5b;
                     int.TryParse(_c5[j], out _c5b);
 
-                    _b.rareTagPool.Add(_c5b);
+                    if (_c5b > 0)
+                    {
+                        _b.rareTagPool.Add(_c5b);
+                    }
                 }
 
                 int.TryParse(_c[6], out _b.scoreMin);
@@ -90,21 +99,23 @@ public class ResourcePointManager : MonoBehaviour
         }
     }
 
-    public ResourcePointData GetResourcePointData(int _resourcePointId)
+    public List<ResourcePointData> GetResourcePointDataList(int _resourcePointId)
     {
+        List<ResourcePointData> result = new List<ResourcePointData>();
         foreach (ResourcePointData _rt in resourcePointdata)
         {
-            if (_rt.id == _resourcePointId)
+            if (_rt.resourcePointId == _resourcePointId)
             {
-                return _rt;
+                result.Add(_rt);
             }
         }
-        return new ResourcePointData();
+        return result;
     }
 
     public Asset DrawAsset(int _resourcePointId,bool _isAddToDatabase = true)
     {
-        ResourcePointData _rp = GetResourcePointData(_resourcePointId);
+        List<ResourcePointData> _rpl = GetResourcePointDataList(_resourcePointId);
+        ResourcePointData _rp = _rpl[Random.Range(0, _rpl.Count)];
         return DrawAsset(_rp.assetId, _rp.mustHaveTagList, _rp.tagPool, _rp.rareTagPool, _rp.scoreMin, _rp.scoreMin, _isAddToDatabase);
     }
 
@@ -124,7 +135,7 @@ public class ResourcePointManager : MonoBehaviour
             tryCount++;
             List<int> _tp = new List<int>(_tagPool);
             List<int> _rtp = new List<int>(_rareTagList);
-            List<int> _mht = new List<int>(_rareTagList);
+            List<int> _mht = new List<int>(_mustHaveTagList);
 
             if (_mht.Count > 0)
             {
