@@ -68,6 +68,13 @@ public class CompositeMenuCanvas : ControlableUI
     // Update is called once per frame
     void Update()
     {
+
+        for (int i = 0; i < assetSelectList.Length; i++)
+        {
+            sessions[i].transform.Find("BlackOverlay").gameObject.SetActive(session != i);
+            sessions[i].transform.Find("Tick").gameObject.SetActive(assetSelectList[i] != 0);
+        }
+
         if (!UIManager.Instance.IsCurrentUI(this))
         {
             return;

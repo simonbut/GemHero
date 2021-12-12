@@ -205,39 +205,21 @@ public class GridScrollView : MonoBehaviour
 
     public GameObject GenerateItem(string graphPath, int _id, string graphPath2 = "", string _text = "", bool isEnabled = true, string graphPath3 = "")
     {
-        //List<Facility> _fl = FacilityManager.Instance.GetFacilityList();
-        //foreach (FacilityComponent _c in componentList)
-        //{
         GameObject listItemInstance = Instantiate(gridItem);
         listItemInstance.transform.SetParent(scrollViewContent.transform);
         listItemInstance.transform.localScale = Vector3.one;
         listItemInstance.GetComponent<GridItem>().SetGridItem(graphPath, _id, listItemList.Count, Click, Selecting, DisSelecting, graphPath2, _text, isEnabled, Drag, graphPath3);
         listItemList.Add(listItemInstance);
 
-        //if (JoyStickManager.Instance.IsJoyStickEnable() && listItemList.Count == 1 && scrollViewId == GlobalCommunicateManager.selectingScrollViewId)
-        //{
-        //    if (listItemList[0].GetComponent<GridItem>() != null)
-        //    {
-        //        listItemList[0].GetComponent<GridItem>().Selecting();
-        //    }
-        //}
-
-        //if (scrollViewContent.transform.childCount == 1)
-        //{
-        //    listItemInstance.GetComponent<Button>().Select();
-        //}
-
-        //ListItemInstance.transform.Find("Name").GetComponent<Text>()
-        //}
         return listItemInstance;
     }
 
-    void Click(int id, GridItem gi)
+    public void Click(int id, GridItem gi)
     {
         clickCallback?.Invoke(id, gi);
     }
 
-    void Selecting(int id, GridItem gi)
+    public void Selecting(int id, GridItem gi)
     {
         //foreach (GameObject _g in listItemList)
         //{
@@ -249,12 +231,12 @@ public class GridScrollView : MonoBehaviour
         selectingCallback?.Invoke(id, gi);
     }
 
-    void DisSelecting(int id, GridItem gi)
+    public void DisSelecting(int id, GridItem gi)
     {
         disselectingCallback?.Invoke(id, gi);
     }
 
-    void Drag(int id, GridItem gi)
+    public void Drag(int id, GridItem gi)
     {
         dragCallBack?.Invoke(id, gi);
     }
