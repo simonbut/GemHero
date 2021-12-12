@@ -40,6 +40,7 @@ public class UIManager : MonoBehaviour
     public RecipeDataUI recipeDataUI;
     public CompositionDataUI compositionDataUI;
     public AssetInCompositionDataUI assetInCompositionDataUI;
+    public CompositionPage2DataUI compositionPage2DataUI;
 
     public ChoiceUI choiceUI;
     public void HideAllDataUI()
@@ -48,6 +49,7 @@ public class UIManager : MonoBehaviour
         recipeDataUI.Hide();
         compositionDataUI.Hide();
         assetInCompositionDataUI.Hide();
+        compositionPage2DataUI.Hide();
     }
 
     // Start is called before the first frame update

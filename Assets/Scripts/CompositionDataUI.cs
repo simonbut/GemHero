@@ -22,7 +22,7 @@ public class CompositionDataUI : DataUI
     [SerializeField] List<GameObject> realitySlots;
     [SerializeField] List<GameObject> dreamSlots;
     [SerializeField] List<GameObject> idealSlots;
-    [SerializeField] List<GameObject> compositeMarks;
+    //[SerializeField] List<GameObject> compositeMarks;
 
     //Prefab
     [SerializeField] Sprite emptySlotSprite;
@@ -33,10 +33,7 @@ public class CompositionDataUI : DataUI
     public void Show(int _recipeId, bool _showCompositePart = false)
     {
         RecipeData _rd = AssetManager.Instance.GetRecipeData(_recipeId);
-        print(_rd.id);
-        print(_rd.targetCompoundId);
         AssetData _ad = AssetManager.Instance.GetAssetData(_rd.targetCompoundId);
-        print(_ad.id);
 
         //TODO graphic 
 

@@ -41,22 +41,32 @@ public class RecipeMenuCanvas : ControlableUI
 
     void ClickData(int id, ListItem gi)
     {
+        currentRecipeId = id;
         //CompositeView.Instance.StartAssetChoosing(id);
+        UIManager.Instance.compositionPage2DataUI.Hide();
         MainGameView.Instance.compositeMenuCanvas.AddUI(id);
     }
 
     void SelectingData(int id, ListItem gi)
     {
+        currentRecipeId = id;
         RecipeData recipeData = AssetManager.Instance.GetRecipeData(id);
         UIManager.Instance.compositionDataUI.Show(id);
         UIManager.Instance.recipeDataUI.Show(id);
+        UIManager.Instance.compositionPage2DataUI.Hide();
+        isPage2Showing = false;
     }
 
     void DisSelectingData(int id, ListItem gi)
     {
+        currentRecipeId = 0;
         UIManager.Instance.compositionDataUI.Hide();
         UIManager.Instance.recipeDataUI.Hide();
+        UIManager.Instance.compositionPage2DataUI.Hide();
     }
+
+    int currentRecipeId = 1;
+    bool isPage2Showing = false;
 
     // Update is called once per frame
     void Update()
@@ -71,6 +81,27 @@ public class RecipeMenuCanvas : ControlableUI
             UIManager.Instance.compositionDataUI.Hide();
             UIManager.Instance.recipeDataUI.Hide();
             OnBackPressed();
+        }
+
+        if (ControlView.Instance.controls.Map1.AssetKey.triggered)
+        {
+            if(currentRecipeId > 0)
+            {
+                print("currentRecipeId " + currentRecipeId);
+                isPage2Showing = !isPage2Showing;
+                if (isPage2Showing)
+                {
+                    UIManager.Instance.compositionPage2DataUI.Show(currentRecipeId);
+                    UIManager.Instance.compositionDataUI.Hide();
+                    UIManager.Instance.recipeDataUI.Hide();
+                }
+                else
+                {
+                    UIManager.Instance.compositionDataUI.Show(currentRecipeId);
+                    UIManager.Instance.recipeDataUI.Show(currentRecipeId);
+                    UIManager.Instance.compositionPage2DataUI.Hide();
+                }
+            }
         }
     }
 }

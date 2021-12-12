@@ -1,8 +1,14 @@
 id	groupId	subId	name	description	grids	compound_type_list	score	isBadTag	tagType	RequireAchievementsCount
-1	1	1	Tag1	Tag1	0;-1,0	consumable	10	FALSE	AssetTag	
-2	2	1	Tag2	Tag2	-1,0;0	consumable	10	FALSE	AssetTag	
-3	3	1	Tag3	Tag3	0;0	consumable	10	FALSE	AssetTag	
-4	4	1	Tag4	Tag4	0	consumable	10	FALSE	AssetTag	
-5	5	1	Tag5	Tag5	0	consumable	10	FALSE	CharacterTag	
-6	6	1	Tag6	Tag6	0	consumable	10	FALSE	GemTag	0
-7	7	1	Tag7	Tag7	0	consumable	10	FALSE	FixedTag	
+1	1	1	品質上升 (小)	品質 +10	0	consumable	10	FALSE	AssetTag	
+2	2	1	空虛	夢想值、現實值和理想值歸 0	-1,0;0	consumable	10	FALSE	AssetTag	
+3	3	1	會心上升 (小)	(武器專用) 暴擊率 +10%	0;0	consumable	10	FALSE	AssetTag	
+4	4	1	會心上升 (中)	(武器專用) 暴擊率 +20%	0;-1,0	consumable	10	FALSE	AssetTag	
+5	5	1	夢想 (小)	夢想值 +1，或者現實值 -1	0	consumable	10	FALSE	AssetTag	
+6	6	1	不會失敗	即使點數過載，合成都不會失敗	0	consumable	10	FALSE	GemTag	0
+7	7	1	豆豆射擊	彈框的最後一發必然爆擊	0	consumable	10	FALSE	FixedTag	
+8	8	1	標籤倒轉 (左右)	所有標籤左右倒轉	0	consumable	10	FALSE	AssetTag	
+9	9	1	標籤倒轉 (上下)	所有標籤上下倒轉	0	consumable	10	FALSE	AssetTag	
+10	10	1	現實 (小)	現實值 +1，或者夢想值 -1	0	consumable	10	FALSE	AssetTag	
+11	11	1	理想 (小)	理想值 +1	0	consumable	10	FALSE	AssetTag	
+12	12	1	理想抑制 (小)	理想值 -1	0	consumable	10	FALSE	AssetTag	
+13	13	1	死肥仔	外觀變肥，攻速 - 10%，靈魂繩索長度 + 3	0;-1,0	consumable	0	TRUE	CharacterTag	
