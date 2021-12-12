@@ -283,8 +283,8 @@ public class AssetManager : MonoBehaviour
         string result = "";
         foreach (AssetTypeData _atd in assetTypeDataList)
         {
-            result += _atd.name.GetString();
-            result += "、";
+            result += "(" + _atd.name.GetString() + ")";
+            result += "\n";
         }
         result = result.Substring(0, result.Length - 1);
         return result;

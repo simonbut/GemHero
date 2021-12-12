@@ -38,12 +38,12 @@ public class CompositionDataUI : DataUI
         AssetData _ad = AssetManager.Instance.GetAssetData(_rd.targetCompoundId);
         print(_ad.id);
 
-        //graphic TODO
+        //TODO graphic 
 
         ShapeGenerator.GenerateShape(shape, _rd.shape, null, 0.2f);
 
         assetName.transform.Find("Text").GetComponent<Text>().text = _ad.name.GetString();
-        assetType.transform.Find("Text").GetComponent<Text>().text = "Types: " + AssetManager.Instance.AssetTypeListToString(_ad.GetAssetTypeList());
+        assetType.transform.Find("Text").GetComponent<Text>().text = AssetManager.Instance.AssetTypeListToString(_ad.GetAssetTypeList());
 
         for (int i = 0; i < 5; i++)
         {

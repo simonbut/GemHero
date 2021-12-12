@@ -34,8 +34,10 @@ public class CompositeTagChoosingCanvas : ControlableUI
         for (int i = 0; i < tagList.Count; i++)
         {
             GameObject gridItemInstance = listScrollView.GenerateItem(tagList[i].tagData.name.GetString(), i);
+            //TODO type graphic
         }
         GameObject gridItemInstance2 = listScrollView.GenerateItem("Complete", -1);
+        //TODO complete graphic
     }
 
     void ClickData(int id, ListItem gi)
@@ -43,6 +45,11 @@ public class CompositeTagChoosingCanvas : ControlableUI
         if (id == -1)
         {
             CompleteComposite();
+            return;
+        }
+
+        if (tagList[id].tagData.tagType == TagType.FixedTag)
+        {
             return;
         }
 
@@ -77,8 +84,8 @@ public class CompositeTagChoosingCanvas : ControlableUI
         compoundQuality = _compoundQuality;
 
         tagList = new List<Tag>();
-        tagList.AddRange(_tagList);
         tagList.AddRange(_staticTagList);
+        tagList.AddRange(_tagList);
 
         for (int i = 0; i < tagList.Count; i++)
         {

@@ -26,12 +26,12 @@ public class AssetDataUI : DataUI
         background.transform.position = new Vector2(x, background.transform.position.y);
         contents.transform.position = new Vector2(x, contents.transform.position.y);
 
-        //graphic TODO
+        //TODO graphic 
 
         AssetData _ad = _ra.GetAssetData();
 
         assetName.transform.Find("Text").GetComponent<Text>().text = _ad.name.GetString();
-        assetType.transform.Find("Text").GetComponent<Text>().text = "Types: " + AssetManager.Instance.AssetTypeListToString(_ad.GetAssetTypeList());
+        assetType.transform.Find("Text").GetComponent<Text>().text = AssetManager.Instance.AssetTypeListToString(_ad.GetAssetTypeList());
         quality.transform.Find("Text2").GetComponent<Text>().text = _ra.GetQuality().ToString("0");
         quality.transform.Find("Fill").GetComponent<Image>().fillAmount = _ra.GetQuality() * 1f / 100f;
         rank.transform.Find("Text").GetComponent<Text>().text = _ra.GetRank().ToString();

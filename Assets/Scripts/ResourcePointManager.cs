@@ -121,7 +121,6 @@ public class ResourcePointManager : MonoBehaviour
 
     public Asset DrawAsset(int _assetId, List<int> _mustHaveTagList, List<int> _tagPool, List<int> _rareTagList, int _scoreMin, int _scoreMax, bool _isAddToDatabase = true)
     {
-        //random draw at most 2 tags and quality, then check score TODO
         int tag1 = 0;
         int tag2 = 0;
         int qualityAffect = 0;

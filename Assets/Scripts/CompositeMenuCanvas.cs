@@ -35,7 +35,7 @@ public class CompositeMenuCanvas : ControlableUI
     {
         foreach (Asset _a in AssetManager.Instance.GetAssetListByType(recipe.assetTypeList[session]))
         {
-            GameObject gridItemInstance = gridScrollView.GenerateItem("", _a.assetUid);//Graph TODO
+            GameObject gridItemInstance = gridScrollView.GenerateItem("", _a.assetUid);//TODO Graph 
             //Graph if used
         }
     }
