@@ -40,6 +40,8 @@ public class UIManager : MonoBehaviour
     public RecipeDataUI recipeDataUI;
     public CompositionDataUI compositionDataUI;
     public AssetInCompositionDataUI assetInCompositionDataUI;
+
+    public ChoiceUI choiceUI;
     public void HideAllDataUI()
     {
         assetDataUI.Hide();

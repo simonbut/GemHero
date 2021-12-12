@@ -508,7 +508,7 @@ namespace ClassHelper
             {
                 result += Mathf.FloorToInt(TagManager.Instance.GetTag(_t).score);
             }
-            //result += qualityAffect;
+            result += qualityAffect;
 
             return result;
         }
@@ -525,42 +525,42 @@ namespace ClassHelper
 
         public Rank GetRank()
         {
-            int score = GetScore();
-            if (score < 30)
+            int rankScore = GetScore() - qualityAffect;
+            if (rankScore < 30)
             {
                 return Rank.F;
             }
             else
             {
-                if (score < 40)
+                if (rankScore < 40)
                 {
                     return Rank.E;
                 }
                 else
                 {
 
-                    if (score < 50)
+                    if (rankScore < 50)
                     {
                         return Rank.D;
                     }
                     else
                     {
 
-                        if (score < 60)
+                        if (rankScore < 60)
                         {
                             return Rank.C;
                         }
                         else
                         {
 
-                            if (score < 70)
+                            if (rankScore < 70)
                             {
                                 return Rank.B;
                             }
                             else
                             {
 
-                                if (score < 80)
+                                if (rankScore < 80)
                                 {
                                     return Rank.A;
                                 }
