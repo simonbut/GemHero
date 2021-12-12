@@ -76,12 +76,11 @@ public class TagBaseCanvas : ShapeGenerator
 
             DetermineChoosingTagColor();
 
-            if (Input.GetMouseButtonDown(0))
+            if (ControlView.Instance.controls.Map1.React.triggered)
             {
                 PutChoosingTag();
             }
         }
-
     }
 
     void PutChoosingTag()
@@ -90,10 +89,16 @@ public class TagBaseCanvas : ShapeGenerator
         {
             GenerateTagGrid(choosingTag.GetComponent<ChoosingTag>().tagContent);
             //TODO Set up tag type visual
-            if (choosingTag != null)
-            {
-                Destroy(choosingTag.gameObject);
-            }
+            DisselectChoosingTag();
+            UIManager.Instance.OnBackPressed();
+        }
+    }
+
+    public void DisselectChoosingTag()
+    {
+        if (choosingTag != null)
+        {
+            Destroy(choosingTag.gameObject);
         }
     }
 

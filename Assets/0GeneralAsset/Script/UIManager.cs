@@ -183,10 +183,9 @@ public class UIManager : MonoBehaviour
         ControlableUIList = new List<ControlableUI>();
     }
 
-    public void GoBack()
+    public void GoBack()//force back
     {
         ControlableUIList[ControlableUIList.Count - 1].OnRemoveUI();
-        //ControlableUIList.RemoveAt(ControlableUIList.Count - 1);
         ShowLastUI();
         Database.SetDescriptionMessage("");
     }

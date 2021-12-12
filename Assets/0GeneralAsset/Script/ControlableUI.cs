@@ -62,6 +62,9 @@ public class ControlableUI : MonoBehaviour
                 case 2:
                     transform.localPosition = new Vector2(MathManager.BoundingFloat(timer, -200f, 0f, timerTotal, 100f), 0f);
                     break;
+                case -1:
+                    transform.localPosition = new Vector2(originalScale.x, originalScale.y);
+                    break;
             }
 
             yield return new WaitForEndOfFrame();

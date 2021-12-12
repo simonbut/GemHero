@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using ClassHelper;
 
 public class CompositeTagChoosingCanvas : ControlableUI
 {
     public ListScrollView listScrollView;
+
+    public GameObject tagDescription;
 
     public override void OnRemoveUI()
     {
@@ -17,6 +20,7 @@ public class CompositeTagChoosingCanvas : ControlableUI
 
     public override void OnShow()
     {
+        tagDescription.SetActive(false);
         Refresh();
 
         base.OnShow();
@@ -53,17 +57,27 @@ public class CompositeTagChoosingCanvas : ControlableUI
             return;
         }
 
-        tagList[id].offset = Vector2Int.zero;
-        //TODO remove existing tag (check if FixedTag)
-        TagBaseCanvas.Instance.GenerateChoosingTag(tagList[id]);
+        if (UIManager.Instance.IsCurrentUI(this))
+        {
+            tagList[id].offset = Vector2Int.zero;
+            //TODO remove existing tag (check if FixedTag)
+            TagBaseCanvas.Instance.GenerateChoosingTag(tagList[id]);
+
+            UIManager.Instance.AddEmptyUI();
+        }
+
     }
 
     void SelectingData(int id, ListItem gi)
     {
         if (id == -1)
         {
+            tagDescription.SetActive(false);
             return;
         }
+        tagDescription.SetActive(true);
+
+        tagDescription.transform.Find("Text").GetComponent<Text>().text = tagList[id].tagData.name.GetString() + "\n" + tagList[id].tagData.description.GetString();
     }
 
     void DisSelectingData(int id, ListItem gi)
@@ -100,6 +114,16 @@ public class CompositeTagChoosingCanvas : ControlableUI
     // Update is called once per frame
     void Update()
     {
+
+        if (ControlView.Instance.controls.Map1.Cancel.triggered)
+        {
+            if (TagBaseCanvas.Instance.choosingTag != null)
+            {
+                TagBaseCanvas.Instance.DisselectChoosingTag();
+                UIManager.Instance.OnBackPressed();
+            }
+        }
+
         if (!UIManager.Instance.IsCurrentUI(this))
         {
             return;
@@ -107,8 +131,11 @@ public class CompositeTagChoosingCanvas : ControlableUI
 
         if (ControlView.Instance.controls.Map1.Cancel.triggered)
         {
-            MainGameView.Instance.tagBaseCanvas.Hide();
-            OnBackPressed();
+            if (TagBaseCanvas.Instance.choosingTag == null)
+            {
+                MainGameView.Instance.tagBaseCanvas.Hide();
+                OnBackPressed();
+            }
         }
     }
 
