@@ -23,6 +23,11 @@ public class AchievementDataUI : DataUI
 
     public void Show(int _achievementId)
     {
+        if (_achievementId <= 0)
+        {
+            Hide();
+        }
+
         Achievement _a = AchievementManager.Instance.GetAchievement(_achievementId);
         descriptionText.text = _a.name.GetString() + "\n" + _a.description.GetString();
         //descriptionText.text += "\n" + "<color=#AAAAAA>" + Database.GetLocalizedText("Command reward") + ":" + "</color>"+ OrderManager.Instance.GetOrder(_a.rewardOrder).name.GetString()

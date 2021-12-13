@@ -279,29 +279,28 @@ public class Database : MonoBehaviour
 
     public class GlobalData
     {
+
+        //Save
+        public int play_times = 0;
+        public int lastLoadData = -1;
+        public List<int> read_achievement_id = new List<int>();
+
+        //Progression
+        public List<int> completed_achievement_id = new List<int>();
         public bool isCredit1Seen = false;
 
-        public List<int> completed_achievement_id = new List<int>();//Card
-        public List<string> read_oice = new List<string>();//memory
-        public int play_times = 0;
-        public List<int> read_achievement_id = new List<int>();
-        //public List<int> read_bonus_id = new List<int>();
-
+        //Settings
         public int bgm = 10;
         public int sfx = 10;
         public int gameSpeed = 0;
-
         public bool isFullScreen = false;
         public bool isSimpleMode = false;
-
         public int screenResolution = 1;
         public Language language = 0;
         //public int speedInBattle = 1;
 
+        //Tutorial Check
         public bool isFastEditTutorialClear = false;
-
-        public int lastLoadData = -1;
-
     }
 
     public static void InitGlobalSaveData()

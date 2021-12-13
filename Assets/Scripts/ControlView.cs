@@ -23,6 +23,7 @@ public class ControlView : MonoBehaviour
         {
             m_instance = this;
             controls = new InputMaster();
+            controls.Enable();
         }
     }
     #endregion
@@ -35,6 +36,7 @@ public class ControlView : MonoBehaviour
 
     public void OnEnable()
     {
+        print("Enable Controls");
         controls.Enable();
     }
 
@@ -103,6 +105,7 @@ public class ControlView : MonoBehaviour
     {
         if (isTrue)
         {
+            print("React");
             MainGameView.Instance.CharacterReact();
         }
     }

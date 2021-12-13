@@ -30,8 +30,8 @@ public class UIManager : MonoBehaviour
     public InformationUI informationParagraphUI;
     public SettingUI settingUI;
     public ControlableUIGeneral emptyUI;
-
     public NewAchievementUI newAchievementUI;
+
 
     [SerializeField] GameObject staticCanvas;
     [SerializeField] DropdownUI dropdownUIPrefab;
@@ -41,6 +41,7 @@ public class UIManager : MonoBehaviour
     public CompositionDataUI compositionDataUI;
     public AssetInCompositionDataUI assetInCompositionDataUI;
     public CompositionPage2DataUI compositionPage2DataUI;
+    public AchievementDataUI achievementDataUI;
 
     public ChoiceUI choiceUI;
     public void HideAllDataUI()
@@ -50,6 +51,7 @@ public class UIManager : MonoBehaviour
         compositionDataUI.Hide();
         assetInCompositionDataUI.Hide();
         compositionPage2DataUI.Hide();
+        achievementDataUI.Hide();
     }
 
     // Start is called before the first frame update

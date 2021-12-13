@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 using ClassHelper;
 
@@ -9,22 +10,9 @@ public class InGameMainMenuUI : ControlableUI
 
     public override void OnShow()
     {
-        listMenuView.SetUp(new List<string> { "Composite"}, this, new List<Callback> { OnCompositeButtonClick });
+        listMenuView.SetUp(new List<string> { "Composite","Quit"}, this, new List<Callback> { OnCompositeButtonClick , OnQuitButtonClick});
 
         base.OnShow();
-    }
-
-
-    public override void AddUI()
-    {
-
-        base.AddUI();
-    }
-
-    public override void OnRemoveUI()
-    {
-
-        base.OnRemoveUI();
     }
 
     // Update is called once per frame
@@ -44,6 +32,11 @@ public class InGameMainMenuUI : ControlableUI
     void OnCompositeButtonClick()
     {
         MainGameView.Instance.OpenRecipeMenu();
+    }
+
+    void OnQuitButtonClick()
+    {
+        SceneManager.LoadScene("StartScene");
     }
 }
 

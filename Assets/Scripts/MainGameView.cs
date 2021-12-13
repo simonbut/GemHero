@@ -21,6 +21,7 @@ public class MainGameView : MonoBehaviour
     {
         if (MainGameView.Instance == null)
         {
+            UIManager.Instance.CleanAllUI();
             m_instance = this;
         }
     }

@@ -35,9 +35,6 @@ public class StartPanelAchievement : ControlableUI
 
     public override void OnRemoveUI()
     {
-        //CraftView.Instance?.ShowFacilityData(0);
-        //CraftView.Instance?.CanelGenerateFacility();
-        StartView.Instance?.ShowAchievementData(0);
 
         base.OnRemoveUI();
     }
@@ -65,7 +62,7 @@ public class StartPanelAchievement : ControlableUI
 
     void SelectingAchievementData(int id, ListItem gi)
     {
-        StartView.Instance?.ShowAchievementData(id);
+        //StartView.Instance?.ShowAchievementData(id);
     }
 
     void DisSelectingAchievementData(int id, ListItem gi)
