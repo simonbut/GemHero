@@ -138,14 +138,14 @@ public class ResourcePointManager : MonoBehaviour
 
             if (_mht.Count > 0)
             {
-                int _index = Random.Range(0, _rtp.Count);
+                int _index = Random.Range(0, _mht.Count);
                 tag1 = _mht[_index];
                 score += TagManager.Instance.GetTag(_mht[_index]).score;
                 _mht.RemoveAt(_index);
             }
             if (_mht.Count > 0)
             {
-                int _index = Random.Range(0, _rtp.Count);
+                int _index = Random.Range(0, _mht.Count);
                 tag2 = _mht[_index];
                 score += TagManager.Instance.GetTag(_mht[_index]).score;
                 _mht.RemoveAt(_index);
@@ -167,7 +167,7 @@ public class ResourcePointManager : MonoBehaviour
                 {
                     int _index = Random.Range(0, _tp.Count);
                     tag1 = _tp[_index];
-                    score += TagManager.Instance.GetTag(_rtp[_index]).score;
+                    score += TagManager.Instance.GetTag(_tp[_index]).score;
                     _tp.RemoveAt(_index);
                 }
             }
@@ -188,7 +188,7 @@ public class ResourcePointManager : MonoBehaviour
                 {
                     int _index = Random.Range(0, _tp.Count);
                     tag2 = _tp[_index];
-                    score += TagManager.Instance.GetTag(_rtp[_index]).score;
+                    score += TagManager.Instance.GetTag(_tp[_index]).score;
                     _tp.RemoveAt(_index);
                 }
             }
@@ -202,7 +202,15 @@ public class ResourcePointManager : MonoBehaviour
             }
         }
 
-        List<int> tagList = new List<int> { tag1, tag2 };
+        List<int> tagList = new List<int>();
+        if (tag1 > 0)
+        {
+            tagList.Add(tag1);
+        }
+        if (tag2 > 0)
+        {
+            tagList.Add(tag2);
+        }
         Asset result = new Asset();
         result.assetId = _assetId;
         result.qualityAffect = qualityAffect;
