@@ -99,8 +99,6 @@ public class ChoiceUI : ControlableUI
         transform.position = _pos;
 
         buttonCallbackList = _buttonCallbackList;
-        GlobalCommunicateManager.selectingId = 0;
-        GlobalCommunicateManager.selectingScrollViewId = 0;
         listItemList = new List<GameObject>();
 
         foreach (Transform _t in transformParent.transform)

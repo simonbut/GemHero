@@ -38,6 +38,7 @@ public class MainGameView : MonoBehaviour
     public CompositeMenuCanvas compositeMenuCanvas;
     public CompositeTagChoosingCanvas tagChoosingCanvas;
     public AssetConfirmCanvas assetConfirmCanvas;
+    public DialogCanvas dialogCanvas;
     
     public TagBaseCanvas tagBaseCanvas;
 

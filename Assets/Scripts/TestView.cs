@@ -17,6 +17,7 @@ public class TestView : MonoBehaviour
         //MainGameView.Instance.tagBaseCanvas.Show(AssetManager.Instance.GetRecipeData(1).shape, new List<int>() { 4, 3 }, new List<Vector2Int>() { new Vector2Int(-1, -1), new Vector2Int(1, -1) });
         //CompositeView.Instance.StartComposite();
         //UIManager.Instance.choiceUI.Setup(new Vector2(Screen.width / 2f, Screen.height / 2f), new List<string> { "12312312312", "asd" }, new List<Callback> { null, null });
+        MainGameView.Instance.dialogCanvas.Setup(new Vector2(Screen.width / 2f, Screen.height / 2f), "ABC", "asdasd asdasd asdasd asd asd asd asd asd asdasd asdasd asdasd asd asd asd asd asd");
     }
 
     // Update is called once per frame
