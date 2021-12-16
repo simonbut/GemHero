@@ -59,6 +59,8 @@ public class Database : MonoBehaviour
         AssetManager.Instance.LoadRecipeData();
         EnemyManager.Instance.LoadEnemyData();
         ResourcePointManager.Instance.LoadResourcePointData();
+        DialogManager.Instance.LoadDialogData();
+        CharacterManager.Instance.LoadCharacterData();
         //
 
 

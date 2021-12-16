@@ -352,10 +352,19 @@ namespace ClassHelper
         }
     }
 
-    public enum ReactType
+    public enum DialogType
     {
-        Collect = 0,
-        Talk = 1
+        destinyShare,
+        afterQuest,
+        afterBattle,
+        mainQuest
+    }
+
+    public enum ResourceType
+    {
+        collect,
+        talk,
+        mainQuest
     }
 
     public enum CompoundType
@@ -398,6 +407,7 @@ namespace ClassHelper
     {
         //id	resource_point_id	asset_id	must_have_tag_list	tag_pool	score_min	score_max
         public int id;
+        public ResourceType resourceType;
         public int resourcePointId;
         public int assetId;
         public List<int> mustHaveTagList = new List<int>();
@@ -405,6 +415,25 @@ namespace ClassHelper
         public List<int> rareTagPool = new List<int>();
         public int scoreMin;
         public int scoreMax;
+        public int characterId;
+        public DialogType dialogType;
+        public int targetDialogId;
+    }
+
+    public class CharacterData
+    {
+        public int id;
+        public LocalizedString name;
+    }
+
+    public class DialogData
+    {
+        //id	dialogId	step	content
+        public int id;
+        public int dialogId;
+        public int step;
+        public int characterId;
+        public LocalizedString content;
     }
 
     public class AssetData

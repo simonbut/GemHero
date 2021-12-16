@@ -46,49 +46,61 @@ public class ResourcePointManager : MonoBehaviour
                 string[] _c = _a[i].Split('\t');
                 int.TryParse(_c[0], out _b.id);
                 int.TryParse(_c[1], out _b.resourcePointId);
-                int.TryParse(_c[2], out _b.assetId);
-
-                _b.mustHaveTagList = new List<int>();
-                string[] _c3 = _c[3].Split(';');
-                for (int j = 0; j < _c3.Length; j++)
+                ResourceType.TryParse(_c[2], out _b.resourceType);
+                switch (_b.resourceType)
                 {
-                    int _c3b;
-                    int.TryParse(_c3[j], out _c3b);
+                    case ResourceType.collect:
+                        int.TryParse(_c[3], out _b.assetId);
 
-                    if (_c3b > 0)
-                    {
-                        _b.mustHaveTagList.Add(_c3b);
-                    }
+                        _b.mustHaveTagList = new List<int>();
+                        string[] _c3 = _c[4].Split(';');
+                        for (int j = 0; j < _c3.Length; j++)
+                        {
+                            int _c3b;
+                            int.TryParse(_c3[j], out _c3b);
+
+                            if (_c3b > 0)
+                            {
+                                _b.mustHaveTagList.Add(_c3b);
+                            }
+                        }
+
+                        _b.tagPool = new List<int>();
+                        string[] _c4 = _c[5].Split(';');
+                        for (int j = 0; j < _c4.Length; j++)
+                        {
+                            int _c4b;
+                            int.TryParse(_c4[j], out _c4b);
+
+                            if (_c4b > 0)
+                            {
+                                _b.tagPool.Add(_c4b);
+                            }
+                        }
+
+                        _b.rareTagPool = new List<int>();
+                        string[] _c5 = _c[6].Split(';');
+                        for (int j = 0; j < _c5.Length; j++)
+                        {
+                            int _c5b;
+                            int.TryParse(_c5[j], out _c5b);
+
+                            if (_c5b > 0)
+                            {
+                                _b.rareTagPool.Add(_c5b);
+                            }
+                        }
+
+                        int.TryParse(_c[7], out _b.scoreMin);
+                        int.TryParse(_c[8], out _b.scoreMax);
+                        break;
+                    case ResourceType.talk:
+                    case ResourceType.mainQuest:
+                        int.TryParse(_c[9], out _b.characterId);
+                        DialogType.TryParse(_c[10], out _b.dialogType);
+                        int.TryParse(_c[11], out _b.targetDialogId);
+                        break;
                 }
-
-                _b.tagPool = new List<int>();
-                string[] _c4 = _c[4].Split(';');
-                for (int j = 0; j < _c4.Length; j++)
-                {
-                    int _c4b;
-                    int.TryParse(_c4[j], out _c4b);
-
-                    if (_c4b > 0)
-                    {
-                        _b.tagPool.Add(_c4b);
-                    }
-                }
-
-                _b.rareTagPool = new List<int>();
-                string[] _c5 = _c[5].Split(';');
-                for (int j = 0; j < _c5.Length; j++)
-                {
-                    int _c5b;
-                    int.TryParse(_c5[j], out _c5b);
-
-                    if (_c5b > 0)
-                    {
-                        _b.rareTagPool.Add(_c5b);
-                    }
-                }
-
-                int.TryParse(_c[6], out _b.scoreMin);
-                int.TryParse(_c[7], out _b.scoreMax);
 
                 resourcePointdata.Add(_b);
             }

@@ -62,14 +62,30 @@ public class MainGameView : MonoBehaviour
             if (reactingObject == _rp)
             {
                 _rp.GetComponent<SpriteRenderer>().material.SetFloat("IsReactable", 1);
-                ShowInteractiveDialog(_rp.reactText);
+
+                List<ResourcePointData> _rpd = ResourcePointManager.Instance.GetResourcePointDataList(reactingObject.resourcePointId);
+                if (_rpd.Count <= 0)
+                {
+                    print("Bug");
+                    return;
+                }
+                switch (_rpd[0].resourceType)
+                {
+                    case ResourceType.collect:
+                        ShowInteractiveDialog("Collect");
+                        break;
+                    case ResourceType.talk:
+                    case ResourceType.mainQuest:
+                        ShowInteractiveDialog("Talk");
+                        break;
+                }
             }
             else
             {
                 _rp.GetComponent<SpriteRenderer>().material.SetFloat("IsReactable", 0);
             }
         }
-        if (reactingObject == null)
+        if (reactingObject == null || !UIManager.Instance.IsNoUI())
         {
             HideInteractiveDialog();
         }
@@ -97,14 +113,23 @@ public class MainGameView : MonoBehaviour
         {
             return;
         }
-        switch (reactingObject.reactType)
+
+        List<ResourcePointData> _rpdl = ResourcePointManager.Instance.GetResourcePointDataList(reactingObject.resourcePointId);
+        if (_rpdl.Count <= 0)
         {
-            case ReactType.Collect:
+            print("Bug");
+            return;
+        }
+        switch (_rpdl[0].resourceType)
+        {
+            case ResourceType.collect:
                 MainGameView.Instance.assetConfirmCanvas.AddUI(ResourcePointManager.Instance.DrawAsset(reactingObject.resourcePointId));
                 //UIManager.Instance.assetDataUI.Show(ResourcePointManager.Instance.DrawAsset(reactingObject.resourcePointId));
                 break;
-            case ReactType.Talk:
-
+            case ResourceType.talk:
+            case ResourceType.mainQuest:
+                ResourcePointData _rpd = _rpdl[0];//TODO determine which DialogType
+                MainGameView.Instance.dialogCanvas.Setup(_rpd.targetDialogId, 1);
                 break;
         }
     }
@@ -123,5 +148,17 @@ public class MainGameView : MonoBehaviour
 
         UIManager.Instance.HideAllDataUI();
         tagBaseCanvas.Hide();
+    }
+
+    public ResourcePoint FindResourcePointByCharacterId(int _chId)
+    {
+        foreach (ResourcePoint _rp in resourcePointList)
+        {
+            if (ResourcePointManager.Instance.GetResourcePointDataList(_rp.resourcePointId)[0].characterId == _chId)
+            {
+                return _rp;
+            }
+        }
+        return null;
     }
 }

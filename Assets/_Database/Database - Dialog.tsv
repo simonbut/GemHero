@@ -1,0 +1,5 @@
+id	dialogId	step	characterId	content
+1	1	1	2	Text A
+2	1	2	1	Text B
+3	1	3	1	Text C
+4	2	1	3	Text D
