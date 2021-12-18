@@ -209,14 +209,19 @@ namespace ClassHelper
     public class Tag
     {
         public int localIndex;
-        public TagData tagData;
+        public int tagDataId;
         public List<int> affectList = new List<int>();
         public Vector2Int offset = new Vector2Int();
+
+        public TagData GetTagData()
+        {
+            return TagManager.Instance.GetTag(tagDataId);
+        }
 
         public List<Vector2Int> GetGrids()
         {
             List<Vector2Int> result = new List<Vector2Int>();
-            foreach (Vector2Int _v in tagData.grids)
+            foreach (Vector2Int _v in GetTagData().grids)
             {
                 Vector2Int _resultV = _v + offset;
                 //TODO affectList
@@ -225,20 +230,15 @@ namespace ClassHelper
             return result;
         }
 
-        static public Tag CreateTag(int _tagid, Vector2Int _offset, List<int> _affectList)
-        {
-            Tag result = new Tag();
-            result.tagData = TagManager.Instance.GetTag(_tagid);
-            result.offset = _offset;
-            result.affectList = _affectList;
-
-            return result;
-        }
-
         static public Tag CreateTag(TagData _tagData, Vector2Int _offset, List<int> _affectList)
         {
+            return CreateTag(_tagData.id, _offset, _affectList);
+        }
+
+        static public Tag CreateTag(int _tagDataId, Vector2Int _offset, List<int> _affectList)
+        {
             Tag result = new Tag();
-            result.tagData = _tagData;
+            result.tagDataId = _tagDataId;
             result.offset = _offset;
             result.affectList = _affectList;
 

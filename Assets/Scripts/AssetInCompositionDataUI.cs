@@ -80,7 +80,7 @@ public class AssetInCompositionDataUI : DataUI
             {
                 if (i < _tl.Count)
                 {
-                    tagList[i].transform.Find("Text").GetComponent<Text>().text = _tl[i].tagData.name.GetString();
+                    tagList[i].transform.Find("Text").GetComponent<Text>().text = _tl[i].GetTagData().name.GetString();
                     ShapeGenerator.GenerateShape(tagList[i].transform.Find("Grid").gameObject, null, new List<Tag> { _tl[i] }, 0.15f);
                 }
                 else

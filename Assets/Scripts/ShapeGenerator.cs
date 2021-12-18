@@ -180,7 +180,7 @@ public class ShapeGenerator : MonoBehaviour
 
     public GameObject GenerateTagGrid(Tag _tag, bool isExisting = true)
     {
-        TagData _td = _tag.tagData;
+        TagData _td = _tag.GetTagData();
         Vector2Int _tagOffset = _tag.offset;
         List<Vector2Int> _gridContents = _tag.GetGrids();
 

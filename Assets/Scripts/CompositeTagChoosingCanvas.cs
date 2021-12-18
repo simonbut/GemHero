@@ -37,7 +37,7 @@ public class CompositeTagChoosingCanvas : ControlableUI
     {
         for (int i = 0; i < tagList.Count; i++)
         {
-            GameObject gridItemInstance = listScrollView.GenerateItem(tagList[i].tagData.name.GetString(), i);
+            GameObject gridItemInstance = listScrollView.GenerateItem(tagList[i].GetTagData().name.GetString(), i);
             //TODO type graphic
         }
         GameObject gridItemInstance2 = listScrollView.GenerateItem("Complete", -1);
@@ -52,7 +52,7 @@ public class CompositeTagChoosingCanvas : ControlableUI
             return;
         }
 
-        if (tagList[id].tagData.tagType == TagType.FixedTag)
+        if (tagList[id].GetTagData().tagType == TagType.FixedTag)
         {
             return;
         }
@@ -77,7 +77,7 @@ public class CompositeTagChoosingCanvas : ControlableUI
         }
         tagDescription.SetActive(true);
 
-        tagDescription.transform.Find("Text").GetComponent<Text>().text = tagList[id].tagData.name.GetString() + "\n" + tagList[id].tagData.description.GetString();
+        tagDescription.transform.Find("Text").GetComponent<Text>().text = tagList[id].GetTagData().name.GetString() + "\n" + tagList[id].GetTagData().description.GetString();
     }
 
     void DisSelectingData(int id, ListItem gi)

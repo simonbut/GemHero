@@ -10,7 +10,7 @@ public class InGameMainMenuUI : ControlableUI
 
     public override void OnShow()
     {
-        listMenuView.SetUp(new List<string> { "Composite","Quit"}, this, new List<Callback> { OnCompositeButtonClick , OnQuitButtonClick});
+        listMenuView.SetUp(new List<string> { "Composite","Quit","PlayerTag"}, this, new List<Callback> { OnCompositeButtonClick , OnQuitButtonClick, OnPlayerTagButtonClick });
 
         base.OnShow();
     }
@@ -37,6 +37,11 @@ public class InGameMainMenuUI : ControlableUI
     void OnQuitButtonClick()
     {
         SceneManager.LoadScene("StartScene");
+    }
+
+    void OnPlayerTagButtonClick()
+    {
+        MainGameView.Instance.playerTagCanvas.ShowPlayerTag();
     }
 }
 

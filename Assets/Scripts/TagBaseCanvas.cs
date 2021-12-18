@@ -47,7 +47,7 @@ public class TagBaseCanvas : ShapeGenerator
         List<int> result = new List<int>();
         foreach (TagGameObject _tg in existingTagGameObjectList)
         {
-            result.Add(_tg.tagContent.tagData.id);
+            result.Add(_tg.tagContent.GetTagData().id);
         }
         return result;
     }
@@ -64,10 +64,15 @@ public class TagBaseCanvas : ShapeGenerator
     }
 
     // Update is called once per frame
-    void Update()
+    public void Update()
     {
         gridParent.transform.localScale = Vector3.one * canvasSize;
 
+        ControlScheme();
+    }
+
+    public virtual void ControlScheme()
+    {
         if (choosingTag != null)
         {
             DetermineChoosingTagPosition();
@@ -83,7 +88,7 @@ public class TagBaseCanvas : ShapeGenerator
         }
     }
 
-    void PutChoosingTag()
+    public virtual void PutChoosingTag()
     {
         if (isPutChoosingTagValid)
         {
@@ -102,7 +107,7 @@ public class TagBaseCanvas : ShapeGenerator
         }
     }
 
-    void DetermineIsPutChoosingTagValid()
+    public void DetermineIsPutChoosingTagValid()
     {
         isPutChoosingTagValid = true;
         if (CheckIfCollide(choosingTag.GetComponent<ChoosingTag>().tagContent, GetExistingTagList()))
@@ -117,7 +122,7 @@ public class TagBaseCanvas : ShapeGenerator
         }
     }
 
-    void DetermineChoosingTagColor()
+    public void DetermineChoosingTagColor()
     {
         if (isPutChoosingTagValid)
         {
@@ -162,7 +167,7 @@ public class TagBaseCanvas : ShapeGenerator
         return false;
     }
 
-    void DetermineChoosingTagPosition()
+    public void DetermineChoosingTagPosition()
     {
         if (choosingTag == null)
         {
@@ -174,7 +179,7 @@ public class TagBaseCanvas : ShapeGenerator
         choosingTag.transform.localPosition = new Vector3(gridOffset.x, gridOffset.y, 0) * 100f * gridSize;
     }
 
-    Vector2Int CalculateGridOffset(Vector2 _mousePosition)
+    public Vector2Int CalculateGridOffset(Vector2 _mousePosition)
     {
         int resultX = Mathf.FloorToInt((_mousePosition.x - gridBaseParent.transform.position.x) / (100f * gridSize) + 0.5f);
         int resultY = Mathf.FloorToInt((_mousePosition.y - gridBaseParent.transform.position.y) / (100f * gridSize) + 0.5f);
@@ -182,21 +187,21 @@ public class TagBaseCanvas : ShapeGenerator
         //calculate boundary
         if (choosingTag != null)
         {
-            if (resultX + choosingTag.GetComponent<ChoosingTag>().tagContent.tagData.GetMaxX() > gridMapBoundary)
+            if (resultX + choosingTag.GetComponent<ChoosingTag>().tagContent.GetTagData().GetMaxX() > gridMapBoundary)
             {
-                resultX = gridMapBoundary - choosingTag.GetComponent<ChoosingTag>().tagContent.tagData.GetMaxX();
+                resultX = gridMapBoundary - choosingTag.GetComponent<ChoosingTag>().tagContent.GetTagData().GetMaxX();
             }
-            if (resultY + choosingTag.GetComponent<ChoosingTag>().tagContent.tagData.GetMaxY() > gridMapBoundary)
+            if (resultY + choosingTag.GetComponent<ChoosingTag>().tagContent.GetTagData().GetMaxY() > gridMapBoundary)
             {
-                resultY = gridMapBoundary - choosingTag.GetComponent<ChoosingTag>().tagContent.tagData.GetMaxY();
+                resultY = gridMapBoundary - choosingTag.GetComponent<ChoosingTag>().tagContent.GetTagData().GetMaxY();
             }
-            if (resultX + choosingTag.GetComponent<ChoosingTag>().tagContent.tagData.GetMinX() < -gridMapBoundary)
+            if (resultX + choosingTag.GetComponent<ChoosingTag>().tagContent.GetTagData().GetMinX() < -gridMapBoundary)
             {
-                resultX = -gridMapBoundary - choosingTag.GetComponent<ChoosingTag>().tagContent.tagData.GetMinX();
+                resultX = -gridMapBoundary - choosingTag.GetComponent<ChoosingTag>().tagContent.GetTagData().GetMinX();
             }
-            if (resultY + choosingTag.GetComponent<ChoosingTag>().tagContent.tagData.GetMinY() < -gridMapBoundary)
+            if (resultY + choosingTag.GetComponent<ChoosingTag>().tagContent.GetTagData().GetMinY() < -gridMapBoundary)
             {
-                resultY = -gridMapBoundary - choosingTag.GetComponent<ChoosingTag>().tagContent.tagData.GetMinY();
+                resultY = -gridMapBoundary - choosingTag.GetComponent<ChoosingTag>().tagContent.GetTagData().GetMinY();
             }
         }
 

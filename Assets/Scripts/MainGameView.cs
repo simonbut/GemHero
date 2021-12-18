@@ -41,6 +41,7 @@ public class MainGameView : MonoBehaviour
     public DialogCanvas dialogCanvas;
     
     public TagBaseCanvas tagBaseCanvas;
+    public PlayerTagCanvas playerTagCanvas;
 
     // Start is called before the first frame update
     void Start()

@@ -127,6 +127,7 @@ public class Database : MonoBehaviour
 
         public int lastAssetUid = 1;
         public List<Asset> assetList = new List<Asset>();
+        public List<Tag> playerTags = new List<Tag>();
     }
 
     public static void AddAsset(Asset _a)
@@ -245,13 +246,7 @@ public class Database : MonoBehaviour
         print(UnityEngine.Application.persistentDataPath);
 
         //stageDataJson = InitStageData(difficulty);
-        userDataJson = InitUserData();
-
-
-
         //System.IO.File.WriteAllText(UnityEngine.Application.persistentDataPath + "/stageDataJson" + saveId + ".sav", JsonUtility.ToJson(stageDataJson));
-        //System.IO.File.WriteAllText(UnityEngine.Application.persistentDataPath + "/userDataJson" + saveId + ".sav", JsonUtility.ToJson(userDataJson));
-
         //StreamWriter sw = new StreamWriter(UnityEngine.Application.persistentDataPath + "/stageDataJson" + saveId + ".sav", false);
         //sw.WriteLine(JsonConvert.SerializeObject(stageDataJson, Formatting.None,
         //            new JsonSerializerSettings()
@@ -260,6 +255,8 @@ public class Database : MonoBehaviour
         //            }));
         //sw.Close();
 
+        userDataJson = InitUserData();
+        System.IO.File.WriteAllText(UnityEngine.Application.persistentDataPath + "/userDataJson" + saveId + ".sav", JsonUtility.ToJson(userDataJson));
         StreamWriter sw2 = new StreamWriter(UnityEngine.Application.persistentDataPath + "/userDataJson" + saveId + ".sav", false);
         sw2.WriteLine(JsonConvert.SerializeObject(userDataJson, Formatting.None,
                     new JsonSerializerSettings()
@@ -270,12 +267,8 @@ public class Database : MonoBehaviour
 
         InitDataFromSave(saveId);
 
-        //if (!isBattleTutorial)
-        //{
-        //    globalData.lastLoadData = _saveId;
-        //}
         SaveGlobalSave();
-
+        Save();
     }
 
 
@@ -358,6 +351,10 @@ public class Database : MonoBehaviour
 
         //result.componentList.Add(0);//make it 1 base
         //result.character_id = 1;
+
+        result.playerTags = new List<Tag>();
+        Tag _t = Tag.CreateTag(14,Vector2Int.zero,new List<int>());
+        result.playerTags.Add(_t);
 
         return result;
     }

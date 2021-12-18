@@ -11,4 +11,5 @@ id	groupId	subId	name	description	grids	compound_type_list	score	isBadTag	tagTyp
 10	10	1	現實 (小)	現實值 +1，或者夢想值 -1	0	consumable	10	FALSE	AssetTag	
 11	11	1	理想 (小)	理想值 +1	0	consumable	10	FALSE	AssetTag	
 12	12	1	理想抑制 (小)	理想值 -1	0	consumable	10	FALSE	AssetTag	
-13	13	1	死肥仔	外觀變肥，攻速 - 10%，靈魂繩索長度 + 3	0;-1,0	consumable	0	TRUE	CharacterTag	
+13	13	1	死肥仔	外觀變肥，攻速 - 10%；靈魂繩索長度 + 3	0;-1,0	consumable	0	TRUE	CharacterTag	
+14	14	1	標籤使者	可以自由控制不同的標籤；靈魂繩索長度 + 3	0;-1,0	consumable	0	FALSE	CharacterTag	
