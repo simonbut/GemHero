@@ -44,40 +44,28 @@ public class TagManager : MonoBehaviour
                 TagData _b = new TagData();
                 string[] _c = _a[i].Split('\t');
                 int.TryParse(_c[0], out _b.id);
-                int.TryParse(_c[1], out _b.groupId);
-                int.TryParse(_c[2], out _b.subId);
-                _b.name = new LocalizedString(_c[3], _c[3], _c[3], "");
-                _b.description = new LocalizedString(_c[4], _c[4], _c[4], "");
+                _b.name = new LocalizedString(_c[1], _c[1], _c[1], "");
+                _b.description = new LocalizedString(_c[2], _c[2], _c[2], "");
 
                 _b.grids = new List<Vector2Int>();
-                string[] _c5 = _c[5].Split(';');
-                for (int j = 0; j < _c5.Length; j++)
+                string[] _c3 = _c[3].Split(';');
+                for (int j = 0; j < _c3.Length; j++)
                 {
-                    string[] _c5b = _c5[j].Split(',');
-                    for (int k = 0; k < _c5b.Length; k++)
+                    string[] _c3b = _c3[j].Split(',');
+                    for (int k = 0; k < _c3b.Length; k++)
                     {
-                        int x5 = 0;
-                        int.TryParse(_c5b[k], out x5);
+                        int x3 = 0;
+                        int.TryParse(_c3b[k], out x3);
 
-                        _b.grids.Add(new Vector2Int(x5, Mathf.FloorToInt(_c5.Length / 2) - j));
+                        _b.grids.Add(new Vector2Int(x3, Mathf.FloorToInt(_c3.Length / 2) - j));
                     }
                 }
 
-                _b.compoundTypeList = new List<CompoundType>();
-                string[] _c6 = _c[6].Split(';');
-                for (int j = 0; j < _c6.Length; j++)
-                {
-                    CompoundType _c6b;
-                    CompoundType.TryParse(_c6[j], out _c6b);
+                int.TryParse(_c[4], out _b.score);
 
-                    _b.compoundTypeList.Add(_c6b);
-                }
-
-                int.TryParse(_c[7], out _b.score);
-
-                bool.TryParse(_c[8], out _b.isBadTag);
-                TagType.TryParse(_c[9], out _b.tagType);
-                int.TryParse(_c[10], out _b.RequireAchievementsCount);
+                bool.TryParse(_c[5], out _b.isBadTag);
+                TagType.TryParse(_c[6], out _b.tagType);
+                int.TryParse(_c[7], out _b.RequireAchievementsCount);
 
                 tagData.Add(_b);
             }

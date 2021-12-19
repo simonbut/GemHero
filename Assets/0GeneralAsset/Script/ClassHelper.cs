@@ -258,12 +258,9 @@ namespace ClassHelper
     {
         //id	groupId	subId	name	description	grids	compound_type_list	score
         public int id;
-        public int groupId;
-        public int subId;
         public LocalizedString name;
         public LocalizedString description;
         public List<Vector2Int> grids;
-        public List<CompoundType> compoundTypeList = new List<CompoundType>();
         public int score;
         public bool isBadTag;
         public TagType tagType;
