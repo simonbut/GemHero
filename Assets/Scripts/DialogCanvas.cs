@@ -47,33 +47,46 @@ public class DialogCanvas : ControlableUI
 
     public void GoNextStep()
     {
-        DialogData _dd = DialogManager.Instance.FindDialogData(dialogId,step + 1);
+        DialogData _dd = DialogManager.Instance.GetDialogData(dialogId,step + 1);
         OnBackPressed();
         if (_dd != null)
         {
-            Setup(dialogId, step + 1);
-        }
-    }
-
-    public void Setup(int _dialogId, int _step)
-    {
-        dialogId = _dialogId;
-        step = _step;
-        DialogData _dd = DialogManager.Instance.FindDialogData(dialogId, step);
-        if (_dd.characterId == 1)//Player
-        {
-            Setup(ControlView.Instance.player, CharacterManager.Instance.FindCharacterData(_dd.characterId).name.GetString(), _dd.content.GetString());
+            Setup(dialogId, step + 1, callbackAfterDialog);
         }
         else
         {
+            if (callbackAfterDialog != null)
+            {
+                callbackAfterDialog();
+            }
+        }
+    }
+
+    Callback callbackAfterDialog;
+    public void Setup(int _dialogId, int _step,Callback _callbackAfterDialog)
+    {
+        callbackAfterDialog = _callbackAfterDialog;
+        dialogId = _dialogId;
+        step = _step;
+        DialogData _dd = DialogManager.Instance.GetDialogData(dialogId, step);
+        if (_dd.characterId == 1)//Player
+        {
+            Setup(ControlView.Instance.player, CharacterManager.Instance.GetCharacterData(_dd.characterId).name.GetString(), _dd.content.GetString());
+        }
+        else
+        {
+            if (_dd.characterId == 0)//special case
+            {
+                _dd.characterId = ResourcePointManager.Instance.GetResourcePointDataList(MainGameView.Instance.reactingObject.resourcePointId)[0].characterId;
+            }
             ResourcePoint _rp = MainGameView.Instance.FindResourcePointByCharacterId(_dd.characterId);
             if (_rp == null)
             {
-                Setup(null, CharacterManager.Instance.FindCharacterData(_dd.characterId).name.GetString(), _dd.content.GetString());
+                Setup(null, CharacterManager.Instance.GetCharacterData(_dd.characterId).name.GetString(), _dd.content.GetString());
             }
             else
             {
-                Setup(_rp.gameObject, CharacterManager.Instance.FindCharacterData(_dd.characterId).name.GetString(), _dd.content.GetString());
+                Setup(_rp.gameObject, CharacterManager.Instance.GetCharacterData(_dd.characterId).name.GetString(), _dd.content.GetString());
             }
         }
     }

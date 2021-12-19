@@ -246,6 +246,14 @@ namespace ClassHelper
         }
     }
 
+    public class DestinyShareData
+    {
+        //id	destinyShareId	tagId
+        public int id;
+        public int characterId;
+        public int tagId;
+    }
+
     public class TagData
     {
         //id	groupId	subId	name	description	grids	compound_type_list	score

@@ -55,7 +55,7 @@ public class CharacterManager : MonoBehaviour
         }
     }
 
-    public CharacterData FindCharacterData(int _chId)
+    public CharacterData GetCharacterData(int _chId)
     {
         foreach (CharacterData _cd in characterData)
         {

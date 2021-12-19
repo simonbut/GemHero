@@ -59,7 +59,7 @@ public class DialogManager : MonoBehaviour
         }
     }
 
-    public DialogData FindDialogData(int _dialogId,int _step)
+    public DialogData GetDialogData(int _dialogId,int _step)
     {
         foreach (DialogData _dd in dialogData)
         {

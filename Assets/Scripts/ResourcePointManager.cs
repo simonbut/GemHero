@@ -124,6 +124,19 @@ public class ResourcePointManager : MonoBehaviour
         return result;
     }
 
+    public ResourcePointData GetResourcePointDataByDialogType(int _resourcePointId,DialogType _dialogType)
+    {
+        List<ResourcePointData> result = new List<ResourcePointData>();
+        foreach (ResourcePointData _rt in resourcePointdata)
+        {
+            if (_rt.resourcePointId == _resourcePointId && _rt.dialogType == _dialogType)
+            {
+                return _rt;
+            }
+        }
+        return null;
+    }
+
     public Asset DrawAsset(int _resourcePointId,bool _isAddToDatabase = true)
     {
         List<ResourcePointData> _rpl = GetResourcePointDataList(_resourcePointId);

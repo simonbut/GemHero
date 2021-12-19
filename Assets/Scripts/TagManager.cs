@@ -26,15 +26,15 @@ public class TagManager : MonoBehaviour
     #endregion
 
     [HideInInspector]
-    public List<TagData> tagdata = new List<TagData>();
+    public List<TagData> tagData = new List<TagData>();
     public List<TagData> GetTagDataFullList()
     {
-        return tagdata;
+        return tagData;
     }
 
     public void LoadTagData()
     {
-        tagdata = new List<TagData>();
+        tagData = new List<TagData>();
         string data = Database.ReadDatabaseWithoutLanguage("Tag");
         if (data.Length > 0)
         {
@@ -79,7 +79,38 @@ public class TagManager : MonoBehaviour
                 TagType.TryParse(_c[9], out _b.tagType);
                 int.TryParse(_c[10], out _b.RequireAchievementsCount);
 
-                tagdata.Add(_b);
+                tagData.Add(_b);
+            }
+        }
+        else
+        {
+            Debug.Log("data is null");
+        }
+    }
+
+    [HideInInspector]
+    public List<DestinyShareData> destinyShareData = new List<DestinyShareData>();
+    public List<DestinyShareData> GetDestinyShareDataFullList()
+    {
+        return destinyShareData;
+    }
+
+    public void LoadDestinyShareData()
+    {
+        destinyShareData = new List<DestinyShareData>();
+        string data = Database.ReadDatabaseWithoutLanguage("DestinyShare");
+        if (data.Length > 0)
+        {
+            string[] _a = data.Split('\n');
+            for (int i = 1; i < _a.Length; i++)
+            {
+                DestinyShareData _b = new DestinyShareData();
+                string[] _c = _a[i].Split('\t');
+                int.TryParse(_c[0], out _b.id);
+                int.TryParse(_c[1], out _b.characterId);
+                int.TryParse(_c[2], out _b.tagId);
+
+                destinyShareData.Add(_b);
             }
         }
         else
@@ -89,20 +120,29 @@ public class TagManager : MonoBehaviour
     }
 
 
-
-    public TagData GetTagData(int tag_id)
+    public TagData GetTagData(int tagId)
     {
-        foreach (TagData _t in tagdata)
+        foreach (TagData _td in tagData)
         {
-            if (_t.id == tag_id)
+            if (_td.id == tagId)
             {
-                return _t;
+                return _td;
             }
         }
         return new TagData();
     }
 
-
-
+    public List<DestinyShareData> GetDestinyShareDataByCharacterId(int _characterId)
+    {
+        List<DestinyShareData> result = new List<DestinyShareData>();
+        foreach (DestinyShareData _dsd in destinyShareData)
+        {
+            if (_dsd.characterId == _characterId)
+            {
+                result.Add(_dsd);
+            }
+        }
+        return result;
+    }
 
 }

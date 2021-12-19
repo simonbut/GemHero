@@ -42,6 +42,7 @@ public class MainGameView : MonoBehaviour
     
     //public TagBaseCanvas tagBaseCanvas;
     public PlayerTagChoosingCanvas playerTagChoosingCanvas;
+    public DestinyShareChoosingCanvas destinyShareChoosingCanvas;
 
     // Start is called before the first frame update
     void Start()
@@ -129,10 +130,16 @@ public class MainGameView : MonoBehaviour
                 break;
             case ResourceType.talk:
             case ResourceType.mainQuest:
-                ResourcePointData _rpd = _rpdl[0];//TODO determine which DialogType
-                MainGameView.Instance.dialogCanvas.Setup(_rpd.targetDialogId, 1);
+                ResourcePointData _rpd = ResourcePointManager.Instance.GetResourcePointDataByDialogType(reactingObject.resourcePointId,DialogType.destinyShare);
+                MainGameView.Instance.dialogCanvas.Setup(_rpd.targetDialogId, 1,DestinyShare);
                 break;
         }
+    }
+
+    public void DestinyShare()
+    {
+        List<ResourcePointData> _rpdl = ResourcePointManager.Instance.GetResourcePointDataList(reactingObject.resourcePointId);
+        destinyShareChoosingCanvas.AddUI(_rpdl[0].characterId);
     }
 
     public void OpenRecipeMenu()
@@ -148,6 +155,11 @@ public class MainGameView : MonoBehaviour
         tagChoosingCanvas.gameObject.SetActive(false);
 
         UIManager.Instance.HideAllDataUI();
+    }
+
+    public void LeaveDestinyShare()
+    {
+        //TODO
     }
 
     public ResourcePoint FindResourcePointByCharacterId(int _chId)
