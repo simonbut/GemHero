@@ -271,7 +271,7 @@ public class AssetManager : MonoBehaviour
         int result = 0;
         foreach (int _t in _tagList)
         {
-            result += Mathf.FloorToInt(TagManager.Instance.GetTag(_t).score);
+            result += Mathf.FloorToInt(TagManager.Instance.GetTagData(_t).score);
         }
         result += _qualityAffect;
 

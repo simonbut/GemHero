@@ -41,7 +41,7 @@ public class InGameMainMenuUI : ControlableUI
 
     void OnPlayerTagButtonClick()
     {
-        MainGameView.Instance.playerTagCanvas.ShowPlayerTag();
+        MainGameView.Instance.playerTagChoosingCanvas.AddUI();
     }
 }
 

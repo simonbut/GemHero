@@ -4,11 +4,10 @@ using UnityEngine;
 using UnityEngine.UI;
 using ClassHelper;
 
-public class CompositeTagChoosingCanvas : ControlableUI
+public class CompositeTagChoosingCanvas : TagChoosingCanvas
 {
     public ListScrollView listScrollView;
-
-    public GameObject tagDescription;
+    public TagBaseCanvas tagBaseCanvas;
 
     public override void OnRemoveUI()
     {
@@ -42,6 +41,8 @@ public class CompositeTagChoosingCanvas : ControlableUI
         }
         GameObject gridItemInstance2 = listScrollView.GenerateItem("Complete", -1);
         //TODO complete graphic
+
+        listScrollView.gameObject.SetActive(tagList.Count > 0);
     }
 
     void ClickData(int id, ListItem gi)
@@ -72,12 +73,9 @@ public class CompositeTagChoosingCanvas : ControlableUI
     {
         if (id == -1)
         {
-            tagDescription.SetActive(false);
             return;
         }
-        tagDescription.SetActive(true);
-
-        tagDescription.transform.Find("Text").GetComponent<Text>().text = tagList[id].GetTagData().name.GetString() + "\n" + tagList[id].GetTagData().description.GetString();
+        DisplayTagDescription(tagList[id].GetTagData().id);
     }
 
     void DisSelectingData(int id, ListItem gi)
@@ -91,7 +89,6 @@ public class CompositeTagChoosingCanvas : ControlableUI
     List<Tag> tagList;
     RecipeData recipe;
     int compoundQuality;
-    //assetSelectList, TargetTagListWithEnoughPoints()
     public void AddUI(int _compoundQuality, RecipeData _recipe, List<Tag> _tagList,List<Tag> _staticTagList)
     {
         recipe = _recipe;
@@ -106,7 +103,7 @@ public class CompositeTagChoosingCanvas : ControlableUI
             tagList[i].localIndex = i;
         }
 
-        MainGameView.Instance.tagBaseCanvas.Show(_recipe.shape, _staticTagList);
+        tagBaseCanvas.Show(_recipe.shape, _staticTagList);
 
         base.AddUI();
     }
@@ -133,7 +130,7 @@ public class CompositeTagChoosingCanvas : ControlableUI
         {
             if (TagBaseCanvas.Instance.choosingTag == null)
             {
-                MainGameView.Instance.tagBaseCanvas.Hide();
+                tagBaseCanvas.Hide();
                 OnBackPressed();
             }
         }
@@ -143,10 +140,11 @@ public class CompositeTagChoosingCanvas : ControlableUI
     {
         Asset compositeAsset = new Asset();
         compositeAsset.assetId = recipe.targetCompoundId;
-        compositeAsset.tagList = MainGameView.Instance.tagBaseCanvas.GetExistingTagIdList();
+        compositeAsset.tagList = tagBaseCanvas.GetExistingTagIdList();
         compositeAsset.qualityAffect = compositeAsset.CalculateQualityAffectByQuality(compoundQuality);
         Database.AddAsset(compositeAsset);
 
+        tagBaseCanvas.Hide();
         MainGameView.Instance.LeaveComposition();
 
         MainGameView.Instance.assetConfirmCanvas.AddUI(compositeAsset);

@@ -90,7 +90,7 @@ public class TagManager : MonoBehaviour
 
 
 
-    public TagData GetTag(int tag_id)
+    public TagData GetTagData(int tag_id)
     {
         foreach (TagData _t in tagdata)
         {

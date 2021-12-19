@@ -215,7 +215,7 @@ namespace ClassHelper
 
         public TagData GetTagData()
         {
-            return TagManager.Instance.GetTag(tagDataId);
+            return TagManager.Instance.GetTagData(tagDataId);
         }
 
         public List<Vector2Int> GetGrids()
@@ -535,7 +535,7 @@ namespace ClassHelper
             int result = 0;
             foreach (int _t in tagList)
             {
-                result += Mathf.FloorToInt(TagManager.Instance.GetTag(_t).score);
+                result += Mathf.FloorToInt(TagManager.Instance.GetTagData(_t).score);
             }
             result += qualityAffect;
 
@@ -547,7 +547,7 @@ namespace ClassHelper
             int originalQuality = 0;
             foreach (int _t in tagList)
             {
-                originalQuality += Mathf.FloorToInt(TagManager.Instance.GetTag(_t).score);
+                originalQuality += Mathf.FloorToInt(TagManager.Instance.GetTagData(_t).score);
             }
             return (quality - originalQuality);
         }

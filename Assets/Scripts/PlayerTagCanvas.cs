@@ -29,8 +29,6 @@ public class PlayerTagCanvas : CharacterTagCanvas
         print("_playerTag " + _playerTag.Count);
 
         Show(_baseShape, _playerTag);
-
-        UIManager.Instance.AddEmptyUI();
     }
 
     // Update is called once per frame
@@ -55,7 +53,7 @@ public class PlayerTagCanvas : CharacterTagCanvas
                 Database.userDataJson.playerTags = GetExistingTagList();
                 Database.Save();
 
-                UIManager.Instance.OnBackPressed();
+                MainGameView.Instance.playerTagChoosingCanvas.OnBackPressed();
                 Hide();
             }
         }

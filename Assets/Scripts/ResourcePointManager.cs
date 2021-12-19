@@ -152,14 +152,14 @@ public class ResourcePointManager : MonoBehaviour
             {
                 int _index = Random.Range(0, _mht.Count);
                 tag1 = _mht[_index];
-                score += TagManager.Instance.GetTag(_mht[_index]).score;
+                score += TagManager.Instance.GetTagData(_mht[_index]).score;
                 _mht.RemoveAt(_index);
             }
             if (_mht.Count > 0)
             {
                 int _index = Random.Range(0, _mht.Count);
                 tag2 = _mht[_index];
-                score += TagManager.Instance.GetTag(_mht[_index]).score;
+                score += TagManager.Instance.GetTagData(_mht[_index]).score;
                 _mht.RemoveAt(_index);
             }
 
@@ -169,7 +169,7 @@ public class ResourcePointManager : MonoBehaviour
                 {
                     int _index = Random.Range(0, _rtp.Count);
                     tag1 = _rtp[_index];
-                    score += TagManager.Instance.GetTag(_rtp[_index]).score;
+                    score += TagManager.Instance.GetTagData(_rtp[_index]).score;
                     _rtp.RemoveAt(_index);
                 }
             }
@@ -179,7 +179,7 @@ public class ResourcePointManager : MonoBehaviour
                 {
                     int _index = Random.Range(0, _tp.Count);
                     tag1 = _tp[_index];
-                    score += TagManager.Instance.GetTag(_tp[_index]).score;
+                    score += TagManager.Instance.GetTagData(_tp[_index]).score;
                     _tp.RemoveAt(_index);
                 }
             }
@@ -190,7 +190,7 @@ public class ResourcePointManager : MonoBehaviour
                 {
                     int _index = Random.Range(0, _rtp.Count);
                     tag2 = _rtp[_index];
-                    score += TagManager.Instance.GetTag(_rtp[_index]).score;
+                    score += TagManager.Instance.GetTagData(_rtp[_index]).score;
                     _rtp.RemoveAt(_index);
                 }
             }
@@ -200,7 +200,7 @@ public class ResourcePointManager : MonoBehaviour
                 {
                     int _index = Random.Range(0, _tp.Count);
                     tag2 = _tp[_index];
-                    score += TagManager.Instance.GetTag(_tp[_index]).score;
+                    score += TagManager.Instance.GetTagData(_tp[_index]).score;
                     _tp.RemoveAt(_index);
                 }
             }

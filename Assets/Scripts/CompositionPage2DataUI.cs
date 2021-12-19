@@ -47,7 +47,7 @@ public class CompositionPage2DataUI : DataUI
             realitySlots[_rd.targetScore[0] - 1].transform.Find("Text").GetComponent<Text>().text = "A";
             markCount++;
 
-            TagData _t = TagManager.Instance.GetTag(_rd.targetTag[0]);
+            TagData _t = TagManager.Instance.GetTagData(_rd.targetTag[0]);
             realityMarkTag.transform.Find("Text").GetComponent<Text>().text = _t.name.GetString();
             ShapeGenerator.GenerateShape(realityMarkTag.transform.Find("Grid").gameObject, null, new List<Tag> { Tag.CreateTag(_t.id, Vector2Int.zero, new List<int>()) }, 0.15f);
             realityMarkDescription.transform.Find("Text").GetComponent<Text>().text = realitySlots[_rd.targetScore[0] - 1].transform.Find("Text").GetComponent<Text>().text + " mark:\n" + _t.description.GetString();
@@ -73,7 +73,7 @@ public class CompositionPage2DataUI : DataUI
                     break;
             }
 
-            TagData _t = TagManager.Instance.GetTag(_rd.targetTag[1]);
+            TagData _t = TagManager.Instance.GetTagData(_rd.targetTag[1]);
             dreamMarkTag.transform.Find("Text").GetComponent<Text>().text = _t.name.GetString();
             ShapeGenerator.GenerateShape(dreamMarkTag.transform.Find("Grid").gameObject, null, new List<Tag> { Tag.CreateTag(_t.id, Vector2Int.zero, new List<int>()) }, 0.15f);
             dreamMarkDescription.transform.Find("Text").GetComponent<Text>().text = dreamSlots[_rd.targetScore[1] - 1].transform.Find("Text").GetComponent<Text>().text + " mark:\n" + _t.description.GetString();
@@ -102,7 +102,7 @@ public class CompositionPage2DataUI : DataUI
                     break;
             }
 
-            TagData _t = TagManager.Instance.GetTag(_rd.targetTag[2]);
+            TagData _t = TagManager.Instance.GetTagData(_rd.targetTag[2]);
             idealMarkTag.transform.Find("Text").GetComponent<Text>().text = _t.name.GetString();
             ShapeGenerator.GenerateShape(idealMarkTag.transform.Find("Grid").gameObject, null, new List<Tag> { Tag.CreateTag(_t.id, Vector2Int.zero, new List<int>()) }, 0.15f);
             idealMarkDescription.transform.Find("Text").GetComponent<Text>().text = idealSlots[_rd.targetScore[2] - 1].transform.Find("Text").GetComponent<Text>().text + " mark:\n" + _t.description.GetString();

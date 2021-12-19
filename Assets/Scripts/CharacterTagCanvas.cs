@@ -41,12 +41,25 @@ public class CharacterTagCanvas : TagBaseCanvas
     }
 
     public Vector2Int cursorOffset;
+    public int selectingTagId;
     //public GameObject cursor;
     public void DetermineSelectingTagPosition()
     {
         cursorOffset = CalculateGridOffset(Input.mousePosition);
         //cursor.GetComponent<TagBaseCursor>().offset = cursorOffset;
         //cursor.transform.localPosition = new Vector3(cursorOffset.x, cursorOffset.y, 0) * 100f * gridSize;
+
+        foreach (Tag _tg in GetExistingTagList())
+        {
+            foreach (Vector2Int _v in _tg.GetGrids())
+            {
+                if (cursorOffset == _v)
+                {
+                    selectingTagId = _tg.tagDataId;
+                    return;
+                }
+            }
+        }
     }
 
 }

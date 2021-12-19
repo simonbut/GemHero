@@ -49,6 +49,15 @@ public class ShapeGenerator : MonoBehaviour
             gridParent = gameObject;
         }
 
+        for (int i = 0; i < existingTagGameObjectList.Count; i++)
+        {
+            if (existingTagGameObjectList[i] != null)
+            {
+                Destroy(existingTagGameObjectList[i].gameObject);
+            }
+        }
+        existingTagGameObjectList = new List<TagGameObject>();
+
         ResetTagBase();
 
         gameObject.SetActive(true);

@@ -40,8 +40,8 @@ public class MainGameView : MonoBehaviour
     public AssetConfirmCanvas assetConfirmCanvas;
     public DialogCanvas dialogCanvas;
     
-    public TagBaseCanvas tagBaseCanvas;
-    public PlayerTagCanvas playerTagCanvas;
+    //public TagBaseCanvas tagBaseCanvas;
+    public PlayerTagChoosingCanvas playerTagChoosingCanvas;
 
     // Start is called before the first frame update
     void Start()
@@ -148,7 +148,6 @@ public class MainGameView : MonoBehaviour
         tagChoosingCanvas.gameObject.SetActive(false);
 
         UIManager.Instance.HideAllDataUI();
-        tagBaseCanvas.Hide();
     }
 
     public ResourcePoint FindResourcePointByCharacterId(int _chId)
