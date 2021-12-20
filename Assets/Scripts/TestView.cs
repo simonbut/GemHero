@@ -18,6 +18,7 @@ public class TestView : MonoBehaviour
         //CompositeView.Instance.StartComposite();
         //UIManager.Instance.choiceUI.Setup(new Vector2(Screen.width / 2f, Screen.height / 2f), new List<string> { "12312312312", "asd" }, new List<Callback> { null, null });
         //MainGameView.Instance.dialogCanvas.Setup(new Vector2(Screen.width / 2f, Screen.height / 2f), "ABC", "asdasd asdasd asdasd asd asd asd asd asd asdasd asdasd asdasd asd asd asd asd asd");
+        Database.userDataJson.time += 1;
     }
 
     // Update is called once per frame

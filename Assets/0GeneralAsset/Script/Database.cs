@@ -115,12 +115,7 @@ public class Database : MonoBehaviour
         public int coin = 1000;
 
         //Progression
-        //public bool isWelcomeTutorialComplete = false;
-        //public bool isChapter1Complete = false;
-        public List<int> completedStoryStages = new List<int>();
-        public int lastStoryStage = 1;
-        public List<int> completedTowerStages = new List<int>();
-        public int lastTowerStage = 1;
+        public int time = 480;//in minute
         //
 
         //back door
