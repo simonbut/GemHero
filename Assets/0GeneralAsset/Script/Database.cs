@@ -127,6 +127,12 @@ public class Database : MonoBehaviour
         public List<Tag> playerTags = new List<Tag>();
     }
 
+    public static void TimePass(int _minute)
+    {
+        userDataJson.time += _minute;
+        Save();
+    }
+
     public static void AddAsset(Asset _a)
     {
         _a.assetUid = userDataJson.lastAssetUid;

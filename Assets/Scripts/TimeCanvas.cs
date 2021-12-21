@@ -10,23 +10,32 @@ public class TimeCanvas : MonoBehaviour
     public GameObject minuteGameObject;
     public Text dayText;
 
+    float time;
     // Start is called before the first frame update
     void Start()
     {
-        
+        time = Database.userDataJson.time; 
     }
 
     // Update is called once per frame
     void Update()
     {
-        DisplayClock();
+        if (time < Database.userDataJson.time)
+        {
+            time += Time.deltaTime * 20f;
+        }
+        else
+        {
+            time = Database.userDataJson.time;
+        }
+        DisplayClock(Mathf.FloorToInt(time));
     }
 
-    void DisplayClock()
+    void DisplayClock(int _time)
     {
-        int day = Mathf.FloorToInt(Database.userDataJson.time * 1f/ 1440f) + 1;
-        int hour = (Database.userDataJson.time % 1440);
-        int minute = (Database.userDataJson.time % 60);
+        int day = Mathf.FloorToInt(_time * 1f/ 1440f) + 1;
+        int hour = (_time % 1440);
+        int minute = (_time % 60);
 
         minuteGameObject.transform.rotation = Quaternion.Euler(new Vector3(0, 0, -minute * 1f / 60f * 360f));
         hourGameObject.transform.rotation = Quaternion.Euler(new Vector3(0, 0, -(hour % 720) * 1f / 720f * 360f));

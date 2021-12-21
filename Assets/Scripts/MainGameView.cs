@@ -125,6 +125,7 @@ public class MainGameView : MonoBehaviour
         switch (_rpdl[0].resourceType)
         {
             case ResourceType.collect:
+                Database.TimePass(10);
                 MainGameView.Instance.assetConfirmCanvas.AddUI(ResourcePointManager.Instance.DrawAsset(reactingObject.resourcePointId));
                 //UIManager.Instance.assetDataUI.Show(ResourcePointManager.Instance.DrawAsset(reactingObject.resourcePointId));
                 break;
