@@ -5,7 +5,7 @@ using ClassHelper;
 
 public class RecipeMenuCanvas : ControlableUI
 {
-    public ListScrollView listScrollView;
+    public RecipeListScrollView recipeListScrollView;
 
     public override void OnRemoveUI()
     {
@@ -25,7 +25,7 @@ public class RecipeMenuCanvas : ControlableUI
 
     public void Refresh()
     {
-        listScrollView.Setup("Recipe List", this, ClickData, SelectingData, DisSelectingData);
+        recipeListScrollView.Setup("Recipe List", this, ClickData, SelectingData, DisSelectingData);
 
         GenerateList();
     }
@@ -35,7 +35,7 @@ public class RecipeMenuCanvas : ControlableUI
         foreach (RecipeData _r in AssetManager.Instance.GetRecipeDataFullList())
         {
             AssetData _compound = AssetManager.Instance.GetAssetData(_r.targetCompoundId);
-            GameObject gridItemInstance = listScrollView.GenerateItem(_compound.name.GetString(), _r.id);
+            GameObject gridItemInstance = recipeListScrollView.GenerateItem(_compound.name.GetString(), _r.id, _r.hpLoss);
         }
     }
 

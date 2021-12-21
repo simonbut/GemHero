@@ -628,7 +628,8 @@ namespace ClassHelper
         public List<int> targetTag;
         public List<Vector2Int> targetPos;
         public List<int> capacity;
-        public int RequireAchievementsCount;
+        public int hpLoss;
+        public int requireAchievementsCount;
     }
 
     public class EnemyData

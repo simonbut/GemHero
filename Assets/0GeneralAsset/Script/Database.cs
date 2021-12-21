@@ -133,6 +133,22 @@ public class Database : MonoBehaviour
         Save();
     }
 
+    public static void ConsumeHp(int _hp)
+    {
+        userDataJson.hp -= _hp;
+        Save();
+    }
+
+    public static void RecoverHp(int _hp)
+    {
+        userDataJson.hp += _hp;
+        if (userDataJson.hp > userDataJson.hpTotal)
+        {
+            userDataJson.hp = userDataJson.hpTotal;
+        }
+        Save();
+    }
+
     public static void AddAsset(Asset _a)
     {
         _a.assetUid = userDataJson.lastAssetUid;

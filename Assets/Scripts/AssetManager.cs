@@ -197,8 +197,9 @@ public class AssetManager : MonoBehaviour
 
                     _b.capacity.Add(_c7b);
                 }
-
-                int.TryParse(_c[7], out _b.RequireAchievementsCount);
+                
+                int.TryParse(_c[8], out _b.hpLoss);
+                int.TryParse(_c[9], out _b.requireAchievementsCount);
 
                 recipedata.Add(_b);
             }

@@ -23,7 +23,7 @@ public class ListScrollView : MonoBehaviour
     //public int scrollViewId = 0;
 
     // Update is called once per frame
-    void Update()
+    public void Update()
     {
         //print("Mouse ScrollWheel" + Input.GetAxis("Mouse ScrollWheel"));
         scrollRect.verticalNormalizedPosition = Mathf.Clamp(scrollRect.verticalNormalizedPosition + Input.GetAxis("Mouse ScrollWheel"), 0, 1);

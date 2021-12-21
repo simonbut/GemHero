@@ -144,6 +144,8 @@ public class CompositeTagChoosingCanvas : TagChoosingCanvas
         compositeAsset.qualityAffect = compositeAsset.CalculateQualityAffectByQuality(compoundQuality);
         Database.AddAsset(compositeAsset);
 
+        Database.ConsumeHp(recipe.hpLoss);
+
         tagBaseCanvas.Hide();
         MainGameView.Instance.LeaveComposition();
 
