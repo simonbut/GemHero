@@ -112,7 +112,8 @@ public class Database : MonoBehaviour
 
         public int version = 0;
 
-        public int coin = 1000;
+        public int hp = 101;
+        public int hpTotal = 101;
 
         //Progression
         public int time = 480;//in minute
