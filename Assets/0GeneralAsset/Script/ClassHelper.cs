@@ -646,4 +646,18 @@ namespace ClassHelper
             return CharacterAttribute.SetUpCharacterAttribute(hp,atk,ats);
         }
     }
+
+    public class QuestData
+    {
+        //id	description	timeLimit (Hour)
+        public int id;
+        public LocalizedString description;
+        public int timeLimit;
+    }
+
+    public class Quest
+    {
+        public int questId = 0;
+        public int startTime;
+    }
 }

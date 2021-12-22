@@ -62,6 +62,7 @@ public class Database : MonoBehaviour
         ResourcePointManager.Instance.LoadResourcePointData();
         DialogManager.Instance.LoadDialogData();
         CharacterManager.Instance.LoadCharacterData();
+        QuestManager.Instance.LoadQuestData();
         //
 
 
@@ -81,15 +82,6 @@ public class Database : MonoBehaviour
         LoadGlobalSave();
 
         InitDatabaseData();
-
-        if (saveId != -1)
-        {
-            LoadSave(saveId);
-        }
-        else
-        {
-            StartNewGame();
-        }
 
         Directory.CreateDirectory(UnityEngine.Application.persistentDataPath + "/stampset");
 
@@ -121,10 +113,50 @@ public class Database : MonoBehaviour
 
         //back door
         public bool isBackDoor = false;
+        public Quest mainQuest = new Quest();
+        public List<Quest> sideQuest = new List<Quest>();
 
         public int lastAssetUid = 1;
         public List<Asset> assetList = new List<Asset>();
         public List<Tag> playerTags = new List<Tag>();
+    }
+
+    public static void AddQuest(int _questId)
+    {
+        Quest _q = new Quest();
+        _q.questId = _questId;
+        _q.startTime = userDataJson.time;
+        if (_questId <= 100)//main quest
+        {
+            userDataJson.mainQuest = _q;
+        }
+        else//side quest
+        {
+            if (userDataJson.sideQuest.Count < 3)
+            {
+                userDataJson.sideQuest.Add(_q);
+            }
+        }
+        Database.Save();
+    }
+
+    public static void ConsumeQuest(int _questId)
+    {
+        if (_questId <= 100)//main quest
+        {
+            userDataJson.mainQuest = new Quest();
+        }
+        else//side quest
+        {
+            foreach (Quest _q in userDataJson.sideQuest)
+            {
+                if (_q.questId == _questId)
+                {
+                    userDataJson.sideQuest.Remove(_q);
+                }
+            }
+        }
+        Database.Save();
     }
 
     public static void TimePass(int _minute)
@@ -161,6 +193,7 @@ public class Database : MonoBehaviour
 
     public static void LoadSave(int _saveId)
     {
+        print(globalData.lastLoadData);
         //enterGameByLoadSave = true;
         globalData.lastLoadData = _saveId;
         SaveGlobalSave();
@@ -172,7 +205,6 @@ public class Database : MonoBehaviour
         {
             InitSave(_saveId, Random.Range(0, 100000), 1);
         }
-
         //if (isDemo)
         //{
         //    globalData.is_tutorial_clear = false;
@@ -842,9 +874,9 @@ public class Database : MonoBehaviour
 
     public static string TimeToString(float _time)
     {
-        int sec = Mathf.FloorToInt(_time) % 60;
-        int min = Mathf.FloorToInt(_time / 60f);
-        return min.ToString("00") + ":" + sec.ToString("00");
+        int min = Mathf.FloorToInt(_time) % 60;
+        int hour = Mathf.FloorToInt(_time / 60f);
+        return hour.ToString("0") + "H" + min.ToString("0") + "M";
     }
 
     public static string GetInputIcon(KeyBoardInput input)
