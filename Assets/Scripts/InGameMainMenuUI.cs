@@ -10,7 +10,7 @@ public class InGameMainMenuUI : ControlableUI
 
     public override void OnShow()
     {
-        listMenuView.SetUp(new List<string> { "Composite","Quit","PlayerTag"}, this, new List<Callback> { OnCompositeButtonClick , OnQuitButtonClick, OnPlayerTagButtonClick });
+        listMenuView.SetUp(new List<string> { "Composite", "PlayerTag", "Quit"}, this, new List<Callback> { OnCompositeButtonClick, OnPlayerTagButtonClick, OnQuitButtonClick });
 
         base.OnShow();
     }

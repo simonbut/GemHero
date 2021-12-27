@@ -46,6 +46,11 @@ public class QuestManager : MonoBehaviour
                 int.TryParse(_c[0], out _b.id);
                 _b.description = new LocalizedString(_c[1], _c[1], _c[1], "");
                 int.TryParse(_c[2], out _b.timeLimit);
+                QuestType.TryParse(_c[3], out _b.questType);
+                int.TryParse(_c[4], out _b.characterId);
+                int.TryParse(_c[5], out _b.itemId);
+                int.TryParse(_c[6], out _b.itemQuality);
+                int.TryParse(_c[7], out _b.itemTag);
 
                 questData.Add(_b);
             }

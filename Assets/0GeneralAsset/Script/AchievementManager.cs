@@ -88,16 +88,16 @@ public class AchievementManager : MonoBehaviour
         {
             return true;
         }
-        return Database.globalData.completed_achievement_id.Contains((int)achievement_id);
+        return Database.globalData.completedAchievementId.Contains((int)achievement_id);
     }
 
     public void CompleteAchievement(int achievement_id)
     {
         print("CompleteAchievement " + achievement_id);
-        if (!Database.globalData.completed_achievement_id.Contains((int)achievement_id))
+        if (!Database.globalData.completedAchievementId.Contains((int)achievement_id))
         {
             SteamAchievement.UnlockAcheivement(achievement_id);
-            Database.globalData.completed_achievement_id.Add(achievement_id);
+            Database.globalData.completedAchievementId.Add(achievement_id);
             //AchievementManager.Instance.GetAchievement(achievement_id).isGet = true;
 
             Database.SaveGlobalSave();
@@ -122,7 +122,7 @@ public class AchievementManager : MonoBehaviour
 
     public void SyncSteamAchievements()
     {
-        foreach (int _id in Database.globalData.completed_achievement_id)
+        foreach (int _id in Database.globalData.completedAchievementId)
         {
             SteamAchievement.UnlockAcheivement(_id);
         }

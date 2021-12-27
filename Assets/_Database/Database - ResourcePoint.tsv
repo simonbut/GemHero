@@ -1,9 +1,12 @@
-id	resource_point_id	resourceType	asset_id	must_have_tag_list	tag_pool	rare_tag_pool	score_min	score_max	characterId	dialogType	targetDialogId
-1	1	collect	1	1	2	4	20	40			
-2	1	collect	2		2;3	4	20	40			
-3	2	collect	3		2;3	4	20	40			
-4	2	collect	4		2;3	4	20	40			
-5	3	talk							2	destinyShare	1
-6	3	talk							2	afterQuest	2
-7	3	talk							2	afterBattle	3
-8	4	mainQuest							3	mainQuest	4
+id	resource_point_id	resourceType	asset_id	must_have_tag_list	tag_pool	rare_tag_pool	score_min	score_max	characterId	dialogType	targetDialogId	questId	afterQuestId
+1	1	collect	1	1	2	4	20	40					
+2	1	collect	2		2;3	4	20	40					
+3	2	collect	3		2;3	4	20	40					
+4	2	collect	4		2;3	4	20	40					
+6	3	talk							2	afterDestinyShare	4		101
+7	3	talk							2	afterItemQuest	4	101	201
+8	3	talk							2	afterBattleQuest	1	201	
+9	3	talk							2	normal	1		
+10	4	mainQuest							3	beforeMainBattleQuest	4	1	
+11	4	mainQuest							3	afterMainBattleQuest	5	1	2
+12	4	mainQuest							3	talkQuest	5	2	3

@@ -6,25 +6,25 @@ using ClassHelper;
 
 public class TagBaseCanvas : ShapeGenerator
 {
-    #region instance
-    private static TagBaseCanvas m_instance;
+    //#region instance
+    //private static TagBaseCanvas m_instance;
 
-    public static TagBaseCanvas Instance
-    {
-        get
-        {
-            return m_instance;
-        }
-    }
+    //public static TagBaseCanvas Instance
+    //{
+    //    get
+    //    {
+    //        return m_instance;
+    //    }
+    //}
 
-    void Awake()
-    {
-        if (TagBaseCanvas.Instance == null)
-        {
-            m_instance = this;
-        }
-    }
-    #endregion
+    //void Awake()
+    //{
+    //    if (TagBaseCanvas.Instance == null)
+    //    {
+    //        m_instance = this;
+    //    }
+    //}
+    //#endregion
 
     public GameObject choosingTagParent;
     public ChoosingTag choosingTag;
@@ -112,12 +112,12 @@ public class TagBaseCanvas : ShapeGenerator
         isPutChoosingTagValid = true;
         if (CheckIfCollide(choosingTag.GetComponent<ChoosingTag>().tagContent, GetExistingTagList()))
         {
-            print("CheckIfCollide failed");
+            //print("CheckIfCollide failed");
             isPutChoosingTagValid = false;
         }
         if (!CheckIfInside(choosingTag.GetComponent<ChoosingTag>().tagContent, gridBaseShape))
         {
-            print("CheckIfInside failed");
+            //print("CheckIfInside failed");
             isPutChoosingTagValid = false;
         }
     }
@@ -157,7 +157,7 @@ public class TagBaseCanvas : ShapeGenerator
                 {
                     if (_v2 == _v)
                     {
-                        print("x = " + (_v2).x + ",y = " + (_v2).y);
+                        //print("x = " + (_v2).x + ",y = " + (_v2).y);
                         return true;
                     }
                 }

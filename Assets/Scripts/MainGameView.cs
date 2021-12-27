@@ -130,17 +130,104 @@ public class MainGameView : MonoBehaviour
                 //UIManager.Instance.assetDataUI.Show(ResourcePointManager.Instance.DrawAsset(reactingObject.resourcePointId));
                 break;
             case ResourceType.talk:
+                TalkDialogList _td = ResourcePointManager.Instance.GetTalkData(reactingObject.resourcePointId);
+                if (!Database.userDataJson.destinyShareCompletion.Contains(_td.characterId))
+                {
+                    MainGameView.Instance.dialogCanvas.Setup(3, DestinyShare);
+                }
+                else
+                {
+                    if (!Database.userDataJson.questCompletion.Contains(_td.afterItemQuest.questId))
+                    {
+                        MainGameView.Instance.dialogCanvas.Setup(5, ItemQuest);
+                    }
+                    else
+                    {
+                        if (!Database.userDataJson.questCompletion.Contains(_td.afterBattleQuest.questId))
+                        {
+                            MainGameView.Instance.dialogCanvas.Setup(6, BattleQuest);
+                        }
+                        else
+                        {
+                            MainGameView.Instance.dialogCanvas.Setup(_td.normal.targetDialogId, null);
+                        }
+                    }
+                }
+                break;
             case ResourceType.mainQuest:
-                ResourcePointData _rpd = ResourcePointManager.Instance.GetResourcePointDataByDialogType(reactingObject.resourcePointId,DialogType.destinyShare);
-                MainGameView.Instance.dialogCanvas.Setup(_rpd.targetDialogId, 1,DestinyShare);
+                MainQuestDialogList _md = ResourcePointManager.Instance.GetMainQuestData(reactingObject.resourcePointId);
+                if (_md.talkQuest != null)
+                {
+                    if (!Database.userDataJson.questCompletion.Contains(_md.talkQuest.questId))
+                    {
+                        MainGameView.Instance.dialogCanvas.Setup(_md.talkQuest.targetDialogId, CheckQuestAfterMainTalkQuest);
+                    }
+                }
+                else
+                {
+                    if (_md.beforeMainBattleQuest != null)
+                    {
+                        if (!Database.userDataJson.questCompletion.Contains(_md.beforeMainBattleQuest.questId))
+                        {
+                            MainGameView.Instance.dialogCanvas.Setup(_md.beforeMainBattleQuest.targetDialogId, MainBattleQuest);
+                        }
+                    }
+                }
                 break;
         }
     }
 
+    public void CheckQuestAfterMainTalkQuest()
+    {
+        MainQuestDialogList _md = ResourcePointManager.Instance.GetMainQuestData(reactingObject.resourcePointId);
+        Database.AddQuest(_md.talkQuest.afterQuestId);
+    }
+
+    public void MainBattleQuest()
+    {
+        CheckQuestAfterMainBattleQuest();//TODO
+    }
+
+    public void CheckQuestAfterMainBattleQuest()
+    {
+        MainQuestDialogList _md = ResourcePointManager.Instance.GetMainQuestData(reactingObject.resourcePointId);
+        Database.AddQuest(_md.afterMainBattleQuest.afterQuestId);
+    }
+
+    public void ItemQuest()
+    {
+        CheckQuestAfterItemQuest();//TODO
+    }
+
+    public void CheckQuestAfterItemQuest()
+    {
+        TalkDialogList _td = ResourcePointManager.Instance.GetTalkData(reactingObject.resourcePointId);
+        Database.ConsumeQuest(_td.afterItemQuest.questId);
+        Database.AddQuest(_td.afterItemQuest.afterQuestId);
+    }
+
+    public void BattleQuest()
+    {
+        CheckQuestAfterBattleQuest();//TODO
+    }
+
+    public void CheckQuestAfterBattleQuest()
+    {
+        TalkDialogList _td = ResourcePointManager.Instance.GetTalkData(reactingObject.resourcePointId);
+        Database.ConsumeQuest(_td.afterBattleQuest.questId);
+        Database.AddQuest(_td.afterBattleQuest.afterQuestId);
+    }
+
     public void DestinyShare()
     {
-        List<ResourcePointData> _rpdl = ResourcePointManager.Instance.GetResourcePointDataList(reactingObject.resourcePointId);
-        destinyShareChoosingCanvas.AddUI(_rpdl[0].characterId);
+        TalkDialogList _td = ResourcePointManager.Instance.GetTalkData(reactingObject.resourcePointId);
+        destinyShareChoosingCanvas.AddUI(_td.characterId);
+    }
+
+    public void CheckQuestAfterDestinyShare()
+    {
+        TalkDialogList _td = ResourcePointManager.Instance.GetTalkData(reactingObject.resourcePointId);
+        Database.AddQuest(_td.afterDestinyShare.afterQuestId);
     }
 
     public void OpenRecipeMenu()

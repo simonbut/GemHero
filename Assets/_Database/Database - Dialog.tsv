@@ -3,3 +3,13 @@ id	dialogId	step	characterId	content
 2	1	2	1	Text B
 3	1	3	1	Text C
 4	2	1	3	Text D
+5	3	1	0	……
+6	3	2	1	（要使用「命運共享」嘗試跟「漠不關心」的人溝通）
+7	4	1	-1	Text A
+8	4	2	-1	Text B
+9	4	3	-1	Text C
+10	4	4	-1	Text D
+11	5	1	0	……
+12	5	2	1	（交付關鍵物品吧，像那個時候一樣…）
+13	6	1	0	……
+14	6	2	1	（是時候撕開「漠不關心」了…）

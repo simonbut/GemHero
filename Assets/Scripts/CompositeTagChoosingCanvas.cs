@@ -62,7 +62,7 @@ public class CompositeTagChoosingCanvas : TagChoosingCanvas
         {
             tagList[id].offset = Vector2Int.zero;
             //TODO remove existing tag (check if FixedTag)
-            TagBaseCanvas.Instance.GenerateChoosingTag(tagList[id]);
+            tagBaseCanvas.GenerateChoosingTag(tagList[id]);
 
             UIManager.Instance.AddEmptyUI();
         }
@@ -114,9 +114,9 @@ public class CompositeTagChoosingCanvas : TagChoosingCanvas
 
         if (ControlView.Instance.controls.Map1.Cancel.triggered)
         {
-            if (TagBaseCanvas.Instance.choosingTag != null)
+            if (tagBaseCanvas.choosingTag != null)
             {
-                TagBaseCanvas.Instance.DisselectChoosingTag();
+                tagBaseCanvas.DisselectChoosingTag();
                 UIManager.Instance.OnBackPressed();
             }
         }
@@ -128,7 +128,7 @@ public class CompositeTagChoosingCanvas : TagChoosingCanvas
 
         if (ControlView.Instance.controls.Map1.Cancel.triggered)
         {
-            if (TagBaseCanvas.Instance.choosingTag == null)
+            if (tagBaseCanvas.choosingTag == null)
             {
                 tagBaseCanvas.Hide();
                 OnBackPressed();

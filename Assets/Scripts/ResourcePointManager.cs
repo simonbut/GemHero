@@ -99,6 +99,8 @@ public class ResourcePointManager : MonoBehaviour
                         int.TryParse(_c[9], out _b.characterId);
                         DialogType.TryParse(_c[10], out _b.dialogType);
                         int.TryParse(_c[11], out _b.targetDialogId);
+                        int.TryParse(_c[12], out _b.questId);
+                        int.TryParse(_c[13], out _b.afterQuestId);
                         break;
                 }
 
@@ -126,7 +128,6 @@ public class ResourcePointManager : MonoBehaviour
 
     public ResourcePointData GetResourcePointDataByDialogType(int _resourcePointId,DialogType _dialogType)
     {
-        List<ResourcePointData> result = new List<ResourcePointData>();
         foreach (ResourcePointData _rt in resourcePointdata)
         {
             if (_rt.resourcePointId == _resourcePointId && _rt.dialogType == _dialogType)
@@ -246,6 +247,55 @@ public class ResourcePointManager : MonoBehaviour
             Database.AddAsset(result);
         }
 
+        return result;
+    }
+
+    public TalkDialogList GetTalkData(int _resourcePointId)
+    {
+        TalkDialogList result = new TalkDialogList();
+        List<ResourcePointData> _rpdl = GetResourcePointDataList(_resourcePointId);
+        result.characterId = _rpdl[0].characterId;
+        foreach (ResourcePointData _rpd in _rpdl)
+        {
+            switch (_rpd.dialogType)
+            {
+                case DialogType.afterDestinyShare:
+                    result.afterDestinyShare = _rpd;
+                    break;
+                case DialogType.afterItemQuest:
+                    result.afterItemQuest = _rpd;
+                    break;
+                case DialogType.afterBattleQuest:
+                    result.afterBattleQuest = _rpd;
+                    break;
+                case DialogType.normal:
+                    result.normal = _rpd;
+                    break;
+            }
+        }
+        return result;
+    }
+
+    public MainQuestDialogList GetMainQuestData(int _resourcePointId)
+    {
+        MainQuestDialogList result = new MainQuestDialogList();
+        List<ResourcePointData> _rpdl = GetResourcePointDataList(_resourcePointId);
+        result.characterId = _rpdl[0].characterId;
+        foreach (ResourcePointData _rpd in _rpdl)
+        {
+            switch (_rpd.dialogType)
+            {
+                case DialogType.beforeMainBattleQuest:
+                    result.beforeMainBattleQuest = _rpd;
+                    break;
+                case DialogType.afterMainBattleQuest:
+                    result.afterMainBattleQuest = _rpd;
+                    break;
+                case DialogType.talkQuest:
+                    result.talkQuest = _rpd;
+                    break;
+            }
+        }
         return result;
     }
 }

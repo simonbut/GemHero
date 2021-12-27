@@ -109,25 +109,38 @@ public class Database : MonoBehaviour
 
         //Progression
         public int time = 480;//in minute
-        //
-
-        //back door
-        public bool isBackDoor = false;
         public Quest mainQuest = new Quest();
         public List<Quest> sideQuest = new List<Quest>();
+        public List<int> destinyShareCompletion = new List<int>();
+        public List<int> questCompletion = new List<int>();
 
+        //player property
         public int lastAssetUid = 1;
         public List<Asset> assetList = new List<Asset>();
         public List<Tag> playerTags = new List<Tag>();
+
+        //back door
+        public bool isBackDoor = false;
+    }
+
+    public static void CompleteDestinyShare(int _chId)
+    {
+        userDataJson.destinyShareCompletion.Add(_chId);
+        Database.Save();
     }
 
     public static void AddQuest(int _questId)
     {
+        if (_questId == 0)
+        {
+            return;
+        }
         Quest _q = new Quest();
         _q.questId = _questId;
         _q.startTime = userDataJson.time;
         if (_questId <= 100)//main quest
         {
+            CompleteMainQuest();
             userDataJson.mainQuest = _q;
         }
         else//side quest
@@ -140,8 +153,14 @@ public class Database : MonoBehaviour
         Database.Save();
     }
 
+    static void CompleteMainQuest()
+    {
+        ConsumeQuest(userDataJson.mainQuest.questId);
+    }
+
     public static void ConsumeQuest(int _questId)
     {
+        userDataJson.questCompletion.Add(_questId);
         if (_questId <= 100)//main quest
         {
             userDataJson.mainQuest = new Quest();
@@ -153,6 +172,7 @@ public class Database : MonoBehaviour
                 if (_q.questId == _questId)
                 {
                     userDataJson.sideQuest.Remove(_q);
+                    break;
                 }
             }
         }
@@ -325,14 +345,14 @@ public class Database : MonoBehaviour
 
     public class GlobalData
     {
-
         //Save
         public int play_times = 0;
         public int lastLoadData = -1;
-        public List<int> read_achievement_id = new List<int>();
 
         //Progression
-        public List<int> completed_achievement_id = new List<int>();
+        public List<int> readAchievementId = new List<int>();
+        public List<int> completedAchievementId = new List<int>();
+        public List<int> completedDialogId = new List<int>();
         public bool isCredit1Seen = false;
 
         //Settings
@@ -347,6 +367,14 @@ public class Database : MonoBehaviour
 
         //Tutorial Check
         public bool isFastEditTutorialClear = false;
+    }
+
+    public static void ReadDialog(int _dialogId)
+    {
+        if (!globalData.completedDialogId.Contains(_dialogId))
+        {
+            globalData.completedDialogId.Add(_dialogId);
+        }
     }
 
     public static void InitGlobalSaveData()
@@ -791,9 +819,9 @@ public class Database : MonoBehaviour
 
     public static int SearchForUnreadAchievement()
     {
-        foreach (int _id in globalData.completed_achievement_id)
+        foreach (int _id in globalData.completedAchievementId)
         {
-            if (!globalData.read_achievement_id.Contains(_id))
+            if (!globalData.readAchievementId.Contains(_id))
             {
                 return _id;
             }
@@ -803,9 +831,9 @@ public class Database : MonoBehaviour
 
     public static void ReadAchievement(int _id)
     {
-        if (!globalData.read_achievement_id.Contains(_id))
+        if (!globalData.readAchievementId.Contains(_id))
         {
-            globalData.read_achievement_id.Add(_id);
+            globalData.readAchievementId.Add(_id);
             SaveGlobalSave();
         }
     }

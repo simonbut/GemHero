@@ -1,3 +1,5 @@
-id	description	timeLimit (Hour)
-1	跟XXYY交談	12
-101	交付擁有「Tag A」的「Compound A」	12
+id	description	timeLimit (Hour)	questType	characterId	itemId	itemQuality	itemTag
+1	跟 $1 交談	12	talk	2			
+101	交付 $1 擁有「$4」的「$2」	12	item	3	1	0	1
+201	取出 $1 身上的「漠不關心」標籤	3	battle	3			
+2	跟 $1 戰鬥	12	mainBattle	4			

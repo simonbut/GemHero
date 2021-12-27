@@ -93,7 +93,7 @@ namespace ClassHelper
             {
                 return true;
             }
-            return Database.globalData.completed_achievement_id.Contains((int)achievement_id);
+            return Database.globalData.completedAchievementId.Contains((int)achievement_id);
         }
     }
 
@@ -357,12 +357,22 @@ namespace ClassHelper
         }
     }
 
+    public enum QuestType
+    {
+        talk,
+        item,
+        battle
+    }
+
     public enum DialogType
     {
-        destinyShare,
-        afterQuest,
-        afterBattle,
-        mainQuest
+        afterDestinyShare,
+        afterItemQuest,
+        afterBattleQuest,
+        normal,
+        beforeMainBattleQuest,
+        afterMainBattleQuest,
+        talkQuest,
     }
 
     public enum ResourceType
@@ -408,6 +418,23 @@ namespace ClassHelper
         FixedTag
     }
 
+    public class TalkDialogList
+    {
+        public int characterId;
+        public ResourcePointData afterDestinyShare;
+        public ResourcePointData afterItemQuest;
+        public ResourcePointData afterBattleQuest;
+        public ResourcePointData normal;
+    }
+
+    public class MainQuestDialogList
+    {
+        public int characterId;
+        public ResourcePointData beforeMainBattleQuest;
+        public ResourcePointData afterMainBattleQuest;
+        public ResourcePointData talkQuest;
+    }
+
     public class ResourcePointData
     {
         //id	resource_point_id	asset_id	must_have_tag_list	tag_pool	score_min	score_max
@@ -423,6 +450,8 @@ namespace ClassHelper
         public int characterId;
         public DialogType dialogType;
         public int targetDialogId;
+        public int questId;
+        public int afterQuestId;
     }
 
     public class CharacterData
@@ -653,6 +682,11 @@ namespace ClassHelper
         public int id;
         public LocalizedString description;
         public int timeLimit;
+        public QuestType questType;
+        public int characterId;
+        public int itemId;
+        public int itemQuality;
+        public int itemTag;
     }
 
     public class Quest

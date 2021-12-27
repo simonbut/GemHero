@@ -35,8 +35,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 20}
-  m_SizeDelta: {x: -20, y: -55.6283}
+  m_AnchoredPosition: {x: 0, y: 42.397766}
+  m_SizeDelta: {x: -20, y: -10.8327}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6594556194912966702
 CanvasRenderer:
@@ -68,18 +68,18 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: f441d41f1a600a143baaeb7a0de92bbf, type: 3}
-    m_FontSize: 15
+    m_FontSize: 30
     m_FontStyle: 0
     m_BestFit: 1
-    m_MinSize: 10
+    m_MinSize: 20
     m_MaxSize: 30
-    m_Alignment: 3
+    m_Alignment: 6
     m_AlignByGeometry: 0
     m_RichText: 1
-    m_HorizontalOverflow: 1
+    m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Mission1: XXYYZZ'
+  m_Text: 213123 adsasd asdasdasd asdasdasd asdasdasda
 --- !u!114 &7961207867870703095
 MonoBehaviour:
   m_ObjectHideFlags: 0

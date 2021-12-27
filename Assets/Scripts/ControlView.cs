@@ -105,7 +105,7 @@ public class ControlView : MonoBehaviour
     {
         if (isTrue)
         {
-            print("React");
+            //print("React");
             MainGameView.Instance.CharacterReact();
         }
     }

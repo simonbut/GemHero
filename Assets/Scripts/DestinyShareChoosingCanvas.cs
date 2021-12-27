@@ -63,7 +63,7 @@ public class DestinyShareChoosingCanvas : TagChoosingCanvas
         {
             tagList[id].offset = Vector2Int.zero;
             //TODO remove existing tag (check if FixedTag)
-            TagBaseCanvas.Instance.GenerateChoosingTag(tagList[id]);
+            destinyShareTagCanvas.GenerateChoosingTag(tagList[id]);
 
             UIManager.Instance.AddEmptyUI();
         }
@@ -111,9 +111,9 @@ public class DestinyShareChoosingCanvas : TagChoosingCanvas
 
         if (ControlView.Instance.controls.Map1.Cancel.triggered)
         {
-            if (TagBaseCanvas.Instance.choosingTag != null)
+            if (destinyShareTagCanvas.choosingTag != null)
             {
-                TagBaseCanvas.Instance.DisselectChoosingTag();
+                destinyShareTagCanvas.DisselectChoosingTag();
                 UIManager.Instance.OnBackPressed();
             }
         }
@@ -125,7 +125,7 @@ public class DestinyShareChoosingCanvas : TagChoosingCanvas
 
         if (ControlView.Instance.controls.Map1.Cancel.triggered)
         {
-            if (TagBaseCanvas.Instance.choosingTag == null)
+            if (destinyShareTagCanvas.choosingTag == null)
             {
                 destinyShareTagCanvas.Hide();
                 OnBackPressed();
@@ -135,7 +135,6 @@ public class DestinyShareChoosingCanvas : TagChoosingCanvas
 
     void CompleteDestinyShare()
     {
-        //TODO check if it can be complete
         bool isAllTagsPlaced = true;
         foreach (Tag _t in tagList)
         {
@@ -150,14 +149,15 @@ public class DestinyShareChoosingCanvas : TagChoosingCanvas
         }
 
         Database.userDataJson.playerTags = destinyShareTagCanvas.GetExistingTagList();
-        Database.Save();
 
         destinyShareTagCanvas.Hide();
         MainGameView.Instance.LeaveDestinyShare();
         OnBackPressed();
 
         //Dialog after
-        ResourcePointData _rpd = ResourcePointManager.Instance.GetResourcePointDataByDialogType(MainGameView.Instance.reactingObject.resourcePointId, DialogType.destinyShare);
-        MainGameView.Instance.dialogCanvas.Setup(_rpd.targetDialogId, 1, null);
+        ResourcePointData _rpd = ResourcePointManager.Instance.GetResourcePointDataByDialogType(MainGameView.Instance.reactingObject.resourcePointId, DialogType.afterDestinyShare);
+        print(_rpd.id);
+        Database.CompleteDestinyShare(_rpd.characterId);
+        MainGameView.Instance.dialogCanvas.Setup(_rpd.targetDialogId, MainGameView.Instance.CheckQuestAfterDestinyShare);
     }
 }

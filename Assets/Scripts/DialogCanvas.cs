@@ -63,8 +63,14 @@ public class DialogCanvas : ControlableUI
     }
 
     Callback callbackAfterDialog;
+    public void Setup(int _dialogId, Callback _callbackAfterDialog)
+    {
+        Setup(_dialogId, 1, _callbackAfterDialog);
+    }
+
     public void Setup(int _dialogId, int _step,Callback _callbackAfterDialog)
     {
+        Database.ReadDialog(_dialogId);
         callbackAfterDialog = _callbackAfterDialog;
         dialogId = _dialogId;
         step = _step;
@@ -82,7 +88,14 @@ public class DialogCanvas : ControlableUI
             ResourcePoint _rp = MainGameView.Instance.FindResourcePointByCharacterId(_dd.characterId);
             if (_rp == null)
             {
-                Setup(null, CharacterManager.Instance.GetCharacterData(_dd.characterId).name.GetString(), _dd.content.GetString());
+                if (CharacterManager.Instance.GetCharacterData(_dd.characterId) != null)
+                {
+                    Setup(null, CharacterManager.Instance.GetCharacterData(_dd.characterId).name.GetString(), _dd.content.GetString());
+                }
+                else
+                {
+                    Setup(null, "", _dd.content.GetString());
+                }
             }
             else
             {

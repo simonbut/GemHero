@@ -24,7 +24,7 @@ public class TimeCanvas : MonoBehaviour
         {
             time += Time.deltaTime * 20f;
         }
-        else
+        if (time > Database.userDataJson.time)
         {
             time = Database.userDataJson.time;
         }
