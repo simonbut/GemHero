@@ -197,7 +197,9 @@ public class MainGameView : MonoBehaviour
 
     public void ItemQuest()
     {
-        CheckQuestAfterItemQuest();//TODO
+        TalkDialogList _td = ResourcePointManager.Instance.GetTalkData(reactingObject.resourcePointId);
+        QuestData _qd = QuestManager.Instance.GetQuestData(_td.afterItemQuest.questId);
+        MainGameView.Instance.itemCanvas.AddUI(ConfirmItemSubmit, _qd.itemQuality, _qd.itemTag, _qd.itemId);
     }
 
     public void CheckQuestAfterItemQuest()
@@ -261,5 +263,20 @@ public class MainGameView : MonoBehaviour
             }
         }
         return null;
+    }
+
+    public void ConfirmItemSubmit(int uid, GridItem gi)
+    {
+        GlobalCommunicateManager.varInt = uid;
+        UIManager.Instance.choiceUI.Setup(new Vector2(Screen.width / 2f, Screen.height / 2f), new List<string> { "Submit", "Redo" }, new List<Callback> { ItemSubmit, null });
+    }
+
+    public void ItemSubmit()
+    {
+        Database.ConsumeAsset(GlobalCommunicateManager.varInt);
+        TalkDialogList _td = ResourcePointManager.Instance.GetTalkData(reactingObject.resourcePointId);
+        UIManager.Instance.HideAllDataUI();
+        UIManager.Instance.OnBackPressed();
+        MainGameView.Instance.dialogCanvas.Setup(_td.afterItemQuest.targetDialogId, CheckQuestAfterItemQuest);
     }
 }

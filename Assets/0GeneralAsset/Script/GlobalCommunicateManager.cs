@@ -5,8 +5,7 @@ using ClassHelper;
 
 public class GlobalCommunicateManager : MonoBehaviour
 {
-
-    public static string oiceId = "";
+    public static int varInt = 0;
 
     public static int selectingId = 0;
     public static int selectingScrollViewId = 0;

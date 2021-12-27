@@ -168,7 +168,7 @@ public class CompositeMenuCanvas : ControlableUI
         UIManager.Instance.assetInCompositionDataUI.Hide();
         UIManager.Instance.compositionDataUI.Hide();
         //MainGameView.Instance.tagBaseCanvas.Show(recipe.shape, AssetManager.Instance.CreateTagList(TargetTagListWithEnoughPoints(), recipe.targetPos));
-        MainGameView.Instance.tagChoosingCanvas.AddUI(GetQuality(), recipe, AssetManager.Instance.CreateTagListByAssets(assetSelectList), AssetManager.Instance.CreateTagList(TargetTagListWithEnoughPoints(), recipe.targetPos));
+        MainGameView.Instance.tagChoosingCanvas.AddUI(assetSelectList, GetQuality(), recipe, AssetManager.Instance.CreateTagListByAssets(assetSelectList), AssetManager.Instance.CreateTagList(TargetTagListWithEnoughPoints(), recipe.targetPos));
     }
 
     void ReSelectAsset()

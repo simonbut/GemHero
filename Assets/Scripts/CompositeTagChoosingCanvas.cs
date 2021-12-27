@@ -86,11 +86,13 @@ public class CompositeTagChoosingCanvas : TagChoosingCanvas
         }
     }
 
+    public int[] assetSelectList;
     List<Tag> tagList;
     RecipeData recipe;
     int compoundQuality;
-    public void AddUI(int _compoundQuality, RecipeData _recipe, List<Tag> _tagList,List<Tag> _staticTagList)
+    public void AddUI(int[] _assetSelectList,int _compoundQuality, RecipeData _recipe, List<Tag> _tagList,List<Tag> _staticTagList)
     {
+        assetSelectList = _assetSelectList;
         recipe = _recipe;
         compoundQuality = _compoundQuality;
 
@@ -143,6 +145,11 @@ public class CompositeTagChoosingCanvas : TagChoosingCanvas
         compositeAsset.tagList = tagBaseCanvas.GetExistingTagIdList();
         compositeAsset.qualityAffect = compositeAsset.CalculateQualityAffectByQuality(compoundQuality);
         Database.AddAsset(compositeAsset);
+
+        foreach (int _uid in assetSelectList)
+        {
+            Database.ConsumeAsset(_uid);
+        }
 
         Database.ConsumeHp(recipe.hpLoss);
 

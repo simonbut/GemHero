@@ -514,6 +514,7 @@ namespace ClassHelper
         public int assetId;
         public int qualityAffect;
         public List<int> tagList;
+        public bool isConsumed = false;
 
         public int GetQuality()
         {

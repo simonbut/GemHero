@@ -295,7 +295,7 @@ public class AssetManager : MonoBehaviour
 
     public Asset GetAssetByUid(int uid)
     {
-        foreach (Asset _a in Database.userDataJson.assetList)
+        foreach (Asset _a in GetAssetList())
         {
             if(_a.assetUid == uid)
             {
@@ -308,7 +308,7 @@ public class AssetManager : MonoBehaviour
     public List<Asset> GetAssetListByType(int type)
     {
         List<Asset> result = new List<Asset>();
-        foreach (Asset _a in Database.userDataJson.assetList)
+        foreach (Asset _a in GetAssetList())
         {
             if (_a.GetAssetData().IsAssetType(type))
             {
@@ -352,6 +352,10 @@ public class AssetManager : MonoBehaviour
         List<Asset> result = new List<Asset>();
         foreach (Asset _a in Database.userDataJson.assetList)
         {
+            if ( _a.isConsumed)
+            {
+                continue;
+            }
             if (!(_filterQuality == 0 || _a.GetQuality() >= _filterQuality))
             {
                 continue;

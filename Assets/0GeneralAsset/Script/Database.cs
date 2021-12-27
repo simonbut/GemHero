@@ -210,7 +210,17 @@ public class Database : MonoBehaviour
         Save();
     }
 
-
+    public static void ConsumeAsset(int _assetUid)
+    {
+        foreach (Asset _a in userDataJson.assetList)
+        {
+            if (_a.assetUid == _assetUid)
+            {
+                _a.isConsumed = true;
+                return;
+            }
+        }
+    }
 
     public static void LoadSave(int _saveId)
     {

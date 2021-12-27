@@ -8,7 +8,7 @@ using UnityEngine.InputSystem;
 public class ItemCanvas : ControlableUI
 {
     public GridScrollView gridScrollView;
-    public Callback clickCallback;
+    public GridItemCallback clickCallback;
     public int filterQuality = 0;
     public int filterTagId = 0;
     public int filterAssetId = 0;
@@ -50,7 +50,7 @@ public class ItemCanvas : ControlableUI
         {
             return;
         }
-        clickCallback();
+        clickCallback(uid, gi);
     }
 
     void SelectingData(int uid, GridItem gi)
@@ -80,7 +80,7 @@ public class ItemCanvas : ControlableUI
         }
     }
 
-    public void AddUI(Callback _clickCallback = null, int _filterQuality = 0, int _filterTagId = 0, int _filterAssetId = 0)
+    public void AddUI(GridItemCallback _clickCallback = null, int _filterQuality = 0, int _filterTagId = 0, int _filterAssetId = 0)
     {
         clickCallback = _clickCallback;
         filterQuality = _filterQuality;
