@@ -24,10 +24,10 @@ public class UIManager : MonoBehaviour
 
     //ControlableUI controlingUI;
     public List<ControlableUI> ControlableUIList = new List<ControlableUI>();
-    public ConfirmUI confirmUI;
-    public ConfirmUI confirmSmallUI;
-    public InformationUI informationUI;
-    public InformationUI informationParagraphUI;
+    //public ConfirmUI confirmUI;
+    //public ConfirmUI confirmSmallUI;
+    public InformationUI shortInformationUI;
+    //public InformationUI informationParagraphUI;
     public SettingUI settingUI;
     public ControlableUIGeneral emptyUI;
     public NewAchievementUI newAchievementUI;
@@ -144,32 +144,32 @@ public class UIManager : MonoBehaviour
         return false;
     }
 
-    public bool IsCurrentUIConfirmUI()
-    {
-        bool result = false;
-        if (ControlableUIList.Count <= 0)
-        {
-            return false;
-        }
-        if (confirmUI == ControlableUIList[ControlableUIList.Count - 1] || confirmSmallUI == ControlableUIList[ControlableUIList.Count - 1])
-        {
-            return true;
-        }
-        return result;
-    }
+    //public bool IsCurrentUIConfirmUI()
+    //{
+    //    bool result = false;
+    //    if (ControlableUIList.Count <= 0)
+    //    {
+    //        return false;
+    //    }
+    //    if (confirmUI == ControlableUIList[ControlableUIList.Count - 1] || confirmSmallUI == ControlableUIList[ControlableUIList.Count - 1])
+    //    {
+    //        return true;
+    //    }
+    //    return result;
+    //}
 
-    public bool IsCurrentUIInformationUI()
-    {
-        if (ControlableUIList.Count <= 0)
-        {
-            return false;
-        }
-        if (informationUI == ControlableUIList[ControlableUIList.Count - 1])
-        {
-            return true;
-        }
-        return false;
-    }
+    //public bool IsCurrentUIInformationUI()
+    //{
+    //    if (ControlableUIList.Count <= 0)
+    //    {
+    //        return false;
+    //    }
+    //    if (informationUI == ControlableUIList[ControlableUIList.Count - 1])
+    //    {
+    //        return true;
+    //    }
+    //    return false;
+    //}
     
     public ControlableUI GetCurrentUI()
     {
@@ -199,35 +199,35 @@ public class UIManager : MonoBehaviour
     //    inputTextUI.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 0);
     //}
 
-    public void AddConfirmUI(string _text, ConfirmUI.SimpleCallBack _yesCallBack, ConfirmUI.SimpleCallBack _noCallBack = null,bool _isHideLastUI = true)
-    {
-        confirmUI.isHideLastUI = _isHideLastUI;
-        confirmUI.AddUI(_text, _yesCallBack, _noCallBack);
-        confirmUI.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 0);
-    }
+    //public void AddConfirmUI(string _text, ConfirmUI.SimpleCallBack _yesCallBack, ConfirmUI.SimpleCallBack _noCallBack = null,bool _isHideLastUI = true)
+    //{
+    //    confirmUI.isHideLastUI = _isHideLastUI;
+    //    confirmUI.AddUI(_text, _yesCallBack, _noCallBack);
+    //    confirmUI.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 0);
+    //}
 
-    public void AddConfirmSmallUI(string _text, ConfirmUI.SimpleCallBack _yesCallBack, ConfirmUI.SimpleCallBack _noCallBack = null)
-    {
-        confirmSmallUI.AddUI(_text, _yesCallBack, _noCallBack);
-        confirmSmallUI.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 0);
-    }
+    //public void AddConfirmSmallUI(string _text, ConfirmUI.SimpleCallBack _yesCallBack, ConfirmUI.SimpleCallBack _noCallBack = null)
+    //{
+    //    confirmSmallUI.AddUI(_text, _yesCallBack, _noCallBack);
+    //    confirmSmallUI.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 0);
+    //}
 
-    public void AddConfirmUILow(string _text, ConfirmUI.SimpleCallBack _yesCallBack, ConfirmUI.SimpleCallBack _noCallBack = null, bool _isHideLastUI = true)
-    {
-        confirmUI.isHideLastUI = _isHideLastUI;
-        confirmUI.AddUI(_text, _yesCallBack, _noCallBack);
-        confirmUI.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -20);
-    }
+    //public void AddConfirmUILow(string _text, ConfirmUI.SimpleCallBack _yesCallBack, ConfirmUI.SimpleCallBack _noCallBack = null, bool _isHideLastUI = true)
+    //{
+    //    confirmUI.isHideLastUI = _isHideLastUI;
+    //    confirmUI.AddUI(_text, _yesCallBack, _noCallBack);
+    //    confirmUI.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -20);
+    //}
 
-    public void AddInformationUI(string _text, InformationUI.SimpleCallBack _yesCallBack = null)
-    {
-        informationUI.AddUI(_text, _yesCallBack);
-    }
+    //public void AddInformationUI(string _text, InformationUI.SimpleCallBack _yesCallBack = null)
+    //{
+    //    informationUI.AddUI(_text, _yesCallBack);
+    //}
 
-    public void AddInformationParagraphUI(string _text, InformationUI.SimpleCallBack _yesCallBack = null)
-    {
-        informationParagraphUI.AddUI(_text, _yesCallBack);
-    }
+    //public void AddInformationParagraphUI(string _text, InformationUI.SimpleCallBack _yesCallBack = null)
+    //{
+    //    informationParagraphUI.AddUI(_text, _yesCallBack);
+    //}
 
     public void RefreshUI()
     {

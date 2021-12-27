@@ -10,7 +10,7 @@ public class InGameMainMenuUI : ControlableUI
 
     public override void OnShow()
     {
-        listMenuView.SetUp(new List<string> { "Composite", "PlayerTag", "Item", "Quit"}, this, new List<Callback> { OnCompositeButtonClick, OnPlayerTagButtonClick, OnItemButtonClick, OnQuitButtonClick });
+        listMenuView.SetUp(new List<string> { "Composite", "PlayerTag", "Item", "Sleep", "Quit" }, this, new List<Callback> { OnCompositeButtonClick, OnPlayerTagButtonClick, OnItemButtonClick, OnSleepButtonClick, OnQuitButtonClick });
 
         base.OnShow();
     }
@@ -47,6 +47,11 @@ public class InGameMainMenuUI : ControlableUI
     void OnItemButtonClick()
     {
         MainGameView.Instance.itemCanvas.AddUI();
+    }
+
+    void OnSleepButtonClick()
+    {
+        UIManager.Instance.choiceUI.Setup(new Vector2(Screen.width / 2f, Screen.height / 2f), new List<string> { "Confirm", "Cancel" }, new List<Callback> { MainGameView.Instance.Sleep, null },"Do you want to sleep? It will consume 2 hrs.");
     }
 }
 

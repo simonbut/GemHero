@@ -94,8 +94,17 @@ public class ChoiceUI : ControlableUI
     List<Callback> buttonCallbackList;
     public List<GameObject> listItemList;
 
-    public void Setup(Vector2 _pos, List<string> _buttonTextList, List<Callback> _buttonCallbackList)
+    public void Setup(Vector2 _pos, List<string> _buttonTextList, List<Callback> _buttonCallbackList,string description = "")
     {
+        if (description != "")
+        {
+            UIManager.Instance.shortInformationUI.Show(description);
+        }
+        else
+        {
+            UIManager.Instance.shortInformationUI.OnHide();
+        }
+
         transform.position = _pos;
 
         buttonCallbackList = _buttonCallbackList;
@@ -160,6 +169,7 @@ public class ChoiceUI : ControlableUI
     void Click(int id, ListItem gi)
     {
         OnBackPressed();
+        UIManager.Instance.shortInformationUI.OnHide();
         buttonCallbackList[id]?.Invoke();
     }
 

@@ -279,4 +279,10 @@ public class MainGameView : MonoBehaviour
         UIManager.Instance.OnBackPressed();
         MainGameView.Instance.dialogCanvas.Setup(_td.afterItemQuest.targetDialogId, CheckQuestAfterItemQuest);
     }
+
+    public void Sleep()
+    {
+        Database.TimePass(2 * 60);
+        Database.RecoverHp(Database.userDataJson.hpTotal);
+    }
 }
