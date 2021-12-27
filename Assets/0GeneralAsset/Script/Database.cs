@@ -203,6 +203,7 @@ public class Database : MonoBehaviour
 
     public static void AddAsset(Asset _a)
     {
+        print("Add Asset");
         _a.assetUid = userDataJson.lastAssetUid;
         userDataJson.assetList.Add(_a);
         userDataJson.lastAssetUid++;
@@ -471,6 +472,8 @@ public class Database : MonoBehaviour
 
     public static void Save(int _saveId)
     {
+        print("Save " + _saveId);
+
         saveId = _saveId;
         //print(UnityEngine.Application.persistentDataPath);
         //System.IO.File.WriteAllText(UnityEngine.Application.persistentDataPath + "/stageDataJson" + saveId + ".sav", JsonUtility.ToJson(stageDataJson));

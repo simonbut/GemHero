@@ -346,4 +346,26 @@ public class AssetManager : MonoBehaviour
         }
         return result;
     }
+
+    public List<Asset> GetAssetList(int _filterQuality = 0, int _filterTagId = 0, int _filterAssetId = 0)
+    {
+        List<Asset> result = new List<Asset>();
+        foreach (Asset _a in Database.userDataJson.assetList)
+        {
+            if (!(_filterQuality == 0 || _a.GetQuality() >= _filterQuality))
+            {
+                continue;
+            }
+            if (!(_filterTagId == 0 || _a.tagList.Contains(_filterTagId)))
+            {
+                continue;
+            }
+            if (!(_filterAssetId == 0 || _a.GetAssetData().id == _filterAssetId))
+            {
+                continue;
+            }
+            result.Add(_a);
+        }
+        return result;
+    }
 }

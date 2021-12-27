@@ -10,7 +10,7 @@ public class InGameMainMenuUI : ControlableUI
 
     public override void OnShow()
     {
-        listMenuView.SetUp(new List<string> { "Composite", "PlayerTag", "Quit"}, this, new List<Callback> { OnCompositeButtonClick, OnPlayerTagButtonClick, OnQuitButtonClick });
+        listMenuView.SetUp(new List<string> { "Composite", "PlayerTag", "Item", "Quit"}, this, new List<Callback> { OnCompositeButtonClick, OnPlayerTagButtonClick, OnItemButtonClick, OnQuitButtonClick });
 
         base.OnShow();
     }
@@ -42,6 +42,11 @@ public class InGameMainMenuUI : ControlableUI
     void OnPlayerTagButtonClick()
     {
         MainGameView.Instance.playerTagChoosingCanvas.AddUI();
+    }
+
+    void OnItemButtonClick()
+    {
+        MainGameView.Instance.itemCanvas.AddUI();
     }
 }
 
