@@ -379,7 +379,8 @@ namespace ClassHelper
     {
         collect,
         talk,
-        mainQuest
+        mainQuest,
+        special
     }
 
     public enum CompoundType

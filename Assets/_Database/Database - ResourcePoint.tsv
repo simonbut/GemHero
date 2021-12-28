@@ -10,3 +10,7 @@ id	resource_point_id	resourceType	asset_id	must_have_tag_list	tag_pool	rare_tag_
 10	4	mainQuest							3	beforeMainBattleQuest	4	1	
 11	4	mainQuest							3	afterMainBattleQuest	5	1	2
 12	4	mainQuest							3	talkQuest	5	2	3
+13	101	special											
+14	102	special											
+15	103	special											
+16	104	special											

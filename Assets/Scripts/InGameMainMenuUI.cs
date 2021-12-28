@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine.SceneManagement;
 using UnityEngine;
 using ClassHelper;
 
@@ -31,27 +30,27 @@ public class InGameMainMenuUI : ControlableUI
 
     void OnCompositeButtonClick()
     {
-        MainGameView.Instance.OpenRecipeMenu();
-    }
-
-    void OnQuitButtonClick()
-    {
-        SceneManager.LoadScene("StartScene");
+        MainGameView.Instance.OpenCompositeCanvas();
     }
 
     void OnPlayerTagButtonClick()
     {
-        MainGameView.Instance.playerTagChoosingCanvas.AddUI();
+        MainGameView.Instance.OpenPlayerTagCanvas();
     }
 
     void OnItemButtonClick()
     {
-        MainGameView.Instance.itemCanvas.AddUI();
+        MainGameView.Instance.OpenItemCanvas();
     }
 
     void OnSleepButtonClick()
     {
-        UIManager.Instance.choiceUI.Setup(new Vector2(Screen.width / 2f, Screen.height / 2f), new List<string> { "Confirm", "Cancel" }, new List<Callback> { MainGameView.Instance.Sleep, null },"Do you want to sleep? It will consume 2 hrs.");
+        MainGameView.Instance.OpenSleepCanvas();
+    }
+
+    void OnQuitButtonClick()
+    {
+        MainGameView.Instance.Quit();
     }
 }
 

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 using UnityEngine.UI;
 using ClassHelper;
@@ -80,6 +81,23 @@ public class MainGameView : MonoBehaviour
                     case ResourceType.talk:
                     case ResourceType.mainQuest:
                         ShowInteractiveDialog("Talk");
+                        break;
+                    case ResourceType.special:
+                        switch (_rpd[0].resourcePointId)
+                        {
+                            case 101:
+                                ShowInteractiveDialog("Composite");
+                                break;
+                            case 102:
+                                ShowInteractiveDialog("PlayerTag");
+                                break;
+                            case 103:
+                                ShowInteractiveDialog("Item");
+                                break;
+                            case 104:
+                                ShowInteractiveDialog("Sleep");
+                                break;
+                        }
                         break;
                 }
             }
@@ -175,7 +193,49 @@ public class MainGameView : MonoBehaviour
                     }
                 }
                 break;
+            case ResourceType.special:
+                switch (reactingObject.resourcePointId)
+                {
+                    case 101:
+                        OpenCompositeCanvas();
+                        break;
+                    case 102:
+                        OpenPlayerTagCanvas();
+                        break;
+                    case 103:
+                        OpenItemCanvas();
+                        break;
+                    case 104:
+                        OpenSleepCanvas();
+                        break;
+                }
+                break;
         }
+    }
+
+    public void OpenCompositeCanvas()
+    {
+        OpenRecipeMenu();
+    }
+
+    public void OpenPlayerTagCanvas()
+    {
+        playerTagChoosingCanvas.AddUI();
+    }
+
+    public void OpenItemCanvas()
+    {
+        itemCanvas.AddUI();
+    }
+
+    public void OpenSleepCanvas()
+    {
+        UIManager.Instance.choiceUI.Setup(new Vector2(Screen.width / 2f, Screen.height / 2f), new List<string> { "Confirm", "Cancel" }, new List<Callback> { MainGameView.Instance.Sleep, null }, "Do you want to sleep? It will consume 2 hrs.");
+    }
+
+    public void Quit()
+    {
+        SceneManager.LoadScene("StartScene");
     }
 
     public void CheckQuestAfterMainTalkQuest()
