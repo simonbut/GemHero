@@ -37,7 +37,7 @@ public class DialogCanvas : ControlableUI
 
         if (targetGameObject == null)
         {
-            transform.position = new Vector2(Screen.width / 2f, Screen.height / 2f);
+            transform.position = new Vector2(Screen.width / 2f, Screen.height / 2f) - new Vector2(60, 230);
         }
         else
         {
@@ -131,8 +131,8 @@ public class DialogCanvas : ControlableUI
 
         dialogObject.transform.Find("Text").GetComponent<Text>().text = _content;
         dialogObject.GetComponent<RectTransform>().sizeDelta = new Vector3(maxWidth + 50, _hDialog + 10);
-        //TODO Assign dialogObject position
 
+        nameObject.SetActive(_name.Length > 0);
         nameObject.transform.Find("Text").GetComponent<Text>().text = _name;
         nameObject.GetComponent<RectTransform>().sizeDelta = new Vector3(_wName + 50, _hName + 10);
         nameObject.transform.position = dialogObject.transform.position + new Vector3(-maxWidth / 2f + _wName / 2f, - nameObject.GetComponent<RectTransform>().sizeDelta.y);

@@ -589,7 +589,7 @@ public class Database : MonoBehaviour
                 //if (!localizationSubTable.ContainsKey(_c[1]) && _c.Length > (int)globalData.language)
                 if (!localizationTable.ContainsKey(_c[1]))
                 {
-                    localizationTable.Add(_c[1], new LocalizedString(_c[2], _c[3], _c[4], ""));
+                    localizationTable.Add(_c[1], new LocalizedString(_c[2], _c[2], _c[2], ""));
                 }
             }
         }

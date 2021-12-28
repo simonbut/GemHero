@@ -36,7 +36,7 @@ public class QuestCanvas : MonoBehaviour
         {
             mainQuestObject.SetActive(true);
             QuestData _q = QuestManager.Instance.GetQuestData(Database.userDataJson.mainQuest.questId);
-            mainQuestObject.transform.Find("Quest").Find("Text").GetComponent<Text>().text = _q.description.GetString();
+            mainQuestObject.transform.Find("Quest").Find("Text").GetComponent<Text>().text = _q.GetDescription();
             float remainTime = _q.timeLimit * 60 - (time - Database.userDataJson.mainQuest.startTime);
             mainQuestObject.transform.Find("Quest").Find("TimeLine").Find("Text").GetComponent<Text>().text = Database.TimeToString(remainTime);
             float fillAmount = remainTime * 1f / (_q.timeLimit * 60);
@@ -56,7 +56,7 @@ public class QuestCanvas : MonoBehaviour
         {
             sideQuestObject[i].SetActive(true);
             QuestData _q = QuestManager.Instance.GetQuestData(Database.userDataJson.sideQuest[i].questId);
-            sideQuestObject[i].transform.Find("Quest").Find("Text").GetComponent<Text>().text = "Side Mission" + (_q.id % 100).ToString("0") + ": " + _q.description.GetString();
+            sideQuestObject[i].transform.Find("Quest").Find("Text").GetComponent<Text>().text = _q.GetDescription();
             float remainTime = _q.timeLimit * 60 - (time - Database.userDataJson.sideQuest[i].startTime);
             sideQuestObject[i].transform.Find("Quest").Find("TimeLine").Find("Text").GetComponent<Text>().text = Database.TimeToString(remainTime);
             float fillAmount = remainTime * 1f / (_q.timeLimit * 60);

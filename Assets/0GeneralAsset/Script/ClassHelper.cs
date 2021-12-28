@@ -688,6 +688,36 @@ namespace ClassHelper
         public int itemId;
         public int itemQuality;
         public int itemTag;
+
+        public string GetDescription()
+        {
+            string result = Database.GetLocalizedText(description.GetString());
+            if (characterId > 0)
+            {
+                result = result.Replace("$1", CharacterManager.Instance.GetCharacterData(characterId).name.GetString());
+            }
+            if (itemId > 0)
+            {
+                result = result.Replace("$2", AssetManager.Instance.GetAssetData(itemId).name.GetString());
+            }
+            if (itemQuality > 0)
+            {
+                result = result.Replace("$3", itemQuality.ToString("0"));
+            }
+            if (itemTag > 0)
+            {
+                result = result.Replace("$4", TagManager.Instance.GetTagData(itemTag).name.GetString());
+            }
+            if (id > 100 && id < 200)
+            {
+                result = "Side Mission " + (id % 100).ToString("0") + "A: " + result;
+            }
+            if (id > 200 && id < 300)
+            {
+                result = "Side Mission " + (id % 100).ToString("0") + "B: " + result;
+            }
+            return result;
+        }
     }
 
     public class Quest
