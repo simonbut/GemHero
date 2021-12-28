@@ -152,6 +152,11 @@ public class MainGameView : MonoBehaviour
                 TalkDialogList _td = ResourcePointManager.Instance.GetTalkData(reactingObject.resourcePointId);
                 if (!Database.userDataJson.destinyShareCompletion.Contains(_td.characterId))
                 {
+                    if (Database.userDataJson.sideQuest.Count >= 3)
+                    {
+                        //TODO warn player too many quest
+                        return;
+                    }
                     MainGameView.Instance.dialogCanvas.Setup(3, DestinyShare);
                 }
                 else
@@ -306,11 +311,6 @@ public class MainGameView : MonoBehaviour
         tagChoosingCanvas.gameObject.SetActive(false);
 
         UIManager.Instance.HideAllDataUI();
-    }
-
-    public void LeaveDestinyShare()
-    {
-        //TODO
     }
 
     public ResourcePoint FindResourcePointByCharacterId(int _chId)

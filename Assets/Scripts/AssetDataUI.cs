@@ -26,7 +26,7 @@ public class AssetDataUI : DataUI
         background.transform.position = new Vector2(x, background.transform.position.y);
         contents.transform.position = new Vector2(x, contents.transform.position.y);
 
-        //TODO graphic 
+        graphic.GetComponent<Image>().sprite = Resources.Load<Sprite>("Asset/" + _ra.assetId.ToString("000"));
 
         AssetData _ad = _ra.GetAssetData();
 

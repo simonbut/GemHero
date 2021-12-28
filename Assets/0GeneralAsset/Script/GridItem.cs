@@ -41,6 +41,7 @@ public class GridItem : MonoBehaviour
 
     public void SetGridItem(string graphPath, int _id, int _selectingId, GridItemCallback _clickCallBack, GridItemCallback _selectingCallBack, GridItemCallback _disSelectingCallBack, string graphPath2 = "",string _text = "",bool isEnabled = true, GridItemCallback _dragCallBack =null, string graphPath3 = "")
     {
+        print(graphPath);
         id = _id;
         selectingId = _selectingId;
         //_g.AddComponent<GridItem>();

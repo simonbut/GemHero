@@ -39,8 +39,7 @@ public class ItemCanvas : ControlableUI
     {
         foreach (Asset _a in AssetManager.Instance.GetAssetList(filterQuality, filterTagId, filterAssetId))
         {
-            GameObject gridItemInstance = gridScrollView.GenerateItem("", _a.assetUid);//TODO Graph 
-            //Graph if used
+            GameObject gridItemInstance = gridScrollView.GenerateItem("Asset/" + _a.assetId.ToString("000"), _a.assetUid);
         }
     }
 

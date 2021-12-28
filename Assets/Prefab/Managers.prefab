@@ -196,7 +196,7 @@ GameObject:
   - component: {fileID: 3841165322859713411}
   - component: {fileID: 3841165322859713410}
   m_Layer: 5
-  m_Name: ShapeBackground
+  m_Name: IconBg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -250,8 +250,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -1006710004073003231, guid: 7b31f1c5a50344e70938c16b727f4cef,
-    type: 3}
+  m_Sprite: {fileID: 21300000, guid: c2378ab1f2c39d0419ad24c3b1b17d83, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1296,7 +1295,7 @@ GameObject:
   - component: {fileID: 3841165322993510282}
   - component: {fileID: 3841165322993510281}
   m_Layer: 5
-  m_Name: Shape
+  m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1771,7 +1770,7 @@ GameObject:
   - component: {fileID: 3841165323121124867}
   - component: {fileID: 3841165323121124866}
   m_Layer: 5
-  m_Name: ShapeBackground
+  m_Name: IconBg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1825,8 +1824,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -1006710004073003231, guid: 7b31f1c5a50344e70938c16b727f4cef,
-    type: 3}
+  m_Sprite: {fileID: 21300000, guid: c2378ab1f2c39d0419ad24c3b1b17d83, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2507,7 +2505,7 @@ GameObject:
   - component: {fileID: 3841165323237410167}
   - component: {fileID: 3841165323237410166}
   m_Layer: 5
-  m_Name: ShapeBackground
+  m_Name: IconBg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2561,8 +2559,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -1006710004073003231, guid: 7b31f1c5a50344e70938c16b727f4cef,
-    type: 3}
+  m_Sprite: {fileID: 21300000, guid: c2378ab1f2c39d0419ad24c3b1b17d83, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4151,7 +4148,7 @@ GameObject:
   - component: {fileID: 3841165323457437495}
   - component: {fileID: 3841165323457437494}
   m_Layer: 5
-  m_Name: ShapeBackground
+  m_Name: IconBg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4205,8 +4202,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -1006710004073003231, guid: 7b31f1c5a50344e70938c16b727f4cef,
-    type: 3}
+  m_Sprite: {fileID: 21300000, guid: c2378ab1f2c39d0419ad24c3b1b17d83, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -7732,7 +7728,7 @@ GameObject:
   - component: {fileID: 3841165324015798324}
   - component: {fileID: 3841165324015798331}
   m_Layer: 5
-  m_Name: Shape
+  m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9150,7 +9146,7 @@ GameObject:
   - component: {fileID: 3841165324229227492}
   - component: {fileID: 3841165324229227499}
   m_Layer: 5
-  m_Name: Shape
+  m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9365,7 +9361,7 @@ GameObject:
   - component: {fileID: 3841165324255768836}
   - component: {fileID: 3841165324255768843}
   m_Layer: 5
-  m_Name: ShapeBackground
+  m_Name: IconBg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9419,8 +9415,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -1006710004073003231, guid: 7b31f1c5a50344e70938c16b727f4cef,
-    type: 3}
+  m_Sprite: {fileID: 21300000, guid: c2378ab1f2c39d0419ad24c3b1b17d83, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -9455,7 +9450,7 @@ GameObject:
   - component: {fileID: 3841165324266336812}
   - component: {fileID: 3841165324266336787}
   m_Layer: 5
-  m_Name: Shape
+  m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9654,7 +9649,7 @@ GameObject:
   - component: {fileID: 3841165324299175771}
   - component: {fileID: 3841165324299175770}
   m_Layer: 5
-  m_Name: Shape
+  m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

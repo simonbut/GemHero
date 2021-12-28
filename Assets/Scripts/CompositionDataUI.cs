@@ -35,7 +35,7 @@ public class CompositionDataUI : DataUI
         RecipeData _rd = AssetManager.Instance.GetRecipeData(_recipeId);
         AssetData _ad = AssetManager.Instance.GetAssetData(_rd.targetCompoundId);
 
-        //TODO graphic 
+        graphic.GetComponent<Image>().sprite = Resources.Load<Sprite>("Asset/" + _ad.id.ToString("000"));
 
         ShapeGenerator.GenerateShape(shape, _rd.shape, null, 0.2f);
 

@@ -151,7 +151,6 @@ public class DestinyShareChoosingCanvas : TagChoosingCanvas
         Database.userDataJson.playerTags = destinyShareTagCanvas.GetExistingTagList();
 
         destinyShareTagCanvas.Hide();
-        MainGameView.Instance.LeaveDestinyShare();
         OnBackPressed();
 
         //Dialog after

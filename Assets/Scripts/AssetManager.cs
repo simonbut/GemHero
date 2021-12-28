@@ -305,18 +305,18 @@ public class AssetManager : MonoBehaviour
         return null;
     }
 
-    public List<Asset> GetAssetListByType(int type)
-    {
-        List<Asset> result = new List<Asset>();
-        foreach (Asset _a in GetAssetList())
-        {
-            if (_a.GetAssetData().IsAssetType(type))
-            {
-                result.Add(_a);
-            }
-        }
-        return result;
-    }
+    //public List<Asset> GetAssetListByType(int type)
+    //{
+    //    List<Asset> result = new List<Asset>();
+    //    foreach (Asset _a in GetAssetList())
+    //    {
+    //        if (_a.GetAssetData().IsAssetType(type))
+    //        {
+    //            result.Add(_a);
+    //        }
+    //    }
+    //    return result;
+    //}
 
     public List<Tag> CreateTagList(List<int> tagIdList,List<Vector2Int> tagOffsetList)
     {
@@ -347,7 +347,7 @@ public class AssetManager : MonoBehaviour
         return result;
     }
 
-    public List<Asset> GetAssetList(int _filterQuality = 0, int _filterTagId = 0, int _filterAssetId = 0)
+    public List<Asset> GetAssetList(int _filterQuality = 0, int _filterTagId = 0, int _filterAssetId = 0,int _filerAssetType = 0)
     {
         List<Asset> result = new List<Asset>();
         foreach (Asset _a in Database.userDataJson.assetList)
@@ -365,6 +365,10 @@ public class AssetManager : MonoBehaviour
                 continue;
             }
             if (!(_filterAssetId == 0 || _a.GetAssetData().id == _filterAssetId))
+            {
+                continue;
+            }
+            if (!(_filerAssetType == 0 || _a.GetAssetData().assetTypeList.Contains(_filerAssetType)))
             {
                 continue;
             }

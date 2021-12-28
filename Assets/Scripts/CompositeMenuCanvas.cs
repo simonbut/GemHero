@@ -33,10 +33,9 @@ public class CompositeMenuCanvas : ControlableUI
 
     void GenerateList()
     {
-        foreach (Asset _a in AssetManager.Instance.GetAssetListByType(recipe.assetTypeList[session]))
+        foreach (Asset _a in AssetManager.Instance.GetAssetList(0, 0, 0, recipe.assetTypeList[session]))
         {
-            GameObject gridItemInstance = gridScrollView.GenerateItem("", _a.assetUid);//TODO Graph 
-            //Graph if used
+            GameObject gridItemInstance = gridScrollView.GenerateItem("Asset/" + _a.assetId.ToString("000"), _a.assetUid);
         }
     }
 
@@ -129,7 +128,8 @@ public class CompositeMenuCanvas : ControlableUI
             {
                 sessions[i].SetActive(true);
                 AssetTypeData _atd = AssetManager.Instance.GetAssetTypeData(atl[i]);
-                sessions[i].transform.Find("Text").GetComponent<Text>().text = _atd.name.GetString();
+                sessions[i].transform.Find("Text").GetComponent<Text>().text = "";//_atd.name.GetString()
+                sessions[i].transform.Find("Image").GetComponent<Image>().sprite = Resources.Load<Sprite>("AssetType/" + _atd.id.ToString("000"));
             }
             else
             {

@@ -19,7 +19,7 @@ public class AssetInCompositionDataUI : DataUI
     [SerializeField] GameObject idealPoint;
     public void Show(Asset _ra)
     {
-        //TODO graphic 
+        graphic.GetComponent<Image>().sprite = Resources.Load<Sprite>("Asset/" + _ra.assetId.ToString("000"));
 
         AssetData _ad = _ra.GetAssetData();
 

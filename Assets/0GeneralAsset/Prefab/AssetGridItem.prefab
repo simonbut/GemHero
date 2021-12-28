@@ -466,7 +466,7 @@ MonoBehaviour:
   displayGraphicFront: {fileID: 354068002626705240}
   gray: {fileID: 3412307466343359579}
   text: {fileID: 1700137027105719960}
-  empty: {fileID: 0}
+  empty: {fileID: 21300000, guid: ac9438f3c7a0a9343b82bf792196b288, type: 3}
   id: 0
   followMouse: 0
   tick: {fileID: 1753696998617928949}
