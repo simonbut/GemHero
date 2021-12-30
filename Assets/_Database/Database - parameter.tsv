@@ -1,6 +1,4 @@
 key	value
-expPoint	1000
-dayDuration	60
-hintCount	5
-stampCount	1
-energySpeed	1000
+basicPlayerHp	500
+basicPlayerDef	0
+basicPlayerAtk	100

@@ -46,6 +46,30 @@ public class CharacterManager : MonoBehaviour
                 int.TryParse(_c[0], out _b.id);
                 _b.name = new LocalizedString(_c[1], _c[1], _c[1], "");
 
+                _b.tagList = new List<int>();
+                string[] _c2 = _c[2].Split(';');
+                for (int j = 0; j < _c2.Length; j++)
+                {
+                    int _c2b;
+                    int.TryParse(_c2[j], out _c2b);
+
+                    _b.tagList.Add(_c2b);
+                }
+
+                _b.tagPos = new List<Vector2Int>();
+                string[] _c3 = _c[3].Split(';');
+                for (int j = 0; j < _c3.Length; j++)
+                {
+                    int x3 = 0;
+                    int y3 = 0;
+                    string[] _c6b = _c3[j].Split(',');
+                    int.TryParse(_c6b[0], out x3);
+                    int.TryParse(_c6b[1], out y3);
+
+                    _b.tagPos.Add(new Vector2Int(x3, y3));
+
+                }
+
                 characterData.Add(_b);
             }
         }

@@ -37,10 +37,10 @@ public class TurnBaseBattleView : MonoBehaviour
         canvas.SetActive(true);
 
         //test
-        AddCharacter(CharacterAttribute.SetUpCharacterAttribute(500f,100f,1000f), Force.player);
-        AddCharacter(CharacterAttribute.SetUpCharacterAttribute(100f, 20f, 1500f), Force.enemy);
-        AddCharacter(CharacterAttribute.SetUpCharacterAttribute(100f, 20f, 1500f), Force.enemy);
-        AddCharacter(CharacterAttribute.SetUpCharacterAttribute(100f, 20f, 1500f), Force.enemy);
+        AddCharacter(CharacterAttribute.SetUpCharacterAttribute(ParameterManager.Instance.GetParameter("basicPlayerHp"), ParameterManager.Instance.GetParameter("basicPlayerDef"), ParameterManager.Instance.GetParameter("basicPlayerAtk"), 1000, null, new List<int>(), new List<int>(), 10), Force.player);
+        AddCharacter(CharacterAttribute.SetUpCharacterAttribute(500f, 10f, 20f, 1500f), Force.enemy);
+        //AddCharacter(CharacterAttribute.SetUpCharacterAttribute(100f, 20f, 1500f), Force.enemy);
+        //AddCharacter(CharacterAttribute.SetUpCharacterAttribute(100f, 20f, 1500f), Force.enemy);
     }
 
     void AddCharacter(CharacterAttribute _characterAttribute, Force _force)
@@ -151,6 +151,6 @@ public class TurnBaseBattleView : MonoBehaviour
     {
         from.RunAttackAnimation();
         to.RunHurtAnimation();
-        to.GetDamage(from.characterAttribute.GetAtk());
+        to.CalcuateAndGetDamage(from.characterAttribute.GetAtk());
     }
 }

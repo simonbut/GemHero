@@ -29,15 +29,15 @@ public class ParameterManager : MonoBehaviour
     {
         parameterList = new Dictionary<string,float>();
         //TextAsset achievementData = Resources.Load("database/Database - " + globalData.language.ToString() + " - achievement") as TextAsset;
-        string facilityData = Database.ReadDatabaseWithoutLanguage("parameter");
+        string facilityData = Database.ReadDatabaseWithoutLanguage("Parameter");
         if (facilityData.Length > 0)
         {
             string[] _a = facilityData.Split('\n');
             for (int i = 1; i < _a.Length; i++)
             {
                 string[] _c = _a[i].Split('\t');
-                float _f = 0;
-                float.TryParse(_c[1], out _f);
+                int _f = 0;
+                int.TryParse(_c[1], out _f);
                 parameterList.Add(_c[0], _f);
             }
         }

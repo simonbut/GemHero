@@ -81,19 +81,17 @@ namespace ClassHelper
     {
 
         //get from database
-        public int achievement_id;
+        public int id;
         public LocalizedString name;
         public LocalizedString description;
-        public int rewardOrder;
-        public bool isValid;
 
         public bool IsAchievementGet()
         {
-            if (achievement_id == 0)
+            if (id == 0)
             {
                 return true;
             }
-            return Database.globalData.completedAchievementId.Contains((int)achievement_id);
+            return Database.globalData.completedAchievementId.Contains((int)id);
         }
     }
 
@@ -264,7 +262,6 @@ namespace ClassHelper
         public int score;
         public bool isBadTag;
         public TagType tagType;
-        public int RequireAchievementsCount = 0;
 
         public int GetMaxX()
         {
@@ -328,15 +325,38 @@ namespace ClassHelper
     public class CharacterAttribute
     {
         float hpTotalPt = 500f;
+        float defPt = 50f;
         float atkPt = 100f;
         float atsPt = 1000f;
+        int ammoTotal = 10;
 
-        public static CharacterAttribute SetUpCharacterAttribute(float _hpTotalPt, float _atkPt, float _atsPt)
+        List<int> skillAffect = new List<int>();
+        List<int> tagAffect = new List<int>();
+        List<int> gemAffect = new List<int>();
+
+        float criRate = 0f;
+        float criDamIncrease = 0f;
+        float blood = 0f;
+        float allDamage = 0f;
+        float directDamage = 0f;
+        float dodgeRate = 0f;
+        float lastHitDamgeIncrease = 0f;
+        float lastHitCriRate = 0f;
+        float lastHitDirectDamage = 0f;
+        float countRate = 0f;
+
+        public static CharacterAttribute SetUpCharacterAttribute(float _hpTotalPt,float _defPt, float _atkPt, float _atsPt,List<int> _skillAffect = null, List<int> _tagAffect = null, List<int> _gemAffect = null,int _ammoTotal = -1)
         {
             CharacterAttribute result = new CharacterAttribute();
             result.hpTotalPt = _hpTotalPt;
+            result.defPt = _defPt;
             result.atkPt = _atkPt;
             result.atsPt = _atsPt;
+            result.ammoTotal = _ammoTotal;
+
+            result.skillAffect = _skillAffect;
+            result.tagAffect = _tagAffect;
+            result.gemAffect = _gemAffect;
 
             return result;
         }
@@ -354,6 +374,11 @@ namespace ClassHelper
         public float GetAts()
         {
             return atsPt;
+        }
+
+        public float GetDef()
+        {
+            return defPt;
         }
     }
 
@@ -415,7 +440,6 @@ namespace ClassHelper
     {
         AssetTag = 0,
         CharacterTag,
-        GemTag,
         FixedTag
     }
 
@@ -434,6 +458,16 @@ namespace ClassHelper
         public ResourcePointData beforeMainBattleQuest;
         public ResourcePointData afterMainBattleQuest;
         public ResourcePointData talkQuest;
+    }
+
+    public class VirtueGemData
+    {
+        //id	name	description	RequireAchievementsCount	IsCriticalGem
+        public int id;
+        public LocalizedString name;
+        public LocalizedString description;
+        public int RequireAchievementsCount;
+        public bool IsCriticalGem;
     }
 
     public class ResourcePointData
@@ -459,6 +493,9 @@ namespace ClassHelper
     {
         public int id;
         public LocalizedString name;
+
+        public List<int> tagList = new List<int>();
+        public List<Vector2Int> tagPos = new List<Vector2Int>();
     }
 
     public class DialogData
@@ -484,6 +521,8 @@ namespace ClassHelper
         public CompoundType compoundType;
         public List<StatType> basicStatTypeList;
         public List<int> basicStatList;
+
+        public int shotCount;
 
         public List<AssetTypeData> GetAssetTypeList()
         {
@@ -669,13 +708,21 @@ namespace ClassHelper
         public int id;
         public LocalizedString name;
         public int hp;
+        public int def;
         public int atk;
         public int ats;
+        public List<int> skillList;
 
         public CharacterAttribute ConvertToCharacterAttribute()
         {
-            return CharacterAttribute.SetUpCharacterAttribute(hp,atk,ats);
+            return CharacterAttribute.SetUpCharacterAttribute(hp, def, atk, ats, skillList, null, null);
         }
+    }
+
+    public class EnemySkillData
+    {
+        public int id;
+        public LocalizedString description;
     }
 
     public class QuestData

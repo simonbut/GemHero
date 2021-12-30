@@ -1,0 +1,7 @@
+id	name	description	RequireAchievementsCount	IsCriticalGem
+1	不會失敗	即使點數過載，合成都不會失敗	0	FALSE
+2	B	abc	0	FALSE
+3	C	abc	0	FALSE
+4	D	abc	0	FALSE
+5	E	abc	0	FALSE
+6	F	abc	0	FALSE

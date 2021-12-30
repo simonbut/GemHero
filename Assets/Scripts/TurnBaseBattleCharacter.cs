@@ -107,6 +107,12 @@ public class TurnBaseBattleCharacter : MonoBehaviour
         actionRefillPt = 0;
     }
 
+    public void CalcuateAndGetDamage(float _enemyAtk)
+    {
+        float result = _enemyAtk / 4f + Mathf.Max(0, _enemyAtk / 2f - characterAttribute.GetDef()) + Mathf.Max(0, _enemyAtk / 2f - characterAttribute.GetDef() / 2f);
+        GetDamage(result);
+    }
+
     public void GetDamage(float _amount)
     {
         hpPt -= _amount;

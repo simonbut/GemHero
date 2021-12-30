@@ -59,10 +59,14 @@ public class Database : MonoBehaviour
         AssetManager.Instance.LoadAssetTypeData();
         AssetManager.Instance.LoadRecipeData();
         EnemyManager.Instance.LoadEnemyData();
+        EnemyManager.Instance.LoadEnemySkillData();
         ResourcePointManager.Instance.LoadResourcePointData();
         DialogManager.Instance.LoadDialogData();
+        VirtueGemManager.Instance.LoadVirtueGemData();
         CharacterManager.Instance.LoadCharacterData();
         QuestManager.Instance.LoadQuestData();
+        AchievementManager.Instance.LoadAchievementData();
+        ParameterManager.Instance.LoadParameterData();
         //
 
 

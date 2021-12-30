@@ -1,4 +1,4 @@
-id	name
-1	Simon
-2	Alex
-3	Queen
+id	name	tag	tagPos
+1	Simon	0;0;7	0,0;0,0;0,0
+2	Alex	0;0;7	0,0;0,0;0,0
+3	Queen	0;0;7	0,0;0,0;0,0

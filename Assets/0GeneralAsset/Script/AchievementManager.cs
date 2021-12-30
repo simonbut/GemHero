@@ -36,7 +36,7 @@ public class AchievementManager : MonoBehaviour
     {
         achievement = new List<Achievement>();
         //TextAsset data = Resources.Load("database/Database - " + globalData.language.ToString() + " - achievement") as TextAsset;
-        string data = Database.ReadDatabaseWithoutLanguage("achievement");
+        string data = Database.ReadDatabaseWithoutLanguage("Achievement");
         if (data.Length > 0)
         {
             string[] _a = data.Split('\n');
@@ -44,20 +44,9 @@ public class AchievementManager : MonoBehaviour
             {
                 Achievement _b = new Achievement();
                 string[] _c = _a[i].Split('\t');
-                int.TryParse(_c[0], out _b.achievement_id);
-                _b.name = new LocalizedString(_c[1], _c[4], _c[6], "");
-                _b.description = new LocalizedString(_c[2], _c[5], _c[7], "");
-                //int.TryParse(_c[3], out _b.rewardOrder);
-
-                bool.TryParse(_c[3], out _b.isValid);
-                if (_b.isValid)
-                {
-                    //if (Database.globalData.completed_achievement_id.Contains(_b.achievement_id))
-                    //{
-                    //    _b.isGet = true;
-                    //}
-                    achievement.Add(_b);
-                }
+                int.TryParse(_c[0], out _b.id);
+                _b.name = new LocalizedString(_c[1], _c[1], _c[1], "");
+                _b.description = new LocalizedString(_c[2], _c[2], _c[2], "");
             }
         }
         else
@@ -73,7 +62,7 @@ public class AchievementManager : MonoBehaviour
         Achievement result = new Achievement();
         foreach (Achievement _a in achievement)
         {
-            if (_a.achievement_id == achievement_id)
+            if (_a.id == achievement_id)
             {
                 result = _a;
                 return result;

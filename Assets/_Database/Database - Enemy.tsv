@@ -1,2 +1,2 @@
-id	name	hp	atk	ats
-1	1	50	10	500
+id	name	hp	def	atk	ats	skillList
+1	1	50	10	10	500	1;2

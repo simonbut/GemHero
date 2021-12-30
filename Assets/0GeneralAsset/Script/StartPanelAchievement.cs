@@ -49,7 +49,7 @@ public class StartPanelAchievement : ControlableUI
         {
             //GameObject ListItemInstance = Instantiate(listItem);
             //ListItemInstance.transform.SetParent(scrollViewContent.transform);
-            GameObject ListItemInstance = listScrollView.GenerateItem(_a.name.GetString(), _a.achievement_id);
+            GameObject ListItemInstance = listScrollView.GenerateItem(_a.name.GetString(), _a.id);
 
             //ListItemInstance.GetComponent<ListItem>().SetListItem(_a.name.GetString(), _a.achievement_id, ClickAchievementData, SelectingAchievementData, DisSelectingAchievementData);
         }
