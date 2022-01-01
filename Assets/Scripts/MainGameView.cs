@@ -343,6 +343,6 @@ public class MainGameView : MonoBehaviour
     public void Sleep()
     {
         Database.TimePass(2 * 60);
-        Database.RecoverHp(Database.userDataJson.hpTotal);
+        Database.RecoverHp(Player.GetTotalHp());
     }
 }

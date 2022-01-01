@@ -1,6 +1,6 @@
-id	name	asset_type_list	reality_point	dream_point	ideal_point	compound_type	basic_stat_types	basic_stats	shotCount
-1	草1	1	0	0	2	asset			
-2	草2	1	0	1	1	asset			
-3	豆豆槍	2	1	0	1	weapon	atk;ats	3;1	10
-4	合成品1	3	1	0	1	compound			
-5	裝飾1	4	0	1	1	accessory			
+id	name	asset_type_list	reality_point	dream_point	ideal_point	compound_type	basic_stat_types	basic_stats	ammoCount	reloadTimeTier
+1	草1	1	0	0	2	asset				
+2	草2	1	0	1	1	asset				
+3	豆豆槍	2	1	0	1	weapon	atk;ats	3;1	10	1
+4	合成品1	3	1	0	1	compound				
+5	裝飾1	4	0	1	1	accessory				

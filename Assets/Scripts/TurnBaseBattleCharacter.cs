@@ -8,15 +8,22 @@ public class TurnBaseBattleCharacter : MonoBehaviour
 {
     [SerializeField] Image hpbar;
     [SerializeField] Image actionbar;
+    [SerializeField] Image reloadTimerBar;
     [SerializeField] Image appearence;
+    [SerializeField] Text hpText;
+
+    [SerializeField] Text ammoText;
+    [SerializeField] List<GameObject> ammoList;
 
     [SerializeField] Sprite basicSprite;
     [SerializeField] Sprite attackSprite;
     [SerializeField] GameObject gunFireAnimation;
 
+    public float reloadTimer = 1;
+    public float displayHpPt;
     public float hpPt;
     public float actionRefillPt;
-
+    public int ammoCount;
 
     public CharacterAttribute characterAttribute;
     public Force force;//0 = player, 1 = enemy
@@ -32,8 +39,29 @@ public class TurnBaseBattleCharacter : MonoBehaviour
         }
 
         hpPt = _characterAttribute.GetHpTotal();
+        displayHpPt = hpPt;
+        ReloadAmmo();
+
+        if (characterAttribute.GetAmmoTotal() > 0)
+        {
+            ReloadAmmo();
+        }
+        else
+        {
+            ammoText.text = "";
+            for (int i = 0; i < ammoList.Count; i++)
+            {
+                ammoList[i].SetActive(false);
+            }
+        }
 
         //TODO: set up character appearence
+    }
+
+    public void ReloadAmmo()
+    {
+        ammoCount = characterAttribute.GetAmmoTotal();
+        reloadTimer = 1;
     }
 
     // Start is called before the first frame update
@@ -45,6 +73,39 @@ public class TurnBaseBattleCharacter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (characterAttribute.GetAmmoTotal() > 0)
+        {
+            if (ammoCount > ammoList.Count)
+            {
+                ammoText.text = ammoCount.ToString("0");
+            }
+            else
+            {
+                ammoText.text = "";
+            }
+            for (int i = 0; i < ammoList.Count; i++)
+            {
+                ammoList[i].SetActive(ammoCount > i);
+            }
+            reloadTimerBar.transform.parent.gameObject.SetActive(reloadTimer < 1f);
+            reloadTimerBar.fillAmount = 1f - reloadTimer;
+        }
+
+        switch (force)
+        {
+            case Force.player:
+                hpbar.transform.parent.gameObject.SetActive(false);
+                hpText.gameObject.SetActive(false);
+                Database.userDataJson.hp = Mathf.FloorToInt(hpPt);
+                break;
+        }
+
+        displayHpPt = Mathf.FloorToInt((displayHpPt * 4f + hpPt) / 5f);
+        if (Mathf.Abs(displayHpPt - hpPt) < 3f)
+        {
+            displayHpPt = hpPt;
+        }
+
         SetHpBar();
         SetActionBar();
 
@@ -84,7 +145,8 @@ public class TurnBaseBattleCharacter : MonoBehaviour
 
     void SetHpBar()
     {
-        hpbar.fillAmount = hpPt / characterAttribute.GetHpTotal();
+        hpbar.fillAmount = displayHpPt / characterAttribute.GetHpTotal();
+        hpText.text = displayHpPt.ToString("0");
     }
 
     void SetActionBar()
@@ -94,7 +156,27 @@ public class TurnBaseBattleCharacter : MonoBehaviour
 
     public void AtbCharge()
     {
+        if (characterAttribute.GetAmmoTotal() > 0 && ammoCount <= 0)
+        {
+            AmmoCharge();
+            return;
+        }
         AtbCharge(characterAttribute.GetAts() / 1000f * Time.deltaTime);
+    }
+
+    public void AmmoCharge()
+    {
+        switch (characterAttribute.GetAmmoReloadTier())
+        {
+            case 1:
+            default:
+                reloadTimer -= 0.5f * Time.deltaTime;
+                break;
+        }
+        if (reloadTimer <= 0f)
+        {
+            ReloadAmmo();
+        }
     }
 
     public void AtbCharge(float chargeAmount)

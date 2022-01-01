@@ -85,7 +85,8 @@ public class AssetManager : MonoBehaviour
                     _b.basicStatList.Add(_c8b);
                 }
 
-                int.TryParse(_c[9], out _b.shotCount);
+                int.TryParse(_c[9], out _b.ammoCount);
+                int.TryParse(_c[10], out _b.ammoReloadTier);
 
                 assetdata.Add(_b);
             }

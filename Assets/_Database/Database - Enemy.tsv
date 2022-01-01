@@ -1,2 +1,2 @@
-id	name	hp	def	atk	ats	skillList
-1	1	50	10	10	500	1;2
+id	name	hp	def	atk	ats	skillList	ammoCount	reloadTimeTier
+1	1	1000	10	10	500	1;2	0	0

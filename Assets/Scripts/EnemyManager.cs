@@ -62,6 +62,9 @@ public class EnemyManager : MonoBehaviour
                     _b.skillList.Add(_c6b);
                 }
 
+                int.TryParse(_c[7], out _b.ammoCount);
+                int.TryParse(_c[8], out _b.ammoReloadTier);
+
                 enemydata.Add(_b);
             }
         }
@@ -69,6 +72,18 @@ public class EnemyManager : MonoBehaviour
         {
             Debug.Log("data is null");
         }
+    }
+
+    public EnemyData GetEnemyData(int _enemyId)
+    {
+        foreach (EnemyData _e in enemydata)
+        {
+            if (_e.id == _enemyId)
+            {
+                return _e;
+            }
+        }
+        return null;
     }
 
 

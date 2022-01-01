@@ -37,10 +37,10 @@ public class TurnBaseBattleView : MonoBehaviour
         canvas.SetActive(true);
 
         //test
-        AddCharacter(CharacterAttribute.SetUpCharacterAttribute(ParameterManager.Instance.GetParameter("basicPlayerHp"), ParameterManager.Instance.GetParameter("basicPlayerDef"), ParameterManager.Instance.GetParameter("basicPlayerAtk"), 1000, null, new List<int>(), new List<int>(), 10), Force.player);
-        AddCharacter(CharacterAttribute.SetUpCharacterAttribute(500f, 10f, 20f, 1500f), Force.enemy);
-        //AddCharacter(CharacterAttribute.SetUpCharacterAttribute(100f, 20f, 1500f), Force.enemy);
-        //AddCharacter(CharacterAttribute.SetUpCharacterAttribute(100f, 20f, 1500f), Force.enemy);
+        AddCharacter(CharacterAttribute.SetUpCharacterAttribute(Database.userDataJson.hp, ParameterManager.Instance.GetParameter("basicPlayerDef"), ParameterManager.Instance.GetParameter("basicPlayerAtk"), 1000, null, new List<int>(), new List<int>(), 10,1), Force.player);
+        AddCharacter(CharacterAttribute.SetUpCharacterAttributeByEnemyId(1), Force.enemy); 
+        AddCharacter(CharacterAttribute.SetUpCharacterAttributeByEnemyId(1), Force.enemy);
+        AddCharacter(CharacterAttribute.SetUpCharacterAttributeByEnemyId(1), Force.enemy);
     }
 
     void AddCharacter(CharacterAttribute _characterAttribute, Force _force)
@@ -55,7 +55,7 @@ public class TurnBaseBattleView : MonoBehaviour
         //determine position
         if (_force == Force.player)
         {
-            characterObjectInstance.transform.localPosition = Vector3.left * 200f;
+            characterObjectInstance.transform.localPosition = Vector3.left * 150f;
         }
         else
         {
@@ -63,13 +63,13 @@ public class TurnBaseBattleView : MonoBehaviour
             switch (enemyCount)
             {
                 case 1:
-                    characterObjectInstance.transform.localPosition = new Vector2(200, 0);
+                    characterObjectInstance.transform.localPosition = new Vector2(150, 0);
                     break;
                 case 2:
-                    characterObjectInstance.transform.localPosition = new Vector2(350, 100);
+                    characterObjectInstance.transform.localPosition = new Vector2(300, 150);
                     break;
                 case 3:
-                    characterObjectInstance.transform.localPosition = new Vector2(350, -100);
+                    characterObjectInstance.transform.localPosition = new Vector2(300, -150);
                     break;
             }
         }
@@ -149,6 +149,7 @@ public class TurnBaseBattleView : MonoBehaviour
 
     void PerformAttack(TurnBaseBattleCharacter from, TurnBaseBattleCharacter to)
     {
+        from.ammoCount--;
         from.RunAttackAnimation();
         to.RunHurtAnimation();
         to.CalcuateAndGetDamage(from.characterAttribute.GetAtk());

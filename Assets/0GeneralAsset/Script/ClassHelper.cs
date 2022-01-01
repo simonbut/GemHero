@@ -322,6 +322,14 @@ namespace ClassHelper
         enemy
     }
 
+    public class Player
+    {
+        public static int GetTotalHp()
+        {
+            return Mathf.FloorToInt(ParameterManager.Instance.GetParameter("basicPlayerHp"));
+        }
+    }
+
     public class CharacterAttribute
     {
         float hpTotalPt = 500f;
@@ -329,6 +337,7 @@ namespace ClassHelper
         float atkPt = 100f;
         float atsPt = 1000f;
         int ammoTotal = 10;
+        int ammoReloadTier = 1;
 
         List<int> skillAffect = new List<int>();
         List<int> tagAffect = new List<int>();
@@ -345,7 +354,7 @@ namespace ClassHelper
         float lastHitDirectDamage = 0f;
         float countRate = 0f;
 
-        public static CharacterAttribute SetUpCharacterAttribute(float _hpTotalPt,float _defPt, float _atkPt, float _atsPt,List<int> _skillAffect = null, List<int> _tagAffect = null, List<int> _gemAffect = null,int _ammoTotal = -1)
+        public static CharacterAttribute SetUpCharacterAttribute(float _hpTotalPt,float _defPt, float _atkPt, float _atsPt,List<int> _skillAffect = null, List<int> _tagAffect = null, List<int> _gemAffect = null,int _ammoTotal = -1,int _ammoReloadTier = 1)
         {
             CharacterAttribute result = new CharacterAttribute();
             result.hpTotalPt = _hpTotalPt;
@@ -353,12 +362,29 @@ namespace ClassHelper
             result.atkPt = _atkPt;
             result.atsPt = _atsPt;
             result.ammoTotal = _ammoTotal;
+            result.ammoReloadTier = _ammoReloadTier;
 
             result.skillAffect = _skillAffect;
             result.tagAffect = _tagAffect;
             result.gemAffect = _gemAffect;
 
             return result;
+        }
+
+        public static CharacterAttribute SetUpCharacterAttributeByEnemyId(int _enemyId)
+        {
+            EnemyData _e = EnemyManager.Instance.GetEnemyData(_enemyId);
+            return SetUpCharacterAttribute(_e.hp, _e.def, _e.atk, _e.ats, _e.skillList, null, null, _e.ammoCount, _e.ammoReloadTier);
+        }
+
+        public int GetAmmoReloadTier()
+        {
+            return ammoReloadTier;
+        }
+
+        public int GetAmmoTotal()
+        {
+            return ammoTotal;
         }
 
         public float GetHpTotal()
@@ -522,7 +548,8 @@ namespace ClassHelper
         public List<StatType> basicStatTypeList;
         public List<int> basicStatList;
 
-        public int shotCount;
+        public int ammoCount;
+        public int ammoReloadTier;
 
         public List<AssetTypeData> GetAssetTypeList()
         {
@@ -712,6 +739,8 @@ namespace ClassHelper
         public int atk;
         public int ats;
         public List<int> skillList;
+        public int ammoCount;
+        public int ammoReloadTier;
 
         public CharacterAttribute ConvertToCharacterAttribute()
         {
