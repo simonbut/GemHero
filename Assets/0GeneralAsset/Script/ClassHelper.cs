@@ -328,6 +328,11 @@ namespace ClassHelper
         {
             return Mathf.FloorToInt(ParameterManager.Instance.GetParameter("basicPlayerHp"));
         }
+
+        public static List<int> GetVirtueGemList()
+        {
+            return Database.userDataJson.virtueGem;
+        }
     }
 
     public class CharacterAttribute

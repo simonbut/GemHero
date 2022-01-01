@@ -7,6 +7,8 @@ using ClassHelper;
 public class PlayerStatusCanvas : MonoBehaviour
 {
     public GameObject hpGameObject;
+    public GameObject virtueGemParent;
+    public GameObject virtueGemPrefab;
     int hp;
 
     // Start is called before the first frame update
@@ -18,6 +20,16 @@ public class PlayerStatusCanvas : MonoBehaviour
     void Init()
     {
         hp = Database.userDataJson.hp;
+        foreach (Transform _t in virtueGemParent.transform)
+        {
+            Destroy(_t.gameObject);
+        }
+        for (int i = 0; i < Player.GetVirtueGemList().Count; i++)
+        {
+            GameObject _vgInstance = Instantiate(virtueGemPrefab);
+            _vgInstance.transform.SetParent(virtueGemParent.transform);
+            _vgInstance.transform.localPosition = new Vector2(65 * i, 0);
+        }
     }
 
     // Update is called once per frame

@@ -22,7 +22,7 @@ public class TestView : MonoBehaviour
         //Database.AddQuest(101);
         //Database.AddQuest(101);
         //Database.TimePass(120);
-        TurnBaseBattleView.Instance.StartBattle();
+        //TurnBaseBattleView.Instance.StartBattle();
     }
 
     // Update is called once per frame

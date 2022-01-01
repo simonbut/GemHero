@@ -117,6 +117,7 @@ public class Database : MonoBehaviour
         public List<Quest> sideQuest = new List<Quest>();
         public List<int> destinyShareCompletion = new List<int>();
         public List<int> questCompletion = new List<int>();
+        public List<int> virtueGem = new List<int>();
 
         //player property
         public int lastAssetUid = 1;
