@@ -34,6 +34,8 @@ public class MainGameView : MonoBehaviour
     public ResourcePoint reactingObject;
     public List<ResourcePoint> resourcePointList = new List<ResourcePoint>();
 
+    public PlayerStatusCanvas playerStatusCanvas;
+
     public InGameMainMenuUI inGameMainMenuUI;
     public RecipeMenuCanvas recipeMenuCanvas;
     public CompositeMenuCanvas compositeMenuCanvas;
@@ -42,7 +44,7 @@ public class MainGameView : MonoBehaviour
     public DialogCanvas dialogCanvas;
     public ItemCanvas itemCanvas;
     public RewardAfterBattleCanvas rewardAfterBattleCanvas;
-    public PlayerStatusCanvas playerStatusCanvas;
+    public EquipmentCanvas equipmentCanvas;
 
     //public TagBaseCanvas tagBaseCanvas;
     public PlayerTagChoosingCanvas playerTagChoosingCanvas;
@@ -233,6 +235,11 @@ public class MainGameView : MonoBehaviour
     public void OpenItemCanvas()
     {
         itemCanvas.AddUI();
+    }
+
+    public void OpenEquipmentCanvas()
+    {
+        equipmentCanvas.AddUI();
     }
 
     public void OpenSleepCanvas()

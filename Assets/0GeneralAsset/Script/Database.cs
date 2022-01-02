@@ -118,6 +118,7 @@ public class Database : MonoBehaviour
         public List<int> destinyShareCompletion = new List<int>();
         public List<int> questCompletion = new List<int>();
         public List<int> virtueGem = new List<int>();
+        public List<int> equipment = new List<int>() { 0, 0, 0, 0, 0 };
 
         //player property
         public int lastAssetUid = 1;

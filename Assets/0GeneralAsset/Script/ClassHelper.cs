@@ -445,7 +445,8 @@ namespace ClassHelper
         accessory,
         consumable,
         compound,
-        asset
+        asset,
+        clothing
     }
 
     public enum StatType

@@ -49,6 +49,8 @@ public class CompositeMenuCanvas : ControlableUI
                 {
                     print("disselect");
                     assetSelectList[session] = 0;
+                    sessions[i].transform.Find("Image").GetComponent<Image>().sprite = Resources.Load<Sprite>("AssetType/" + AssetManager.Instance.GetAssetTypeData(recipe.assetTypeList[i]).id.ToString("000"));
+
                     NextSession();
                     return;
                 }
@@ -60,6 +62,7 @@ public class CompositeMenuCanvas : ControlableUI
             }
         }
         assetSelectList[session] = uid;
+        sessions[session].transform.Find("Image").GetComponent<Image>().sprite = Resources.Load<Sprite>("Asset/" + AssetManager.Instance.GetAssetByUid(assetSelectList[session]).assetId.ToString("000"));
         NextSession();
     }
 
