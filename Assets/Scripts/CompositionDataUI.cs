@@ -110,8 +110,11 @@ public class CompositionDataUI : DataUI
         }
         if (_rd.targetTag[0] != 0)
         {
-            realitySlots[_rd.targetScore[0] - 1].transform.Find("Text").GetComponent<Text>().text = "A";
-            markCount++;
+            if (_rd.targetScore[0] > 0)
+            {
+                realitySlots[_rd.targetScore[0] - 1].transform.Find("Text").GetComponent<Text>().text = "A";
+                markCount++;
+            }
         }
 
         for (int i = 0; i < dreamSlots.Count; i++)
@@ -120,14 +123,18 @@ public class CompositionDataUI : DataUI
         }
         if (_rd.targetTag[1] != 0)
         {
-            switch (markCount)
+            if (_rd.targetScore[1] > 0)
             {
-                case 0:
-                    dreamSlots[_rd.targetScore[1] - 1].transform.Find("Text").GetComponent<Text>().text = "A";
-                    break;
-                case 1:
-                    dreamSlots[_rd.targetScore[1] - 1].transform.Find("Text").GetComponent<Text>().text = "B";
-                    break;
+                switch (markCount)
+                {
+                    case 0:
+                        dreamSlots[_rd.targetScore[1] - 1].transform.Find("Text").GetComponent<Text>().text = "A";
+                        break;
+                    case 1:
+                        dreamSlots[_rd.targetScore[1] - 1].transform.Find("Text").GetComponent<Text>().text = "B";
+                        break;
+                }
+                markCount++;
             }
         }
 
@@ -137,17 +144,21 @@ public class CompositionDataUI : DataUI
         }
         if (_rd.targetTag[2] != 0)
         {
-            switch (markCount)
+            if (_rd.targetScore[2] > 0)
             {
-                case 0:
-                    idealSlots[_rd.targetScore[2] - 1].transform.Find("Text").GetComponent<Text>().text = "A";
-                    break;
-                case 1:
-                    idealSlots[_rd.targetScore[2] - 1].transform.Find("Text").GetComponent<Text>().text = "B";
-                    break;
-                case 2:
-                    idealSlots[_rd.targetScore[2] - 1].transform.Find("Text").GetComponent<Text>().text = "C";
-                    break;
+                switch (markCount)
+                {
+                    case 0:
+                        idealSlots[_rd.targetScore[2] - 1].transform.Find("Text").GetComponent<Text>().text = "A";
+                        break;
+                    case 1:
+                        idealSlots[_rd.targetScore[2] - 1].transform.Find("Text").GetComponent<Text>().text = "B";
+                        break;
+                    case 2:
+                        idealSlots[_rd.targetScore[2] - 1].transform.Find("Text").GetComponent<Text>().text = "C";
+                        break;
+                }
+                markCount++;
             }
         }
 

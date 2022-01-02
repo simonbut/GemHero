@@ -4,3 +4,5 @@ id	name	asset_type_list	reality_point	dream_point	ideal_point	compound_type	basi
 3	豆豆槍	2	1	0	1	weapon	atk;ats	3;1	10	1
 4	合成品1	3	1	0	1	compound				
 5	裝飾1	4	0	1	1	accessory				
+6	蛋糕	5	0	0	0	consumable				
+7	普通槍	2	0	0	0	weapon	atk;ats	1;1	10	1

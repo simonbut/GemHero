@@ -154,7 +154,7 @@ public class @InputMaster : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""50647aa5-f336-4178-9d4c-a4d6e7c5f069"",
-                    ""path"": ""<Keyboard>/enter"",
+                    ""path"": ""<Keyboard>/ctrl"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""KeyboardAndMouse"",
