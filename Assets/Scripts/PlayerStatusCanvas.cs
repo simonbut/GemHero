@@ -14,10 +14,10 @@ public class PlayerStatusCanvas : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Init();
+        Refresh();
     }
 
-    void Init()
+    public void Refresh()
     {
         hp = Database.userDataJson.hp;
         foreach (Transform _t in virtueGemParent.transform)

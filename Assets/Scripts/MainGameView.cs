@@ -41,7 +41,9 @@ public class MainGameView : MonoBehaviour
     public AssetConfirmCanvas assetConfirmCanvas;
     public DialogCanvas dialogCanvas;
     public ItemCanvas itemCanvas;
-    
+    public RewardAfterBattleCanvas rewardAfterBattleCanvas;
+    public PlayerStatusCanvas playerStatusCanvas;
+
     //public TagBaseCanvas tagBaseCanvas;
     public PlayerTagChoosingCanvas playerTagChoosingCanvas;
     public DestinyShareChoosingCanvas destinyShareChoosingCanvas;

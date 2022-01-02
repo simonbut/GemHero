@@ -26,7 +26,7 @@ public class TurnBaseBattleView : MonoBehaviour
     }
     #endregion
 
-    public GameObject canvas;
+    public TurnBaseBattleCanvas canvas;
     public GameObject characterObjectPrefab;
 
     public List<TurnBaseBattleCharacter> characterList;
@@ -39,7 +39,7 @@ public class TurnBaseBattleView : MonoBehaviour
 
     public void StartBattle(int _questId)
     {
-        canvas.SetActive(true);
+        canvas.AddUI();
         questId = _questId;
 
         QuestData _q = QuestManager.Instance.GetQuestData(questId);
@@ -88,7 +88,7 @@ public class TurnBaseBattleView : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!canvas.activeInHierarchy)
+        if (!UIManager.Instance.IsCurrentUI(canvas))
         {
             return;
         }
@@ -113,15 +113,8 @@ public class TurnBaseBattleView : MonoBehaviour
 
         if (isWin)
         {
-            canvas.SetActive(false);
-            if (questId < 100)
-            {
-                MainGameView.Instance.CheckQuestAfterMainBattleQuest();
-            }
-            else
-            {
-                MainGameView.Instance.CheckQuestAfterBattleQuest();
-            }
+            canvas.OnBackPressed();
+            MainGameView.Instance.rewardAfterBattleCanvas.AddUI(questId < 100);
         }
 
         if (isLose)

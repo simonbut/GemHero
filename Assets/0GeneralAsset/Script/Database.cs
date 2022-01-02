@@ -206,6 +206,12 @@ public class Database : MonoBehaviour
         Save();
     }
 
+    public static void AddGem(int _gemId)
+    {
+        userDataJson.virtueGem.Add(_gemId);
+        Save();
+    }
+
     public static void AddAsset(Asset _a)
     {
         print("Add Asset");

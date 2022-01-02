@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using ClassHelper;
+using System;
+using System.Linq;
+using System.Security.Cryptography;
 
 public class VirtueGemManager : MonoBehaviour
 {
@@ -68,5 +71,31 @@ public class VirtueGemManager : MonoBehaviour
             }
         }
         return null;
+    }
+
+    public List<int> GenerateRandomRewardGemList(bool _isCri)
+    {
+        List<int> result = new List<int>();
+
+        System.Random rnd = new System.Random();
+        List<VirtueGemData> randomList = virtueGemData.OrderBy(x => rnd.Next()).ToList();
+
+        foreach (VirtueGemData _vg in randomList)
+        {
+            if (_isCri == _vg.IsCriticalGem)
+            {
+                if (!Database.userDataJson.virtueGem.Contains(_vg.id))
+                {
+                    result.Add(_vg.id);
+                }
+            }
+
+            if (result.Count >= 3)
+            {
+                return result;
+            }
+        }
+
+        return result;
     }
 }
