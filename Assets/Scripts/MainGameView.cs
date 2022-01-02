@@ -251,7 +251,8 @@ public class MainGameView : MonoBehaviour
 
     public void MainBattleQuest()
     {
-        CheckQuestAfterMainBattleQuest();//TODO
+        MainQuestDialogList _md = ResourcePointManager.Instance.GetMainQuestData(reactingObject.resourcePointId);
+        TurnBaseBattleView.Instance.StartBattle(_md.afterMainBattleQuest.questId);
     }
 
     public void CheckQuestAfterMainBattleQuest()
@@ -276,7 +277,8 @@ public class MainGameView : MonoBehaviour
 
     public void BattleQuest()
     {
-        CheckQuestAfterBattleQuest();//TODO
+        TalkDialogList _td = ResourcePointManager.Instance.GetTalkData(reactingObject.resourcePointId);
+        TurnBaseBattleView.Instance.StartBattle(_td.afterBattleQuest.questId);
     }
 
     public void CheckQuestAfterBattleQuest()

@@ -1,5 +1,5 @@
-id	description	timeLimit (Hour)	questType	characterId	itemId	itemQuality	itemTag
-1	talkQuestTest	12	talk	3			
-101	submitTQuestTest	12	item	2	1	0	1
-201	sideBattleQuestTest	3	battle	2			
-2	mainBattleQuestTest	12	mainBattle	4			
+id	description	timeLimit (Hour)	questType	characterId	itemId	itemQuality	itemTag	enemyList
+1	talkQuestTest	12	talk	3				
+101	submitTQuestTest	12	item	2	1	0	1	
+201	sideBattleQuestTest	3	battle	2				1;1
+2	mainBattleQuestTest	12	mainBattle	4				1;1

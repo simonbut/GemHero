@@ -52,6 +52,16 @@ public class QuestManager : MonoBehaviour
                 int.TryParse(_c[6], out _b.itemQuality);
                 int.TryParse(_c[7], out _b.itemTag);
 
+                _b.enemyList = new List<int>();
+                string[] _c8 = _c[8].Split(';');
+                for (int j = 0; j < _c8.Length; j++)
+                {
+                    int _c8b;
+                    int.TryParse(_c8[j], out _c8b);
+
+                    _b.enemyList.Add(_c8b);
+                }
+
                 questData.Add(_b);
             }
         }

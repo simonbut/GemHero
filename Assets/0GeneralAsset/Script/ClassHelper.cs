@@ -770,6 +770,7 @@ namespace ClassHelper
         public int itemId;
         public int itemQuality;
         public int itemTag;
+        public List<int> enemyList;
 
         public string GetDescription()
         {

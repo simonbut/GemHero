@@ -32,15 +32,24 @@ public class TurnBaseBattleView : MonoBehaviour
     public List<TurnBaseBattleCharacter> characterList;
     public int enemyCount = 0;
 
-    public void StartBattle()
+    public int questId = 0;
+
+    public bool isWin = false;
+    public bool isLose = false;
+
+    public void StartBattle(int _questId)
     {
         canvas.SetActive(true);
+        questId = _questId;
 
-        //test
+        QuestData _q = QuestManager.Instance.GetQuestData(questId);
+
         AddCharacter(CharacterAttribute.SetUpCharacterAttribute(Database.userDataJson.hp, ParameterManager.Instance.GetParameter("basicPlayerDef"), ParameterManager.Instance.GetParameter("basicPlayerAtk"), 1000, null, new List<int>(), new List<int>(), 10,1), Force.player);
-        AddCharacter(CharacterAttribute.SetUpCharacterAttributeByEnemyId(1), Force.enemy); 
-        AddCharacter(CharacterAttribute.SetUpCharacterAttributeByEnemyId(1), Force.enemy);
-        AddCharacter(CharacterAttribute.SetUpCharacterAttributeByEnemyId(1), Force.enemy);
+
+        for (int i = 0; i < _q.enemyList.Count; i++)
+        {
+            AddCharacter(CharacterAttribute.SetUpCharacterAttributeByEnemyId(_q.enemyList[i]), Force.enemy);
+        }
     }
 
     void AddCharacter(CharacterAttribute _characterAttribute, Force _force)
@@ -79,6 +88,11 @@ public class TurnBaseBattleView : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!canvas.activeInHierarchy)
+        {
+            return;
+        }
+
         //Check Attack
         foreach (TurnBaseBattleCharacter _tbbc in characterList)
         {
@@ -93,6 +107,61 @@ public class TurnBaseBattleView : MonoBehaviour
                 _tbbc.ResetAtb();
             }
         }
+
+        CheckLose();
+        CheckWin();
+
+        if (isWin)
+        {
+            canvas.SetActive(false);
+            if (questId < 100)
+            {
+                MainGameView.Instance.CheckQuestAfterMainBattleQuest();
+            }
+            else
+            {
+                MainGameView.Instance.CheckQuestAfterBattleQuest();
+            }
+        }
+
+        if (isLose)
+        {
+            //GameOver
+        }
+    }
+
+    void CheckLose()
+    {
+        foreach (TurnBaseBattleCharacter _tbbc in characterList)
+        {
+            if (_tbbc.force == Force.player)
+            {
+                if (_tbbc.hpPt <= 0)
+                {
+                    isLose = true;
+                }
+            }
+        }
+    }
+
+    void CheckWin()
+    {
+        if (isLose)
+        {
+            return;
+        }
+        bool isWinResult = true;
+        foreach (TurnBaseBattleCharacter _tbbc in characterList)
+        {
+            if (_tbbc.force == Force.enemy)
+            {
+                if (_tbbc.hpPt > 0)
+                {
+                    isWinResult = false;
+                }
+            }
+        }
+        isWin = isWinResult;
     }
 
     void SetTarget(TurnBaseBattleCharacter from)
