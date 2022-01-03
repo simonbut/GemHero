@@ -24,6 +24,9 @@ public class EquipmentCanvas : ControlableUI
 
     public void Refresh()
     {
+        UIManager.Instance.assetDataUI.Hide();
+        UIManager.Instance.compositionDataUI.Hide();
+
         gridScrollView.Setup("Asset List", this, ClickData, SelectingData, DisSelectingData);
 
         GenerateList();
@@ -60,12 +63,14 @@ public class EquipmentCanvas : ControlableUI
 
         Database.userDataJson.equipment[session] = uid;
         sessions[session].transform.Find("Image").GetComponent<Image>().sprite = Resources.Load<Sprite>("Asset/" + AssetManager.Instance.GetAssetByUid(Database.userDataJson.equipment[session]).assetId.ToString("000"));
+
+        session = -1;
     }
 
     void SelectingData(int uid, GridItem gi)
     {
         Asset _a = AssetManager.Instance.GetAssetByUid(uid);
-        UIManager.Instance.assetInCompositionDataUI.Show(_a);
+        UIManager.Instance.assetDataUI.Show(_a, 1200);
     }
 
     void DisSelectingData(int uid, GridItem gi)
@@ -91,7 +96,7 @@ public class EquipmentCanvas : ControlableUI
 
         if (ControlView.Instance.controls.Map1.Cancel.triggered)
         {
-            UIManager.Instance.assetInCompositionDataUI.Hide();
+            UIManager.Instance.assetDataUI.Hide();
             UIManager.Instance.compositionDataUI.Hide();
             OnBackPressed();
         }

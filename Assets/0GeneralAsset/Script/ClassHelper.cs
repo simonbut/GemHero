@@ -326,7 +326,78 @@ namespace ClassHelper
     {
         public static int GetTotalHp()
         {
-            return Mathf.FloorToInt(ParameterManager.Instance.GetParameter("basicPlayerHp"));
+            float result = ParameterManager.Instance.GetParameter("basicPlayerHp");
+
+            return Mathf.FloorToInt(result);
+        }
+
+        public static float GetBasicAtk()
+        {
+            float result = ParameterManager.Instance.GetParameter("basicPlayerAtk");
+
+            foreach (int _e in Database.userDataJson.equipment)
+            {
+                if (_e == 0)
+                {
+                    continue;
+                }
+                AssetData _a = AssetManager.Instance.GetAssetByUid(_e).GetAssetData();
+                for (int i = 0; i < _a.basicStatTypeList.Count; i++)
+                {
+                    if (_a.basicStatTypeList[i] == StatType.atk)
+                    {
+                        result += _a.basicStatList[i];
+                    }
+                }
+            }
+
+            return result * 100f;
+        }
+
+        public static float GetBasicAts()
+        {
+            float result = ParameterManager.Instance.GetParameter("basicPlayerAts");
+
+            foreach (int _e in Database.userDataJson.equipment)
+            {
+                if (_e == 0)
+                {
+                    continue;
+                }
+                AssetData _a = AssetManager.Instance.GetAssetByUid(_e).GetAssetData();
+                for (int i = 0; i < _a.basicStatTypeList.Count; i++)
+                {
+                    if (_a.basicStatTypeList[i] == StatType.ats)
+                    {
+                        result += _a.basicStatList[i];
+                    }
+                }
+            }
+
+            return result * 1000f;
+        }
+
+        public static float GetBasicDef()
+        {
+            float result = ParameterManager.Instance.GetParameter("basicPlayerDef");
+
+            foreach (int _e in Database.userDataJson.equipment)
+            {
+                if (_e == 0)
+                {
+                    continue;
+                }
+                AssetData _a = AssetManager.Instance.GetAssetByUid(_e).GetAssetData();
+                for (int i = 0; i < _a.basicStatTypeList.Count; i++)
+                {
+                    if (_a.basicStatTypeList[i] == StatType.def)
+                    {
+                        result += _a.basicStatList[i];
+                    }
+                }
+            }
+
+            return result * 100f;
         }
 
         public static List<int> GetVirtueGemList()

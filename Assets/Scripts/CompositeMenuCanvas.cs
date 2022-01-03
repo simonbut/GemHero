@@ -26,6 +26,9 @@ public class CompositeMenuCanvas : ControlableUI
 
     public void Refresh()
     {
+        UIManager.Instance.assetInCompositionDataUI.Hide();
+        UIManager.Instance.compositionDataUI.Hide();
+
         gridScrollView.Setup("Asset List", this, ClickData, SelectingData, DisSelectingData);
 
         GenerateList();

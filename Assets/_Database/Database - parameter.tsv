@@ -1,4 +1,5 @@
 key	value
 basicPlayerHp	1001
 basicPlayerDef	0
-basicPlayerAtk	100
+basicPlayerAtk	0
+basicPlayerAts	0

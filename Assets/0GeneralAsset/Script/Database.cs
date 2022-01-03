@@ -118,7 +118,7 @@ public class Database : MonoBehaviour
         public List<int> destinyShareCompletion = new List<int>();
         public List<int> questCompletion = new List<int>();
         public List<int> virtueGem = new List<int>();
-        public List<int> equipment = new List<int>() { 0, 0, 0, 0, 0 };
+        public List<int> equipment = new List<int>();
 
         //player property
         public int lastAssetUid = 1;
@@ -457,6 +457,19 @@ public class Database : MonoBehaviour
         result.playerTags = new List<Tag>();
         Tag _t = Tag.CreateTag(14,Vector2Int.zero,new List<int>());
         result.playerTags.Add(_t);
+
+        result.assetList = new List<Asset>();
+        Asset _a = new Asset();
+        _a.assetId = 7;
+        _a.tagList = new List<int>();
+        _a.qualityAffect = 20;
+        _a.assetUid = 1;
+        result.assetList.Add(_a);
+
+        result.lastAssetUid = 2;
+
+        result.equipment = new List<int> { 1, 0, 0, 0, 0 };
+
 
         return result;
     }

@@ -43,8 +43,9 @@ public class TurnBaseBattleView : MonoBehaviour
         questId = _questId;
 
         QuestData _q = QuestManager.Instance.GetQuestData(questId);
+        AssetData _a = AssetManager.Instance.GetAssetByUid(Database.userDataJson.equipment[0]).GetAssetData();
 
-        AddCharacter(CharacterAttribute.SetUpCharacterAttribute(Database.userDataJson.hp, ParameterManager.Instance.GetParameter("basicPlayerDef"), ParameterManager.Instance.GetParameter("basicPlayerAtk"), 1000, null, new List<int>(), new List<int>(), 10,1), Force.player);
+        AddCharacter(CharacterAttribute.SetUpCharacterAttribute(Database.userDataJson.hp, Player.GetBasicDef(), Player.GetBasicAtk(), Player.GetBasicAts(), null, new List<int>(), new List<int>(), _a.ammoCount, _a.ammoReloadTier), Force.player);
 
         for (int i = 0; i < _q.enemyList.Count; i++)
         {
