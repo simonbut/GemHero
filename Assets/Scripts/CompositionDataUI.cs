@@ -78,7 +78,7 @@ public class CompositionDataUI : DataUI
             }
         }
 
-        switch (_ad.compoundType)
+        switch (_ad.GetCompoundType())
         {
             case CompoundType.asset:
             case CompoundType.compound:

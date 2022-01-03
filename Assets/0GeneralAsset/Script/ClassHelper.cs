@@ -550,7 +550,7 @@ namespace ClassHelper
         public int dreamPoint;
         public int idealPoint;
 
-        public CompoundType compoundType;
+        //public CompoundType compoundType;
         public List<StatType> basicStatTypeList;
         public List<int> basicStatList;
 
@@ -578,6 +578,30 @@ namespace ClassHelper
                 }
             }
             return false;
+        }
+
+        public CompoundType GetCompoundType()
+        {
+            foreach (int _id in assetTypeList)
+            {
+                if (_id == 2)
+                {
+                    return CompoundType.weapon;
+                }
+                if (_id == 4)
+                {
+                    return CompoundType.accessory;
+                }
+                if (_id == 5)
+                {
+                    return CompoundType.consumable;
+                }
+                if (_id == 6)
+                {
+                    return CompoundType.clothing;
+                }
+            }
+            return CompoundType.compound;
         }
     }
 

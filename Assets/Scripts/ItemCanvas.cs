@@ -39,7 +39,17 @@ public class ItemCanvas : ControlableUI
     {
         foreach (Asset _a in AssetManager.Instance.GetAssetList(filterQuality, filterTagId, filterAssetId))
         {
-            GameObject gridItemInstance = gridScrollView.GenerateItem("Asset/" + _a.assetId.ToString("000"), _a.assetUid);
+            if (_a.GetAssetData().GetCompoundType() == CompoundType.consumable)
+            {
+                GameObject gridItemInstance = gridScrollView.GenerateItem("Asset/" + _a.assetId.ToString("000"), _a.assetUid);
+            }
+        }
+        foreach (Asset _a in AssetManager.Instance.GetAssetList(filterQuality, filterTagId, filterAssetId))
+        {
+            if (_a.GetAssetData().GetCompoundType() != CompoundType.consumable)
+            {
+                GameObject gridItemInstance = gridScrollView.GenerateItem("Asset/" + _a.assetId.ToString("000"), _a.assetUid);
+            }
         }
     }
 

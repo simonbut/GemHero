@@ -234,7 +234,33 @@ public class MainGameView : MonoBehaviour
 
     public void OpenItemCanvas()
     {
-        itemCanvas.AddUI();
+        itemCanvas.AddUI(ConfirmUseConsumable);
+    }
+
+    public void ConfirmUseConsumable(int uid, GridItem gi)
+    {
+        if (AssetManager.Instance.GetAssetByUid(uid).GetAssetData().GetCompoundType() != CompoundType.consumable)
+        {
+            return;
+        }
+        GlobalCommunicateManager.varInt = uid;
+        UIManager.Instance.choiceUI.Setup(new Vector2(Screen.width / 2f, Screen.height / 2f), new List<string> { "Use", "Cancel" }, new List<Callback> { UseConsumable, null });
+    }
+
+    public void UseConsumable()
+    {
+        print("GlobalCommunicateManager.varInt " + GlobalCommunicateManager.varInt);
+        Asset _a = AssetManager.Instance.GetAssetByUid(GlobalCommunicateManager.varInt);
+        switch (_a.assetId)
+        {
+            //TODO consumable effect
+            case 1:
+                break;
+        }
+        Database.ConsumeAsset(GlobalCommunicateManager.varInt);
+
+        UIManager.Instance.assetDataUI.Hide();
+        itemCanvas.Refresh();
     }
 
     public void OpenEquipmentCanvas()

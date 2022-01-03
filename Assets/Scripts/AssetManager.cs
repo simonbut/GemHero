@@ -50,43 +50,43 @@ public class AssetManager : MonoBehaviour
                 _b.name = new LocalizedString(_c[1], _c[1], _c[1], "");
 
                 _b.assetTypeList = new List<int>();
-                string[] _c6 = _c[2].Split(';');
-                for (int j = 0; j < _c6.Length; j++)
+                string[] _c2 = _c[2].Split(';');
+                for (int j = 0; j < _c2.Length; j++)
                 {
-                    int _c6b;
-                    int.TryParse(_c6[j], out _c6b);
+                    int _c2b;
+                    int.TryParse(_c2[j], out _c2b);
 
-                    _b.assetTypeList.Add(_c6b);
+                    _b.assetTypeList.Add(_c2b);
                 }
 
                 int.TryParse(_c[3], out _b.realityPoint);
                 int.TryParse(_c[4], out _b.dreamPoint);
                 int.TryParse(_c[5], out _b.idealPoint);
 
-                CompoundType.TryParse(_c[6], out _b.compoundType);
+                //CompoundType.TryParse(_c[6], out _b.compoundType);
 
                 _b.basicStatTypeList = new List<StatType>();
-                string[] _c7 = _c[7].Split(';');
-                for (int j = 0; j < _c7.Length; j++)
+                string[] _c6 = _c[6].Split(';');
+                for (int j = 0; j < _c6.Length; j++)
                 {
-                    StatType _c7b;
-                    StatType.TryParse(_c7[j], out _c7b);
+                    StatType _c6b;
+                    StatType.TryParse(_c6[j], out _c6b);
 
-                    _b.basicStatTypeList.Add(_c7b);
+                    _b.basicStatTypeList.Add(_c6b);
                 }
 
                 _b.basicStatList = new List<int>();
-                string[] _c8 = _c[8].Split(';');
-                for (int j = 0; j < _c8.Length; j++)
+                string[] _c7 = _c[7].Split(';');
+                for (int j = 0; j < _c7.Length; j++)
                 {
-                    int _c8b;
-                    int.TryParse(_c8[j], out _c8b);
+                    int _c7b;
+                    int.TryParse(_c7[j], out _c7b);
 
-                    _b.basicStatList.Add(_c8b);
+                    _b.basicStatList.Add(_c7b);
                 }
 
-                int.TryParse(_c[9], out _b.ammoCount);
-                int.TryParse(_c[10], out _b.ammoReloadTier);
+                int.TryParse(_c[8], out _b.ammoCount);
+                int.TryParse(_c[9], out _b.ammoReloadTier);
 
                 assetdata.Add(_b);
             }
