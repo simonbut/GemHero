@@ -19,7 +19,7 @@ public class StartCanvas : ControlableUI
 
     public override void OnShow()
     {
-        listMenuView.SetUp(new List<string> { "Contine", "New Game", "Exit" }, this, new List<Callback> { OnContinueButtonClick, OnStartButtonClick, OnExitButtonClick });
+        listMenuView.SetUp(new List<string> { "Contine", "New Game", "Settings", "Exit" }, this, new List<Callback> { OnContinueButtonClick, OnStartButtonClick, OnSettingButtonClick, OnExitButtonClick });
 
         base.OnShow();
     }
@@ -33,7 +33,7 @@ public class StartCanvas : ControlableUI
         }
     }
 
-    public void OnStartButtonClick()
+    public void OnStartButtonClick()//TODO cancel it
     {
         StartView.Instance.NewGameClicked();
     }
@@ -41,6 +41,11 @@ public class StartCanvas : ControlableUI
     public void OnContinueButtonClick()
     {
         StartView.Instance.ContinueClicked();
+    }
+
+    public void OnSettingButtonClick()
+    {
+        StartView.Instance.OpenSettingUI();
     }
 
     public void OnExitButtonClick()

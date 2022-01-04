@@ -11,19 +11,15 @@ public class SettingUI : ControlableUI
     [SerializeField] Slider vfxSlider;
     [SerializeField] Button languageDropDownButton;
     [SerializeField] Toggle fullScreenToggle;
-    [SerializeField] Toggle isSimpleModeToggle;
+    //[SerializeField] Toggle isSimpleModeToggle;
     [SerializeField] Button resolutionDropDownButton;
     DropdownUI languageDropDown;
     DropdownUI resolutionDropDown;
     //[SerializeField] Slider speedInBattleSlider;
-    //[SerializeField] StartScene startScene;
-    //[SerializeField] CoreFlow coreFlow;
-    //[SerializeField] Mainbattle mainbattle;
 
     //[SerializeField] Button creditButton;
     [SerializeField] Button titleButton;
 
-    [SerializeField] GameObject hintGameObject;
     [SerializeField] Text versionNo;
 
     [SerializeField] Slider gameSpeedSlider;
@@ -52,8 +48,6 @@ public class SettingUI : ControlableUI
     {
         GlobalCommunicateManager.selectingId = 0;
 
-        hintGameObject.SetActive(false);
-
         //if (JoyStickManager.Instance.IsJoyStickEnable())
         //{
         //    toTitleButtonImage.enabled = false;
@@ -71,7 +65,6 @@ public class SettingUI : ControlableUI
     public void Init()
     {
         versionNo.text = "ver. " + Database.versionNo;
-        hintGameObject.SetActive(false);
         LoadSetting();
         //if (MainMenuView.Instance == null)
         //{
@@ -92,14 +85,11 @@ public class SettingUI : ControlableUI
         bgmSlider.value = Database.globalData.bgm;
         vfxSlider.value = Database.globalData.sfx;
         gameSpeedSlider.value = Database.globalData.gameSpeed;
-        //languageDropDown.value = (int)Database.globalData.language;
-        //resolutionDropDown.value = Database.globalData.screenResolution;
         languageDropDown = UIManager.Instance.GenerateDropdownUI(languageDropDown, Database.GetLocalizedText("Language"), new List<string> { "English", "繁體中文", "简体中文" }, languageDropDownButton, languageDropDownButton.transform.position, (int)Database.globalData.language);
         resolutionDropDown = UIManager.Instance.GenerateDropdownUI(resolutionDropDown, Database.GetLocalizedText("Resolution"), new List<string> { "1280 x 720", "1600 x 900", "1920 x 1080" }, resolutionDropDownButton, resolutionDropDownButton.transform.position, Database.globalData.screenResolution);
 
-        //speedInBattleSlider.value = Database.globalData.speedInBattle;
         fullScreenToggle.isOn = Database.globalData.isFullScreen;
-        isSimpleModeToggle.isOn = Database.globalData.isSimpleMode;
+        //isSimpleModeToggle.isOn = Database.globalData.isSimpleMode;
 
         loadComplete = true;
     }
@@ -120,9 +110,8 @@ public class SettingUI : ControlableUI
         Database.globalData.sfx = Mathf.FloorToInt(vfxSlider.value);
         Database.globalData.gameSpeed = Mathf.FloorToInt(gameSpeedSlider.value);
         Database.globalData.screenResolution = resolutionDropDown.value;
-        //Database.globalData.speedInBattle = Mathf.FloorToInt(speedInBattleSlider.value);
         Database.globalData.isFullScreen = fullScreenToggle.isOn;
-        Database.globalData.isSimpleMode = isSimpleModeToggle.isOn;
+        //Database.globalData.isSimpleMode = isSimpleModeToggle.isOn;
         Database.SaveGlobalSave();
     }
 
@@ -345,59 +334,6 @@ public class SettingUI : ControlableUI
         //        hint = false;
         //    }
 
-    }
-
-    public void LanguageHint()
-    {
-        hintGameObject.SetActive(true);
-        if (loadComplete)
-        {
-            switch (Database.globalData.language)
-            {
-                case Language.zh:
-                    hintGameObject.transform.Find("Text").GetComponent<Text>().text = "必須重啟遊戲，才能更改語言";
-                    break;
-                case Language.cn:
-                    hintGameObject.transform.Find("Text").GetComponent<Text>().text = "必须重启游戏，才能更改语言";
-                    break;
-                case Language.en:
-                    hintGameObject.transform.Find("Text").GetComponent<Text>().text = "you must restart to apply language setting.";
-                    break;
-                case Language.de:
-                    hintGameObject.transform.Find("Text").GetComponent<Text>().text = "Sie müssen neu starten, um die Spracheinstellung anzuwenden.";
-                    break;
-                    //case Database.Language.jp:
-                    //    hintGameObject.transform.Find("Text").GetComponent<Text>().text = "Sie müssen neu starten, um die Spracheinstellung anzuwenden.";
-                    //    break;
-            }
-            if (coroutine != null)
-            {
-                StopCoroutine(coroutine);
-            }
-            coroutine = StartCoroutine(HintAnimation());
-        }
-    }
-
-    Coroutine coroutine;
-
-    IEnumerator HintAnimation()
-    {
-        float timer = 0;
-        while (timer < 1f)
-        {
-            hintGameObject.transform.localPosition = new Vector3(0, -300f * (1f - timer), 0);
-            timer += Time.deltaTime;
-            yield return null;
-        }
-        yield return new WaitForSeconds(1f);
-
-        float timer2 = 0;
-        while (timer2 < 1f)
-        {
-            hintGameObject.transform.localPosition = new Vector3(0, -300f * timer2, 0);
-            timer2 += Time.deltaTime;
-            yield return null;
-        }
     }
 
     public void LanguageDropDownClicked()

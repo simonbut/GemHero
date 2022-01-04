@@ -383,10 +383,8 @@ public class Database : MonoBehaviour
         public int sfx = 10;
         public int gameSpeed = 0;
         public bool isFullScreen = false;
-        public bool isSimpleMode = false;
         public int screenResolution = 1;
         public Language language = 0;
-        //public int speedInBattle = 1;
 
         //Tutorial Check
         public bool isFastEditTutorialClear = false;
