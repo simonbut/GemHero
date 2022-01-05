@@ -97,7 +97,7 @@ public class EnemyManager : MonoBehaviour
     public void LoadEnemySkillData()
     {
         enemySkilldata = new List<EnemySkillData>();
-        string data = Database.ReadDatabaseWithoutLanguage("Enemy");
+        string data = Database.ReadDatabaseWithoutLanguage("EnemySkill");
         if (data.Length > 0)
         {
             string[] _a = data.Split('\n');
@@ -116,5 +116,17 @@ public class EnemyManager : MonoBehaviour
         {
             Debug.Log("data is null");
         }
+    }
+
+    public EnemySkillData GetEnemySkillData(int _skillId)
+    {
+        foreach (EnemySkillData _e in enemySkilldata)
+        {
+            if (_e.id == _skillId)
+            {
+                return _e;
+            }
+        }
+        return null;
     }
 }

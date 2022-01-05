@@ -226,4 +226,19 @@ public class TurnBaseBattleCharacter : MonoBehaviour
         hurtAnimation = true;
         hurtAnimationTimer = 0f;
     }
+
+    public void MouseEnter()
+    {
+        TurnBaseBattleView.Instance.ShowEnemyInformation(this);
+    }
+
+    public void MouseExit()
+    {
+        TurnBaseBattleView.Instance.HideEnemyInformation();
+    }
+
+    public void MouseDown()
+    {
+        TurnBaseBattleView.Instance.AimEnemy(this);
+    }
 }

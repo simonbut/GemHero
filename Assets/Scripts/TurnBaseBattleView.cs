@@ -37,6 +37,22 @@ public class TurnBaseBattleView : MonoBehaviour
     public bool isWin = false;
     public bool isLose = false;
 
+    public void ShowEnemyInformation(TurnBaseBattleCharacter _character)
+    {
+        canvas.ShowEnemyInformation(_character);
+    }
+
+    public void HideEnemyInformation()
+    {
+        canvas.HideEnemyInformation();
+    }
+
+    public void AimEnemy(TurnBaseBattleCharacter _character)
+    {
+        SelectTarget(_character);
+    }
+
+
     public void StartBattle(int _questId)
     {
         canvas.AddUI();
@@ -158,7 +174,21 @@ public class TurnBaseBattleView : MonoBehaviour
         isWin = isWinResult;
     }
 
-    void SetTarget(TurnBaseBattleCharacter from)
+    void SelectTarget(TurnBaseBattleCharacter _enemy)
+    {
+        if (_enemy.force == Force.player)
+        {
+            return;
+        }
+        List<TurnBaseBattleCharacter> _cl = GetCharacterList(Force.player);
+        if (_cl.Count <= 0)
+        {
+            return;
+        }
+        _cl[0].target = _enemy;
+    }
+
+    void RandomTarget(TurnBaseBattleCharacter from)
     {
         if (from.force == Force.player)
         {
@@ -180,7 +210,7 @@ public class TurnBaseBattleView : MonoBehaviour
         }
     }
 
-    List<TurnBaseBattleCharacter> GetCharacterList(Force _force)
+    public List<TurnBaseBattleCharacter> GetCharacterList(Force _force)
     {
         List<TurnBaseBattleCharacter> result = new List<TurnBaseBattleCharacter>();
         foreach (TurnBaseBattleCharacter _tbbc in characterList)
@@ -201,7 +231,7 @@ public class TurnBaseBattleView : MonoBehaviour
     {
         if (from.target == null)
         {
-            SetTarget(from);
+            RandomTarget(from);
         }
         if (from.target == null)//can't find target
         {

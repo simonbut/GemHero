@@ -430,6 +430,43 @@ namespace ClassHelper
         float lastHitDirectDamage = 0f;
         float countRate = 0f;
 
+        public string GetEnemyInformation()
+        {
+            //$1 is hp
+            string result = "";
+            result += "HP: " + "$1" + " / " + GetHpTotal().ToString("0") + "\n";
+            result += "Def: " + GetDef().ToString("0") + "\n";
+            result += "Atk: " + GetAtk().ToString("0") + "\n";
+            result += "Ats: " + GetAts().ToString("0") + "\n";
+            result += "\n";
+            result += "\n";
+
+            foreach (int _skill in skillAffect)
+            {
+                EnemySkillData _esd = EnemyManager.Instance.GetEnemySkillData(_skill);
+                result += _esd.description.GetString() + "\n" + "\n" + "\n";
+            }
+
+            return result;
+        }
+
+        public string GetPlayerInformation()
+        {
+            //$1 is hp, $2 is ammo count
+            string result = "";
+            result += "HP: " + "$1" + " / " + GetHpTotal().ToString("0") + "\n";
+            result += "Def: " + GetDef().ToString("0") + "\n";
+            result += "Atk: " + GetAtk().ToString("0") + "\n";
+            result += "Ats: " + GetAts().ToString("0") + "\n";
+            result += "Ammo Count: " + "$2" + " / " + GetAmmoTotal().ToString("0") + "\n";
+            result += "Reload Speed Tier: " + GetAmmoReloadTier().ToString("0") + "\n";
+            result += "\n";
+
+            //TODO: List out criRate to countRate if they > 0
+
+            return result;
+        }
+
         public static CharacterAttribute SetUpCharacterAttribute(float _hpTotalPt,float _defPt, float _atkPt, float _atsPt,List<int> _skillAffect = null, List<int> _tagAffect = null, List<int> _gemAffect = null,int _ammoTotal = -1,int _ammoReloadTier = 1)
         {
             CharacterAttribute result = new CharacterAttribute();
