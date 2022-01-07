@@ -681,10 +681,13 @@ public class Database : MonoBehaviour
     public static void ApplySetting()
     {
         //bgm
-        //AudioManager.instance.bgmVolume = globalData.bgm;
+        AudioManager.instance.bgmVolume = globalData.bgm;
+
         //vfx
-        //AudioManager.instance.sfxVolume = globalData.sfx;
-        //globalData.language //TODO
+        AudioManager.instance.sfxVolume = globalData.sfx;
+
+        //TODO: globalData.language
+
         //screen resolution,full screen
         if (globalData.isFullScreen)
         {
@@ -716,8 +719,6 @@ public class Database : MonoBehaviour
                     break;
             }
         }
-        //speed in battle
-        //speedInBattle = 1f + (globalData.speedInBattle - 1) * 0.5f;
     }
     #endregion
 

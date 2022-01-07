@@ -11,8 +11,6 @@ public class AudioManager : MonoBehaviour
         instance = this;
     }
 
-    public bool isMute;
-
     private void Update()
     {
         if (bgmVolumeFadeinTimer < 1)
@@ -23,71 +21,70 @@ public class AudioManager : MonoBehaviour
         {
             bgmVolumeFadeinTimer = 1;
         }
-        //Camera.main.GetComponent<AkAudioListener>().
-        BGM.volume = 0.05f * Database.globalData.bgm * bgmVolumeFadeinTimer;
-        SFX.volume = 0.08f * Database.globalData.sfx;
-        Voice.volume = 0.08f * Database.globalData.sfx;
-        if (isMute)
-        {
-            BGM.volume = 0;
-            SFX.volume = 0;
-            Voice.volume = 0;
-        }
+        BGM.volume = 0.05f * bgmVolume * bgmVolumeFadeinTimer;
+        SFX.volume = 0.08f * sfxVolume;
     }
 
-    //public int bgmVolume;
+    public int bgmVolume;
     public float bgmVolumeFadeinTimer;
-    //public int sfxVolume;
+    public int sfxVolume;
 
     public static AudioManager instance;
     [SerializeField] AudioSource BGM;
     [SerializeField] AudioSource SFX;
-    [SerializeField] AudioSource Voice;
+
+    [SerializeField] AudioClip exampleBGM;
+    [SerializeField] AudioClip exampleSFX;
 
     public void Init()
     {
-        //PlaySFX(akEvent);
-    }
-
-
-    GameObject bgmObject = null;
-    public void PlayBGM(AudioSource _bgm)
-    {
 
     }
 
-    public void StopBGM()
-    {
+    #region audio
 
-    }
-
-    public void PlaySFX(AudioSource _sfx,GameObject _g = null)
+    GameObject PlaySFX(AudioClip _ac, float _speed = 1, float _decibelMultiplier = 1f, bool _isOverSenseChange = false)
     {
-        //return;
-        if(_g == null)
+        GameObject sfx = Instantiate(SFX.gameObject);
+        sfx.gameObject.SetActive(true);
+        sfx.GetComponent<AudioSource>().clip = _ac;
+        sfx.GetComponent<AudioSource>().pitch = _speed;
+        sfx.GetComponent<AudioSource>().volume = 0.08f * sfxVolume * _decibelMultiplier * 0.5f;
+        sfx.GetComponent<AudioSource>().Play();
+
+        if (Camera.main != null)
         {
-            GameObject _instance = new GameObject();
-            //GameObject _instance = Instantiate(new GameObject());
-            if (Camera.main != null)
-            {
-                _instance.transform.position = Camera.main.transform.position;
-            }
-
-            _instance.transform.SetParent(transform);
-            _instance.name = _sfx.name;
-
-            _g = _instance;
+            sfx.transform.position = Camera.main.transform.position;
         }
+
+        if (_isOverSenseChange)
+        {
+            sfx.AddComponent<DontDelete>();
+        }
+
+        return sfx;
     }
 
-    GameObject dizzySFX;
-    public void RegisterDizzySFX(GameObject _g)//
+    #endregion
+
+    #region bgm
+
+    public void ContinueBgm()
     {
-        dizzySFX = _g;
+        BGM.Play();
     }
 
-    public void DeleteDizzySFX()//
+    public void StopBgm()
     {
-        Destroy(dizzySFX);
+        BGM.Stop();
     }
+
+    public void PlayBGM(AudioClip _bgm)
+    {
+        BGM.clip = _bgm;
+        BGM.Play();
+        bgmVolumeFadeinTimer = 0;
+    }
+
+    #endregion
 }
