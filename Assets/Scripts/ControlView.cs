@@ -30,7 +30,9 @@ public class ControlView : MonoBehaviour
 
     private void Start()
     {
-        Rope.instance.Init();
+        MainGameView.Instance.ChangeMap(Database.userDataJson.mapId);
+        MainGameView.Instance.ChangePlayerPos(Database.userDataJson.pos);
+        Rope.Instance.Init();
     }
 
 
@@ -59,7 +61,7 @@ public class ControlView : MonoBehaviour
 
     }
 
-    void UpdateCameraPosition(Vector3 _offset)
+    public void UpdateCameraPosition(Vector3 _offset)
     {
         if (!UIManager.Instance.IsNoUI())
         {
@@ -124,7 +126,7 @@ public class ControlView : MonoBehaviour
         Vector3 _prePos = new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z);
         Vector3 _offset = input * Time.deltaTime * speed;
         player.GetComponent<Rigidbody2D>().MovePosition(player.transform.position + _offset);
-        if (Rope.instance.GetRopeLength(_offset) > lengthLimit)
+        if (Rope.Instance.GetRopeLength(_offset) > lengthLimit)
         {
             player.GetComponent<Rigidbody2D>().MovePosition(player.transform.position);
         }

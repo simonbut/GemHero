@@ -525,7 +525,7 @@ namespace ClassHelper
     {
         talk,
         item,
-        battle
+        battle,
     }
 
     public enum DialogType
@@ -544,7 +544,8 @@ namespace ClassHelper
         collect,
         talk,
         mainQuest,
-        special
+        special,
+        changePos,
     }
 
     public enum CompoundType
@@ -554,7 +555,7 @@ namespace ClassHelper
         consumable,
         compound,
         asset,
-        clothing
+        clothing,
     }
 
     public enum StatType
@@ -562,7 +563,7 @@ namespace ClassHelper
         atk = 0,
         ats,
         hp,
-        def
+        def,
     }
 
     public enum Rank
@@ -573,14 +574,14 @@ namespace ClassHelper
         C,
         B,
         A,
-        S
+        S,
     }
 
     public enum TagType
     {
         AssetTag = 0,
         CharacterTag,
-        FixedTag
+        FixedTag,
     }
 
     public class TalkDialogList
@@ -627,6 +628,8 @@ namespace ClassHelper
         public int targetDialogId;
         public int questId;
         public int afterQuestId;
+        public int mapId;
+        public Vector2 pos;
     }
 
     public class CharacterData

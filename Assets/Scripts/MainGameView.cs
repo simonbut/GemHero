@@ -86,6 +86,9 @@ public class MainGameView : MonoBehaviour
                     case ResourceType.mainQuest:
                         ShowInteractiveDialog("Talk");
                         break;
+                    case ResourceType.changePos:
+                        ShowInteractiveDialog("React");
+                        break;
                     case ResourceType.special:
                         switch (_rpd[0].resourcePointId)
                         {
@@ -202,6 +205,10 @@ public class MainGameView : MonoBehaviour
                     }
                 }
                 break;
+            case ResourceType.changePos:
+                ChangeMap(_rpdl[0].mapId);
+                ChangePlayerPos(_rpdl[0].pos);
+                break;
             case ResourceType.special:
                 switch (reactingObject.resourcePointId)
                 {
@@ -220,6 +227,35 @@ public class MainGameView : MonoBehaviour
                 }
                 break;
         }
+    }
+
+    public List<GameObject> mapList;
+    public int currentMapId = 1;
+    public void ChangeMap(int _mapId)
+    {
+        if (currentMapId == _mapId)
+        {
+            return;
+        }
+        for (int i = 0; i < mapList.Count; i++)
+        {
+            mapList[i].SetActive(false);
+        }
+        mapList[_mapId].SetActive(true);
+        currentMapId = _mapId;
+
+        Database.userDataJson.mapId = currentMapId;
+        Database.Save();
+    }
+
+    public void ChangePlayerPos(Vector2 _pos)
+    {
+        ControlView.Instance.UpdateCameraPosition(new Vector3(_pos.x, _pos.y, 0) - ControlView.Instance.player.transform.position);
+        ControlView.Instance.player.transform.position = _pos;
+        Rope.Instance.Init();
+
+        Database.userDataJson.pos = new Vector2Int(Mathf.FloorToInt(_pos.x), Mathf.FloorToInt(_pos.y));
+        Database.Save();
     }
 
     public void OpenCompositeCanvas()

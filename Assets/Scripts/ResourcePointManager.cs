@@ -102,6 +102,18 @@ public class ResourcePointManager : MonoBehaviour
                         int.TryParse(_c[12], out _b.questId);
                         int.TryParse(_c[13], out _b.afterQuestId);
                         break;
+                    case ResourceType.changePos:
+                        int.TryParse(_c[14], out _b.mapId);
+
+                        _b.pos = new Vector2();
+                        string[] _c15 = _c[15].Split(',');
+                        int _c15x;
+                        int.TryParse(_c15[0], out _c15x);
+                        int _c15y;
+                        int.TryParse(_c15[1], out _c15y);
+                        _b.pos = new Vector2(_c15x, _c15y);
+
+                        break;
                 }
 
                 resourcePointdata.Add(_b);

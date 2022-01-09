@@ -12,14 +12,15 @@ public class Rope : MonoBehaviour
 
     public TextMesh lengthText;
 
-    public static Rope instance;
+    public static Rope Instance;
     private void Awake()
     {
-        instance = this;
+        Instance = this;
     }
 
     public void Init()
     {
+        ropePositions = new List<Vector3>();
         AddPosToRope(player.transform.position);
     }
 

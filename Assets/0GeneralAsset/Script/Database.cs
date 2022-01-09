@@ -124,6 +124,8 @@ public class Database : MonoBehaviour
         public int lastAssetUid = 1;
         public List<Asset> assetList = new List<Asset>();
         public List<Tag> playerTags = new List<Tag>();
+        public int mapId = 1;
+        public Vector2Int pos = new Vector2Int();
 
         //back door
         public bool isBackDoor = false;
