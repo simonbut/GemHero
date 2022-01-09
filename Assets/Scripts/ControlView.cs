@@ -28,6 +28,11 @@ public class ControlView : MonoBehaviour
     }
     #endregion
 
+    private void Start()
+    {
+        Rope.instance.Init();
+    }
+
 
     public float lengthLimit = 10;
     public GameObject cameraParent;

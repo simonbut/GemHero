@@ -16,7 +16,10 @@ public class Rope : MonoBehaviour
     private void Awake()
     {
         instance = this;
+    }
 
+    public void Init()
+    {
         AddPosToRope(player.transform.position);
     }
 
