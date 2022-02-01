@@ -23,12 +23,16 @@ public class TestView : MonoBehaviour
         //Database.AddQuest(101);
         //Database.TimePass(120);
         //TurnBaseBattleView.Instance.StartBattle();
-        Database.ContinueGame();
+        //Database.ContinueGame();
+        //Database.ConsumeHp(Player.GetTotalHp());
     }
 
     // Update is called once per frame
     void Update()
     {
-        //Database.userDataJson.time += 1;
+        //if (!Database.userDataJson.isSaveCorrupted)
+        //{
+        //    Database.userDataJson.time += 1;
+        //}
     }
 }

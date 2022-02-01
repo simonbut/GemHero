@@ -45,6 +45,7 @@ public class MainGameView : MonoBehaviour
     public ItemCanvas itemCanvas;
     public RewardAfterBattleCanvas rewardAfterBattleCanvas;
     public EquipmentCanvas equipmentCanvas;
+    public GameoverCanvas gameoverCanvas;
 
     //public TagBaseCanvas tagBaseCanvas;
     public PlayerTagChoosingCanvas playerTagChoosingCanvas;
@@ -59,6 +60,16 @@ public class MainGameView : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Database.userDataJson.isSaveCorrupted)
+        {
+            return;
+        }
+
+        if (Player.GetHp() <= 0 || IsMainQuestTimeOut())
+        {
+            GameOver();
+        }
+
         InteractiveDialog.transform.position = MathManager.WorldPosToCanvasPos(ControlView.Instance.player.transform.position + Vector3.up * 1f);
 
         foreach (ResourcePoint _rp in resourcePointList)
@@ -417,5 +428,27 @@ public class MainGameView : MonoBehaviour
     {
         Database.TimePass(2 * 60);
         Database.RecoverHp(Player.GetTotalHp());
+    }
+
+    public void GameOver()
+    {
+        Database.globalData.isSaveCorrupted = true;
+        Database.userDataJson.isSaveCorrupted = true;
+        Database.Save();
+        gameoverCanvas.AddUI();
+    }
+
+    bool IsMainQuestTimeOut()
+    {
+        if (Database.userDataJson.mainQuest.questId > 0)
+        {
+            QuestData _q = QuestManager.Instance.GetQuestData(Database.userDataJson.mainQuest.questId);
+            if (Database.userDataJson.time > _q.timeLimit + Database.userDataJson.mainQuest.startTime)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

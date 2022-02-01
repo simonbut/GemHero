@@ -21,6 +21,11 @@ public class StartCanvas : ControlableUI
     {
         listMenuView.SetUp(new List<string> { "Contine", "New Game", "Settings", "Exit" }, this, new List<Callback> { OnContinueButtonClick, OnStartButtonClick, OnSettingButtonClick, OnExitButtonClick });
 
+        if (Database.globalData.isSaveCorrupted)
+        {
+            listMenuView.buttonList[0].gameObject.SetActive(false);
+        }
+
         base.OnShow();
     }
 

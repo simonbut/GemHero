@@ -55,6 +55,11 @@ public class ControlView : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Database.userDataJson.isSaveCorrupted)
+        {
+            return;
+        }
+
         CheckInput();
         CharacterMove();
         CharacterAnimation();

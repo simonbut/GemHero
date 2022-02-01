@@ -324,6 +324,11 @@ namespace ClassHelper
 
     public class Player
     {
+        public static int GetHp()
+        {
+            return Database.userDataJson.hp;
+        }
+
         public static int GetTotalHp()
         {
             float result = ParameterManager.Instance.GetParameter("basicPlayerHp");

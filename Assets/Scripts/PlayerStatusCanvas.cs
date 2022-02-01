@@ -19,7 +19,7 @@ public class PlayerStatusCanvas : MonoBehaviour
 
     public void Refresh()
     {
-        hp = Database.userDataJson.hp;
+        hp = Player.GetHp();
         foreach (Transform _t in virtueGemParent.transform)
         {
             Destroy(_t.gameObject);
@@ -35,11 +35,11 @@ public class PlayerStatusCanvas : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (hp < Database.userDataJson.hp)
+        if (hp < Player.GetHp())
         {
             hp++;
         }
-        if (hp > Database.userDataJson.hp)
+        if (hp > Player.GetHp())
         {
             hp--;
         }

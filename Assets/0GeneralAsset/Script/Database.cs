@@ -373,6 +373,7 @@ public class Database : MonoBehaviour
         //Save
         public int play_times = 0;
         public int lastLoadData = -1;
+        public bool isSaveCorrupted = true;
 
         //Progression
         public List<int> readAchievementId = new List<int>();
@@ -777,6 +778,8 @@ public class Database : MonoBehaviour
 
     public static void StartNewGame()
     {
+        globalData.isSaveCorrupted = false;
+
         //List<int> initialTotem = new List<int>();
         //initialTotem.Add(totemList[0].totemId);
         //initialTotem.Add(totemList[1].totemId);
