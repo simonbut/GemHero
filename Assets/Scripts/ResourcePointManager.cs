@@ -232,6 +232,17 @@ public class ResourcePointManager : MonoBehaviour
         }
     }
 
+    public BookData GetBookData(int _bookDataId)
+    {
+        foreach (BookData _bd in bookData)
+        {
+            if (_bd.id == _bookDataId)
+            {
+                return _bd;
+            }
+        }
+        return null;
+    }
 
     public Asset DrawAsset(int _resourcePointId, bool _isAddToDatabase = true)
     {

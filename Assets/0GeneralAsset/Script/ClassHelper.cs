@@ -650,6 +650,13 @@ namespace ClassHelper
         public LocalizedString description;
         public List<int> recipeList = new List<int>();
         public int time;
+
+        public string GetBookDescription()
+        {
+            string result = "";
+
+            return result;
+        }
     }
 
     public class CharacterData

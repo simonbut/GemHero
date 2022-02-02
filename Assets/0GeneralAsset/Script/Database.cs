@@ -120,7 +120,8 @@ public class Database : MonoBehaviour
         public List<int> questCompletion = new List<int>();
         public List<int> virtueGem = new List<int>();
         public List<int> equipment = new List<int>();
-
+        public List<int> book = new List<int>();
+        
         //player property
         public int lastAssetUid = 1;
         public List<Asset> assetList = new List<Asset>();
@@ -194,6 +195,12 @@ public class Database : MonoBehaviour
         Save();
     }
 
+    public static void AddBook(int _bookId)
+    {
+        userDataJson.book.Add(_bookId);
+        Save();
+    }
+    
     public static void ConsumeHp(int _hp)
     {
         userDataJson.hp -= _hp;

@@ -14,9 +14,15 @@ public class RewardAfterBattleCanvas : ControlableUI
     public void AddUI(bool _isCriticalGem)
     {
         isCriticalGem = _isCriticalGem;
-        gemList = VirtueGemManager.Instance.GenerateRandomRewardGemList(_isCriticalGem);
 
-        for (int i=0;i<gemList.Count;i++)
+        AddUI();
+    }
+
+    public override void AddUI()
+    {
+        gemList = VirtueGemManager.Instance.GenerateRandomRewardGemList(isCriticalGem);
+
+        for (int i = 0; i < gemList.Count; i++)
         {
             VirtueGemData _vg = VirtueGemManager.Instance.GetVirtueGemData(gemList[i]);
             //TODO icon
@@ -24,7 +30,7 @@ public class RewardAfterBattleCanvas : ControlableUI
             rewardGemList[i].transform.Find("Text").GetComponent<Text>().text = _vg.description.GetString();
         }
 
-        AddUI();
+        base.AddUI();
     }
 
     public void ChooseGem(int _index)

@@ -46,6 +46,8 @@ public class MainGameView : MonoBehaviour
     public RewardAfterBattleCanvas rewardAfterBattleCanvas;
     public EquipmentCanvas equipmentCanvas;
     public GameoverCanvas gameoverCanvas;
+    public LibraryCanvas libraryCanvas;
+    public BookConfirmCanvas bookConfirmCanvas;
 
     //public TagBaseCanvas tagBaseCanvas;
     public PlayerTagChoosingCanvas playerTagChoosingCanvas;
@@ -244,7 +246,7 @@ public class MainGameView : MonoBehaviour
                 }
                 break;
             case ResourceType.library:
-
+                libraryCanvas.AddUI(reactingObject.resourcePointId);
                 break;
             case ResourceType.monster:
                 TurnBaseBattleView.Instance.StartBattleByMonsterPoint(reactingObject.resourcePointId);
