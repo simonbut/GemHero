@@ -33,6 +33,7 @@ public class TurnBaseBattleView : MonoBehaviour
     public int enemyCount = 0;
 
     public int questId = 0;
+    public int monsterPoint = 0;
 
     public bool isWin = false;
     public bool isLose = false;
@@ -53,10 +54,31 @@ public class TurnBaseBattleView : MonoBehaviour
     }
 
 
-    public void StartBattle(int _questId)
+    public void StartBattleByMonsterPoint(int _monsterPontId)
+    {
+        canvas.AddUI();
+        questId = 0;
+        monsterPoint = _monsterPontId;
+
+        List<ResourcePointData> _rp = ResourcePointManager.Instance.GetResourcePointDataList(_monsterPontId);
+        AssetData _a = AssetManager.Instance.GetAssetByUid(Database.userDataJson.equipment[0]).GetAssetData();
+
+        AddCharacter(CharacterAttribute.SetUpCharacterAttribute(Database.userDataJson.hp, Player.GetBasicDef(), Player.GetBasicAtk(), Player.GetBasicAts(), null, new List<int>(), new List<int>(), _a.ammoCount, _a.ammoReloadTier), Force.player);
+
+        print(_rp[0].enemyList.Count);
+        for (int i = 0; i < _rp[0].enemyList.Count; i++)
+        {
+            print(_rp[0].enemyList[i]);
+            AddCharacter(CharacterAttribute.SetUpCharacterAttributeByEnemyId(_rp[0].enemyList[i]), Force.enemy);
+        }
+    }
+
+
+    public void StartBattleByQuest(int _questId)
     {
         canvas.AddUI();
         questId = _questId;
+        monsterPoint = 0;
 
         QuestData _q = QuestManager.Instance.GetQuestData(questId);
         AssetData _a = AssetManager.Instance.GetAssetByUid(Database.userDataJson.equipment[0]).GetAssetData();
@@ -131,7 +153,14 @@ public class TurnBaseBattleView : MonoBehaviour
         if (isWin)
         {
             canvas.OnBackPressed();
-            MainGameView.Instance.rewardAfterBattleCanvas.AddUI(questId < 100);
+            if (monsterPoint > 0)
+            {
+                MainGameView.Instance.assetConfirmCanvas.AddUI(new List<Asset> { ResourcePointManager.Instance.DrawAsset(monsterPoint), ResourcePointManager.Instance.DrawAsset(monsterPoint), ResourcePointManager.Instance.DrawAsset(monsterPoint) });
+            }
+            if (questId > 0)
+            {
+                MainGameView.Instance.rewardAfterBattleCanvas.AddUI(questId < 100);
+            }
         }
 
         if (isLose)

@@ -61,6 +61,7 @@ public class Database : MonoBehaviour
         EnemyManager.Instance.LoadEnemyData();
         EnemyManager.Instance.LoadEnemySkillData();
         ResourcePointManager.Instance.LoadResourcePointData();
+        ResourcePointManager.Instance.LoadBookData();
         DialogManager.Instance.LoadDialogData();
         VirtueGemManager.Instance.LoadVirtueGemData();
         CharacterManager.Instance.LoadCharacterData();

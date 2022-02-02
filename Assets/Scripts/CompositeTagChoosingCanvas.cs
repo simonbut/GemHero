@@ -156,6 +156,6 @@ public class CompositeTagChoosingCanvas : TagChoosingCanvas
         tagBaseCanvas.Hide();
         MainGameView.Instance.LeaveComposition();
 
-        MainGameView.Instance.assetConfirmCanvas.AddUI(compositeAsset);
+        MainGameView.Instance.assetConfirmCanvas.AddUI(new List<Asset> { compositeAsset });
     }
 }

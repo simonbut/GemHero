@@ -22,11 +22,28 @@ public class AssetConfirmCanvas : ControlableUI
         base.OnShow();
     }
 
-    public void AddUI(Asset _a)
+    List<Asset> assetList = new List<Asset>();
+    public void AddUI(List<Asset> _al)
     {
-        UIManager.Instance.assetDataUI.Show(_a);
+        assetList.AddRange(_al);
+        NextAsset();
 
         base.AddUI();
+    }
+
+    public void NextAsset()
+    {
+        if (assetList.Count > 0)
+        {
+            UIManager.Instance.assetDataUI.HideInstantly();
+            UIManager.Instance.assetDataUI.Show(assetList[0]);
+            assetList.RemoveAt(0);
+        }
+        else
+        {
+            UIManager.Instance.assetDataUI.Hide();
+            OnBackPressed();
+        }
     }
 
     // Update is called once per frame
@@ -39,8 +56,7 @@ public class AssetConfirmCanvas : ControlableUI
 
         if (ControlView.Instance.controls.Map1.React.triggered || ControlView.Instance.controls.Map1.Cancel.triggered)
         {
-            UIManager.Instance.assetDataUI.Hide();
-            OnBackPressed();
+            NextAsset();
         }
     }
 }

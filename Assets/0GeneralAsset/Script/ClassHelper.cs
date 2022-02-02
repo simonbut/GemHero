@@ -551,6 +551,8 @@ namespace ClassHelper
         mainQuest,
         special,
         changePos,
+        library,
+        monster,
     }
 
     public enum CompoundType
@@ -635,6 +637,19 @@ namespace ClassHelper
         public int afterQuestId;
         public int mapId;
         public Vector2 pos;
+        public List<int> bookId;
+        public List<int> enemyList;
+        public bool disappearAfter;
+    }
+
+    public class BookData
+    {
+        //id	name	description	recipeList	time(hr)
+        public int id;
+        public LocalizedString name;
+        public LocalizedString description;
+        public List<int> recipeList = new List<int>();
+        public int time;
     }
 
     public class CharacterData

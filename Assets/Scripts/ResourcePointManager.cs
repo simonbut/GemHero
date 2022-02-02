@@ -47,6 +47,7 @@ public class ResourcePointManager : MonoBehaviour
                 int.TryParse(_c[0], out _b.id);
                 int.TryParse(_c[1], out _b.resourcePointId);
                 ResourceType.TryParse(_c[2], out _b.resourceType);
+                bool.TryParse(_c[18], out _b.disappearAfter);
                 switch (_b.resourceType)
                 {
                     case ResourceType.collect:
@@ -114,6 +115,37 @@ public class ResourcePointManager : MonoBehaviour
                         _b.pos = new Vector2(_c15x, _c15y);
 
                         break;
+                    case ResourceType.library:
+                        _b.bookId = new List<int>();
+                        string[] _c16 = _c[16].Split(';');
+                        for (int j = 0; j < _c16.Length; j++)
+                        {
+                            int _c16b;
+                            int.TryParse(_c16[j], out _c16b);
+
+                            if (_c16b > 0)
+                            {
+                                _b.bookId.Add(_c16b);
+                            }
+                        }
+                        break;
+                    case ResourceType.monster:
+
+                        _b.enemyList = new List<int>();
+                        string[] _c17 = _c[17].Split(';');
+                        for (int j = 0; j < _c17.Length; j++)
+                        {
+                            int _c17b;
+                            int.TryParse(_c17[j], out _c17b);
+
+                            if (_c17b > 0)
+                            {
+                                _b.enemyList.Add(_c17b);
+                            }
+                        }
+                        goto case ResourceType.collect;
+
+
                 }
 
                 resourcePointdata.Add(_b);
@@ -138,7 +170,7 @@ public class ResourcePointManager : MonoBehaviour
         return result;
     }
 
-    public ResourcePointData GetResourcePointDataByDialogType(int _resourcePointId,DialogType _dialogType)
+    public ResourcePointData GetResourcePointDataByDialogType(int _resourcePointId, DialogType _dialogType)
     {
         foreach (ResourcePointData _rt in resourcePointdata)
         {
@@ -150,7 +182,58 @@ public class ResourcePointManager : MonoBehaviour
         return null;
     }
 
-    public Asset DrawAsset(int _resourcePointId,bool _isAddToDatabase = true)
+
+
+    [HideInInspector]
+    public List<BookData> bookData = new List<BookData>();
+    public List<BookData> GetBookDataFullList()
+    {
+        return bookData;
+    }
+
+
+    public void LoadBookData()
+    {
+        //id	resource_point_id	asset_id	must_have_tag_list	tag_pool	score_min	score_max
+        bookData = new List<BookData>();
+        string data = Database.ReadDatabaseWithoutLanguage("Book");
+        if (data.Length > 0)
+        {
+            string[] _a = data.Split('\n');
+            for (int i = 1; i < _a.Length; i++)
+            {
+                BookData _b = new BookData();
+                string[] _c = _a[i].Split('\t');
+                int.TryParse(_c[0], out _b.id);
+                _b.name = new LocalizedString(_c[1], _c[1], _c[1], "");
+                _b.description = new LocalizedString(_c[2], _c[2], _c[2], "");
+
+                _b.recipeList = new List<int>();
+                string[] _c3 = _c[3].Split(';');
+                for (int j = 0; j < _c3.Length; j++)
+                {
+                    int _c3b;
+                    int.TryParse(_c3[j], out _c3b);
+
+                    if (_c3b > 0)
+                    {
+                        _b.recipeList.Add(_c3b);
+                    }
+                }
+
+                int.TryParse(_c[4], out _b.time);
+
+                bookData.Add(_b);
+            }
+        }
+        else
+        {
+            Debug.Log("data is null");
+        }
+    }
+
+
+    public Asset DrawAsset(int _resourcePointId, bool _isAddToDatabase = true)
     {
         List<ResourcePointData> _rpl = GetResourcePointDataList(_resourcePointId);
         ResourcePointData _rp = _rpl[Random.Range(0, _rpl.Count)];

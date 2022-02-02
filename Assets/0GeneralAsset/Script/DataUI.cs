@@ -116,10 +116,13 @@ public class DataUI : MonoBehaviour
         //}
 
         //transform.localScale = originalScale;
+        HideInstantly();
 
-        gameObject.SetActive(false);
-
-        hiding = false;
     }
 
+    public void HideInstantly()
+    {
+        gameObject.SetActive(false);
+        hiding = false;
+    }
 }

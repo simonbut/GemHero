@@ -85,7 +85,7 @@ public class MainGameView : MonoBehaviour
                 List<ResourcePointData> _rpd = ResourcePointManager.Instance.GetResourcePointDataList(reactingObject.resourcePointId);
                 if (_rpd.Count <= 0)
                 {
-                    print("Bug");
+                    print("Bug in " + reactingObject.resourcePointId);
                     return;
                 }
                 switch (_rpd[0].resourceType)
@@ -116,6 +116,12 @@ public class MainGameView : MonoBehaviour
                                 ShowInteractiveDialog("Sleep");
                                 break;
                         }
+                        break;
+                    case ResourceType.library:
+                        ShowInteractiveDialog("Enter");
+                        break;
+                    case ResourceType.monster:
+                        ShowInteractiveDialog("Fight");
                         break;
                 }
             }
@@ -156,14 +162,14 @@ public class MainGameView : MonoBehaviour
         List<ResourcePointData> _rpdl = ResourcePointManager.Instance.GetResourcePointDataList(reactingObject.resourcePointId);
         if (_rpdl.Count <= 0)
         {
-            print("Bug");
+            print("Bug in " + reactingObject.resourcePointId);
             return;
         }
         switch (_rpdl[0].resourceType)
         {
             case ResourceType.collect:
-                Database.TimePass(10);
-                MainGameView.Instance.assetConfirmCanvas.AddUI(ResourcePointManager.Instance.DrawAsset(reactingObject.resourcePointId));
+                Database.TimePass(30);
+                MainGameView.Instance.assetConfirmCanvas.AddUI(new List<Asset> { ResourcePointManager.Instance.DrawAsset(reactingObject.resourcePointId),ResourcePointManager.Instance.DrawAsset(reactingObject.resourcePointId),ResourcePointManager.Instance.DrawAsset(reactingObject.resourcePointId)});
                 //UIManager.Instance.assetDataUI.Show(ResourcePointManager.Instance.DrawAsset(reactingObject.resourcePointId));
                 break;
             case ResourceType.talk:
@@ -236,6 +242,12 @@ public class MainGameView : MonoBehaviour
                         OpenSleepCanvas();
                         break;
                 }
+                break;
+            case ResourceType.library:
+
+                break;
+            case ResourceType.monster:
+                TurnBaseBattleView.Instance.StartBattleByMonsterPoint(reactingObject.resourcePointId);
                 break;
         }
     }
@@ -334,7 +346,7 @@ public class MainGameView : MonoBehaviour
     public void MainBattleQuest()
     {
         MainQuestDialogList _md = ResourcePointManager.Instance.GetMainQuestData(reactingObject.resourcePointId);
-        TurnBaseBattleView.Instance.StartBattle(_md.afterMainBattleQuest.questId);
+        TurnBaseBattleView.Instance.StartBattleByQuest(_md.afterMainBattleQuest.questId);
     }
 
     public void CheckQuestAfterMainBattleQuest()
@@ -360,7 +372,7 @@ public class MainGameView : MonoBehaviour
     public void BattleQuest()
     {
         TalkDialogList _td = ResourcePointManager.Instance.GetTalkData(reactingObject.resourcePointId);
-        TurnBaseBattleView.Instance.StartBattle(_td.afterBattleQuest.questId);
+        TurnBaseBattleView.Instance.StartBattleByQuest(_td.afterBattleQuest.questId);
     }
 
     public void CheckQuestAfterBattleQuest()
