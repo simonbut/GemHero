@@ -131,6 +131,16 @@ public class Database : MonoBehaviour
 
         //back door
         public bool isBackDoor = false;
+
+        public List<int> GetSideQuestId()
+        {
+            List<int> result = new List<int>();
+            foreach (Quest _sq in sideQuest)
+            {
+                result.Add(_sq.questId);
+            }
+            return result;
+        }
     }
 
     public static void CompleteDestinyShare(int _chId)
@@ -192,6 +202,17 @@ public class Database : MonoBehaviour
     public static void TimePass(int _minute)
     {
         userDataJson.time += _minute;
+
+        //Vanish time out side quest
+        foreach (Quest _q in userDataJson.sideQuest)
+        {
+            if (userDataJson.time > QuestManager.Instance.GetQuestData(_q.questId).timeLimit * 60 + _q.startTime)
+            {
+                userDataJson.sideQuest.Remove(_q);
+                break;
+            }
+        }
+
         Save();
     }
 

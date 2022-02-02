@@ -189,13 +189,27 @@ public class MainGameView : MonoBehaviour
                 {
                     if (!Database.userDataJson.questCompletion.Contains(_td.afterItemQuest.questId))
                     {
-                        MainGameView.Instance.dialogCanvas.Setup(5, ItemQuest);
+                        if (Database.userDataJson.GetSideQuestId().Contains(_td.afterItemQuest.questId))
+                        {
+                            MainGameView.Instance.dialogCanvas.Setup(5, ItemQuest);
+                        }
+                        else
+                        {
+                            MainGameView.Instance.dialogCanvas.Setup(_td.normal.targetDialogId, null);
+                        }
                     }
                     else
                     {
                         if (!Database.userDataJson.questCompletion.Contains(_td.afterBattleQuest.questId))
                         {
-                            MainGameView.Instance.dialogCanvas.Setup(6, BattleQuest);
+                            if (Database.userDataJson.GetSideQuestId().Contains(_td.afterItemQuest.questId))
+                            {
+                                MainGameView.Instance.dialogCanvas.Setup(6, BattleQuest);
+                            }
+                            else
+                            {
+                                MainGameView.Instance.dialogCanvas.Setup(_td.normal.targetDialogId, null);
+                            }
                         }
                         else
                         {
@@ -457,7 +471,7 @@ public class MainGameView : MonoBehaviour
         if (Database.userDataJson.mainQuest.questId > 0)
         {
             QuestData _q = QuestManager.Instance.GetQuestData(Database.userDataJson.mainQuest.questId);
-            if (Database.userDataJson.time > _q.timeLimit + Database.userDataJson.mainQuest.startTime)
+            if (Database.userDataJson.time > _q.timeLimit * 60 + Database.userDataJson.mainQuest.startTime)
             {
                 return true;
             }
