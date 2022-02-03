@@ -31,5 +31,15 @@ public class TagChoosingCanvas : ControlableUI
         TagData _td = TagManager.Instance.GetTagData(_tagId);
 
         tagDescription.transform.Find("Text").GetComponent<Text>().text = _td.name.GetString() + "\n" + _td.description.GetString();
+        if (_td.tagType == TagType.CharacterTag)
+        {
+            foreach (Tag _t in Database.userDataJson.playerTags)
+            {
+                if (_t.tagDataId == _tagId && !_t.isReady)
+                {
+                    tagDescription.transform.Find("Text").GetComponent<Text>().text = _td.name.GetString() + "(Not Ready)" + "\n" + _td.description.GetString();
+                }
+            }
+        }
     }
 }

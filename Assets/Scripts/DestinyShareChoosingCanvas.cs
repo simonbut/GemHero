@@ -62,6 +62,7 @@ public class DestinyShareChoosingCanvas : TagChoosingCanvas
         if (UIManager.Instance.IsCurrentUI(this))
         {
             tagList[id].offset = Vector2Int.zero;
+            tagList[id].isReady = false;
             //TODO remove existing tag (check if FixedTag)
             destinyShareTagCanvas.GenerateChoosingTag(tagList[id]);
 

@@ -202,7 +202,7 @@ public class MainGameView : MonoBehaviour
                     {
                         if (!Database.userDataJson.questCompletion.Contains(_td.afterBattleQuest.questId))
                         {
-                            if (Database.userDataJson.GetSideQuestId().Contains(_td.afterItemQuest.questId))
+                            if (Database.userDataJson.GetSideQuestId().Contains(_td.afterBattleQuest.questId))
                             {
                                 MainGameView.Instance.dialogCanvas.Setup(6, BattleQuest);
                             }
@@ -458,6 +458,17 @@ public class MainGameView : MonoBehaviour
         TalkDialogList _td = ResourcePointManager.Instance.GetTalkData(reactingObject.resourcePointId);
         Database.ConsumeQuest(_td.afterBattleQuest.questId);
         Database.AddQuest(_td.afterBattleQuest.afterQuestId);
+
+        foreach (DestinyShareData _dsd in TagManager.Instance.GetDestinyShareDataByCharacterId(_td.afterBattleQuest.characterId))
+        {
+            for (int i = 0; i < Database.userDataJson.playerTags.Count; i++)
+            {
+                if (_dsd.tagId == Database.userDataJson.playerTags[i].tagDataId)
+                {
+                    Database.userDataJson.playerTags[i].isReady = true;
+                }
+            }
+        }
 
         if (_td.afterBattleQuest.disappearAfter)
         {

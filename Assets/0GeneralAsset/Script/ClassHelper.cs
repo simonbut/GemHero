@@ -210,6 +210,7 @@ namespace ClassHelper
         public int tagDataId;
         public List<int> affectList = new List<int>();
         public Vector2Int offset = new Vector2Int();
+        public bool isReady = true;
 
         public TagData GetTagData()
         {
@@ -336,7 +337,10 @@ namespace ClassHelper
             float result = ParameterManager.Instance.GetParameter("basicWireLength");
             foreach (Tag _t in Database.userDataJson.playerTags)
             {
-                result += _t.GetSize();
+                if (_t.isReady)
+                {
+                    result += _t.GetSize();
+                }
             }
 
             return result;
