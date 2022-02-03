@@ -13,3 +13,8 @@ id	dialogId	step	characterId	content
 12	5	2	1	（交付關鍵物品吧，像那個時候一樣…）
 13	6	1	0	……
 14	6	2	1	（是時候撕開「漠不關心」了…）
+15	7	1	0	……
+16	8	1	-1	Text A
+17	8	2	-1	Text B
+18	9	1	-1	Text C
+19	9	2	-1	Text D

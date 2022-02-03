@@ -400,6 +400,12 @@ public class ResourcePointManager : MonoBehaviour
                 case DialogType.talkQuest:
                     result.talkQuest = _rpd;
                     break;
+                case DialogType.beforeMainReleaseQuest:
+                    result.beforeMainReleaseQuest = _rpd;
+                    break;
+                case DialogType.afterMainReleaseQuest:
+                    result.afterMainReleaseQuest = _rpd;
+                    break;
             }
         }
         return result;

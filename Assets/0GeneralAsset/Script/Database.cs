@@ -113,6 +113,7 @@ public class Database : MonoBehaviour
         //public int hpTotal = 101;
 
         //Progression
+        public int releasePerson = 0;
         public int time = 480;//in minute
         public Quest mainQuest = new Quest();
         public List<Quest> sideQuest = new List<Quest>();
@@ -616,6 +617,7 @@ public class Database : MonoBehaviour
 
         InitDatabaseData();
 
+        AddQuest(Mathf.FloorToInt(ParameterManager.Instance.GetParameter("stage1FirstMainQuestId")));//TODO different stage
 
         //GameEventManager.RefreshCurrentEventList();
         //SkillManager.RefreshSkillList();

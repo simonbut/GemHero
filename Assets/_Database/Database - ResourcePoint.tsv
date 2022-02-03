@@ -3,13 +3,14 @@ id	resource_point_id	resourceType	asset_id	must_have_tag_list	tag_pool	rare_tag_
 2	1	collect	2		2;3	4	20	40										
 3	2	collect	3		2;3	4	20	40										
 4	2	collect	4		2;3	4	20	40										
-6	3	talk							2	afterDestinyShare	4		101					
-7	3	talk							2	afterItemQuest	4	101	201					
-8	3	talk							2	afterBattleQuest	1	201						
-9	3	talk							2	normal	1							
-10	4	mainQuest							3	beforeMainBattleQuest	4	1						
-11	4	mainQuest							3	afterMainBattleQuest	5	1	2					
-12	4	mainQuest							3	talkQuest	5	2	3					
+5	3	talk							2	afterDestinyShare	4		101					
+6	3	talk							2	afterItemQuest	4	101	201					
+7	3	talk							2	afterBattleQuest	1	201						
+8	3	talk							2	normal	1							
+9	4	mainQuest							3	beforeMainReleaseQuest	8	1						
+10	4	mainQuest							3	afterMainReleaseQuest	9	1	2					TRUE
+11	4	mainQuest							4	beforeMainBattleQuest	4	2						
+12	4	mainQuest							4	afterMainBattleQuest	5	2						
 13	101	special																
 14	102	special																
 15	103	special																

@@ -1,7 +1,8 @@
 ID	Key	繁中	英文
-1	talkQuestTest	跟 $1 交談	
-2	submitTQuestTest	交付 $1 擁有「$4」的「$2」	
-3	sideBattleQuestTest	取出 $1 身上的「漠不關心」標籤	
-4	mainBattleQuestTest	跟 $1 戰鬥	
-5	submitQTQuestTest	交付 $1 擁有「$4」，並品質 >= $3 的「$2」	
-6	submitQQuestTest	交付 $1 品質 >= $3 的「$2」	
+1	talkQuestText	跟 $1 交談	
+2	submitTQuestText	交付 $1 擁有「$4」的「$2」	
+3	sideBattleQuestText	取出 $1 身上的「漠不關心」標籤	
+4	mainBattleQuestText	跟 $1 戰鬥	
+5	submitQTQuestText	交付 $1 擁有「$4」，並品質 >= $3 的「$2」	
+6	submitQQuestText	交付 $1 品質 >= $3 的「$2」	
+7	mainReleaseQuestText	解放 $5 人並跟 $1 交談	

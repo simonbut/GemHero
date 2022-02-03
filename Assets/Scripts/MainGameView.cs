@@ -195,7 +195,7 @@ public class MainGameView : MonoBehaviour
                         }
                         else
                         {
-                            MainGameView.Instance.dialogCanvas.Setup(_td.normal.targetDialogId, null);
+                            MainGameView.Instance.dialogCanvas.Setup(7, null);
                         }
                     }
                     else
@@ -208,7 +208,7 @@ public class MainGameView : MonoBehaviour
                             }
                             else
                             {
-                                MainGameView.Instance.dialogCanvas.Setup(_td.normal.targetDialogId, null);
+                                MainGameView.Instance.dialogCanvas.Setup(7, null);
                             }
                         }
                         else
@@ -229,11 +229,29 @@ public class MainGameView : MonoBehaviour
                 }
                 else
                 {
-                    if (_md.beforeMainBattleQuest != null)
+
+                    if (_md.beforeMainReleaseQuest != null)
                     {
-                        if (!Database.userDataJson.questCompletion.Contains(_md.beforeMainBattleQuest.questId))
+                        if (!Database.userDataJson.questCompletion.Contains(_md.beforeMainReleaseQuest.questId))
                         {
-                            MainGameView.Instance.dialogCanvas.Setup(_md.beforeMainBattleQuest.targetDialogId, MainBattleQuest);
+                            if (Database.userDataJson.releasePerson >= QuestManager.Instance.GetQuestData(_md.beforeMainReleaseQuest.questId).targetRelease)
+                            {
+                                MainGameView.Instance.dialogCanvas.Setup(_md.afterMainReleaseQuest.targetDialogId, CheckQuestAfterMainReleaseQuest);
+                            }
+                            else
+                            {
+                                MainGameView.Instance.dialogCanvas.Setup(_md.beforeMainReleaseQuest.targetDialogId, null);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if (_md.beforeMainBattleQuest != null)
+                        {
+                            if (!Database.userDataJson.questCompletion.Contains(_md.beforeMainBattleQuest.questId))
+                            {
+                                MainGameView.Instance.dialogCanvas.Setup(_md.beforeMainBattleQuest.targetDialogId, MainBattleQuest);
+                            }
                         }
                     }
                 }
@@ -353,22 +371,55 @@ public class MainGameView : MonoBehaviour
         SceneManager.LoadScene("StartScene");
     }
 
+    public void CheckQuestAfterMainReleaseQuest()
+    {
+        MainQuestDialogList _md = ResourcePointManager.Instance.GetMainQuestData(reactingObject.resourcePointId);
+        Database.AddQuest(_md.afterMainReleaseQuest.afterQuestId);
+
+        if (_md.afterMainReleaseQuest.disappearAfter)
+        {
+            Destroy(reactingObject.gameObject);
+        }
+    }
+
     public void CheckQuestAfterMainTalkQuest()
     {
         MainQuestDialogList _md = ResourcePointManager.Instance.GetMainQuestData(reactingObject.resourcePointId);
         Database.AddQuest(_md.talkQuest.afterQuestId);
+
+        if (_md.afterMainReleaseQuest.disappearAfter)
+        {
+            Destroy(reactingObject.gameObject);
+        }
     }
 
     public void MainBattleQuest()
     {
         MainQuestDialogList _md = ResourcePointManager.Instance.GetMainQuestData(reactingObject.resourcePointId);
         TurnBaseBattleView.Instance.StartBattleByQuest(_md.afterMainBattleQuest.questId);
+
+        if (_md.afterMainReleaseQuest.disappearAfter)
+        {
+            Destroy(reactingObject.gameObject);
+        }
     }
 
     public void CheckQuestAfterMainBattleQuest()
     {
         MainQuestDialogList _md = ResourcePointManager.Instance.GetMainQuestData(reactingObject.resourcePointId);
-        Database.AddQuest(_md.afterMainBattleQuest.afterQuestId);
+        if (_md.afterMainBattleQuest.afterQuestId == 0)
+        {
+            //TODO win
+        }
+        else
+        {
+            Database.AddQuest(_md.afterMainBattleQuest.afterQuestId);
+        }
+
+        if (_md.afterMainReleaseQuest.disappearAfter)
+        {
+            Destroy(reactingObject.gameObject);
+        }
     }
 
     public void ItemQuest()
@@ -383,19 +434,35 @@ public class MainGameView : MonoBehaviour
         TalkDialogList _td = ResourcePointManager.Instance.GetTalkData(reactingObject.resourcePointId);
         Database.ConsumeQuest(_td.afterItemQuest.questId);
         Database.AddQuest(_td.afterItemQuest.afterQuestId);
+
+        if (_td.afterItemQuest.disappearAfter)
+        {
+            Destroy(reactingObject.gameObject);
+        }
     }
 
     public void BattleQuest()
     {
         TalkDialogList _td = ResourcePointManager.Instance.GetTalkData(reactingObject.resourcePointId);
         TurnBaseBattleView.Instance.StartBattleByQuest(_td.afterBattleQuest.questId);
+
+        if (_td.afterBattleQuest.disappearAfter)
+        {
+            Destroy(reactingObject.gameObject);
+        }
     }
 
     public void CheckQuestAfterBattleQuest()
     {
+        Database.userDataJson.releasePerson++;
         TalkDialogList _td = ResourcePointManager.Instance.GetTalkData(reactingObject.resourcePointId);
         Database.ConsumeQuest(_td.afterBattleQuest.questId);
         Database.AddQuest(_td.afterBattleQuest.afterQuestId);
+
+        if (_td.afterBattleQuest.disappearAfter)
+        {
+            Destroy(reactingObject.gameObject);
+        }
     }
 
     public void DestinyShare()

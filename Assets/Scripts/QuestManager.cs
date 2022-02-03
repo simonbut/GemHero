@@ -62,6 +62,8 @@ public class QuestManager : MonoBehaviour
                     _b.enemyList.Add(_c8b);
                 }
 
+                int.TryParse(_c[9], out _b.targetRelease);
+                
                 questData.Add(_b);
             }
         }

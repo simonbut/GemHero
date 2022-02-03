@@ -560,6 +560,8 @@ namespace ClassHelper
         beforeMainBattleQuest,
         afterMainBattleQuest,
         talkQuest,
+        beforeMainReleaseQuest,
+        afterMainReleaseQuest,
     }
 
     public enum ResourceType
@@ -624,6 +626,8 @@ namespace ClassHelper
         public ResourcePointData beforeMainBattleQuest;
         public ResourcePointData afterMainBattleQuest;
         public ResourcePointData talkQuest;
+        public ResourcePointData beforeMainReleaseQuest;
+        public ResourcePointData afterMainReleaseQuest;
     }
 
     public class VirtueGemData
@@ -951,6 +955,7 @@ namespace ClassHelper
         public int itemId;
         public int itemQuality;
         public int itemTag;
+        public int targetRelease;
         public List<int> enemyList;
 
         public string GetDescription()
@@ -971,6 +976,10 @@ namespace ClassHelper
             if (itemTag > 0)
             {
                 result = result.Replace("$4", TagManager.Instance.GetTagData(itemTag).name.GetString());
+            }
+            if (targetRelease > 0)
+            {
+                result = result.Replace("$5", targetRelease.ToString("0"));
             }
             if (id > 100 && id < 200)
             {
