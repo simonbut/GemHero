@@ -228,6 +228,13 @@ namespace ClassHelper
             return result;
         }
 
+        public int GetSize()
+        {
+            int result = GetGrids().Count;
+
+            return result;
+        }
+
         static public Tag CreateTag(TagData _tagData, Vector2Int _offset, List<int> _affectList)
         {
             return CreateTag(_tagData.id, _offset, _affectList);
@@ -324,6 +331,17 @@ namespace ClassHelper
 
     public class Player
     {
+        public static float GetWireLengthLimit()
+        {
+            float result = ParameterManager.Instance.GetParameter("basicWireLength");
+            foreach (Tag _t in Database.userDataJson.playerTags)
+            {
+                result += _t.GetSize();
+            }
+
+            return result;
+        }
+
         public static int GetHp()
         {
             return Database.userDataJson.hp;

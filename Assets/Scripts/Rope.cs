@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using ClassHelper;
 
 public class Rope : MonoBehaviour
 {
@@ -36,7 +37,7 @@ public class Rope : MonoBehaviour
         }
 
         lengthText.transform.position = player.transform.position;
-        lengthText.text = GetRopeLength(Vector3.zero).ToString("0.0");
+        lengthText.text = (Player.GetWireLengthLimit() - GetRopeLength(Vector3.zero)).ToString("0.0");
     }
 
     public float GetRopeLength(Vector3 _offset)
@@ -47,6 +48,7 @@ public class Rope : MonoBehaviour
             result += (ropePositions[i + 1] - ropePositions[i]).magnitude;
         }
         result += (player.transform.position + _offset - ropePositions[ropePositions.Count - 1]).magnitude;
+        result = result / (ParameterManager.Instance.GetParameter("basicWireLengthUnit") * 1f / 1000f);
 
         return result;
     }

@@ -35,8 +35,6 @@ public class ControlView : MonoBehaviour
         Rope.Instance.Init();
     }
 
-
-    public float lengthLimit = 10;
     public GameObject cameraParent;
 
     public InputMaster controls;
@@ -131,7 +129,7 @@ public class ControlView : MonoBehaviour
         Vector3 _prePos = new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z);
         Vector3 _offset = input * Time.deltaTime * speed;
         player.GetComponent<Rigidbody2D>().MovePosition(player.transform.position + _offset);
-        if (Rope.Instance.GetRopeLength(_offset) > lengthLimit)
+        if (Rope.Instance.GetRopeLength(_offset) > Player.GetWireLengthLimit())
         {
             player.GetComponent<Rigidbody2D>().MovePosition(player.transform.position);
         }

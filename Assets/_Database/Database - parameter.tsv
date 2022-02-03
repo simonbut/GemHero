@@ -3,3 +3,6 @@ basicPlayerHp	1001
 basicPlayerDef	0
 basicPlayerAtk	0
 basicPlayerAts	0
+basicWireLength	5
+basicWireLengthUnit	2000
+AchievementBingoBonusPoint	3
