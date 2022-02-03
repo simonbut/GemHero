@@ -148,6 +148,7 @@ public class CompositeTagChoosingCanvas : TagChoosingCanvas
 
         foreach (int _uid in assetSelectList)
         {
+            CheckIfChangeWeapon(_uid, Database.userDataJson.lastAssetUid - 1);
             Database.ConsumeAsset(_uid);
         }
 
@@ -157,5 +158,13 @@ public class CompositeTagChoosingCanvas : TagChoosingCanvas
         MainGameView.Instance.LeaveComposition();
 
         MainGameView.Instance.assetConfirmCanvas.AddUI(new List<Asset> { compositeAsset });
+    }
+
+    void CheckIfChangeWeapon(int _oldUid,int _newUid)
+    {
+        if (Database.userDataJson.equipment[0] == _oldUid)
+        {
+            Database.userDataJson.equipment[0] = _newUid;
+        }
     }
 }
