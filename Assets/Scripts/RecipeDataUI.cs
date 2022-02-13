@@ -15,8 +15,8 @@ public class RecipeDataUI : DataUI
         {
             if (i < _rd.assetTypeList.Count)
             {
-                recipeAssetList[i].transform.Find("Name").transform.Find("Text").GetComponent<Text>().text = AssetManager.Instance.GetAssetTypeData(_rd.assetTypeList[i]).name.GetString();
-                recipeAssetList[i].transform.Find("IconBg").transform.Find("Image").GetComponent<Image>().sprite = Resources.Load<Sprite>("AssetType/" + _rd.assetTypeList[i].ToString("000"));
+                recipeAssetList[i].transform.Find("Name").transform.Find("Text").GetComponent<Text>().text = AssetManager.Instance.GetRecipeAssetName(_rd.assetTypeList[i]);
+                recipeAssetList[i].transform.Find("IconBg").transform.Find("Image").GetComponent<Image>().sprite = Resources.Load<Sprite>(AssetManager.Instance.GetRecipeAssetIconPath(_rd.assetTypeList[i]));
             }
             else
             {

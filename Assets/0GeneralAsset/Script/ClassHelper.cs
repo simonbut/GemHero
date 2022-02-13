@@ -268,6 +268,8 @@ namespace ClassHelper
         public LocalizedString description;
         public List<Vector2Int> grids;
         public int score;
+        public int minValue;
+        public int maxValue;
         public bool isBadTag;
         public TagType tagType;
 
@@ -640,6 +642,7 @@ namespace ClassHelper
         public int id;
         public LocalizedString name;
         public LocalizedString description;
+        public List<int> appearStage;
         public int RequireAchievementsCount;
         public bool IsCriticalGem;
     }
@@ -681,6 +684,26 @@ namespace ClassHelper
         {
             string result = "";
 
+            for (int i = 0; i < recipeList.Count; i++)
+            {
+                if (i>0)
+                {
+                    result += "\n";
+                }
+                RecipeData _rd = AssetManager.Instance.GetRecipeData(recipeList[i]);
+                result += (i + 1).ToString("0") + ". ";
+                result += AssetManager.Instance.GetAssetData(_rd.targetCompoundId).name.GetString();
+                result += " = ";
+                for (int j = 0; j < _rd.assetTypeList.Count; j++)
+                {
+                    if (j > 0)
+                    {
+                        result += " + ";
+                    }
+                    result += AssetManager.Instance.GetRecipeAssetName(_rd.assetTypeList[i]);
+                }
+            }
+
             return result;
         }
     }
@@ -690,8 +713,8 @@ namespace ClassHelper
         public int id;
         public LocalizedString name;
 
-        public List<int> tagList = new List<int>();
-        public List<Vector2Int> tagPos = new List<Vector2Int>();
+        //public List<int> tagList = new List<int>();
+        //public List<Vector2Int> tagPos = new List<Vector2Int>();
     }
 
     public class DialogData
@@ -920,6 +943,7 @@ namespace ClassHelper
         public List<Vector2Int> targetPos;
         public List<int> capacity;
         public int hpLoss;
+        public int lockUntilStage;
         public int requireAchievementsCount;
     }
 

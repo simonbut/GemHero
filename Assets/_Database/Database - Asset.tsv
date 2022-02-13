@@ -1,8 +1,8 @@
 id	name	asset_type_list	reality_point	dream_point	ideal_point	basic_stat_types	basic_stats	ammoCount	reloadTimeTier	(Remark)
-1	草1	1	0	0	2					asset
-2	草2	1	0	1	1					asset
-3	豆豆槍	2	1	0	1	atk;ats	3;1	10	1	weapon
-4	合成品1	3	1	0	1					compound
-5	裝飾1	4	0	1	1					accessory
-6	蛋糕	5	0	0	0					consumable
-7	普通槍	2	0	0	0	atk;ats	1;1	10	1	weapon
+1	草1	10001	0	0	2					asset
+2	草2	10001	0	1	1					asset
+3	豆豆槍	10002	1	0	1	atk;ats	3;1	10	1	weapon
+4	合成品1	10003	1	0	1					compound
+5	裝飾1	10004	0	1	1					accessory
+6	蛋糕	10005	0	0	0					consumable
+7	普通槍	10002	0	0	0	atk;ats	1;1	10	1	weapon

@@ -52,7 +52,7 @@ public class CompositeMenuCanvas : ControlableUI
                 {
                     print("disselect");
                     assetSelectList[session] = 0;
-                    sessions[i].transform.Find("Image").GetComponent<Image>().sprite = Resources.Load<Sprite>("AssetType/" + AssetManager.Instance.GetAssetTypeData(recipe.assetTypeList[i]).id.ToString("000"));
+                    sessions[i].transform.Find("Image").GetComponent<Image>().sprite = Resources.Load<Sprite>(AssetManager.Instance.GetRecipeAssetIconPath(recipe.assetTypeList[i]));//"AssetType/" + AssetManager.Instance.GetAssetTypeData(recipe.assetTypeList[i]).id.ToString("000")
 
                     NextSession();
                     return;

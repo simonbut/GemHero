@@ -202,7 +202,8 @@ public class AssetManager : MonoBehaviour
                 }
                 
                 int.TryParse(_c[8], out _b.hpLoss);
-                int.TryParse(_c[9], out _b.requireAchievementsCount);
+                int.TryParse(_c[9], out _b.lockUntilStage);
+                int.TryParse(_c[10], out _b.requireAchievementsCount);
 
                 recipedata.Add(_b);
             }
@@ -378,5 +379,29 @@ public class AssetManager : MonoBehaviour
             result.Add(_a);
         }
         return result;
+    }
+
+    public string GetRecipeAssetName(int _id)
+    {
+        if (_id > 10000)
+        {
+            return "(" + GetAssetTypeData(_id).name.GetString() + ")";
+        }
+        else
+        {
+            return GetAssetData(_id).name.GetString();
+        }
+    }
+
+    public string GetRecipeAssetIconPath(int _id)
+    {
+        if (_id > 10000)
+        {
+            return "AssetType/" + (_id - 10000).ToString("000");
+        }
+        else
+        {
+            return "Asset/" + _id.ToString("000");
+        }
     }
 }

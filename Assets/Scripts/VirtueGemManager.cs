@@ -49,8 +49,22 @@ public class VirtueGemManager : MonoBehaviour
                 int.TryParse(_c[0], out _b.id);
                 _b.name = new LocalizedString(_c[1], _c[1], _c[1], "");
                 _b.description = new LocalizedString(_c[2], _c[2], _c[2], "");
-                int.TryParse(_c[3], out _b.RequireAchievementsCount);
-                bool.TryParse(_c[4], out _b.IsCriticalGem);
+
+                _b.appearStage = new List<int>();
+                string[] _c3 = _c[3].Split(';');
+                for (int j = 0; j < _c3.Length; j++)
+                {
+                    int _c3b;
+                    int.TryParse(_c3[j], out _c3b);
+
+                    if (_c3b > 0)
+                    {
+                        _b.appearStage.Add(_c3b);
+                    }
+                }
+
+                int.TryParse(_c[4], out _b.RequireAchievementsCount);
+                bool.TryParse(_c[5], out _b.IsCriticalGem);
 
                 virtueGemData.Add(_b);
             }

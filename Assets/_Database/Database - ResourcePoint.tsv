@@ -3,14 +3,14 @@ id	resource_point_id	resourceType	asset_id	must_have_tag_list	tag_pool	rare_tag_
 2	1	collect	2		2;3	4	20	40										
 3	2	collect	3		2;3	4	20	40										
 4	2	collect	4		2;3	4	20	40										
-5	3	talk							2	afterDestinyShare	4		101					
-6	3	talk							2	afterItemQuest	4	101	201					
-7	3	talk							2	afterBattleQuest	1	201						
-8	3	talk							2	normal	1							
-9	4	mainQuest							3	beforeMainReleaseQuest	8	1						
-10	4	mainQuest							3	afterMainReleaseQuest	9	1	2					TRUE
-11	4	mainQuest							4	beforeMainBattleQuest	4	2						
-12	4	mainQuest							4	afterMainBattleQuest	5	2						
+5	1001	talk							10002	afterDestinyShare	4		101					
+6	1001	talk							10002	afterItemQuest	4	101	201					
+7	1001	talk							10002	afterBattleQuest	1	201						
+8	1001	talk							10002	normal	1							
+9	4	mainQuest							10008	beforeMainReleaseQuest	8	1						
+10	4	mainQuest							10008	afterMainReleaseQuest	9	1	2					TRUE
+11	4	mainQuest							10009	beforeMainBattleQuest	4	2						
+12	4	mainQuest							10009	afterMainBattleQuest	5	2						
 13	101	special																
 14	102	special																
 15	103	special																
@@ -22,3 +22,19 @@ id	resource_point_id	resourceType	asset_id	must_have_tag_list	tag_pool	rare_tag_
 21	7	library														1;2		
 22	8	monster	1	1	2	4	20	40									1;1	
 23	8	monster	2		2;3	4	20	40										
+24	1002	talk							10004	afterDestinyShare	4		102					
+25	1002	talk							10004	afterItemQuest	4	102	202					
+26	1002	talk							10004	afterBattleQuest	1	202						
+27	1002	talk							10004	normal	1							
+28	1003	talk							10005	afterDestinyShare	4		103					
+29	1003	talk							10005	afterItemQuest	4	103	203					
+30	1003	talk							10005	afterBattleQuest	1	203						
+31	1003	talk							10005	normal	1							
+32	1004	talk							10005	afterDestinyShare	4		104					
+33	1004	talk							10005	afterItemQuest	4	104	204					
+34	1004	talk							10005	afterBattleQuest	1	204						
+35	1004	talk							10005	normal	1							
+36	1005	talk							10005	afterDestinyShare	4		105					
+37	1005	talk							10005	afterItemQuest	4	105	205					
+38	1005	talk							10005	afterBattleQuest	1	205						
+39	1005	talk							10005	normal	1							
