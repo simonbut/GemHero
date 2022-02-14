@@ -686,7 +686,7 @@ namespace ClassHelper
 
             for (int i = 0; i < recipeList.Count; i++)
             {
-                if (i>0)
+                if (i > 0)
                 {
                     result += "\n";
                 }
@@ -700,7 +700,7 @@ namespace ClassHelper
                     {
                         result += " + ";
                     }
-                    result += AssetManager.Instance.GetRecipeAssetName(_rd.assetTypeList[i]);
+                    result += AssetManager.Instance.GetRecipeAssetName(_rd.assetTypeList[j]);
                 }
             }
 

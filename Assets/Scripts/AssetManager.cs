@@ -226,6 +226,15 @@ public class AssetManager : MonoBehaviour
         return new RecipeData();
     }
 
+    public List<int> GetAllLearnedRecipe()
+    {
+        List<int> result = new List<int>();
+        foreach (int _bookId in Database.userDataJson.book)
+        {
+            result.AddRange(ResourcePointManager.Instance.GetBookData(_bookId).recipeList);
+        }
+        return result;
+    }
 
 
     [HideInInspector]

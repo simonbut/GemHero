@@ -34,8 +34,11 @@ public class RecipeMenuCanvas : ControlableUI
     {
         foreach (RecipeData _r in AssetManager.Instance.GetRecipeDataFullList())
         {
-            AssetData _compound = AssetManager.Instance.GetAssetData(_r.targetCompoundId);
-            GameObject gridItemInstance = recipeListScrollView.GenerateItem(_compound.name.GetString(), _r.id, _r.hpLoss);
+            if (Database.userDataJson.chapter >= _r.lockUntilStage || AssetManager.Instance.GetAllLearnedRecipe().Contains(_r.id))
+            {
+                AssetData _compound = AssetManager.Instance.GetAssetData(_r.targetCompoundId);
+                GameObject gridItemInstance = recipeListScrollView.GenerateItem(_compound.name.GetString(), _r.id, _r.hpLoss);
+            }
         }
     }
 
