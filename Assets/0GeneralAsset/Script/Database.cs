@@ -501,6 +501,10 @@ public class Database : MonoBehaviour
 
         result.equipment = new List<int> { 1, 0, 0, 0, 0 };
 
+        Quest _q = new Quest();
+        _q.questId = Mathf.FloorToInt(ParameterManager.Instance.GetParameter("stage1FirstMainQuestId"));//TODO different stage
+        _q.startTime = result.time;
+        result.mainQuest = _q;
 
         return result;
     }
@@ -616,8 +620,6 @@ public class Database : MonoBehaviour
         //print("InitDataFromSave " + _saveId);
 
         InitDatabaseData();
-
-        AddQuest(Mathf.FloorToInt(ParameterManager.Instance.GetParameter("stage1FirstMainQuestId")));//TODO different stage
 
         //GameEventManager.RefreshCurrentEventList();
         //SkillManager.RefreshSkillList();

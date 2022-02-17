@@ -325,13 +325,22 @@ public class ResourcePointManager : MonoBehaviour
                 }
             }
 
-            qualityAffect = Random.Range(-20, 30);
-            score += qualityAffect;
-
-            if (score >= _scoreMin && score <= _scoreMax)
+            if (score <= _scoreMax)
+            {
+                passScoreCheck = false;
+            }
+            else
             {
                 passScoreCheck = true;
             }
+
+            qualityAffect = Random.Range(_scoreMin - score, _scoreMax - score);
+            score += qualityAffect;
+
+            //if (score >= _scoreMin && score <= _scoreMax)
+            //{
+            //    passScoreCheck = true;
+            //}
         }
 
         List<int> tagList = new List<int>();

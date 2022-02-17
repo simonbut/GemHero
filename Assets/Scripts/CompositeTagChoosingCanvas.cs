@@ -42,7 +42,7 @@ public class CompositeTagChoosingCanvas : TagChoosingCanvas
         GameObject gridItemInstance2 = listScrollView.GenerateItem("Complete", -1);
         //TODO complete graphic
 
-        listScrollView.gameObject.SetActive(tagList.Count > 0);
+        //listScrollView.gameObject.SetActive(tagList.Count > 0);
     }
 
     void ClickData(int id, ListItem gi)
@@ -92,6 +92,15 @@ public class CompositeTagChoosingCanvas : TagChoosingCanvas
     int compoundQuality;
     public void AddUI(int[] _assetSelectList,int _compoundQuality, RecipeData _recipe, List<Tag> _tagList,List<Tag> _staticTagList)
     {
+        Setup(_assetSelectList, _compoundQuality, _recipe, _tagList, _staticTagList);
+
+        tagBaseCanvas.Show(_recipe.shape, _staticTagList);
+
+        base.AddUI();
+    }
+
+    public void Setup(int[] _assetSelectList, int _compoundQuality, RecipeData _recipe, List<Tag> _tagList, List<Tag> _staticTagList)
+    {
         assetSelectList = _assetSelectList;
         recipe = _recipe;
         compoundQuality = _compoundQuality;
@@ -104,10 +113,6 @@ public class CompositeTagChoosingCanvas : TagChoosingCanvas
         {
             tagList[i].localIndex = i;
         }
-
-        tagBaseCanvas.Show(_recipe.shape, _staticTagList);
-
-        base.AddUI();
     }
 
     // Update is called once per frame
@@ -138,7 +143,7 @@ public class CompositeTagChoosingCanvas : TagChoosingCanvas
         }
     }
 
-    void CompleteComposite()
+    public void CompleteComposite()
     {
         Asset compositeAsset = new Asset();
         compositeAsset.assetId = recipe.targetCompoundId;

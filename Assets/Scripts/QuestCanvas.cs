@@ -19,7 +19,7 @@ public class QuestCanvas : MonoBehaviour
     {
         if (time < Database.userDataJson.time)
         {
-            time += Time.deltaTime * 20f;
+            time += Time.deltaTime * Mathf.Max(1,Database.userDataJson.time - time) * 10f;
         }
         if (time > Database.userDataJson.time)
         {

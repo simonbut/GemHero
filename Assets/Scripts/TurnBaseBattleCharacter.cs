@@ -89,6 +89,8 @@ public class TurnBaseBattleCharacter : MonoBehaviour
             }
             reloadTimerBar.transform.parent.gameObject.SetActive(reloadTimer < 1f);
             reloadTimerBar.fillAmount = 1f - reloadTimer;
+
+            actionbar.transform.parent.gameObject.SetActive(ammoCount > 0);
         }
 
         switch (force)
@@ -161,7 +163,7 @@ public class TurnBaseBattleCharacter : MonoBehaviour
             AmmoCharge();
             return;
         }
-        AtbCharge(characterAttribute.GetAts() / 1000f * Time.deltaTime);
+        AtbCharge(characterAttribute.GetAts() * Time.deltaTime);
     }
 
     public void AmmoCharge()

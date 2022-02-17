@@ -398,7 +398,7 @@ namespace ClassHelper
                 {
                     if (_a.basicStatTypeList[i] == StatType.ats)
                     {
-                        result += _a.basicStatList[i];
+                        result += _a.basicStatList[i] /1000f;
                     }
                 }
             }
@@ -541,7 +541,7 @@ namespace ClassHelper
 
         public float GetAts()
         {
-            return atsPt;
+            return atsPt / 1000f;
         }
 
         public float GetDef()

@@ -37,11 +37,11 @@ public class PlayerStatusCanvas : MonoBehaviour
     {
         if (hp < Player.GetHp())
         {
-            hp++;
+            hp += Mathf.Max(Mathf.FloorToInt(Time.deltaTime * 500f), Player.GetHp() - hp);
         }
         if (hp > Player.GetHp())
         {
-            hp--;
+            hp -= Mathf.Max(Mathf.FloorToInt(Time.deltaTime * 500f), Player.GetHp() - hp);
         }
         hpGameObject.transform.Find("Bar").GetComponent<Image>().fillAmount = hp * 1f / Player.GetTotalHp();
         hpGameObject.transform.Find("Text").GetComponent<Text>().text = hp + " / " + Player.GetTotalHp();

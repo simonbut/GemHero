@@ -26,8 +26,8 @@ public class CompositeMenuCanvas : ControlableUI
 
     public void Refresh()
     {
-        UIManager.Instance.assetInCompositionDataUI.Hide();
-        UIManager.Instance.compositionDataUI.Hide();
+        //UIManager.Instance.assetInCompositionDataUI.Hide();
+        //UIManager.Instance.compositionDataUI.Hide();
 
         gridScrollView.Setup("Asset List", this, ClickData, SelectingData, DisSelectingData);
 
@@ -109,10 +109,10 @@ public class CompositeMenuCanvas : ControlableUI
     public int session = 0;
     public void AddUI(int _recipeId)
     {
-        UIManager.Instance.compositionDataUI.Show(_recipeId, true);
-        UIManager.Instance.recipeDataUI.Hide();
-
         SetupRecipe(_recipeId);
+
+        UIManager.Instance.recipeDataUI.Hide();
+        UIManager.Instance.compositionDataUI.Show(_recipeId, true);
 
         AddUI();
     }
@@ -160,7 +160,14 @@ public class CompositeMenuCanvas : ControlableUI
         }
         if (isAllChossen)
         {
-            UIManager.Instance.choiceUI.Setup(new Vector2(Screen.width / 2f, Screen.height / 2f), new List<string> { "Next Stage", "Redo" }, new List<Callback> { NextStep, ReSelectAsset });
+            if (AssetManager.Instance.CreateTagListByAssets(assetSelectList).Count == 0)
+            {
+                UIManager.Instance.choiceUI.Setup(new Vector2(Screen.width / 2f, Screen.height / 2f), new List<string> { "Composite", "Redo" }, new List<Callback> { NextStep, ReSelectAsset });
+            }
+            else
+            {
+                UIManager.Instance.choiceUI.Setup(new Vector2(Screen.width / 2f, Screen.height / 2f), new List<string> { "Next Step", "Redo" }, new List<Callback> { NextStep, ReSelectAsset });
+            }
             return;
         }
         else
@@ -174,7 +181,17 @@ public class CompositeMenuCanvas : ControlableUI
         UIManager.Instance.assetInCompositionDataUI.Hide();
         UIManager.Instance.compositionDataUI.Hide();
         //MainGameView.Instance.tagBaseCanvas.Show(recipe.shape, AssetManager.Instance.CreateTagList(TargetTagListWithEnoughPoints(), recipe.targetPos));
-        MainGameView.Instance.tagChoosingCanvas.AddUI(assetSelectList, GetQuality(), recipe, AssetManager.Instance.CreateTagListByAssets(assetSelectList), AssetManager.Instance.CreateTagList(TargetTagListWithEnoughPoints(), recipe.targetPos));
+
+        if (AssetManager.Instance.CreateTagListByAssets(assetSelectList).Count == 0)
+        {
+            MainGameView.Instance.tagChoosingCanvas.Setup(assetSelectList, GetQuality(), recipe, AssetManager.Instance.CreateTagListByAssets(assetSelectList), AssetManager.Instance.CreateTagList(TargetTagListWithEnoughPoints(), recipe.targetPos));
+            MainGameView.Instance.tagChoosingCanvas.CompleteComposite();
+        }
+        else
+        {
+            MainGameView.Instance.tagChoosingCanvas.AddUI(assetSelectList, GetQuality(), recipe, AssetManager.Instance.CreateTagListByAssets(assetSelectList), AssetManager.Instance.CreateTagList(TargetTagListWithEnoughPoints(), recipe.targetPos));
+        }
+
     }
 
     void ReSelectAsset()

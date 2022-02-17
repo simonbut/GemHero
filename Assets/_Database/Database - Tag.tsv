@@ -10,9 +10,9 @@ id	name	description	grids	score	minValue	maxValue	isBadTag	tagType
 9	現實 (小)	現實值 +1，或者夢想值 -1	0	10			FALSE	AssetTag
 10	理想 (小)	理想值 +1	0	10			FALSE	AssetTag
 11	理想抑制 (小)	理想值 -1	0	10			FALSE	AssetTag
-12	死肥仔	外觀變肥，攻速 - 10%；靈魂繩索長度 + 3	0;-1,0	0			TRUE	CharacterTag
-13	標籤使者	可以自由控制不同的標籤；靈魂繩索長度 + 3	0;-1,0	0			FALSE	CharacterTag
-14	高速消化	使用食品的所需時間減少50%；靈魂繩索長度 + 1	0	0			FALSE	CharacterTag
+12	死肥仔	外觀變肥，攻速 -10%；靈魂繩索長度 +3	0;-1,0	0			TRUE	CharacterTag
+13	標籤使者	可以自由控制不同的標籤；靈魂繩索長度 +3	0;-1,0	0			FALSE	CharacterTag
+14	高速消化	使用食品的所需時間減少50%；靈魂繩索長度 +1	0	0			FALSE	CharacterTag
 15	漠不關心	ABC	0	0			TRUE	CharacterTag
 16	蛋糕	花費15分鐘使用。使用後，體力回復 100 - 500 (視乎品質)	0	0			FALSE	FixedTag
 17	攻擊力 +1	攻擊力 +1	0	0			FALSE	CharacterTag
@@ -23,3 +23,11 @@ id	name	description	grids	score	minValue	maxValue	isBadTag	tagType
 22			0	0			TRUE	CharacterTag
 23			0	0			FALSE	CharacterTag
 24			0	0			TRUE	CharacterTag
+25	槍2A	可以一次射出兩發，但傷害 -40%	0	10			FALSE	FixedTag
+26	槍2B	彈框的最後一發必然爆擊	0	10			FALSE	FixedTag
+27	槍3A	吸血 +10%	0	10			FALSE	FixedTag
+28	槍3B	上彈速度 +50%	0	10			FALSE	FixedTag
+29	裝飾2A	暴擊傷害 +40%	0	10			FALSE	FixedTag
+30	裝飾2B	攻擊力 +1	0	10			FALSE	FixedTag
+31	裝飾3A	暴擊率 +25%	0	10			FALSE	FixedTag
+32	裝飾3B	攻擊力 +1	0	10			FALSE	FixedTag
