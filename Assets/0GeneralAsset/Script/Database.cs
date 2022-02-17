@@ -150,7 +150,7 @@ public class Database : MonoBehaviour
         Database.Save();
     }
 
-    public static void AddQuest(int _questId)
+    public static void AddQuest(int _questId,int _startTime)
     {
         if (_questId == 0)
         {
@@ -158,7 +158,7 @@ public class Database : MonoBehaviour
         }
         Quest _q = new Quest();
         _q.questId = _questId;
-        _q.startTime = userDataJson.time;
+        _q.startTime = _startTime;
         if (_questId <= 100)//main quest
         {
             CompleteMainQuest();
@@ -192,6 +192,7 @@ public class Database : MonoBehaviour
             {
                 if (_q.questId == _questId)
                 {
+                    GlobalCommunicateManager.storedTime = _q.startTime;
                     userDataJson.sideQuest.Remove(_q);
                     break;
                 }

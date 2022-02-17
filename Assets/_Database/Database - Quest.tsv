@@ -1,14 +1,14 @@
 id	description	timeLimit (Hour)	questType	characterId	itemId	itemQuality	itemTag	enemyList	targetRelease
 1	mainReleaseQuestText	36	mainRelease	10008					2
-2	mainBattleQuestText	36	mainBattle	10009				1;1	
+2	mainBattleQuestText	36	mainBattle	10009				5	
 3	talkQuestText	12	talk	10003					
-101	submitTQuestText	12	item	10002	1	0	1		
+101	submitTQuestText	12	item	10002	1	5			
 201	sideBattleQuestText	12	battle	10002				1;1	
-102	submitTQuestText	12	item	10004	1	0	1		
-202	sideBattleQuestText	12	battle	10004				2	
+102	submitTQuestText	12	item	10004	1	5			
+202	sideBattleQuestText	12	battle	10004				1;1	
 103	submitTQuestText	12	item	10005	1	0	1		
-203	sideBattleQuestText	12	battle	10005				3	
+203	sideBattleQuestText	12	battle	10005				2	
 104	submitTQuestText	12	item	10006	1	0	1		
-204	sideBattleQuestText	12	battle	10006				4	
+204	sideBattleQuestText	12	battle	10006				3	
 105	submitTQuestText	12	item	10007	1	0	1		
-205	sideBattleQuestText	12	battle	10007				5	
+205	sideBattleQuestText	12	battle	10007				4	

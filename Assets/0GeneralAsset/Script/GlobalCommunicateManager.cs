@@ -19,6 +19,12 @@ public class GlobalCommunicateManager : MonoBehaviour
 
     public static bool isTutorial = false;
 
+    public static int storedTime = 0;
+    public static void SetStoredTime(int _time)
+    {
+        storedTime = _time;
+    }
+
     public static bool IsStepOneSecond()
     {
         return (Mathf.FloorToInt(time) > Mathf.FloorToInt(preTime));

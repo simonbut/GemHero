@@ -176,8 +176,10 @@ public class MainGameView : MonoBehaviour
                 break;
             case ResourceType.talk:
                 TalkDialogList _td = ResourcePointManager.Instance.GetTalkData(reactingObject.resourcePointId);
+                print("A");
                 if (!Database.userDataJson.destinyShareCompletion.Contains(_td.characterId))
                 {
+                    print("B");
                     if (Database.userDataJson.sideQuest.Count >= 3)
                     {
                         //TODO warn player too many quest
@@ -187,6 +189,7 @@ public class MainGameView : MonoBehaviour
                 }
                 else
                 {
+                    print("C");
                     if (!Database.userDataJson.questCompletion.Contains(_td.afterItemQuest.questId))
                     {
                         if (Database.userDataJson.GetSideQuestId().Contains(_td.afterItemQuest.questId))
@@ -200,6 +203,7 @@ public class MainGameView : MonoBehaviour
                     }
                     else
                     {
+                        print("D");
                         if (!Database.userDataJson.questCompletion.Contains(_td.afterBattleQuest.questId))
                         {
                             if (Database.userDataJson.GetSideQuestId().Contains(_td.afterBattleQuest.questId))
@@ -374,7 +378,7 @@ public class MainGameView : MonoBehaviour
     public void CheckQuestAfterMainReleaseQuest()
     {
         MainQuestDialogList _md = ResourcePointManager.Instance.GetMainQuestData(reactingObject.resourcePointId);
-        Database.AddQuest(_md.afterMainReleaseQuest.afterQuestId);
+        Database.AddQuest(_md.afterMainReleaseQuest.afterQuestId, Database.userDataJson.mainQuest.startTime);
 
         if (_md.afterMainReleaseQuest.disappearAfter)
         {
@@ -385,7 +389,7 @@ public class MainGameView : MonoBehaviour
     public void CheckQuestAfterMainTalkQuest()
     {
         MainQuestDialogList _md = ResourcePointManager.Instance.GetMainQuestData(reactingObject.resourcePointId);
-        Database.AddQuest(_md.talkQuest.afterQuestId);
+        Database.AddQuest(_md.talkQuest.afterQuestId, Database.userDataJson.mainQuest.startTime);
 
         if (_md.afterMainReleaseQuest.disappearAfter)
         {
@@ -413,7 +417,7 @@ public class MainGameView : MonoBehaviour
         }
         else
         {
-            Database.AddQuest(_md.afterMainBattleQuest.afterQuestId);
+            Database.AddQuest(_md.afterMainBattleQuest.afterQuestId, Database.userDataJson.mainQuest.startTime);
         }
 
         if (_md.afterMainReleaseQuest.disappearAfter)
@@ -433,7 +437,7 @@ public class MainGameView : MonoBehaviour
     {
         TalkDialogList _td = ResourcePointManager.Instance.GetTalkData(reactingObject.resourcePointId);
         Database.ConsumeQuest(_td.afterItemQuest.questId);
-        Database.AddQuest(_td.afterItemQuest.afterQuestId);
+        Database.AddQuest(_td.afterItemQuest.afterQuestId, GlobalCommunicateManager.storedTime);
 
         if (_td.afterItemQuest.disappearAfter)
         {
@@ -457,7 +461,7 @@ public class MainGameView : MonoBehaviour
         Database.userDataJson.releasePerson++;
         TalkDialogList _td = ResourcePointManager.Instance.GetTalkData(reactingObject.resourcePointId);
         Database.ConsumeQuest(_td.afterBattleQuest.questId);
-        Database.AddQuest(_td.afterBattleQuest.afterQuestId);
+        Database.AddQuest(_td.afterBattleQuest.afterQuestId, GlobalCommunicateManager.storedTime);
 
         foreach (DestinyShareData _dsd in TagManager.Instance.GetDestinyShareDataByCharacterId(_td.afterBattleQuest.characterId))
         {
@@ -478,14 +482,16 @@ public class MainGameView : MonoBehaviour
 
     public void DestinyShare()
     {
+        print("D");
         TalkDialogList _td = ResourcePointManager.Instance.GetTalkData(reactingObject.resourcePointId);
         destinyShareChoosingCanvas.AddUI(_td.characterId);
+        print("E");
     }
 
     public void CheckQuestAfterDestinyShare()
     {
         TalkDialogList _td = ResourcePointManager.Instance.GetTalkData(reactingObject.resourcePointId);
-        Database.AddQuest(_td.afterDestinyShare.afterQuestId);
+        Database.AddQuest(_td.afterDestinyShare.afterQuestId, Database.userDataJson.time);
     }
 
     public void OpenRecipeMenu()
