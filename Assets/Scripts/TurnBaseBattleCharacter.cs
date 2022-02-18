@@ -36,6 +36,9 @@ public class TurnBaseBattleCharacter : MonoBehaviour
         if (force == Force.enemy)
         {
             appearence.transform.localScale = new Vector2(-appearence.transform.localScale.x, appearence.transform.localScale.y);
+
+            basicSprite = Resources.Load<Sprite>("Enemy/" + _characterAttribute.enemyId.ToString("000"));
+            attackSprite = Resources.Load<Sprite>("Enemy/" + _characterAttribute.enemyId.ToString("000"));
         }
 
         hpPt = _characterAttribute.GetHpTotal();
@@ -54,8 +57,6 @@ public class TurnBaseBattleCharacter : MonoBehaviour
                 ammoList[i].SetActive(false);
             }
         }
-
-        //TODO: set up character appearence
     }
 
     public void ReloadAmmo()

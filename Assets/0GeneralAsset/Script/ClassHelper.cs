@@ -437,6 +437,8 @@ namespace ClassHelper
 
     public class CharacterAttribute
     {
+        public int enemyId = 0;
+
         float hpTotalPt = 500f;
         float defPt = 50f;
         float atkPt = 100f;
@@ -496,9 +498,11 @@ namespace ClassHelper
             return result;
         }
 
-        public static CharacterAttribute SetUpCharacterAttribute(float _hpTotalPt,float _defPt, float _atkPt, float _atsPt,List<int> _skillAffect = null, List<int> _tagAffect = null, List<int> _gemAffect = null,int _ammoTotal = -1,int _ammoReloadTier = 1)
+        public static CharacterAttribute SetUpCharacterAttribute(int _enemyId,float _hpTotalPt,float _defPt, float _atkPt, float _atsPt,List<int> _skillAffect = null, List<int> _tagAffect = null, List<int> _gemAffect = null,int _ammoTotal = -1,int _ammoReloadTier = 1)
         {
             CharacterAttribute result = new CharacterAttribute();
+            result.enemyId = _enemyId;
+
             result.hpTotalPt = _hpTotalPt;
             result.defPt = _defPt;
             result.atkPt = _atkPt;
@@ -516,7 +520,7 @@ namespace ClassHelper
         public static CharacterAttribute SetUpCharacterAttributeByEnemyId(int _enemyId)
         {
             EnemyData _e = EnemyManager.Instance.GetEnemyData(_enemyId);
-            return SetUpCharacterAttribute(_e.hp, _e.def, _e.atk, _e.ats, _e.skillList, null, null, _e.ammoCount, _e.ammoReloadTier);
+            return SetUpCharacterAttribute(_enemyId, _e.hp, _e.def, _e.atk, _e.ats, _e.skillList, null, null, _e.ammoCount, _e.ammoReloadTier);
         }
 
         public int GetAmmoReloadTier()
@@ -962,7 +966,7 @@ namespace ClassHelper
 
         public CharacterAttribute ConvertToCharacterAttribute()
         {
-            return CharacterAttribute.SetUpCharacterAttribute(hp, def, atk, ats, skillList, null, null);
+            return CharacterAttribute.SetUpCharacterAttribute(id, hp, def, atk, ats, skillList, null, null);
         }
     }
 

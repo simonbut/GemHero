@@ -75,7 +75,7 @@ public class TurnBaseBattleCanvas : ControlableUI
         selectingClue.transform.position = _character.gameObject.transform.position;
 
         //update enemy information UI
-        //enemyInformation.transform.Find("Icon").GetComponent<Image>().sprite =//TODO graphic
+        enemyInformation.transform.Find("Icon").GetComponent<Image>().sprite = Resources.Load<Sprite>("Enemy/" + _character.characterAttribute.enemyId.ToString("000"));
         enemyInformation.transform.Find("Text").GetComponent<Text>().text = _character.characterAttribute.GetEnemyInformation().Replace("$1",_character.hpPt.ToString());
     }
 
