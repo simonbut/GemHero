@@ -1011,11 +1011,11 @@ namespace ClassHelper
             }
             if (id > 100 && id < 200)
             {
-                result = "Side Mission " + (id % 100).ToString("0") + "A: " + result;
+                result = "Side Mission " + (id % 100).ToString("0") + " (1/2): " + result;
             }
             if (id > 200 && id < 300)
             {
-                result = "Side Mission " + (id % 100).ToString("0") + "B: " + result;
+                result = "Side Mission " + (id % 100).ToString("0") + " (2/2): " + result;
             }
             return result;
         }

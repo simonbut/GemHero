@@ -136,6 +136,15 @@ public class MainGameView : MonoBehaviour
         {
             HideInteractiveDialog();
         }
+
+        //Hide boss
+        switch (Database.userDataJson.chapter)
+        {
+            case 1:
+                FindResourcePointByCharacterId(QuestManager.Instance.GetQuestData(2).characterId).gameObject.SetActive(Database.userDataJson.mainQuest.questId == 2);
+                break;
+
+        }
     }
 
     public GameObject InteractiveDialog;
@@ -176,10 +185,8 @@ public class MainGameView : MonoBehaviour
                 break;
             case ResourceType.talk:
                 TalkDialogList _td = ResourcePointManager.Instance.GetTalkData(reactingObject.resourcePointId);
-                print("A");
                 if (!Database.userDataJson.destinyShareCompletion.Contains(_td.characterId))
                 {
-                    print("B");
                     if (Database.userDataJson.sideQuest.Count >= 3)
                     {
                         //TODO warn player too many quest
@@ -189,7 +196,6 @@ public class MainGameView : MonoBehaviour
                 }
                 else
                 {
-                    print("C");
                     if (!Database.userDataJson.questCompletion.Contains(_td.afterItemQuest.questId))
                     {
                         if (Database.userDataJson.GetSideQuestId().Contains(_td.afterItemQuest.questId))
@@ -203,7 +209,6 @@ public class MainGameView : MonoBehaviour
                     }
                     else
                     {
-                        print("D");
                         if (!Database.userDataJson.questCompletion.Contains(_td.afterBattleQuest.questId))
                         {
                             if (Database.userDataJson.GetSideQuestId().Contains(_td.afterBattleQuest.questId))
