@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
+using CharacterAttributeClass;
 
 namespace ClassHelper
 {
@@ -434,126 +435,6 @@ namespace ClassHelper
             return Database.userDataJson.virtueGem;
         }
     }
-
-    public class CharacterAttribute
-    {
-        public int enemyId = 0;
-
-        float hpTotalPt = 500f;
-        float defPt = 50f;
-        float atkPt = 100f;
-        float atsPt = 1000f;
-        int ammoTotal = 10;
-        int ammoReloadTier = 1;
-
-        List<int> skillAffect = new List<int>();
-        List<int> tagAffect = new List<int>();
-        List<int> gemAffect = new List<int>();
-
-        float criRate = 0f;
-        float criDamIncrease = 0f;
-        float blood = 0f;
-        float allDamage = 0f;
-        float directDamage = 0f;
-        float dodgeRate = 0f;
-        float lastHitDamgeIncrease = 0f;
-        float lastHitCriRate = 0f;
-        float lastHitDirectDamage = 0f;
-        float countRate = 0f;
-
-        public string GetEnemyInformation()
-        {
-            //$1 is hp
-            string result = "";
-            result += "HP: " + "$1" + " / " + GetHpTotal().ToString("0") + "\n";
-            result += "Def: " + GetDef().ToString("0") + "\n";
-            result += "Atk: " + GetAtk().ToString("0") + "\n";
-            result += "Ats: " + GetAts().ToString("0") + "\n";
-            result += "\n";
-            result += "\n";
-
-            foreach (int _skill in skillAffect)
-            {
-                EnemySkillData _esd = EnemyManager.Instance.GetEnemySkillData(_skill);
-                result += _esd.description.GetString() + "\n" + "\n" + "\n";
-            }
-
-            return result;
-        }
-
-        public string GetPlayerInformation()
-        {
-            //$1 is hp, $2 is ammo count
-            string result = "";
-            result += "HP: " + "$1" + " / " + GetHpTotal().ToString("0") + "\n";
-            result += "Def: " + GetDef().ToString("0") + "\n";
-            result += "Atk: " + GetAtk().ToString("0") + "\n";
-            result += "Ats: " + GetAts().ToString("0") + "\n";
-            result += "Ammo Count: " + "$2" + " / " + GetAmmoTotal().ToString("0") + "\n";
-            result += "Reload Speed Tier: " + GetAmmoReloadTier().ToString("0") + "\n";
-            result += "\n";
-
-            //TODO: List out criRate to countRate if they > 0
-
-            return result;
-        }
-
-        public static CharacterAttribute SetUpCharacterAttribute(int _enemyId,float _hpTotalPt,float _defPt, float _atkPt, float _atsPt,List<int> _skillAffect = null, List<int> _tagAffect = null, List<int> _gemAffect = null,int _ammoTotal = -1,int _ammoReloadTier = 1)
-        {
-            CharacterAttribute result = new CharacterAttribute();
-            result.enemyId = _enemyId;
-
-            result.hpTotalPt = _hpTotalPt;
-            result.defPt = _defPt;
-            result.atkPt = _atkPt;
-            result.atsPt = _atsPt;
-            result.ammoTotal = _ammoTotal;
-            result.ammoReloadTier = _ammoReloadTier;
-
-            result.skillAffect = _skillAffect;
-            result.tagAffect = _tagAffect;
-            result.gemAffect = _gemAffect;
-
-            return result;
-        }
-
-        public static CharacterAttribute SetUpCharacterAttributeByEnemyId(int _enemyId)
-        {
-            EnemyData _e = EnemyManager.Instance.GetEnemyData(_enemyId);
-            return SetUpCharacterAttribute(_enemyId, _e.hp, _e.def, _e.atk, _e.ats, _e.skillList, null, null, _e.ammoCount, _e.ammoReloadTier);
-        }
-
-        public int GetAmmoReloadTier()
-        {
-            return ammoReloadTier;
-        }
-
-        public int GetAmmoTotal()
-        {
-            return ammoTotal;
-        }
-
-        public float GetHpTotal()
-        {
-            return hpTotalPt;
-        }
-
-        public float GetAtk()
-        {
-            return atkPt;
-        }
-
-        public float GetAts()
-        {
-            return atsPt / 1000f;
-        }
-
-        public float GetDef()
-        {
-            return defPt;
-        }
-    }
-
     public enum QuestType
     {
         talk,
@@ -840,17 +721,56 @@ namespace ClassHelper
 
         public int GetRealityPoint()
         {
-            return GetAssetData().realityPoint;
+            int result = GetAssetData().realityPoint;
+            foreach (int _t in tagList)
+            {
+                switch (_t)
+                {
+                    case 2://空虛
+                        return 0;
+                        break;
+                    case 5://夢想 (小)
+                        result--;
+                        break;
+                }
+            }
+            return result;
         }
 
-        public int GetDreamPoint()
-        {
-            return GetAssetData().dreamPoint;
-        }
+        //public int GetDreamPoint()
+        //{
+        //    int result = GetAssetData().dreamPoint;
+        //    foreach (int _t in tagList)
+        //    {
+        //        switch (_t)
+        //        {
+        //            case 2://空虛
+        //                return 0;
+        //                break;
+        //            case 5://夢想 (小)
+        //                result++;
+        //                break;
+        //        }
+        //    }
+        //    return result;
+        //}
 
         public int GetIdealPoint()
         {
-            return GetAssetData().idealPoint;
+            int result = GetAssetData().idealPoint;
+            foreach (int _t in tagList)
+            {
+                switch (_t)
+                {
+                    case 2://空虛
+                        return 0;
+                        break;
+                    case 5://理想抑制 (小)
+                        result--;
+                        break;
+                }
+            }
+            return result;
         }
 
         public int GetScore()
@@ -966,7 +886,7 @@ namespace ClassHelper
 
         public CharacterAttribute ConvertToCharacterAttribute()
         {
-            return CharacterAttribute.SetUpCharacterAttribute(id, hp, def, atk, ats, skillList, null, null);
+            return CharacterAttribute.SetUpCharacterAttribute(id, hp, def, atk, ats, skillList, null, null, null);
         }
     }
 

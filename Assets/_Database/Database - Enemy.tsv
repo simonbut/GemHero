@@ -3,5 +3,5 @@ id	name	hp	def	atk	ats	skillList	ammoCount	reloadTimeTier
 2	B	2000	10	20	500	1	0	0
 3	C	2000	10	20	500	2	0	0
 4	D	2000	10	20	500	3	0	0
-5	E	2000	10	20	500	1;2;3	0	0
-6	F	1000	10	10	500		0	0
+5	E	2000	10	20	500	4	0	0
+6	F	1000	10	10	500	2;4	0	0

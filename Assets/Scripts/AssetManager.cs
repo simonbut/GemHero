@@ -289,6 +289,16 @@ public class AssetManager : MonoBehaviour
         }
         result += _qualityAffect;
 
+        foreach (int _t in _tagList)
+        {
+            switch (_t)
+            {
+                case 1://品質上升 (小)
+                    result += 10;
+                    break;
+            }
+        }
+
         return result;
     }
 

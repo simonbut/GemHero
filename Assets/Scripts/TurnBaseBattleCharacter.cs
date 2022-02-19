@@ -1,8 +1,9 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using ClassHelper;
+using CharacterAttributeClass;
 
 public class TurnBaseBattleCharacter : MonoBehaviour
 {
@@ -173,7 +174,7 @@ public class TurnBaseBattleCharacter : MonoBehaviour
         {
             case 1:
             default:
-                reloadTimer -= 0.5f * Time.deltaTime;
+                reloadTimer -= 0.5f * Time.deltaTime * (1 + characterAttribute.GetAmmoReloadSpeedAdd());
                 break;
         }
         if (reloadTimer <= 0f)
@@ -192,10 +193,82 @@ public class TurnBaseBattleCharacter : MonoBehaviour
         actionRefillPt = 0;
     }
 
-    public void CalcuateAndGetDamage(float _enemyAtk)
+    public void CalcuateAndGetDamage(TurnBaseBattleCharacter _sourceC,float _damageMultiplier = 1f)
     {
-        float result = _enemyAtk / 4f + Mathf.Max(0, _enemyAtk / 2f - characterAttribute.GetDef()) + Mathf.Max(0, _enemyAtk / 2f - characterAttribute.GetDef() / 2f);
+        CharacterAttribute _sourceCA = _sourceC.characterAttribute;
+        float resultAtk = _sourceCA.GetAtk();
+        if (Random.Range(0, 1000) < _sourceCA.GetCriRate() * 1000 || (_sourceCA.IsLastHitCrit() && _sourceC.ammoCount == 1) || (_sourceCA.IsFirstHitCrit() && _sourceC.ammoCount == _sourceC.characterAttribute.GetAmmoTotal()))
+        {
+            resultAtk *= _sourceCA.GetCriDamMultiplier();
+        }
+
+        if (_sourceCA.GetLastHitDamgeIncrease() > 0 && _sourceC.ammoCount == 1)
+        {
+            resultAtk += _sourceCA.GetLastHitDamgeIncrease();
+        }
+
+        float result = resultAtk / 4f + Mathf.Max(0, resultAtk / 2f - characterAttribute.GetDef()) + Mathf.Max(0, resultAtk / 2f - characterAttribute.GetDef() / 2f);
+        result += _sourceCA.GetDirectDamage();
+
+        result *= _damageMultiplier;
+
+        if (characterAttribute.skillAffect != null)
+        {
+            foreach (int _s in characterAttribute.skillAffect)
+            {
+                switch (_s)
+                {
+                    case 1://受到的傷害減少 1
+                        result -= 1;
+                        break;
+                }
+            }
+        }
+
         GetDamage(result);
+
+        if (_sourceCA.GetBlood() > 0)
+        {
+            _sourceC.GetHeal(result * _sourceCA.GetBlood());
+        }
+
+        if (characterAttribute.skillAffect != null)
+        {
+            foreach (int _s in characterAttribute.skillAffect)
+            {
+                switch (_s)
+                {
+                    case 3://被攻擊時，玩家失去 1 點體力
+                        _sourceC.hpPt -= 1;
+                        break;
+                }
+            }
+        }
+
+        if (_sourceC.characterAttribute.skillAffect != null)
+        {
+            foreach (int _s in _sourceC.characterAttribute.skillAffect)
+            {
+                switch (_s)
+                {
+                    case 2://攻擊時，玩家失去 1 粒子彈 (最後 1 粒子彈除外)
+                        if (ammoCount > 1)
+                        {
+                            ammoCount--;
+                        }
+                        break;
+                }
+            }
+        }
+    }
+
+    public void GetHeal(float _amount)
+    {
+        hpPt += _amount;
+        if (hpPt > characterAttribute.GetHpTotal())
+        {
+            hpPt = characterAttribute.GetHpTotal();
+        }
     }
 
     public void GetDamage(float _amount)
@@ -204,6 +277,21 @@ public class TurnBaseBattleCharacter : MonoBehaviour
         if (hpPt <= 0)
         {
             DestroyCharacter();
+        }
+        else
+        {
+            if (characterAttribute.gemAffect != null)
+            {
+                foreach (int _t in characterAttribute.gemAffect)
+                {
+                    switch (_t)
+                    {
+                        case 2:
+                            actionRefillPt = 1f;
+                            break;
+                    }
+                }
+            }
         }
     }
 

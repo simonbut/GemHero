@@ -43,7 +43,7 @@ public class AssetInCompositionDataUI : DataUI
         }
         for (int i = 0; i < 5; i++)
         {
-            if (i < _ra.GetDreamPoint())
+            if (i < -_ra.GetRealityPoint())
             {
                 dreamPoint.transform.Find("PtGrid" + i).Find("Fill").GetComponent<Image>().fillAmount = 1f;
             }
@@ -66,7 +66,7 @@ public class AssetInCompositionDataUI : DataUI
 
 
         realityPoint.SetActive(_ra.GetRealityPoint() > 0);
-        dreamPoint.SetActive(_ra.GetDreamPoint() > 0);
+        dreamPoint.SetActive(_ra.GetRealityPoint() < 0);
 
         if (_ra.tagList.Count == 0)
         {

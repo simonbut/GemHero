@@ -49,7 +49,7 @@ public class AssetDataUI : DataUI
         }
         for (int i = 0; i < 5; i++)
         {
-            if (i < _ra.GetDreamPoint())
+            if (i < -_ra.GetRealityPoint())
             {
                 dreamPoint.transform.Find("PtGrid" + i).Find("Fill").GetComponent<Image>().fillAmount = 1f;
             }

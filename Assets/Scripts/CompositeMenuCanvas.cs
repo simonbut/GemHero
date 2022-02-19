@@ -251,8 +251,14 @@ public class CompositeMenuCanvas : ControlableUI
                 if (_uid > 0)
                 {
                     Asset _a = AssetManager.Instance.GetAssetByUid(_uid);
-                    result[0] += _a.GetRealityPoint();
-                    result[1] += _a.GetDreamPoint();
+                    if (_a.GetRealityPoint()>0)
+                    {
+                        result[0] += _a.GetRealityPoint();
+                    }
+                    else
+                    {
+                        result[1] += -_a.GetRealityPoint();
+                    }
                     result[2] += _a.GetIdealPoint();
                 }
             }

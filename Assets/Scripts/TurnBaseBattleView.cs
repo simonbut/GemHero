@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using ClassHelper;
+using CharacterAttributeClass;
 
 public class TurnBaseBattleView : MonoBehaviour
 {
@@ -63,7 +64,7 @@ public class TurnBaseBattleView : MonoBehaviour
         List<ResourcePointData> _rp = ResourcePointManager.Instance.GetResourcePointDataList(_monsterPontId);
         AssetData _a = AssetManager.Instance.GetAssetByUid(Database.userDataJson.equipment[0]).GetAssetData();
 
-        AddCharacter(CharacterAttribute.SetUpCharacterAttribute(0, Database.userDataJson.hp, Player.GetBasicDef(), Player.GetBasicAtk(), Player.GetBasicAts(), null, new List<int>(), new List<int>(), _a.ammoCount, _a.ammoReloadTier), Force.player);
+        AddCharacter(CharacterAttribute.SetUpCharacterAttribute(0, Database.userDataJson.hp, Player.GetBasicDef(), Player.GetBasicAtk(), Player.GetBasicAts(), null, Database.userDataJson.playerTags, Database.userDataJson.virtueGem, Database.userDataJson.equipment , _a.ammoCount, _a.ammoReloadTier), Force.player);
 
         print(_rp[0].enemyList.Count);
         for (int i = 0; i < _rp[0].enemyList.Count; i++)
@@ -83,7 +84,7 @@ public class TurnBaseBattleView : MonoBehaviour
         QuestData _q = QuestManager.Instance.GetQuestData(questId);
         AssetData _a = AssetManager.Instance.GetAssetByUid(Database.userDataJson.equipment[0]).GetAssetData();
 
-        AddCharacter(CharacterAttribute.SetUpCharacterAttribute(0,Database.userDataJson.hp, Player.GetBasicDef(), Player.GetBasicAtk(), Player.GetBasicAts(), null, new List<int>(), new List<int>(), _a.ammoCount, _a.ammoReloadTier), Force.player);
+        AddCharacter(CharacterAttribute.SetUpCharacterAttribute(0, Database.userDataJson.hp, Player.GetBasicDef(), Player.GetBasicAtk(), Player.GetBasicAts(), null, Database.userDataJson.playerTags, Database.userDataJson.virtueGem, Database.userDataJson.equipment, _a.ammoCount, _a.ammoReloadTier), Force.player);
 
         for (int i = 0; i < _q.enemyList.Count; i++)
         {
@@ -271,9 +272,22 @@ public class TurnBaseBattleView : MonoBehaviour
 
     void PerformAttack(TurnBaseBattleCharacter from, TurnBaseBattleCharacter to)
     {
-        from.ammoCount--;
         from.RunAttackAnimation();
         to.RunHurtAnimation();
-        to.CalcuateAndGetDamage(from.characterAttribute.GetAtk());
+        if (from.characterAttribute.IsDoubleHit())
+        {
+            to.CalcuateAndGetDamage(from,0.6f);
+            from.ammoCount--;
+            if (from.ammoCount>0)
+            {
+                to.CalcuateAndGetDamage(from,0.6f);
+                from.ammoCount--;
+            }
+        }
+        else
+        {
+            to.CalcuateAndGetDamage(from);
+            from.ammoCount--;
+        }
     }
 }
