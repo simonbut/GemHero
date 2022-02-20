@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using ClassHelper;
@@ -27,6 +27,9 @@ public class CompositionDataUI : DataUI
     //Prefab
     [SerializeField] Sprite emptySlotSprite;
     [SerializeField] Sprite fillSlotSprite;
+
+    [SerializeField] Image warnGraph;
+    [SerializeField] Text warnText;
 
     bool showCompositePart = false;
 
@@ -218,6 +221,26 @@ public class CompositionDataUI : DataUI
                 {
                     idealSlots[i].GetComponent<Image>().sprite = emptySlotSprite;
                 }
+            }
+
+            warnText.color = new Color(1, 1, 1, Mathf.Sin(Time.time));
+            warnGraph.color = new Color(1, 0, 0, Mathf.Sin(Time.time));
+            warnText.gameObject.SetActive(MainGameView.Instance.compositeMenuCanvas.GetScoreOverflow() > 0);
+            warnGraph.gameObject.SetActive(MainGameView.Instance.compositeMenuCanvas.GetScoreOverflow() > 0);
+            switch (MainGameView.Instance.compositeMenuCanvas.GetScoreOverflow())
+            {
+                case 0:
+                    warnText.text = "";
+                    break;
+                case 1:
+                    warnText.text = "超過了一格，品質下降 50%";
+                    break;
+                case 2:
+                    warnText.text = "超過了兩格，品質下降 70%";
+                    break;
+                default:
+                    warnText.text = "超過了三格或以上，品質下降 80%";
+                    break;
             }
         }
     }

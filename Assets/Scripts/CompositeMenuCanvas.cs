@@ -209,6 +209,30 @@ public class CompositeMenuCanvas : ControlableUI
                 result += AssetManager.Instance.GetAssetByUid(_uid).GetQuality();
             }
         }
+        switch (GetScoreOverflow())
+        {
+            case 0:
+
+                break;
+            case 1:
+                result = Mathf.FloorToInt(result * 0.5f);
+                break;
+            case 2:
+                result = Mathf.FloorToInt(result * 0.3f);
+                break;
+            default:
+                result = Mathf.FloorToInt(result * 0.2f);
+                break;
+        }
+        return result;
+    }
+
+    public int GetScoreOverflow()
+    {
+        int result = 0;
+        result += Mathf.Max(0, GetPoints()[0] - recipe.capacity[0]);
+        result += Mathf.Max(0, GetPoints()[1] - recipe.capacity[1]);
+        result += Mathf.Max(0, GetPoints()[2] - recipe.capacity[2]);
         return result;
     }
 

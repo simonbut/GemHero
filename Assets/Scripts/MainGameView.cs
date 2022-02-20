@@ -522,6 +522,7 @@ public class MainGameView : MonoBehaviour
     {
         UIManager.Instance.RemoveUI(compositeMenuCanvas);
         UIManager.Instance.RemoveUI(tagChoosingCanvas);
+        UIManager.Instance.RemoveUI(recipeMenuCanvas);
         compositeMenuCanvas.gameObject.SetActive(false);
         tagChoosingCanvas.gameObject.SetActive(false);
 
