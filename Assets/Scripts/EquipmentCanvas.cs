@@ -104,7 +104,7 @@ public class EquipmentCanvas : ControlableUI
 
     public List<GameObject> sessions;
     public int session = 0;
-    public List<int> equipmentTypes = new List<int> { 2, 6, 4, 4, 4 };
+    public List<int> equipmentTypes = new List<int> { 10002, 10006, 10004, 10004, 10004 };
 
     public override void AddUI()
     {

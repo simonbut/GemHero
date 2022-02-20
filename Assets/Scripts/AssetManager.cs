@@ -75,18 +75,28 @@ public class AssetManager : MonoBehaviour
                     _b.basicStatTypeList.Add(_c6b);
                 }
 
-                _b.basicStatList = new List<int>();
+                _b.basicStatListMin = new List<int>();
                 string[] _c7 = _c[7].Split(';');
                 for (int j = 0; j < _c7.Length; j++)
                 {
                     int _c7b;
                     int.TryParse(_c7[j], out _c7b);
 
-                    _b.basicStatList.Add(_c7b);
+                    _b.basicStatListMin.Add(_c7b);
                 }
 
-                int.TryParse(_c[8], out _b.ammoCount);
-                int.TryParse(_c[9], out _b.ammoReloadTier);
+                _b.basicStatListMax = new List<int>();
+                string[] _c8 = _c[8].Split(';');
+                for (int j = 0; j < _c8.Length; j++)
+                {
+                    int _c8b;
+                    int.TryParse(_c8[j], out _c8b);
+
+                    _b.basicStatListMax.Add(_c8b);
+                }
+
+                int.TryParse(_c[9], out _b.ammoCount);
+                int.TryParse(_c[10], out _b.ammoReloadTier);
 
                 assetdata.Add(_b);
             }

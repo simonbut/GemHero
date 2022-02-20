@@ -217,7 +217,7 @@ namespace CharacterAttributeClass
                             case 4://會心上升 (中)
                                 if (AssetManager.Instance.GetAssetByUid(_e).GetAssetData().assetTypeList.Contains(10002))
                                 {
-                                    result += AssetManager.Instance.GetAssetByUid(_e).GetQuality() * (TagManager.Instance.GetTagData(_t).maxValue - TagManager.Instance.GetTagData(_t).minValue) + TagManager.Instance.GetTagData(_t).minValue;
+                                    result += AssetManager.Instance.GetAssetByUid(_e).GetQuality() / 100f * (TagManager.Instance.GetTagData(_t).maxValue - TagManager.Instance.GetTagData(_t).minValue) + TagManager.Instance.GetTagData(_t).minValue;
                                 }
                                 break;
                         }
@@ -284,8 +284,8 @@ namespace CharacterAttributeClass
             string result = "";
             result += "HP: " + "$1" + " / " + GetHpTotal().ToString("0") + "\n";
             result += "Def: " + GetDef().ToString("0") + "\n";
-            result += "Atk: " + GetAtk().ToString("0") + "\n";
-            result += "Ats: " + GetAts().ToString("0") + "\n";
+            result += "Atk: " + GetAtk().ToString("0.0") + "\n";
+            result += "Ats: " + GetAts().ToString("0.0") + "\n";
             result += "\n";
             result += "\n";
 
@@ -313,15 +313,15 @@ namespace CharacterAttributeClass
             //TODO: List out criRate to countRate if they > 0
             if (GetCriRate() > 0)
             {
-                result += "暴擊率: " + GetCriRate().ToString("P1") + "%\n";
+                result += "暴擊率: " + GetCriRate().ToString("P1") + "\n";
             }
             if (GetCriRate() > 0 || GetCriDamMultiplier() > 0)
             {
-                result += "暴擊傷害: " + GetCriDamMultiplier().ToString("P1") + "%\n";
+                result += "暴擊傷害: " + GetCriDamMultiplier().ToString("P1") + "\n";
             }
             if (GetBlood() > 0)
             {
-                result += "吸血: " + GetBlood().ToString("P1") + "%\n";
+                result += "吸血: " + GetBlood().ToString("P1") + "\n";
             }
             if (GetDirectDamage() > 0)
             {

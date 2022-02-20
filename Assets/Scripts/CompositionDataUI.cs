@@ -91,15 +91,30 @@ public class CompositionDataUI : DataUI
                 break;
             case CompoundType.weapon:
             case CompoundType.accessory:
+            case CompoundType.clothing:
                 if (_ad.basicStatTypeList.Count > 0)
                 {
                     attr1.SetActive(true);
-                    attr1.transform.Find("Text").GetComponent<Text>().text = _ad.basicStatTypeList[0].ToString() + ": " + _ad.basicStatList[0].ToString("0");
+                    float _min = _ad.basicStatListMin[0] * 1f;
+                    float _max = _ad.basicStatListMax[0] * 1f;
+                    if (_ad.basicStatTypeList[0] == StatType.ats || _ad.basicStatTypeList[0] == StatType.def)
+                    {
+                        _min /= 1000f;
+                        _max /= 1000f;
+                    }
+                    attr1.transform.Find("Text").GetComponent<Text>().text = _ad.basicStatTypeList[0].ToString() + ": " + _min.ToString("0") + " - " + _max.ToString("0");
                 }
                 if (_ad.basicStatTypeList.Count > 1)
                 {
                     attr2.SetActive(true);
-                    attr2.transform.Find("Text").GetComponent<Text>().text = _ad.basicStatTypeList[1].ToString() + ": " + _ad.basicStatList[1].ToString("0");
+                    float _min = _ad.basicStatListMin[1] * 1f;
+                    float _max = _ad.basicStatListMax[1] * 1f;
+                    if (_ad.basicStatTypeList[1] == StatType.ats || _ad.basicStatTypeList[1] == StatType.def)
+                    {
+                        _min /= 1000f;
+                        _max /= 1000f;
+                    }
+                    attr2.transform.Find("Text").GetComponent<Text>().text = _ad.basicStatTypeList[1].ToString() + ": " + _min.ToString("0") + " - " + _max.ToString("0");
                 }
                 break;
         }

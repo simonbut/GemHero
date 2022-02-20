@@ -80,15 +80,26 @@ public class AssetDataUI : DataUI
                 break;
             case CompoundType.weapon:
             case CompoundType.accessory:
+            case CompoundType.clothing:
                 if (_ad.basicStatTypeList.Count > 0)
                 {
                     attr1.SetActive(true);
-                    attr1.transform.Find("Text").GetComponent<Text>().text = _ad.basicStatTypeList[0].ToString() + ": " + _ra.GetAttr1().ToString("0");
+                    float _value = _ra.GetAttr()[0] * 1f;
+                    if (_ad.basicStatTypeList[0] == StatType.ats || _ad.basicStatTypeList[0] == StatType.def)
+                    {
+                        _value /= 1000f;
+                    }
+                    attr1.transform.Find("Text").GetComponent<Text>().text = _ad.basicStatTypeList[0].ToString() + ": " + _value.ToString("0.0");
                 }
                 if (_ad.basicStatTypeList.Count > 1)
                 {
                     attr2.SetActive(true);
-                    attr2.transform.Find("Text").GetComponent<Text>().text = _ad.basicStatTypeList[1].ToString() + ": " + _ra.GetAttr2().ToString("0");
+                    float _value = _ra.GetAttr()[1] * 1f;
+                    if (_ad.basicStatTypeList[1] == StatType.ats || _ad.basicStatTypeList[1] == StatType.def)
+                    {
+                        _value /= 1000f;
+                    }
+                    attr2.transform.Find("Text").GetComponent<Text>().text = _ad.basicStatTypeList[1].ToString() + ": " + _value.ToString("0.0");
                 }
                 break;
         }

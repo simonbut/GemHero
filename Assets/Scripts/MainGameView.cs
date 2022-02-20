@@ -501,10 +501,8 @@ public class MainGameView : MonoBehaviour
 
     public void DestinyShare()
     {
-        print("D");
         TalkDialogList _td = ResourcePointManager.Instance.GetTalkData(reactingObject.resourcePointId);
         destinyShareChoosingCanvas.AddUI(_td.characterId);
-        print("E");
     }
 
     public void CheckQuestAfterDestinyShare()

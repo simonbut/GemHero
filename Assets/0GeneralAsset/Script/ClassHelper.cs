@@ -371,17 +371,17 @@ namespace ClassHelper
                 {
                     continue;
                 }
-                AssetData _a = AssetManager.Instance.GetAssetByUid(_e).GetAssetData();
-                for (int i = 0; i < _a.basicStatTypeList.Count; i++)
+                Asset _a = AssetManager.Instance.GetAssetByUid(_e);
+                for (int i = 0; i < _a.GetAssetData().basicStatTypeList.Count; i++)
                 {
-                    if (_a.basicStatTypeList[i] == StatType.atk)
+                    if (_a.GetAssetData().basicStatTypeList[i] == StatType.atk)
                     {
-                        result += _a.basicStatList[i];
+                        result += _a.GetAttr()[i];
                     }
                 }
             }
 
-            return result * 100f;
+            return result;
         }
 
         public static float GetBasicAts()
@@ -394,17 +394,17 @@ namespace ClassHelper
                 {
                     continue;
                 }
-                AssetData _a = AssetManager.Instance.GetAssetByUid(_e).GetAssetData();
-                for (int i = 0; i < _a.basicStatTypeList.Count; i++)
+                Asset _a = AssetManager.Instance.GetAssetByUid(_e);
+                for (int i = 0; i < _a.GetAssetData().basicStatTypeList.Count; i++)
                 {
-                    if (_a.basicStatTypeList[i] == StatType.ats)
+                    if (_a.GetAssetData().basicStatTypeList[i] == StatType.ats)
                     {
-                        result += _a.basicStatList[i] /1000f;
+                        result += _a.GetAttr()[i];
                     }
                 }
             }
 
-            return result * 1000f;
+            return result;
         }
 
         public static float GetBasicDef()
@@ -417,17 +417,17 @@ namespace ClassHelper
                 {
                     continue;
                 }
-                AssetData _a = AssetManager.Instance.GetAssetByUid(_e).GetAssetData();
-                for (int i = 0; i < _a.basicStatTypeList.Count; i++)
+                Asset _a = AssetManager.Instance.GetAssetByUid(_e);
+                for (int i = 0; i < _a.GetAssetData().basicStatTypeList.Count; i++)
                 {
-                    if (_a.basicStatTypeList[i] == StatType.def)
+                    if (_a.GetAssetData().basicStatTypeList[i] == StatType.def)
                     {
-                        result += _a.basicStatList[i];
+                        result += _a.GetAttr()[i];
                     }
                 }
             }
 
-            return result * 100f;
+            return result;
         }
 
         public static List<int> GetVirtueGemList()
@@ -626,7 +626,8 @@ namespace ClassHelper
 
         //public CompoundType compoundType;
         public List<StatType> basicStatTypeList;
-        public List<int> basicStatList;
+        public List<int> basicStatListMin;
+        public List<int> basicStatListMax;
 
         public int ammoCount;
         public int ammoReloadTier;
@@ -658,19 +659,19 @@ namespace ClassHelper
         {
             foreach (int _id in assetTypeList)
             {
-                if (_id == 2)
+                if (_id == 10002)
                 {
                     return CompoundType.weapon;
                 }
-                if (_id == 4)
+                if (_id == 10004)
                 {
                     return CompoundType.accessory;
                 }
-                if (_id == 5)
+                if (_id == 10005)
                 {
                     return CompoundType.consumable;
                 }
-                if (_id == 6)
+                if (_id == 10006)
                 {
                     return CompoundType.clothing;
                 }
@@ -697,6 +698,15 @@ namespace ClassHelper
             return AssetManager.Instance.GetAssetData(assetId);
         }
 
+        public List<float> GetAttr()
+        {
+            List<float> result = new List<float>();
+            result.Add(GetAttr1());
+            result.Add(GetAttr2());
+
+            return result;
+        }
+
         public float GetAttr1()
         {
             if (GetAssetData().basicStatTypeList.Count < 1)
@@ -705,7 +715,7 @@ namespace ClassHelper
             }
             else
             {
-                return GetAssetData().basicStatList[0];
+                return GetAssetData().basicStatListMin[0] + (GetAssetData().basicStatListMax[0] - GetAssetData().basicStatListMin[0]) * GetQuality() / 100f;
             }
         }
 
@@ -717,7 +727,7 @@ namespace ClassHelper
             }
             else
             {
-                return GetAssetData().basicStatList[1];
+                return GetAssetData().basicStatListMin[1] + (GetAssetData().basicStatListMax[1] - GetAssetData().basicStatListMin[1]) * GetQuality() / 100f;
             }
         }
 
