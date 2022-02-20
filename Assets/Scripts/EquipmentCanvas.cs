@@ -129,7 +129,7 @@ public class EquipmentCanvas : ControlableUI
                 }
                 else
                 {
-                    sessions[i].transform.Find("Image").GetComponent<Image>().sprite = Resources.Load<Sprite>("AssetType/" + _atd.id.ToString("000"));
+                    sessions[i].transform.Find("Image").GetComponent<Image>().sprite = Resources.Load<Sprite>(AssetManager.Instance.GetRecipeAssetIconPath(_atd.id));
                 }
             }
             else

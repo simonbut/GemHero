@@ -25,7 +25,7 @@ public class RewardAfterBattleCanvas : ControlableUI
         for (int i = 0; i < gemList.Count; i++)
         {
             VirtueGemData _vg = VirtueGemManager.Instance.GetVirtueGemData(gemList[i]);
-            //TODO icon
+            rewardGemList[i].transform.Find("Icon").GetComponent<Image>().sprite = Resources.Load<Sprite>("VirtueGem/" + _vg.id.ToString("000"));
             rewardGemList[i].transform.Find("Name").GetComponent<Text>().text = _vg.name.GetString();
             rewardGemList[i].transform.Find("Text").GetComponent<Text>().text = _vg.description.GetString();
         }

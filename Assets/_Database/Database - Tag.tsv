@@ -16,15 +16,15 @@ id	name	description	grids	score	minValue	maxValue	isBadTag	tagType
 15	漠不關心	ABC	0	0			TRUE	CharacterTag
 16	蛋糕	花費15分鐘使用。使用後，體力回復 100 - 500 (視乎品質)	0	0			FALSE	FixedTag
 17	溫柔	攻擊力 -1；靈魂繩索長度 +1	0	0			FALSE	CharacterTag
-18	人渣	穿透傷害 +1；靈魂繩索長度 +3	0	0			TRUE	CharacterTag
+18	人渣	穿透傷害 +1；靈魂繩索長度 +3	0;-1,0	0			TRUE	CharacterTag
 19			0	0			FALSE	CharacterTag
-20	一事無成	暴擊率 +25%；靈魂繩索長度 +3	0	0			TRUE	CharacterTag
+20	一事無成	暴擊率 +25%；靈魂繩索長度 +3	0;-1,0	0			TRUE	CharacterTag
 21	集中	上彈速度 +50%；靈魂繩索長度 +1	0	0			FALSE	CharacterTag
-22	娘娘腔	攻速 -10%；靈魂繩索長度 +3	0	0			TRUE	CharacterTag
+22	娘娘腔	攻速 -10%；靈魂繩索長度 +3	0;-1,0	0			TRUE	CharacterTag
 23			0	0			FALSE	CharacterTag
-24	有病	穿透傷害 +1；靈魂繩索長度 +3	0	0			TRUE	CharacterTag
+24	有病	穿透傷害 +1；靈魂繩索長度 +3	0;-1,0	0			TRUE	CharacterTag
 25	槍2A	可以一次射出兩發，但傷害 -40%	0	10			FALSE	FixedTag
-26	槍2B	彈框的最後一發必然爆擊	0	10			FALSE	FixedTag
+26	槍2B	彈框的最後一發必然暴擊	0	10			FALSE	FixedTag
 27	槍3A	吸血 +10%	0	10			FALSE	FixedTag
 28	槍3B	上彈速度 +50%	0	10			FALSE	FixedTag
 29	裝飾2A	暴擊傷害 +40%	0	10			FALSE	FixedTag

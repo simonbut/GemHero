@@ -28,7 +28,8 @@ public class PlayerStatusCanvas : MonoBehaviour
         {
             GameObject _vgInstance = Instantiate(virtueGemPrefab);
             _vgInstance.transform.SetParent(virtueGemParent.transform);
-            _vgInstance.transform.localPosition = new Vector2(65 * i, 0);
+            _vgInstance.transform.localPosition = new Vector2(85 * i, 0);
+            _vgInstance.GetComponent<Image>().sprite = Resources.Load<Sprite>("VirtueGem/" + Player.GetVirtueGemList()[i].ToString("000"));
         }
     }
 

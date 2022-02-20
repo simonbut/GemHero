@@ -86,6 +86,10 @@ namespace CharacterAttributeClass
             {
                 foreach (int _e in equipmentUidList)
                 {
+                    if (_e == 0)
+                    {
+                        continue;
+                    }
                     foreach (int _t in AssetManager.Instance.GetAssetByUid(_e).tagList)
                     {
                         switch (_t)
@@ -122,6 +126,10 @@ namespace CharacterAttributeClass
             {
                 foreach (int _e in equipmentUidList)
                 {
+                    if (_e == 0)
+                    {
+                        continue;
+                    }
                     foreach (int _t in AssetManager.Instance.GetAssetByUid(_e).tagList)
                     {
                         switch (_t)
@@ -194,6 +202,10 @@ namespace CharacterAttributeClass
             {
                 foreach (int _e in equipmentUidList)
                 {
+                    if (_e == 0)
+                    {
+                        continue;
+                    }
                     foreach (int _t in AssetManager.Instance.GetAssetByUid(_e).tagList)
                     {
                         switch (_t)
@@ -247,6 +259,10 @@ namespace CharacterAttributeClass
             {
                 foreach (int _e in equipmentUidList)
                 {
+                    if (_e == 0)
+                    {
+                        continue;
+                    }
                     foreach (int _t in AssetManager.Instance.GetAssetByUid(_e).tagList)
                     {
                         switch (_t)
@@ -385,6 +401,10 @@ namespace CharacterAttributeClass
             {
                 foreach (int _e in equipmentUidList)
                 {
+                    if (_e == 0)
+                    {
+                        continue;
+                    }
                     foreach (int _t in AssetManager.Instance.GetAssetByUid(_e).tagList)
                     {
                         switch (_t)
@@ -433,6 +453,10 @@ namespace CharacterAttributeClass
             {
                 foreach (int _e in equipmentUidList)
                 {
+                    if (_e == 0)
+                    {
+                        continue;
+                    }
                     foreach (int _t in AssetManager.Instance.GetAssetByUid(_e).tagList)
                     {
                         switch (_t)
@@ -455,6 +479,10 @@ namespace CharacterAttributeClass
             {
                 foreach (int _e in equipmentUidList)
                 {
+                    if (_e == 0)
+                    {
+                        continue;
+                    }
                     foreach (int _t in AssetManager.Instance.GetAssetByUid(_e).tagList)
                     {
                         switch (_t)

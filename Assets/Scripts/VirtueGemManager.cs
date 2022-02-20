@@ -98,7 +98,7 @@ public class VirtueGemManager : MonoBehaviour
         {
             if (_isCri == _vg.IsCriticalGem)
             {
-                if (!Database.userDataJson.virtueGem.Contains(_vg.id))
+                if (!Database.userDataJson.virtueGem.Contains(_vg.id) && _vg.appearStage.Contains(Database.userDataJson.chapter))
                 {
                     result.Add(_vg.id);
                 }

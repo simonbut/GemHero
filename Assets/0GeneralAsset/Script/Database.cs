@@ -487,7 +487,7 @@ public class Database : MonoBehaviour
         //result.character_id = 1;
 
         result.playerTags = new List<Tag>();
-        Tag _t = Tag.CreateTag(14,Vector2Int.zero,new List<int>());
+        Tag _t = Tag.CreateTag(13,Vector2Int.zero,new List<int>());
         result.playerTags.Add(_t);
 
         result.assetList = new List<Asset>();

@@ -134,8 +134,8 @@ public class CompositeMenuCanvas : ControlableUI
             {
                 sessions[i].SetActive(true);
                 AssetTypeData _atd = AssetManager.Instance.GetAssetTypeData(atl[i]);
-                sessions[i].transform.Find("Text").GetComponent<Text>().text = "";//_atd.name.GetString()
-                sessions[i].transform.Find("Image").GetComponent<Image>().sprite = Resources.Load<Sprite>("AssetType/" + _atd.id.ToString("000"));
+                sessions[i].transform.Find("Text").GetComponent<Text>().text = _atd.name.GetString();
+                sessions[i].transform.Find("Image").GetComponent<Image>().sprite = Resources.Load<Sprite>(AssetManager.Instance.GetRecipeAssetIconPath(_atd.id));
             }
             else
             {

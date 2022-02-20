@@ -53,6 +53,8 @@ public class MainGameView : MonoBehaviour
     public PlayerTagChoosingCanvas playerTagChoosingCanvas;
     public DestinyShareChoosingCanvas destinyShareChoosingCanvas;
 
+    public BackCanvas backCanvas;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -70,6 +72,20 @@ public class MainGameView : MonoBehaviour
         if (Player.GetHp() <= 0 || IsMainQuestTimeOut())
         {
             GameOver();
+        }
+
+        if (UIManager.Instance.IsCurrentUI(inGameMainMenuUI) || UIManager.Instance.IsCurrentUI(recipeMenuCanvas) || UIManager.Instance.IsCurrentUI(compositeMenuCanvas)
+            || UIManager.Instance.IsCurrentUI(tagChoosingCanvas) || UIManager.Instance.IsCurrentUI(assetConfirmCanvas)
+            || UIManager.Instance.IsCurrentUI(itemCanvas) || UIManager.Instance.IsCurrentUI(equipmentCanvas)
+            || UIManager.Instance.IsCurrentUI(libraryCanvas) || UIManager.Instance.IsCurrentUI(playerTagChoosingCanvas)
+            || UIManager.Instance.IsCurrentUI(destinyShareChoosingCanvas)
+            )
+        {
+            backCanvas.gameObject.SetActive(true);
+        }
+        else
+        {
+            backCanvas.gameObject.SetActive(false);
         }
 
         InteractiveDialog.transform.position = MathManager.WorldPosToCanvasPos(ControlView.Instance.player.transform.position + Vector3.up * 1f);
@@ -483,6 +499,8 @@ public class MainGameView : MonoBehaviour
         {
             Destroy(reactingObject.gameObject);
         }
+
+        Database.Save();
     }
 
     public void DestinyShare()

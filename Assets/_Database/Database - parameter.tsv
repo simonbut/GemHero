@@ -3,7 +3,7 @@ basicPlayerHp	1001
 basicPlayerDef	0
 basicPlayerAtk	0
 basicPlayerAts	0
-basicWireLength	5
+basicWireLength	3
 basicWireLengthUnit	2000
 AchievementBingoBonusPoint	5
 stage1FirstMainQuestId	1

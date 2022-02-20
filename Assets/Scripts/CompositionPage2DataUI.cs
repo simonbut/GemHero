@@ -44,6 +44,7 @@ public class CompositionPage2DataUI : DataUI
         }
         if (_rd.targetTag[0] != 0)
         {
+            realityMarkDescription.SetActive(true);
             if (_rd.targetScore[0] > 0)
             {
                 realitySlots[_rd.targetScore[0] - 1].transform.Find("Text").GetComponent<Text>().text = "A";
@@ -70,9 +71,11 @@ public class CompositionPage2DataUI : DataUI
         for (int i = 0; i < dreamSlots.Count; i++)
         {
             dreamSlots[i].SetActive(i < _rd.capacity[1]);
+            dreamSlots[i].transform.Find("Text").GetComponent<Text>().text = "";
         }
         if (_rd.targetTag[1] != 0)
         {
+            dreamMarkDescription.SetActive(true);
             if (_rd.targetScore[1] > 0)
             {
                 switch (markCount)
@@ -105,9 +108,11 @@ public class CompositionPage2DataUI : DataUI
         for (int i = 0; i < idealSlots.Count; i++)
         {
             idealSlots[i].SetActive(i < _rd.capacity[2]);
+            idealSlots[i].transform.Find("Text").GetComponent<Text>().text = "";
         }
         if (_rd.targetTag[2] != 0)
         {
+            idealMarkDescription.SetActive(true);
             if (_rd.targetScore[2] > 0)
             {
                 switch (markCount)
