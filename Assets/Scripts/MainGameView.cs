@@ -46,6 +46,7 @@ public class MainGameView : MonoBehaviour
     public RewardAfterBattleCanvas rewardAfterBattleCanvas;
     public EquipmentCanvas equipmentCanvas;
     public GameoverCanvas gameoverCanvas;
+    public StageClearCanvas stageClearCanvas;
     public LibraryCanvas libraryCanvas;
     public BookConfirmCanvas bookConfirmCanvas;
 
@@ -75,7 +76,7 @@ public class MainGameView : MonoBehaviour
         }
 
         if (UIManager.Instance.IsCurrentUI(inGameMainMenuUI) || UIManager.Instance.IsCurrentUI(recipeMenuCanvas) || UIManager.Instance.IsCurrentUI(compositeMenuCanvas)
-            || UIManager.Instance.IsCurrentUI(tagChoosingCanvas) || UIManager.Instance.IsCurrentUI(assetConfirmCanvas)
+            || UIManager.Instance.IsCurrentUI(tagChoosingCanvas)
             || UIManager.Instance.IsCurrentUI(itemCanvas) || UIManager.Instance.IsCurrentUI(equipmentCanvas)
             || UIManager.Instance.IsCurrentUI(libraryCanvas) || UIManager.Instance.IsCurrentUI(playerTagChoosingCanvas)
             || UIManager.Instance.IsCurrentUI(destinyShareChoosingCanvas)
@@ -388,7 +389,7 @@ public class MainGameView : MonoBehaviour
 
     public void OpenSleepCanvas()
     {
-        UIManager.Instance.choiceUI.Setup(new Vector2(Screen.width / 2f, Screen.height / 2f), new List<string> { "Confirm", "Cancel" }, new List<Callback> { MainGameView.Instance.Sleep, null }, "Do you want to sleep? It will consume 2 hrs.");
+        UIManager.Instance.choiceUI.Setup(new Vector2(Screen.width / 2f, Screen.height / 2f), new List<string> { "Confirm", "Cancel" }, new List<Callback> { MainGameView.Instance.Sleep, null }, "Do you want to sleep? It will consume 2 hrs and recover all your hp.");
     }
 
     public void Quit()
@@ -412,7 +413,7 @@ public class MainGameView : MonoBehaviour
         MainQuestDialogList _md = ResourcePointManager.Instance.GetMainQuestData(reactingObject.resourcePointId);
         Database.AddQuest(_md.talkQuest.afterQuestId, Database.userDataJson.mainQuest.startTime);
 
-        if (_md.afterMainReleaseQuest.disappearAfter)
+        if (_md.talkQuest.disappearAfter)
         {
             Destroy(reactingObject.gameObject);
         }
@@ -422,11 +423,6 @@ public class MainGameView : MonoBehaviour
     {
         MainQuestDialogList _md = ResourcePointManager.Instance.GetMainQuestData(reactingObject.resourcePointId);
         TurnBaseBattleView.Instance.StartBattleByQuest(_md.afterMainBattleQuest.questId);
-
-        if (_md.afterMainReleaseQuest.disappearAfter)
-        {
-            Destroy(reactingObject.gameObject);
-        }
     }
 
     public void CheckQuestAfterMainBattleQuest()
@@ -434,7 +430,7 @@ public class MainGameView : MonoBehaviour
         MainQuestDialogList _md = ResourcePointManager.Instance.GetMainQuestData(reactingObject.resourcePointId);
         if (_md.afterMainBattleQuest.afterQuestId == 0)
         {
-            //TODO win
+            //MainGameView.Instance.StageClear();
         }
         else
         {
@@ -571,6 +567,14 @@ public class MainGameView : MonoBehaviour
         Database.userDataJson.isSaveCorrupted = true;
         Database.Save();
         gameoverCanvas.AddUI();
+    }
+
+    public void StageClear()
+    {
+        Database.globalData.isSaveCorrupted = true;
+        Database.userDataJson.isGameClear = true;
+        Database.Save();
+        stageClearCanvas.AddUI();
     }
 
     bool IsMainQuestTimeOut()

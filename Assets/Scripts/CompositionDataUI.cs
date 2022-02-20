@@ -120,6 +120,7 @@ public class CompositionDataUI : DataUI
         for (int i = 0; i < dreamSlots.Count; i++)
         {
             dreamSlots[i].SetActive(i < _rd.capacity[1]);
+            dreamSlots[i].transform.Find("Text").GetComponent<Text>().text = "";
         }
         if (_rd.targetTag[1] != 0)
         {
@@ -141,6 +142,7 @@ public class CompositionDataUI : DataUI
         for (int i = 0; i < idealSlots.Count; i++)
         {
             idealSlots[i].SetActive(i < _rd.capacity[2]);
+            idealSlots[i].transform.Find("Text").GetComponent<Text>().text = "";
         }
         if (_rd.targetTag[2] != 0)
         {

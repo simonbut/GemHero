@@ -440,6 +440,8 @@ namespace ClassHelper
         talk,
         item,
         battle,
+        mainBattle,
+        mainRelease,
     }
 
     public enum DialogType

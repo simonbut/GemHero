@@ -160,13 +160,20 @@ public class TurnBaseBattleView : MonoBehaviour
             }
             if (questId > 0)
             {
-                MainGameView.Instance.rewardAfterBattleCanvas.AddUI(questId < 100);
+                if (QuestManager.Instance.GetQuestData(questId).questType == QuestType.mainBattle)
+                {
+                    MainGameView.Instance.StageClear();
+                }
+                else
+                {
+                    MainGameView.Instance.rewardAfterBattleCanvas.AddUI(questId < 100);
+                }
             }
         }
 
         if (isLose)
         {
-            //GameOver
+            MainGameView.Instance.GameOver();
         }
     }
 
