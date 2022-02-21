@@ -141,7 +141,7 @@ public class TurnBaseBattleView : MonoBehaviour
                 continue;
             }
             _tbbc.AtbCharge();
-            if (_tbbc.actionRefillPt >= 1f)
+            if (_tbbc.actionRefillPt >= _tbbc.actionRefillRequire)
             {
                 PerformAttack(_tbbc);
                 _tbbc.ResetAtb();

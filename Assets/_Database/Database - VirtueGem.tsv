@@ -1,6 +1,8 @@
 id	name	description	appearStage	RequireAchievementsCount	IsCriticalGem
 1	不會失敗	即使點數過載，合成都不會失敗	2	0	FALSE
-2	穿透傷害 +1	穿透傷害 +1	1;2;3	0	FALSE
-3	全體傷害 +10%	全體傷害 +10%	1	0	FALSE
+2	反擊	被攻擊時如角色持有子彈，Action槽立即充滿	1;2;3	0	FALSE
+3	暴擊傷害 +40%	暴擊傷害 +40%	1	0	FALSE
 4	吸血 +10%	吸血 +10%	1	0	FALSE
-5	最後一發傷害 +10	最後一發傷害 +10	1	0	FALSE
+5	關鍵一發	最後一發傷害 +50	1	0	FALSE
+6	狙擊	上彈後的第一發必定暴擊	1	0	FALSE
+7	穿透傷害 +15	穿透傷害 +15	1	0	FALSE

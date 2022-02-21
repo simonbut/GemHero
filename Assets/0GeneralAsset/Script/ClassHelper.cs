@@ -734,6 +734,10 @@ namespace ClassHelper
         public int GetRealityPoint()
         {
             int result = GetAssetData().realityPoint;
+            if (GetAssetData().realityPoint <= 0)
+            {
+                result = -GetAssetData().dreamPoint;
+            }
             foreach (int _t in tagList)
             {
                 switch (_t)

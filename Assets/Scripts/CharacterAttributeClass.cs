@@ -43,7 +43,7 @@ namespace CharacterAttributeClass
                     switch (_g)
                     {
                         case 5://關鍵一發
-                            result += 10f;
+                            result += 50f;
                             break;
                     }
                 }
@@ -156,10 +156,10 @@ namespace CharacterAttributeClass
                     switch (_t.tagDataId)
                     {
                         case 18://人渣
-                            result += 1f;
+                            result += 5f;
                             break;
                         case 24://有病
-                            result += 1f;
+                            result += 5f;
                             break;
                     }
                 }
@@ -171,8 +171,8 @@ namespace CharacterAttributeClass
                 {
                     switch (_g)
                     {
-                        case 7://穿透傷害 +1
-                            result += 1f;
+                        case 7://穿透傷害 +15
+                            result += 15f;
                             break;
                     }
                 }
@@ -289,10 +289,17 @@ namespace CharacterAttributeClass
             result += "\n";
             result += "\n";
 
-            foreach (int _skill in skillAffect)
+            if (skillAffect != null)
             {
-                EnemySkillData _esd = EnemyManager.Instance.GetEnemySkillData(_skill);
-                result += _esd.description.GetString() + "\n" + "\n" + "\n";
+                foreach (int _skill in skillAffect)
+                {
+                    if(_skill == 0)
+                    {
+                        continue;
+                    }
+                    EnemySkillData _esd = EnemyManager.Instance.GetEnemySkillData(_skill);
+                    result += _esd.description.GetString() + "\n" + "\n" + "\n";
+                }
             }
 
             return result;
@@ -383,6 +390,7 @@ namespace CharacterAttributeClass
         public float GetAtk()
         {
             float result = atkPt;
+            float multiplier = 1f;
 
             if (tagAffect != null)
             {
@@ -391,7 +399,7 @@ namespace CharacterAttributeClass
                     switch (_t.tagDataId)
                     {
                         case 17://溫柔
-                            result--;
+                            result -= 5f;
                             break;
                     }
                 }
@@ -410,17 +418,17 @@ namespace CharacterAttributeClass
                         switch (_t)
                         {
                             case 30://裝飾2B
-                                result += 1f;
+                                multiplier += 0.15f;
                                 break;
                             case 32://裝飾3B
-                                result += 1f;
+                                multiplier += 0.15f;
                                 break;
                         }
                     }
                 }
             }
 
-            return result;
+            return result * multiplier;
         }
 
         public float GetAts()

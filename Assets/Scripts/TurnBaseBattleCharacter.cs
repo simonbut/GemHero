@@ -24,6 +24,7 @@ public class TurnBaseBattleCharacter : MonoBehaviour
     public float displayHpPt;
     public float hpPt;
     public float actionRefillPt;
+    public float actionRefillRequire = 1f;
     public int ammoCount;
 
     public CharacterAttribute characterAttribute;
@@ -155,7 +156,7 @@ public class TurnBaseBattleCharacter : MonoBehaviour
 
     void SetActionBar()
     {
-        actionbar.fillAmount = actionRefillPt;
+        actionbar.fillAmount = actionRefillPt / actionRefillRequire;
     }
 
     public void AtbCharge()
@@ -190,6 +191,7 @@ public class TurnBaseBattleCharacter : MonoBehaviour
 
     public void ResetAtb()
     {
+        actionRefillRequire = Random.Range(0.9f, 1.1f);
         actionRefillPt = 0;
     }
 
@@ -218,8 +220,8 @@ public class TurnBaseBattleCharacter : MonoBehaviour
             {
                 switch (_s)
                 {
-                    case 1://受到的傷害減少 1
-                        result -= 1;
+                    case 1://受到的傷害減少 5
+                        result -= 5;
                         break;
                 }
             }
@@ -238,8 +240,8 @@ public class TurnBaseBattleCharacter : MonoBehaviour
             {
                 switch (_s)
                 {
-                    case 3://被攻擊時，玩家失去 1 點體力
-                        _sourceC.hpPt -= 1;
+                    case 3://被攻擊時，玩家失去 10 點體力
+                        _sourceC.hpPt -= 10;
                         break;
                 }
             }
@@ -287,7 +289,7 @@ public class TurnBaseBattleCharacter : MonoBehaviour
                     switch (_t)
                     {
                         case 2:
-                            actionRefillPt = 1f;
+                            actionRefillPt = actionRefillRequire;
                             break;
                     }
                 }

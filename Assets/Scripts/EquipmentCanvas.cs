@@ -49,6 +49,10 @@ public class EquipmentCanvas : ControlableUI
                 if (session == i)
                 {
                     print("disselect");
+                    if (i == 0)//weapon can't disselect
+                    {
+                        return;
+                    }
                     Database.userDataJson.equipment[i] = 0;
                     sessions[i].transform.Find("Image").GetComponent<Image>().sprite = Resources.Load<Sprite>("AssetType/" + AssetManager.Instance.GetAssetTypeData(equipmentTypes[i]).id.ToString("000"));
                     return;
@@ -104,7 +108,7 @@ public class EquipmentCanvas : ControlableUI
 
     public List<GameObject> sessions;
     public int session = 0;
-    public List<int> equipmentTypes = new List<int> { 10002, 10006, 10004, 10004, 10004 };
+    List<int> equipmentTypes = new List<int> { 10002, 10006, 10004, 10004, 10004 };
 
     public override void AddUI()
     {
