@@ -248,7 +248,7 @@ public class ResourcePointManager : MonoBehaviour
     {
         List<ResourcePointData> _rpl = GetResourcePointDataList(_resourcePointId);
         ResourcePointData _rp = _rpl[Random.Range(0, _rpl.Count)];
-        return DrawAsset(_rp.assetId, _rp.mustHaveTagList, _rp.tagPool, _rp.rareTagPool, _rp.scoreMin, _rp.scoreMin, _isAddToDatabase);
+        return DrawAsset(_rp.assetId, _rp.mustHaveTagList, _rp.tagPool, _rp.rareTagPool, _rp.scoreMin, _rp.scoreMax, _isAddToDatabase);
     }
 
     public Asset DrawAsset(int _assetId, List<int> _mustHaveTagList, List<int> _tagPool, List<int> _rareTagList, int _scoreMin, int _scoreMax, bool _isAddToDatabase = true)
@@ -262,8 +262,11 @@ public class ResourcePointManager : MonoBehaviour
 
         while (!passScoreCheck && tryCount < 100)
         {
-            int score = 0;
             tryCount++;
+
+            int score = 0;
+            tag1 = 0;
+            tag2 = 0;
             List<int> _tp = new List<int>(_tagPool);
             List<int> _rtp = new List<int>(_rareTagList);
             List<int> _mht = new List<int>(_mustHaveTagList);
@@ -325,7 +328,7 @@ public class ResourcePointManager : MonoBehaviour
                 }
             }
 
-            if (score <= _scoreMax)
+            if (score >= _scoreMax)
             {
                 passScoreCheck = false;
             }
@@ -335,6 +338,8 @@ public class ResourcePointManager : MonoBehaviour
             }
 
             qualityAffect = Random.Range(_scoreMin - score, _scoreMax - score);
+            print("score " + score);
+            print("qualityAffect " + qualityAffect);    
             score += qualityAffect;
 
             //if (score >= _scoreMin && score <= _scoreMax)

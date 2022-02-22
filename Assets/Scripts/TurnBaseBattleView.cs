@@ -54,9 +54,25 @@ public class TurnBaseBattleView : MonoBehaviour
         SelectTarget(_character);
     }
 
+    public void ResetField()
+    {
+        enemyCount = 0;
+        foreach (TurnBaseBattleCharacter _c in characterList)
+        {
+            if (_c == null)
+            {
+                continue;
+            }
+            Destroy(_c.gameObject);
+        }
+        characterList = new List<TurnBaseBattleCharacter>();
+    }
+
 
     public void StartBattleByMonsterPoint(int _monsterPontId)
     {
+        ResetField();
+
         canvas.AddUI();
         questId = 0;
         monsterPoint = _monsterPontId;
@@ -77,6 +93,8 @@ public class TurnBaseBattleView : MonoBehaviour
 
     public void StartBattleByQuest(int _questId)
     {
+        ResetField();
+
         canvas.AddUI();
         questId = _questId;
         monsterPoint = 0;
@@ -283,11 +301,11 @@ public class TurnBaseBattleView : MonoBehaviour
         to.RunHurtAnimation();
         if (from.characterAttribute.IsDoubleHit())
         {
-            to.CalcuateAndGetDamage(from,0.6f);
+            to.CalcuateAndGetDamage(from,0.7f);
             from.ammoCount--;
             if (from.ammoCount>0)
             {
-                to.CalcuateAndGetDamage(from,0.6f);
+                to.CalcuateAndGetDamage(from,0.7f);
                 from.ammoCount--;
             }
         }

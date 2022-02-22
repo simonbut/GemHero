@@ -92,12 +92,14 @@ public class CompositionDataUI : DataUI
             case CompoundType.weapon:
             case CompoundType.accessory:
             case CompoundType.clothing:
+                attr1.SetActive(false);
+                attr2.SetActive(false);
                 if (_ad.basicStatTypeList.Count > 0)
                 {
                     attr1.SetActive(true);
                     float _min = _ad.basicStatListMin[0] * 1f;
                     float _max = _ad.basicStatListMax[0] * 1f;
-                    if (_ad.basicStatTypeList[0] == StatType.ats || _ad.basicStatTypeList[0] == StatType.def)
+                    if (_ad.basicStatTypeList[0] == StatType.ats)
                     {
                         _min /= 1000f;
                         _max /= 1000f;
@@ -109,7 +111,7 @@ public class CompositionDataUI : DataUI
                     attr2.SetActive(true);
                     float _min = _ad.basicStatListMin[1] * 1f;
                     float _max = _ad.basicStatListMax[1] * 1f;
-                    if (_ad.basicStatTypeList[1] == StatType.ats || _ad.basicStatTypeList[1] == StatType.def)
+                    if (_ad.basicStatTypeList[1] == StatType.ats)
                     {
                         _min /= 1000f;
                         _max /= 1000f;

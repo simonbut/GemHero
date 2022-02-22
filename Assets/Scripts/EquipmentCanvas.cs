@@ -69,6 +69,8 @@ public class EquipmentCanvas : ControlableUI
         sessions[session].transform.Find("Image").GetComponent<Image>().sprite = Resources.Load<Sprite>("Asset/" + AssetManager.Instance.GetAssetByUid(Database.userDataJson.equipment[session]).assetId.ToString("000"));
 
         session = -1;
+
+        Database.Save();
     }
 
     void SelectingData(int uid, GridItem gi)

@@ -186,7 +186,7 @@ public class TurnBaseBattleCharacter : MonoBehaviour
 
     public void AtbCharge(float chargeAmount)
     {
-        actionRefillPt += chargeAmount;
+        actionRefillPt += chargeAmount * 0.75f;//the game is too fast
     }
 
     public void ResetAtb()

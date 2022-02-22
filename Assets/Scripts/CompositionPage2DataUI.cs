@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using ClassHelper;
@@ -65,7 +65,8 @@ public class CompositionPage2DataUI : DataUI
         }
         else
         {
-            realityMarkDescription.SetActive(false);
+            //realityMarkDescription.SetActive(false);
+            realityMarkDescription.transform.Find("Text").GetComponent<Text>().text = "無特殊效果";
         }
 
         for (int i = 0; i < dreamSlots.Count; i++)
@@ -102,7 +103,8 @@ public class CompositionPage2DataUI : DataUI
         }
         else
         {
-            dreamMarkDescription.SetActive(false);
+            //dreamMarkDescription.SetActive(false);
+            dreamMarkDescription.transform.Find("Text").GetComponent<Text>().text = "無特殊效果";
         }
 
         for (int i = 0; i < idealSlots.Count; i++)
@@ -144,7 +146,8 @@ public class CompositionPage2DataUI : DataUI
         }
         else
         {
-            idealMarkDescription.SetActive(false);
+            //idealMarkDescription.SetActive(false);
+            idealMarkDescription.transform.Find("Text").GetComponent<Text>().text = "無特殊效果";
         }
 
         OnShow();

@@ -224,7 +224,7 @@ public class CompositeMenuCanvas : ControlableUI
                 result = Mathf.FloorToInt(result * 0.2f);
                 break;
         }
-        return result;
+        return Mathf.Min(result, 100);
     }
 
     public int GetScoreOverflow()

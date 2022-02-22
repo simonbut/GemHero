@@ -690,7 +690,7 @@ namespace ClassHelper
 
         public int GetQuality()
         {
-            return AssetManager.Instance.CalculateQuality(tagList, qualityAffect);
+            return Mathf.Min(AssetManager.Instance.CalculateQuality(tagList, qualityAffect), 100);
         }
 
         public AssetData GetAssetData()
@@ -748,6 +748,9 @@ namespace ClassHelper
                     case 5://夢想 (小)
                         result--;
                         break;
+                    case 9://現實 (小)
+                        result++;
+                        break;
                 }
             }
             return result;
@@ -781,12 +784,15 @@ namespace ClassHelper
                     case 2://空虛
                         return 0;
                         break;
-                    case 5://理想抑制 (小)
+                    case 10://理想 (小)
+                        result++;
+                        break;
+                    case 11://理想抑制 (小)
                         result--;
                         break;
                 }
             }
-            return result;
+            return Mathf.Max(0, result);
         }
 
         public int GetScore()

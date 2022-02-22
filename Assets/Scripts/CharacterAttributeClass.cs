@@ -94,7 +94,7 @@ namespace CharacterAttributeClass
                     {
                         switch (_t)
                         {
-                            case 31://槍3A
+                            case 31://吸血 +10%
                                 result += 0.1f;
                                 break;
                         }
@@ -134,7 +134,7 @@ namespace CharacterAttributeClass
                     {
                         switch (_t)
                         {
-                            case 31://槍3B
+                            case 31://上彈速度 +50%
                                 result += 0.5f;
                                 break;
                         }
@@ -469,7 +469,7 @@ namespace CharacterAttributeClass
                     {
                         switch (_t)
                         {
-                            case 25://槍2A
+                            case 25://連射
                                 return true;
                                 break;
                         }
@@ -495,7 +495,7 @@ namespace CharacterAttributeClass
                     {
                         switch (_t)
                         {
-                            case 25://槍2B
+                            case 25://補刀
                                 return true;
                                 break;
                         }

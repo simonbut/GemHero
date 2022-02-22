@@ -81,11 +81,13 @@ public class AssetDataUI : DataUI
             case CompoundType.weapon:
             case CompoundType.accessory:
             case CompoundType.clothing:
+                attr1.SetActive(false);
+                attr2.SetActive(false);
                 if (_ad.basicStatTypeList.Count > 0)
                 {
                     attr1.SetActive(true);
                     float _value = _ra.GetAttr()[0] * 1f;
-                    if (_ad.basicStatTypeList[0] == StatType.ats || _ad.basicStatTypeList[0] == StatType.def)
+                    if (_ad.basicStatTypeList[0] == StatType.ats)
                     {
                         _value /= 1000f;
                     }
@@ -95,7 +97,7 @@ public class AssetDataUI : DataUI
                 {
                     attr2.SetActive(true);
                     float _value = _ra.GetAttr()[1] * 1f;
-                    if (_ad.basicStatTypeList[1] == StatType.ats || _ad.basicStatTypeList[1] == StatType.def)
+                    if (_ad.basicStatTypeList[1] == StatType.ats)
                     {
                         _value /= 1000f;
                     }
@@ -116,6 +118,7 @@ public class AssetDataUI : DataUI
             {
                 if (i < _tl.Count)
                 {
+                    tagList[i].SetActive(true);
                     tagList[i].transform.Find("Text").GetComponent<Text>().text = _tl[i].GetTagData().name.GetString();
                     ShapeGenerator.GenerateShape(tagList[i].transform.Find("Grid").gameObject, null, new List<Tag> { _tl[i] }, 0.15f);
                 }

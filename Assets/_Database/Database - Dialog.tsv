@@ -1,8 +1,8 @@
 id	dialogId	step	characterId	content
-1	1	1	2	Text A
-2	1	2	1	Text B
-3	1	3	1	Text C
-4	1	4	3	Text D
+1	1	1	2	感謝你
+2	999	1	1	
+3	999	2	1	
+4	999	3	1	
 5	3	1	0	……
 6	3	2	1	（要使用「命運共享」嘗試跟「漠不關心」的人溝通）
 7	4	1	-1	這就是你一直以來的遭遇了嗎？

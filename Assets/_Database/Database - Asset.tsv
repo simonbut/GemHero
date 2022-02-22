@@ -1,20 +1,20 @@
 id	name	asset_type_list	reality_point	dream_point	ideal_point	basic_stat_types	basic_stats_min	basic_stats_max	ammoCount	reloadTimeTier	(Remark)
 1	草1	10001	0	0	2						asset
 2	草2	10001	0	1	1						asset
-3	豆豆槍	10002	1	0	1	atk;ats	30;1000	60;2000	10	1	weapon
+3	槍1	10002	0	0	0	atk;ats	30;1000	60;2000	10	1	weapon
 4	合成品1	10003	1	0	1						compound
 5	裝飾1	10004	0	1	1						accessory
 6	蛋糕	10005	0	0	0						consumable
 7	普通槍	10002	0	0	0	atk;ats	30;1000	60;2000	10	1	weapon
-8	金屬1	10007	0	0	0						asset
-9	金屬2	10007	0	0	0						asset
-10	動物素材1	10008	0	0	0						asset
-11	動物素材2	10008	0	0	0						asset
-12	合成品2	10003;10001;10007	0	0	0						compound
+8	金屬1	10007	2	0	1						asset
+9	金屬2	10007	3	0	0						asset
+10	動物素材1	10008	2	0	0						asset
+11	動物素材2	10008	2	0	0						asset
+12	合成品2	10003;10001;10007	0	1	1						compound
 13	合成品3	10003;10001;10007	0	0	0						compound
-14	合成品4	10003;10001;10007	0	0	0						compound
+14	合成品4	10003;10001;10007	0	1	1						compound
 15	合成品5	10003;10001;10007	0	0	0						compound
-16	槍2	10002	5	5	5	atk;ats	30;1000	60;2000	10	3	weapon
-17	槍3	10002	5	5	5	atk;ats	10;3000	20;6000	30	2	weapon
-18	裝飾2	10004;10008	5	5	5						accessory
-19	裝飾3	10004;10008	5	5	5						accessory
+16	槍2	10002	0	0	0	atk;ats	40;1000	80;2000	10	3	weapon
+17	槍3	10002	0	0	0	atk;ats	15;3000	30;6000	30	2	weapon
+18	裝飾2	10004;10008	5	5	5	def	5	10			accessory
+19	裝飾3	10004;10008	5	5	5	def	5	10			accessory

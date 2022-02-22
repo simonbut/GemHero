@@ -162,6 +162,15 @@ public class MainGameView : MonoBehaviour
                 break;
 
         }
+
+        //Hide instructor
+        switch (Database.userDataJson.chapter)
+        {
+            case 1:
+                FindResourcePointByCharacterId(QuestManager.Instance.GetQuestData(1).characterId).gameObject.SetActive(Database.userDataJson.mainQuest.questId == 1);
+                break;
+
+        }
     }
 
     public GameObject InteractiveDialog;
@@ -564,6 +573,7 @@ public class MainGameView : MonoBehaviour
     {
         Database.globalData.isSaveCorrupted = true;
         Database.userDataJson.isSaveCorrupted = true;
+        Database.SaveGlobalSave();
         Database.Save();
         gameoverCanvas.AddUI();
     }
@@ -572,6 +582,7 @@ public class MainGameView : MonoBehaviour
     {
         Database.globalData.isSaveCorrupted = true;
         Database.userDataJson.isGameClear = true;
+        Database.SaveGlobalSave();
         Database.Save();
         stageClearCanvas.AddUI();
     }

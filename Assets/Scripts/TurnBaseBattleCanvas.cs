@@ -43,7 +43,7 @@ public class TurnBaseBattleCanvas : ControlableUI
         }
 
         //update player information UI
-        playerInformation.transform.Find("Text").GetComponent<Text>().text = _cl[0].characterAttribute.GetPlayerInformation().Replace("$1", _cl[0].hpPt.ToString()).Replace("$2", _cl[0].ammoCount.ToString());
+        playerInformation.transform.Find("Text").GetComponent<Text>().text = _cl[0].characterAttribute.GetPlayerInformation().Replace("$1", _cl[0].hpPt.ToString("0")).Replace("$2", _cl[0].ammoCount.ToString("0"));
 
         //update aim UI
         if (_cl[0].target == null)
@@ -76,7 +76,7 @@ public class TurnBaseBattleCanvas : ControlableUI
 
         //update enemy information UI
         enemyInformation.transform.Find("Icon").GetComponent<Image>().sprite = Resources.Load<Sprite>("Enemy/" + _character.characterAttribute.enemyId.ToString("000"));
-        enemyInformation.transform.Find("Text").GetComponent<Text>().text = _character.characterAttribute.GetEnemyInformation().Replace("$1",_character.hpPt.ToString());
+        enemyInformation.transform.Find("Text").GetComponent<Text>().text = _character.characterAttribute.GetEnemyInformation().Replace("$1",_character.hpPt.ToString("0"));
 
 
     }

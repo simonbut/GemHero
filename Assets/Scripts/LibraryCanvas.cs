@@ -44,7 +44,7 @@ public class LibraryCanvas : ControlableUI
             }
 
             BookData _bd = ResourcePointManager.Instance.GetBookData(bookList[i]);
-            //TODO icon
+            bookGameobjectList[i].transform.Find("Icon").GetComponent<Image>().sprite = Resources.Load<Sprite>("Book/" + _bd.id.ToString("000"));
             bookGameobjectList[i].transform.Find("Name").GetComponent<Text>().text = _bd.name.GetString();
             bookGameobjectList[i].transform.Find("Text").GetComponent<Text>().text = _bd.description.GetString();
             bookGameobjectList[i].transform.Find("Time").GetComponent<Text>().text = "Time to read: $1h".Replace("$1", _bd.time.ToString("0"));
